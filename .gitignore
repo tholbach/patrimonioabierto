@@ -1,0 +1,8 @@
+# Raw intermediate pulls from JCyL's WFS - large (multi-MB) and fully
+# reproducible via scripts/fetch_jcyl.py, no reason to version them.
+data/raw/
+
+scratchpad/
+
+__pycache__/
+*.pyc

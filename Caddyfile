@@ -1,0 +1,8 @@
+## Internal-only - no domain/TLS here. The shared Caddy in
+## the ingress proxy's own repository terminates TLS for this site's domain and reverse_proxies
+## to this container by its Docker network alias. See README for the exact
+## site block to add there.
+:80 {
+	root * /srv
+	file_server
+}

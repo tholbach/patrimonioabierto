@@ -1,0 +1,23 @@
+name: cylinked
+
+services:
+  web:
+    # Matches the ingress host's own Caddy image choice for consistency.
+    image: caddy:2
+    container_name: cylinked_web
+    volumes:
+      - ./web:/srv:ro
+      - ./Caddyfile:/etc/caddy/Caddyfile:ro
+    networks:
+      - ingress
+    restart: unless-stopped
+
+networks:
+  # No TLS/domain here on purpose - this container only serves static files
+  # internally. The shared Caddy in the ingress proxy's own repository already owns
+  # port 80/443 on the host and TLS certs for this site's domain; this joins its
+  # network so that Caddy can reverse_proxy to it, the same way another service and
+  # another service already do (see the ingress proxy's own repository). See this
+  # repo's README for the one-line Caddyfile addition that wires it up.
+  ingress:
+    external: true
