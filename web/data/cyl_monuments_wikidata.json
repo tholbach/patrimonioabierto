@@ -497,11 +497,11 @@
     "municipality_match_approx": false,
     "province": "Ávila",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=209",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q6058643",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Puerta%20del%20palacio%20del%20rey%20ni%C3%B1o.jpg"
   },
   {
     "jcyl_id": 221,
@@ -539,11 +539,11 @@
     "municipality_match_approx": false,
     "province": "Ávila",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=227",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43117936",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Avila%20-%20Iglesia%20de%20San%20Martin%201.JPG"
   },
   {
     "jcyl_id": 236,
@@ -2555,11 +2555,11 @@
     "municipality_match_approx": false,
     "province": "Burgos",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=1351",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43130121",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/HernandoDePolanco.jpg"
   },
   {
     "jcyl_id": 1370,
@@ -2597,11 +2597,11 @@
     "municipality_match_approx": false,
     "province": "Burgos",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=1375",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q5910389",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Iglesia%20de%20San%20Juan%20-%201.jpg"
   },
   {
     "jcyl_id": 1382,
@@ -2828,8 +2828,8 @@
     "municipality_match_approx": false,
     "province": "Burgos",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=1470",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43164963",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -9695,11 +9695,11 @@
     "municipality_match_approx": false,
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=4208",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q112657591",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Alija%20del%20Infantado%20%2838543366000%29.jpg"
   },
   {
     "jcyl_id": 4214,
@@ -9842,11 +9842,11 @@
     "municipality_match_approx": false,
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=4296",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43168944",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Muralla%2C%20Palacio%20Gaud%C3%AD%2C%20Catedral%20de%20Astorga.jpg"
   },
   {
     "jcyl_id": 4302,
@@ -9884,11 +9884,11 @@
     "municipality_match_approx": false,
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=4309",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43169149",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/CastrilloPolvazares.JPG"
   },
   {
     "jcyl_id": 4316,
@@ -9905,11 +9905,11 @@
     "municipality_match_approx": false,
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=4316",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q112664092",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Castillo%20de%20Balboa%202011%20-%20panoramio%20%282%29.jpg"
   },
   {
     "jcyl_id": 4321,
@@ -13184,11 +13184,11 @@
     "municipality_match_approx": false,
     "province": "Palencia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=6376",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43167355",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Ampudia%20-%20Colegiata%20de%20San%20Miguel%2007.jpg"
   },
   {
     "jcyl_id": 6382,
@@ -13247,11 +13247,11 @@
     "municipality_match_approx": false,
     "province": "Palencia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=6421",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43131003",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Amusco%20-%20004%20%2840214184385%29.jpg"
   },
   {
     "jcyl_id": 6441,
@@ -13352,11 +13352,11 @@
     "municipality_match_approx": false,
     "province": "Palencia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=6484",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43131683",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Iglesia%20de%20la%20Asunci%C3%B3n%20-%20Autilla%20del%20Pino.JPG"
   },
   {
     "jcyl_id": 6501,
@@ -13436,11 +13436,11 @@
     "municipality_match_approx": false,
     "province": "Palencia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=6548",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43131673",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Iglesia%20de%20Santa%20Mar%C3%ADa%20de%20Arbis%20-%20Baquer%C3%ADn%20de%20Campos%204.jpg"
   },
   {
     "jcyl_id": 6570,
@@ -16502,11 +16502,11 @@
     "municipality_match_approx": false,
     "province": "Salamanca",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=8687",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43140717",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Iglesia%20de%20Almenara%20de%20Tormes%2002.jpg"
   },
   {
     "jcyl_id": 8704,
@@ -16523,11 +16523,11 @@
     "municipality_match_approx": false,
     "province": "Salamanca",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=8704",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43173235",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Arapil%20Grande%20y%20Arapil%20Chico.JPG"
   },
   {
     "jcyl_id": 8738,
@@ -22928,11 +22928,11 @@
     "municipality_match_approx": false,
     "province": "Soria",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=12429",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43090787",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Almazan%20-%20Convento%20de%20Mercedarios.jpg"
   },
   {
     "jcyl_id": 12440,
@@ -23117,11 +23117,11 @@
     "municipality_match_approx": false,
     "province": "Soria",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=12516",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q65160717",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Aguilar%20de%20Montuenga%20-%20002%20%2833820624856%29.jpg"
   },
   {
     "jcyl_id": 12521,
@@ -24063,13 +24063,13 @@
     "province": "Soria",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=12928",
     "wikidata_qid": [
-      "Q1126981",
-      "Q43081005"
+      "Q43081005",
+      "Q1126981"
     ],
     "already_linked": true,
     "wikidata_conflict": true,
     "has_wikidata_image": true,
-    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/San%20Baudelio%20Frontal.jpg"
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Casillas%20de%20Berlanga%20-%20Ermita%20de%20San%20Baudelio%20-%205724799.jpg"
   },
   {
     "jcyl_id": 12935,
@@ -31064,11 +31064,11 @@
     "municipality_match_approx": false,
     "province": "Zamora",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=16406",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43116051",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/IGLESIA%20ARCENILLAS.jpg"
   },
   {
     "jcyl_id": 16415,
@@ -38498,8 +38498,8 @@
     "municipality_match_approx": false,
     "province": "Zamora",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=256453",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q131242619",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -40241,8 +40241,8 @@
     "municipality_match_approx": false,
     "province": "Soria",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=773869",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q52846636",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -49460,8 +49460,8 @@
     "municipality_match_approx": false,
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=879533",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q124282448",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -50489,11 +50489,11 @@
     "municipality_match_approx": false,
     "province": "Ávila",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=2018366",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q29921428",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Biblioteca%20p%C3%BAblica%20de%20%C3%81vila.jpg"
   },
   {
     "jcyl_id": 2018370,
