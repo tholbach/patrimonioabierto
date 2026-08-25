@@ -19,5 +19,13 @@ networks:
   # network so that Caddy can reverse_proxy to it, the same way another service and
   # another service already do (see the ingress proxy's own repository). See this
   # repo's README for the one-line Caddyfile addition that wires it up.
+  #
+  # name: ingress, not just "ingress" -
+  # that stack pins its Compose project name to "the ingress stack" but never
+  # names this network explicitly, so Compose auto-prefixes it with the
+  # project name. Verified against another stack's compose file, which joins
+  # the same network and uses this exact full name (its own local alias is
+  # called nc_connect, name differs, but the "name:" value matches).
   ingress:
+    name: ingress
     external: true
