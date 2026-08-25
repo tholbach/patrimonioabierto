@@ -1295,11 +1295,11 @@
     "municipality_match_approx": false,
     "province": "Ávila",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=620",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43169744",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Arquitectura%20popular%2C%20Bonilla%20de%20la%20Sierra%20%28%C3%81vila%29.jpg"
   },
   {
     "jcyl_id": 625,
@@ -3500,11 +3500,11 @@
     "municipality_match_approx": false,
     "province": "Burgos",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=1771",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43117096",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Burgos%20-%20Museo%20de%20Burgos%2C%20Casa%20de%20Angulo%201.jpg"
   },
   {
     "jcyl_id": 1778,
@@ -3605,8 +3605,8 @@
     "municipality_match_approx": false,
     "province": "Burgos",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=1823",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q106960516",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -8624,8 +8624,8 @@
     "municipality_match_approx": false,
     "province": "Burgos",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=3810",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q106979009",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -13688,8 +13688,8 @@
     "municipality_match_approx": false,
     "province": "Palencia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=6749",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43131991",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -23537,11 +23537,11 @@
     "municipality_match_approx": false,
     "province": "Soria",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=12697",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q116876098",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Torre%20Alcubilla.JPG"
   },
   {
     "jcyl_id": 12702,
@@ -23558,11 +23558,11 @@
     "municipality_match_approx": false,
     "province": "Soria",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=12702",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q114204663",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Berzosa%20083.JPG"
   },
   {
     "jcyl_id": 12714,
@@ -23789,11 +23789,11 @@
     "municipality_match_approx": false,
     "province": "Soria",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=12835",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43175061",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/El%20Burgo%20de%20Osma%20-%20Ruinas%20de%20Uxama%20-%208170433.jpg"
   },
   {
     "jcyl_id": 12845,
@@ -23831,11 +23831,11 @@
     "municipality_match_approx": false,
     "province": "Soria",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=12851",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q27608966",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Navapalos.jpg"
   },
   {
     "jcyl_id": 12857,
@@ -23852,11 +23852,11 @@
     "municipality_match_approx": false,
     "province": "Soria",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=12857",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43176729",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Monumento%20funerario%20romano-cubierta%20del%20piso%20superior.jpg"
   },
   {
     "jcyl_id": 12870,
@@ -24063,13 +24063,13 @@
     "province": "Soria",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=12928",
     "wikidata_qid": [
-      "Q43081005",
-      "Q1126981"
+      "Q1126981",
+      "Q43081005"
     ],
     "already_linked": true,
     "wikidata_conflict": true,
     "has_wikidata_image": true,
-    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Casillas%20de%20Berlanga%20-%20Ermita%20de%20San%20Baudelio%20-%205724799.jpg"
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/San%20Baudelio%20Frontal.jpg"
   },
   {
     "jcyl_id": 12935,
@@ -39002,11 +39002,11 @@
     "municipality_match_approx": false,
     "province": "Burgos",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=309525",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q126917659",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Iglesia%20de%20San%20Mart%C3%ADn%2C%20Busto%20de%20Bureba%2001.jpg"
   },
   {
     "jcyl_id": 314805,
@@ -40703,11 +40703,11 @@
     "municipality_match_approx": false,
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=817559",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q112657404",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Torre%20de%20Babia%2001%20torre%20by-dpc.jpg"
   },
   {
     "jcyl_id": 817563,
@@ -48662,11 +48662,11 @@
     "municipality_match_approx": false,
     "province": "Burgos",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=875137",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q106977796",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Cruz%20de%20piedra%20en%20la%20calle%20Nu%C3%B1o%20Rasura.jpg"
   },
   {
     "jcyl_id": 875141,
@@ -48704,11 +48704,11 @@
     "municipality_match_approx": false,
     "province": "Burgos",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=875151",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q106878100",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Burgos%20-%20Iglesia%20de%20Nuestra%20Se%C3%B1ora%20la%20Real%20y%20Antigua%20de%20Gamonal%2003.JPG"
   },
   {
     "jcyl_id": 875155,
@@ -50867,8 +50867,8 @@
     "municipality_match_approx": false,
     "province": "Valladolid",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=2118092",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q126485367",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
