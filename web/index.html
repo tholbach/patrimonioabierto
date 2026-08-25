@@ -16,17 +16,21 @@
   <header id="topbar">
     <span class="brand"><img src="assets/logo.png" alt="" id="logo-mark">CyLinked</span>
 
+    <!-- Mobile only (see CSS) - collapses #search-wrap to just this icon
+         until tapped, so the default header stays one compact row instead
+         of permanently reserving a full second row for it. -->
+    <button type="button" id="search-toggle-btn" data-i18n-title="search.placeholder" aria-label="Search">🔍</button>
+
     <div id="search-wrap">
       <input type="text" id="search-input" autocomplete="off" data-i18n-placeholder="search.placeholder" />
+      <button type="button" id="search-close-btn" aria-label="Close search">✕</button>
       <div id="search-results"></div>
     </div>
 
-    <nav>
-      <button type="button" data-open-panel="stats">📊 <span data-i18n="nav.stats">Estadísticas</span></button>
-      <button type="button" data-open-panel="about">ℹ️ <span data-i18n="nav.about">Acerca de</span></button>
-      <button type="button" data-open-panel="contribute">🤝 <span data-i18n="nav.contribute">Cómo contribuir</span></button>
-      <button type="button" id="lang-toggle">EN</button>
-    </nav>
+    <!-- Estadísticas/Acerca de/Cómo contribuir/language all live behind
+         this on every screen size now, not just mobile - see showMenuPanel()
+         in app.js. Keeps the header down to logo + search everywhere. -->
+    <button type="button" id="menu-btn" data-i18n-title="menu.button_title" aria-label="Menu">☰</button>
   </header>
 
   <div id="app">

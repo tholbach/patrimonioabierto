@@ -829,13 +829,43 @@ function showProvincePanel(prov, { flyTo = false, updateUrl = true } = {}) {
   if (flyTo) map.flyToBounds(bboxToLeafletBounds(prov.bbox), { padding: [40, 40] });
 }
 
-document.querySelectorAll('[data-open-panel]').forEach((btn) => {
-  btn.addEventListener('click', () => {
-    if (btn.dataset.openPanel === 'stats') showStatsPanel();
-    else if (btn.dataset.openPanel === 'about') showAboutPanel();
-    else showContributePanel();
+// Mobile only (see CSS) - the topbar's four nav items collapse into this
+// one button + panel instead of competing with the search box for room.
+let panelBeforeMenu = null; // so the language toggle below can return here instead of just re-showing the menu
+
+function showMenuPanel() {
+  if (currentPanelState?.type !== 'menu') {
+    panelBeforeMenu = currentPanelState;
+  }
+  currentPanelState = { type: 'menu' };
+  panelContentEl.innerHTML = `
+    ${heroBlock({ title: t('menu.title'), placeholderIcon: '☰' })}
+    <div class="panel-body">
+      <ul class="list">
+        <li class="list-row" data-menu="stats"><span class="list-row-icon-plain">📊</span><span class="list-row-name">${t('nav.stats')}</span></li>
+        <li class="list-row" data-menu="about"><span class="list-row-icon-plain">ℹ️</span><span class="list-row-name">${t('nav.about')}</span></li>
+        <li class="list-row" data-menu="contribute"><span class="list-row-icon-plain">🤝</span><span class="list-row-name">${t('nav.contribute')}</span></li>
+        <li class="list-row" data-menu="lang"><span class="list-row-icon-plain">🌐</span><span class="list-row-name">${currentLang === 'es' ? 'English' : 'Español'}</span></li>
+      </ul>
+    </div>
+  `;
+  openPanel();
+  panelContentEl.querySelectorAll('.list-row[data-menu]').forEach((row) => {
+    row.addEventListener('click', () => {
+      const action = row.dataset.menu;
+      if (action === 'stats') showStatsPanel();
+      else if (action === 'about') showAboutPanel();
+      else if (action === 'contribute') showContributePanel();
+      else if (action === 'lang') {
+        currentLang = currentLang === 'es' ? 'en' : 'es';
+        applyStaticI18n();
+        rerenderPanel(panelBeforeMenu); // back to whatever was open before the menu, now in the new language
+      }
+    });
   });
-});
+}
+
+document.getElementById('menu-btn').addEventListener('click', showMenuPanel);
 
 // --- Geolocation ---------------------------------------------------------
 
@@ -994,9 +1024,27 @@ function selectSearchResult(type, key) {
   searchResultsEl.classList.remove('open');
   searchInputEl.value = '';
   searchInputEl.blur();
+  closeMobileSearch(); // no-op on desktop - .search-active is never set there
 }
 
 searchInputEl.addEventListener('input', () => renderSearchResults(searchInputEl.value));
+
+// Mobile only (see CSS) - #search-wrap stays collapsed to just an icon
+// until tapped, so the default header is one compact row instead of
+// permanently reserving a full-width second row for search.
+function closeMobileSearch() {
+  topbarEl.classList.remove('search-active');
+  searchResultsEl.classList.remove('open');
+  searchInputEl.value = '';
+  searchInputEl.blur();
+}
+
+const topbarEl = document.getElementById('topbar');
+document.getElementById('search-toggle-btn').addEventListener('click', () => {
+  topbarEl.classList.add('search-active');
+  searchInputEl.focus();
+});
+document.getElementById('search-close-btn').addEventListener('click', closeMobileSearch);
 
 searchInputEl.addEventListener('keydown', (e) => {
   const rows = Array.from(searchResultsEl.querySelectorAll('.search-row'));
@@ -1029,27 +1077,29 @@ document.addEventListener('click', (e) => {
   }
 });
 
-// --- Language toggle ---------------------------------------------------
+// --- Language ------------------------------------------------------------
 
-document.getElementById('lang-toggle').addEventListener('click', () => {
-  currentLang = currentLang === 'es' ? 'en' : 'es';
-  applyStaticI18n();
-  // Re-render whatever's currently in the panel so it reflects the new
-  // language too, instead of only relabeling the chrome around it.
-  if (currentPanelState?.type === 'monument') {
-    selectMonument(currentPanelState.record, { flyTo: false, updateUrl: false });
-  } else if (currentPanelState?.type === 'municipality') {
-    showMunicipalityPanel(currentPanelState.muni, { flyTo: false, updateUrl: false });
-  } else if (currentPanelState?.type === 'province') {
-    showProvincePanel(currentPanelState.prov, { flyTo: false, updateUrl: false });
-  } else if (currentPanelState?.type === 'stats') {
+// Re-renders a given panel state in the (by then already-switched) current
+// language - shared by showMenuPanel()'s language row (return to whatever
+// was open before the menu, not just the menu itself) and available for
+// any other future language-affecting action.
+function rerenderPanel(state) {
+  if (state?.type === 'monument') {
+    selectMonument(state.record, { flyTo: false, updateUrl: false });
+  } else if (state?.type === 'municipality') {
+    showMunicipalityPanel(state.muni, { flyTo: false, updateUrl: false });
+  } else if (state?.type === 'province') {
+    showProvincePanel(state.prov, { flyTo: false, updateUrl: false });
+  } else if (state?.type === 'stats') {
     showStatsPanel({ updateUrl: false });
-  } else if (currentPanelState?.type === 'about') {
+  } else if (state?.type === 'about') {
     showAboutPanel({ updateUrl: false });
-  } else if (currentPanelState?.type === 'contribute') {
+  } else if (state?.type === 'contribute') {
     showContributePanel({ updateUrl: false });
+  } else {
+    closePanel(); // nothing was open before - just back to the plain map
   }
-});
+}
 
 applyStaticI18n();
 

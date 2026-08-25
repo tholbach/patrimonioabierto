@@ -11,6 +11,8 @@ const STRINGS = {
     'nav.stats': 'Estadísticas',
     'nav.about': 'Acerca de',
     'nav.contribute': 'Cómo contribuir',
+    'menu.title': 'Menú',
+    'menu.button_title': 'Menú',
     'stats.template': (linked, total, pct) => `${linked} / ${total} enlazados (${pct}%)`,
     'badge.share': '🔗 Compartir',
     'badge.share.copied': '✓ Copiado',
@@ -87,6 +89,8 @@ const STRINGS = {
     'nav.stats': 'Statistics',
     'nav.about': 'About',
     'nav.contribute': 'How to contribute',
+    'menu.title': 'Menu',
+    'menu.button_title': 'Menu',
     'stats.template': (linked, total, pct) => `${linked} / ${total} linked (${pct}%)`,
     'badge.share': '🔗 Share',
     'badge.share.copied': '✓ Copied',
@@ -179,7 +183,6 @@ function applyStaticI18n() {
     el.title = t(el.dataset.i18nTitle);
   });
   document.documentElement.lang = currentLang;
-  document.getElementById('lang-toggle').textContent = currentLang === 'es' ? 'EN' : 'ES';
 }
 
 // Accent/case-insensitive matching - "leon" should find "León", "avila"
