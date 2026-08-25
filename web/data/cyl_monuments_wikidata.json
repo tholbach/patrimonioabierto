@@ -9947,8 +9947,8 @@
     "municipality_match_approx": false,
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=4366",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q117325268",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -13457,11 +13457,11 @@
     "municipality_match_approx": false,
     "province": "Palencia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=6570",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q5911996",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Iglesia%20de%20Santa%20Mar%C3%ADa%20Cillamayor%20002.jpg"
   },
   {
     "jcyl_id": 6586,
@@ -13499,11 +13499,11 @@
     "municipality_match_approx": false,
     "province": "Palencia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=6605",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43143299",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Villanueva%20De%20La%20Torre%20001%20Iglesia%20Santa%20Marina%20003.JPG"
   },
   {
     "jcyl_id": 6622,
@@ -13625,11 +13625,11 @@
     "municipality_match_approx": false,
     "province": "Palencia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=6714",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43131975",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Iglesia%20Parroquial%20-%20Boada%201.jpg"
   },
   {
     "jcyl_id": 6729,
@@ -13646,11 +13646,11 @@
     "municipality_match_approx": false,
     "province": "Palencia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=6729",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43115744",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/La%20Iglesia%20de%20Nuestra%20Se%C3%B1ora%20de%20la%20Asunci%C3%B3n%20-%20Boadilla%20del%20Camino.JPG"
   },
   {
     "jcyl_id": 6738,
@@ -16544,11 +16544,11 @@
     "municipality_match_approx": false,
     "province": "Salamanca",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=8738",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q16616272",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Estanque%20Jard%C3%ADn%20Renacentista%20El%20Bosque%2C%20B%C3%A9jar.JPG"
   },
   {
     "jcyl_id": 8757,
@@ -19673,11 +19673,11 @@
     "municipality_match_approx": false,
     "province": "Segovia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=10630",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43143986",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/BIC%20RI-51-0008762%20frontal.jpg"
   },
   {
     "jcyl_id": 10646,
@@ -19715,11 +19715,11 @@
     "municipality_match_approx": false,
     "province": "Segovia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=10652",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43178778",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/09%20Bernardos%20Cerro%20Virgen%20Castillo%20Muralla%20Lou.jpg"
   },
   {
     "jcyl_id": 10672,
@@ -23285,11 +23285,11 @@
     "municipality_match_approx": false,
     "province": "Soria",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=12581",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43143528",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Iglesia%20parroquial%20San%20Pedro%20Abanco.jpg"
   },
   {
     "jcyl_id": 12602,
@@ -23369,11 +23369,11 @@
     "municipality_match_approx": false,
     "province": "Soria",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=12624",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q52854524",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Convento%20de%20Paredes%20Albas%20-%20BERLANGA%20de%20DUERO%20%28Soria%297.jpg"
   },
   {
     "jcyl_id": 12631,
@@ -39338,11 +39338,11 @@
     "municipality_match_approx": false,
     "province": "Burgos",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=539494",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q126179512",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Complejo%20Minero%20de%20Belorado%2C%20Puras%20de%20Villafranca.jpg"
   },
   {
     "jcyl_id": 539518,
