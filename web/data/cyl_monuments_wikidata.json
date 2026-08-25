@@ -7259,11 +7259,11 @@
     "municipality_match_approx": false,
     "province": "Burgos",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=3295",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q122924279",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/San%20millan%20de%20lara%2007%20%28Rollo%20de%20justicia%29.jpg"
   },
   {
     "jcyl_id": 3300,
@@ -12614,11 +12614,11 @@
     "municipality_match_approx": false,
     "province": "Palencia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=6032",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43089744",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Casa%20rectoral%20%28casa%20del%20cura%29%20-%20vista%20general.jpg"
   },
   {
     "jcyl_id": 6039,
@@ -12719,11 +12719,11 @@
     "municipality_match_approx": false,
     "province": "Palencia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=6092",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43167473",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Aguilar%20de%20Campoo%20-%20Plaza%20de%20Espa%C3%B1a%202.JPG"
   },
   {
     "jcyl_id": 6098,
@@ -12740,11 +12740,11 @@
     "municipality_match_approx": false,
     "province": "Palencia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=6098",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q6898373",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Monasterio%20Santa%20Maria%20la%20Real%20-%20Aguilar%20de%20Campoo2.jpg"
   },
   {
     "jcyl_id": 6107,
@@ -12806,11 +12806,11 @@
     "municipality_match_approx": false,
     "province": "Palencia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=6121",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q33528688",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Asunci%C3%B3nBarrioSantaMar%C3%ADaAguilar%20001.JPG"
   },
   {
     "jcyl_id": 6139,
@@ -12869,8 +12869,8 @@
     "municipality_match_approx": false,
     "province": "Palencia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=6164",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43143267",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -12890,8 +12890,8 @@
     "municipality_match_approx": false,
     "province": "Palencia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=6190",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q138885232",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -13058,11 +13058,11 @@
     "municipality_match_approx": false,
     "province": "Palencia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=6313",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43131517",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/SanVicenteBecerrilCarpio%20002.JPG"
   },
   {
     "jcyl_id": 6327,
@@ -13079,11 +13079,11 @@
     "municipality_match_approx": false,
     "province": "Palencia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=6327",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43140452",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Iglesia%20de%20Santa%20Mar%C3%ADa%20010%20Barrio%20de%20Santa%20Mar%C3%ADa%20%28Becerril%20del%20Carpio%29.JPG"
   },
   {
     "jcyl_id": 6343,
@@ -15935,11 +15935,11 @@
     "municipality_match_approx": false,
     "province": "Salamanca",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=8376",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43115071",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/WLM14ES%20-%20Iglesia%20de%20la%20Anunciaci%C3%B3n%2C%20Santa%20Teresa%20de%20Jes%C3%BAs%2C%20Alba%20de%20Tormes%20-%20MARIA%20ROSA%20FERRE.jpg"
   },
   {
     "jcyl_id": 8393,
@@ -15956,11 +15956,11 @@
     "municipality_match_approx": false,
     "province": "Salamanca",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=8393",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43140618",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Juicio%20Final%20en%20Alba%20de%20Tormes%2C%20Iglesia%20de%20San%20Juan%20Ap%C3%B3stol.jpg"
   },
   {
     "jcyl_id": 8411,
@@ -16460,11 +16460,11 @@
     "municipality_match_approx": false,
     "province": "Salamanca",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=8652",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43140604",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Iglesia%20de%20San%20Miguel%2C%20Aldearrubia.jpg"
   },
   {
     "jcyl_id": 8671,
@@ -19295,11 +19295,11 @@
     "municipality_match_approx": false,
     "province": "Salamanca",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=10432",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q24113770",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/El%20Rollo%20Vilvestre.jpg"
   },
   {
     "jcyl_id": 10436,
@@ -19547,11 +19547,11 @@
     "municipality_match_approx": false,
     "province": "Segovia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=10576",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43117984",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Aldealengua%20de%20Pedraza%20iglesia%20Asuncion%2001.JPG"
   },
   {
     "jcyl_id": 10596,
@@ -22613,11 +22613,11 @@
     "municipality_match_approx": false,
     "province": "Soria",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=12292",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q56168315",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/JCYL%20Torre%20de%20Abejar.jpg"
   },
   {
     "jcyl_id": 12312,
@@ -27389,11 +27389,11 @@
     "municipality_match_approx": false,
     "province": "Valladolid",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=14332",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43171235",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Alaejos.JPG"
   },
   {
     "jcyl_id": 14338,
@@ -50258,11 +50258,11 @@
     "municipality_match_approx": false,
     "province": "Valladolid",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=2016582",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q2877536",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/RuinasCastilloAlaejos.JPG"
   },
   {
     "jcyl_id": 2016594,
@@ -51119,11 +51119,11 @@
     "municipality_match_approx": false,
     "province": "Palencia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=2126708",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q30010496",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Quintanilla%20de%20la%20Berzosa%20-%20Church%20of%20Saint%20Martin%20003.JPG"
   },
   {
     "jcyl_id": 2126726,
@@ -51518,11 +51518,11 @@
     "municipality_match_approx": false,
     "province": "Ávila",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=2285181",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q116215278",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Mu%C3%B1otello%2011.jpg"
   },
   {
     "jcyl_id": 2285191,
