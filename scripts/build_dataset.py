@@ -9,14 +9,18 @@ Also the source dataset for OpenRefine reconciliation work - see README.
 """
 import json
 import os
-from datetime import datetime, timedelta
+from datetime import datetime, timedelta, timezone
 
 from geometry import bbox_of_multipolygon, multipolygon_centroid, point_in_multipolygon
 
 RAW_DIR = os.path.join(os.path.dirname(__file__), "..", "data", "raw")
-# Written straight into web/data/ - this is the actual static asset the
-# frontend fetches, not a separate build artifact that needs copying over.
-OUT_PATH = os.path.join(os.path.dirname(__file__), "..", "web", "data", "cyl_monuments_wikidata.json")
+WEB_DATA_DIR = os.path.join(os.path.dirname(__file__), "..", "web", "data")
+# Written straight into web/data/ - these are the actual static assets the
+# frontend fetches, not separate build artifacts that need copying over.
+OUT_PATH = os.path.join(WEB_DATA_DIR, "cyl_monuments_wikidata.json")
+MUNICIPALITIES_PATH = os.path.join(WEB_DATA_DIR, "municipalities.json")
+PROVINCES_PATH = os.path.join(WEB_DATA_DIR, "provinces.json")
+HISTORY_PATH = os.path.join(WEB_DATA_DIR, "history.json")
 
 SMALL_WORDS = {"de", "del", "la", "las", "el", "los", "y", "a", "en"}
 
@@ -79,6 +83,89 @@ def match_municipio(lon, lat, indexed_munis):
     return min(pool, key=dist)["props"], True
 
 
+def build_geo_indexes(indexed_munis, records):
+    """Municipality/province search indexes - for the "fly to + show
+    coverage stats" search feature, not the monument dataset itself. Kept
+    lightweight (no polygon geometry shipped to the browser, just a
+    centroid + bbox per place) since these load on every page view.
+    """
+    monuments_by_muni = {}
+    for r in records:
+        monuments_by_muni.setdefault(r["municipality_ine_code_p772"], []).append(r)
+
+    municipalities = []
+    for m in indexed_munis:
+        props = m["props"]
+        ine = props["c_prov_mun"]
+        muni_monuments = monuments_by_muni.get(ine, [])
+        lon, lat = multipolygon_centroid(m["coords"])
+        municipalities.append(
+            {
+                "name": props["n_mun"],
+                "province": props["n_prov"],
+                "ine_code_p772": ine,
+                "lat": round(lat, 6),
+                "lon": round(lon, 6),
+                "bbox": [round(v, 6) for v in m["bbox"]],
+                "monument_count": len(muni_monuments),
+                "linked_count": sum(r["already_linked"] for r in muni_monuments),
+            }
+        )
+
+    provinces_map = {}
+    for m in municipalities:
+        prov = provinces_map.setdefault(
+            m["province"],
+            {"name": m["province"], "bbox": None, "monument_count": 0, "linked_count": 0, "municipality_count": 0},
+        )
+        prov["monument_count"] += m["monument_count"]
+        prov["linked_count"] += m["linked_count"]
+        prov["municipality_count"] += 1
+        if prov["bbox"] is None:
+            prov["bbox"] = list(m["bbox"])
+        else:
+            prov["bbox"][0] = min(prov["bbox"][0], m["bbox"][0])
+            prov["bbox"][1] = min(prov["bbox"][1], m["bbox"][1])
+            prov["bbox"][2] = max(prov["bbox"][2], m["bbox"][2])
+            prov["bbox"][3] = max(prov["bbox"][3], m["bbox"][3])
+
+    provinces = []
+    for prov in provinces_map.values():
+        prov["lat"] = round((prov["bbox"][1] + prov["bbox"][3]) / 2, 6)
+        prov["lon"] = round((prov["bbox"][0] + prov["bbox"][2]) / 2, 6)
+        provinces.append(prov)
+
+    municipalities.sort(key=lambda m: m["name"])
+    provinces.sort(key=lambda p: p["name"])
+    return municipalities, provinces
+
+
+def append_history_snapshot(records):
+    """Appends today's coverage numbers to history.json - the actual point
+    of this isn't the map, it's proving the linking work is real, ongoing
+    progress rather than a one-off snapshot. One entry per calendar date:
+    re-running `make build` again today updates today's entry instead of
+    piling up duplicates, so testing/rebuilding doesn't inflate the trend.
+    """
+    total = len(records)
+    linked = sum(r["already_linked"] for r in records)
+    with_image = sum(r["has_wikidata_image"] for r in records)
+    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+
+    history = []
+    if os.path.exists(HISTORY_PATH):
+        history = json.load(open(HISTORY_PATH))
+
+    snapshot = {"date": today, "total": total, "linked": linked, "with_image": with_image}
+    if history and history[-1]["date"] == today:
+        history[-1] = snapshot
+    else:
+        history.append(snapshot)
+
+    json.dump(history, open(HISTORY_PATH, "w"), indent=2)
+    print(f"history.json: {len(history)} snapshot(s), latest: {snapshot}")
+
+
 def main():
     monuments = json.load(open(os.path.join(RAW_DIR, "monuments.json")))["features"]
     munis_geojson = json.load(open(os.path.join(RAW_DIR, "municipios.json")))
@@ -88,10 +175,29 @@ def main():
     print(f"indexed {len(indexed_munis)} municipios")
 
     wd_by_jcyl = {}
+    wd_has_image_by_jcyl = {}
+    wd_image_url_by_jcyl = {}
     for row in wd_raw:
         jcyl_id = row["jcylID"]["value"].strip()
         qid = row["item"]["value"].rsplit("/", 1)[-1]
-        wd_by_jcyl.setdefault(jcyl_id, []).append(qid)
+        # An item with >1 P18 value (multiple photos) produces >1 row for
+        # the same item+jcylID via the OPTIONAL join in fetch_wikidata.py -
+        # dedupe here, or a photogenic item with 3 images falsely looks
+        # like 3 different items conflicting over the same jcyl_id.
+        if qid not in wd_by_jcyl.setdefault(jcyl_id, []):
+            wd_by_jcyl[jcyl_id].append(qid)
+        # True if ANY of (possibly several, in conflict cases) linked items
+        # has a P18 - "linked" and "has a photo" are genuinely different
+        # things worth tracking separately (see history.json below).
+        has_image = row.get("hasImage", {}).get("value") == "true"
+        wd_has_image_by_jcyl[jcyl_id] = wd_has_image_by_jcyl.get(jcyl_id, False) or has_image
+        # First image URL wins if there are several - just needs to be *a*
+        # representative thumbnail for list views, not necessarily the same
+        # one the per-monument panel picks (that re-fetches the item's own
+        # P18[0] directly, which can differ - a minor, acceptable mismatch
+        # for the performance win of not doing that per list row).
+        if row.get("image") and jcyl_id not in wd_image_url_by_jcyl:
+            wd_image_url_by_jcyl[jcyl_id] = row["image"]["value"]
 
     records = []
     approx_count = 0
@@ -123,16 +229,33 @@ def main():
                 "wikidata_qid": wd_qids[0] if len(wd_qids) == 1 else (wd_qids if wd_qids else None),
                 "already_linked": bool(wd_qids),
                 "wikidata_conflict": len(wd_qids) > 1,
+                "has_wikidata_image": wd_has_image_by_jcyl.get(cid, False),
+                "image_url": wd_image_url_by_jcyl.get(cid),  # ready-made Special:FilePath URL, or None
             }
         )
 
     records.sort(key=lambda r: r["jcyl_id"])
     json.dump(records, open(OUT_PATH, "w"), ensure_ascii=False, indent=2)
 
+    municipalities, provinces = build_geo_indexes(indexed_munis, records)
+    json.dump(municipalities, open(MUNICIPALITIES_PATH, "w"), ensure_ascii=False, indent=2)
+    json.dump(provinces, open(PROVINCES_PATH, "w"), ensure_ascii=False, indent=2)
+    print(f"wrote {len(municipalities)} municipalities, {len(provinces)} provinces")
+
     linked = sum(r["already_linked"] for r in records)
+    with_image = sum(r["has_wikidata_image"] for r in records)
+
+    meta_path = os.path.join(os.path.dirname(OUT_PATH), "meta.json")
+    json.dump(
+        {"generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")},
+        open(meta_path, "w"),
+    )
+    append_history_snapshot(records)
+
     print(f"wrote {len(records)} records to {OUT_PATH}")
     print(f"already linked: {linked} ({linked / len(records):.0%})")
     print(f"missing from wikidata: {len(records) - linked}")
+    print(f"with a main image: {with_image} ({with_image / len(records):.0%})")
     print(f"wikidata id conflicts: {sum(r['wikidata_conflict'] for r in records)}")
     print(f"municipality approx-matched: {approx_count}")
 

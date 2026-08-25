@@ -1,35 +1,594 @@
-html, body { height: 100%; margin: 0; font-family: system-ui, sans-serif; }
-#map { height: 100%; width: 100%; }
+:root {
+  /* CyL purple sourced from a flag-color reference (flagcolorcodes.com),
+     not an official Junta style guide - used only as a UI accent (topbar,
+     headings), never for the linked/missing marker semantics below. */
+  --cyl-purple: #742c64;
+  --cyl-purple-dark: #4f1e44;
 
-#legend {
-  position: absolute;
-  top: 12px;
-  right: 12px;
-  z-index: 1000;
-  background: white;
-  padding: 10px 14px;
-  border-radius: 6px;
-  box-shadow: 0 1px 6px rgba(0,0,0,0.3);
+  /* Not Bootstrap's default danger-red/success-green - "missing" isn't an
+     error, it's an invitation to help, and the alarm-red read wrong before
+     it even read dated. Teal/terracotta carries the same signal more
+     honestly and sits better next to photography. */
+  --color-linked: #1c8a6d;
+  --color-missing: #c2703d;
+
+  --bg: #faf8f6;
+  --ink: #2b2521;
+  --ink-soft: #6b625c;
+  --card: #ffffff;
+  --border: #e8e2db;
+
+  --font-display: 'Fraunces', Georgia, serif;
+  --font-body: 'Inter', system-ui, sans-serif;
+}
+
+* { box-sizing: border-box; }
+html, body { height: 100%; margin: 0; }
+body { display: flex; flex-direction: column; font-family: var(--font-body); background: var(--bg); color: var(--ink); }
+
+#topbar {
+  flex: 0 0 auto;
+  height: 56px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 20px;
+  background: var(--cyl-purple);
+  color: white;
+  box-shadow: 0 1px 8px rgba(0,0,0,0.25);
+  z-index: 600;
+}
+#topbar .brand {
+  display: flex;
+  align-items: center;
+  gap: 9px;
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 20px;
+  letter-spacing: 0.2px;
+}
+#logo-mark { height: 42px; width: auto; display: block; }
+#topbar nav { display: flex; align-items: center; gap: 8px; }
+#topbar button {
+  background: rgba(255,255,255,0.14);
+  border: none;
+  color: white;
+  padding: 8px 14px;
+  border-radius: 18px;
+  font-family: var(--font-body);
   font-size: 13px;
-  line-height: 1.6;
+  font-weight: 500;
+  cursor: pointer;
+  transition: background 0.15s ease;
 }
+#topbar button:hover { background: rgba(255,255,255,0.26); }
+#lang-toggle { font-weight: 700; min-width: 38px; }
 
-.dot {
-  display: inline-block;
-  width: 10px;
-  height: 10px;
+#search-wrap { position: relative; flex: 1 1 auto; max-width: 420px; margin: 0 20px; }
+#search-input {
+  width: 100%;
+  padding: 8px 14px;
+  border-radius: 18px;
+  border: none;
+  background: rgba(255,255,255,0.16);
+  color: white;
+  font-family: var(--font-body);
+  font-size: 13.5px;
+  outline: none;
+  transition: background 0.15s ease;
+}
+#search-input::placeholder { color: rgba(255,255,255,0.7); }
+#search-input:focus { background: rgba(255,255,255,0.28); }
+
+#search-results {
+  display: none;
+  position: absolute;
+  top: calc(100% + 8px);
+  left: 0;
+  right: 0;
+  max-height: 60vh;
+  overflow-y: auto;
+  background: var(--card);
+  border-radius: 12px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.25);
+  z-index: 700;
+}
+#search-results.open { display: block; }
+
+.search-section-label {
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  padding: 10px 14px 4px;
+}
+.search-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 14px;
+  cursor: pointer;
+  color: var(--ink);
+  font-size: 13.5px;
+}
+.search-row-icon { font-size: 15px; flex-shrink: 0; }
+.search-row-thumb {
+  width: 24px; height: 24px;
   border-radius: 50%;
-  margin-right: 6px;
+  object-fit: cover;
+  flex-shrink: 0;
 }
-.dot.linked { background: #2a9d5c; }
-.dot.missing { background: #d9534f; }
+.search-row-name { flex: 1 1 auto; }
+.search-row-sub { color: var(--ink-soft); font-size: 12px; }
+.search-row:hover, .search-row.highlighted { background: var(--bg); }
+.search-empty { padding: 14px; color: var(--ink-soft); font-size: 13px; }
 
-#stats { margin-top: 4px; color: #555; }
+@media (max-width: 768px) {
+  #search-wrap { margin: 0 10px; max-width: none; }
+  #topbar nav button span { display: none; } /* icon-only nav on small screens, search needs the room */
+}
 
-.popup-content { max-width: 260px; }
-.popup-content h3 { margin: 0 0 4px; font-size: 15px; }
-.popup-content .meta { color: #666; font-size: 12px; margin-bottom: 6px; }
-.popup-content img { max-width: 100%; border-radius: 4px; margin-top: 6px; }
-.popup-content .extract { font-size: 13px; margin-top: 6px; }
-.popup-content .missing-note { font-size: 13px; color: #a33; margin-top: 6px; }
-.popup-content a { color: #2a6fbb; }
+#app { display: flex; flex: 1 1 auto; min-height: 0; width: 100%; }
+
+/* position: relative so #shuffle-btn/#locate-btn (position: absolute)
+   anchor to the map's own visible area specifically - NOT #app, which
+   spans the map AND the panel side-by-side, so anchoring there would
+   measure from the panel's edge once it's open instead of the map's. */
+#map-wrap { flex: 1 1 auto; height: 100%; min-width: 0; position: relative; }
+#map { width: 100%; height: 100%; background: var(--bg); }
+
+/* Detail panel: a real sibling of the map, not a floating overlay on top
+   of it - the map shrinks to make room (desktop), or stacks below it as a
+   bottom sheet (mobile). Either way it's part of the page layout. */
+#panel {
+  width: 0;
+  height: 100%;
+  overflow: hidden;
+  transition: width 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+  background: var(--card);
+  box-shadow: -4px 0 24px rgba(0,0,0,0.12);
+  flex-shrink: 0;
+  position: relative;
+}
+#panel.open { width: 420px; }
+
+#panel-content {
+  width: 420px;
+  height: 100%;
+  overflow-y: auto;
+  animation: fade-in 0.35s ease;
+}
+@keyframes fade-in {
+  from { opacity: 0; transform: translateY(6px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+#panel-handle { display: none; }
+
+#panel-close {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  z-index: 10;
+  border: none;
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(6px);
+  border-radius: 50%;
+  width: 32px;
+  height: 32px;
+  font-family: inherit;
+  font-size: 15px;
+  cursor: pointer;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.25);
+}
+#panel-close:hover { background: white; }
+
+@media (max-width: 768px) {
+  #app { flex-direction: column; }
+  #map-wrap { flex: 1 1 auto; min-height: 0; width: 100%; }
+  #panel {
+    width: 100% !important;
+    height: 0;
+    transition: height 0.3s cubic-bezier(0.2, 0.8, 0.2, 1);
+    border-radius: 18px 18px 0 0;
+  }
+  #panel.open { height: 68vh; }
+  #panel-content { width: 100%; }
+  #panel-handle {
+    display: block;
+    width: 40px;
+    height: 4px;
+    border-radius: 2px;
+    background: var(--border);
+    margin: 10px auto 0;
+  }
+}
+
+/* Marker icons: emoji-in-a-circle, colored by linkage status */
+.monument-icon {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 26px;
+  height: 26px;
+  border-radius: 50%;
+  border: 2px solid white;
+  box-shadow: 0 2px 6px rgba(0,0,0,0.35);
+  font-size: 14px;
+  transition: transform 0.12s ease;
+}
+.monument-icon:hover { transform: scale(1.15); }
+/* Color alone isn't enough - ~8% of men are red-green colorblind (moot
+   here since we dropped red/green, but the principle still applies to any
+   two hues). A solid vs. dashed ring gives a second, non-color channel. */
+.monument-icon.linked { background: var(--color-linked); border-style: solid; }
+.monument-icon.missing { background: var(--color-missing); border-style: dashed; }
+
+/* Cluster bubbles: color communicates the linked/missing ratio of the
+   monuments inside, computed per-cluster in app.js - so the map still
+   tells the "coverage gap" story even zoomed out. */
+.cluster-icon div {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  border: 3px solid white;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.35);
+  color: white;
+  font-family: var(--font-body);
+  font-weight: 600;
+  font-size: 13px;
+}
+
+/* --- Hero: the photo (or gradient fallback) at the top of every panel --- */
+
+.hero {
+  position: relative;
+  height: 260px;
+  overflow: hidden;
+  background: linear-gradient(135deg, var(--cyl-purple) 0%, var(--cyl-purple-dark) 100%);
+}
+.hero-placeholder-icon {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding-bottom: 15%; /* nudges it above dead-center, out of the scrim/title's way */
+  font-size: 110px;
+  line-height: 1;
+  opacity: 0.28;
+  pointer-events: none;
+}
+.hero-fallback::before {
+  /* subtle texture so a flat gradient doesn't feel like an empty state */
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: radial-gradient(circle at 25% 20%, rgba(255,255,255,0.12), transparent 55%);
+}
+.hero a { display: block; height: 100%; }
+.hero-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.4s ease;
+}
+.hero a:hover .hero-img { transform: scale(1.04); }
+
+.hero-scrim {
+  position: absolute;
+  left: 0; right: 0; bottom: 0;
+  padding: 40px 22px 18px;
+  background: linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.35) 55%, transparent 100%);
+  color: white;
+}
+.hero-kicker {
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  opacity: 0.9;
+  margin-bottom: 4px;
+}
+.hero-title {
+  font-family: var(--font-display);
+  font-weight: 600;
+  font-size: 24px;
+  line-height: 1.15;
+  margin: 0;
+  text-shadow: 0 1px 8px rgba(0,0,0,0.3);
+}
+
+.panel-body { padding: 20px 22px 28px; }
+.panel-body .meta { color: var(--ink-soft); font-size: 13px; margin-bottom: 4px; }
+.panel-body h3 {
+  font-family: var(--font-display);
+  font-weight: 600;
+  margin: 24px 0 8px;
+  font-size: 16px;
+  color: var(--cyl-purple-dark);
+}
+
+.source-list { margin: 0; padding-left: 20px; font-size: 13px; line-height: 1.8; color: var(--ink); }
+.source-list a { color: var(--cyl-purple); }
+
+.stats-mission {
+  border-left: 3px solid var(--cyl-purple);
+  padding-left: 12px;
+  margin: 6px 0 18px;
+  font-style: italic;
+  color: var(--ink);
+}
+
+.stats-numbers { display: flex; gap: 10px; margin: 4px 0 6px; }
+.stat-box {
+  flex: 1 1 0;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 12px 10px;
+  text-align: center;
+}
+.stat-value { font-family: var(--font-display); font-size: 22px; font-weight: 600; color: var(--cyl-purple-dark); }
+.stat-pct { font-size: 13px; font-weight: 500; color: var(--ink-soft); }
+.stat-label { font-size: 11.5px; color: var(--ink-soft); margin-top: 2px; line-height: 1.3; }
+
+.stats-chart { width: 100%; height: auto; margin-top: 6px; }
+.stats-chart-axis { display: flex; justify-content: space-between; font-size: 11px; color: var(--ink-soft); margin-top: 2px; }
+.stats-chart-legend { display: flex; gap: 16px; font-size: 12.5px; color: var(--ink-soft); margin-top: 8px; }
+.legend-swatch { display: inline-block; width: 12px; height: 3px; margin-right: 5px; vertical-align: middle; }
+.legend-swatch.linked { background: var(--color-linked); }
+.legend-swatch.image { background: var(--cyl-purple); }
+.stats-chart-empty { font-size: 13px; color: var(--ink-soft); font-style: italic; margin-top: 4px; }
+
+.list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--border); }
+.list-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 10px 2px;
+  border-bottom: 1px solid var(--border);
+  cursor: pointer;
+  font-size: 13.5px;
+  transition: background 0.12s ease;
+}
+.list-row:hover { background: var(--bg); }
+.list-row-icon {
+  width: 22px; height: 22px;
+  border-radius: 50%;
+  display: flex; align-items: center; justify-content: center;
+  font-size: 11px;
+  flex-shrink: 0;
+}
+.list-row-icon.linked { background: var(--color-linked); }
+.list-row-icon.missing { background: var(--color-missing); }
+.list-row-thumb {
+  width: 26px; height: 26px;
+  border-radius: 50%;
+  object-fit: cover;
+  flex-shrink: 0;
+}
+.list-row-name { flex: 1 1 auto; }
+.list-row-stat { color: var(--ink-soft); font-size: 12.5px; flex-shrink: 0; }
+
+/* First thing in .panel-body now (right under the hero photo) - tighter
+   top margin than a mid-content element would want, so it reads as
+   attached to the photo above rather than floating in the body padding. */
+.image-caption { font-size: 11.5px; color: var(--ink-soft); margin: -6px 0 14px; line-height: 1.4; }
+.image-caption:empty { display: none; }
+.image-caption a { color: var(--ink-soft); }
+
+.gallery { display: flex; gap: 8px; overflow-x: auto; margin: 12px 0 4px; padding-bottom: 4px; }
+.gallery img {
+  height: 68px;
+  width: 68px;
+  object-fit: cover;
+  border-radius: 8px;
+  cursor: pointer;
+  border: 2px solid transparent;
+  flex-shrink: 0;
+  transition: transform 0.15s ease, border-color 0.15s ease;
+}
+.gallery img:hover { border-color: var(--cyl-purple); transform: translateY(-2px); }
+
+.extract { font-size: 14.5px; line-height: 1.6; margin: 14px 0; color: var(--ink); }
+.text-license { font-size: 11px; color: var(--ink-soft); margin: -8px 0 14px; line-height: 1.4; }
+.text-license a { color: var(--ink-soft); }
+
+.read-more-link {
+  display: inline-block;
+  font-size: 13px;
+  font-weight: 500;
+  color: var(--cyl-purple);
+  text-decoration: none;
+  margin: -6px 0 12px;
+}
+.read-more-link:hover { text-decoration: underline; }
+
+.link-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 5px;
+  padding: 7px 14px;
+  border-radius: 18px;
+  font-size: 13px;
+  font-weight: 500;
+  text-decoration: none;
+  border: 1.5px solid var(--border);
+  background: var(--card);
+  color: var(--ink);
+  transition: border-color 0.15s ease, transform 0.1s ease;
+}
+.badge:hover { transform: translateY(-1px); }
+.badge.wikidata { border-color: #b7d4e8; color: #0f5c85; }
+.badge.wikipedia { border-color: #d8d3cc; color: #333; }
+.badge.jcyl { border-color: var(--border); color: var(--ink-soft); }
+/* font-family: inherit only, NOT the "font" shorthand - "font: inherit"
+   resets size/weight/line-height too, silently overriding the 13px/500
+   .badge sets above and making this one button look different from its
+   sibling badges (buttons don't inherit font-family by default, unlike
+   every other element, so *something* here is still required). */
+.badge.share-btn { border-color: #ddc9d6; color: var(--cyl-purple); font-family: inherit; cursor: pointer; }
+
+.facts {
+  margin: 4px 0 10px;
+  border-top: 1px solid var(--border);
+  border-bottom: 1px solid var(--border);
+}
+.fact-row {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 8px 0;
+  font-size: 13.5px;
+}
+.fact-row + .fact-row { border-top: 1px solid var(--border); }
+.fact-icon { flex-shrink: 0; font-size: 13px; }
+.fact-label { color: var(--ink-soft); flex: 0 0 auto; min-width: 90px; }
+.fact-value { color: var(--ink); font-weight: 500; }
+
+.upload-cta {
+  margin-top: 12px;
+  padding: 14px;
+  background: #f5f0f7;
+  border: 1px solid #e5d5e2;
+  border-radius: 10px;
+}
+.upload-cta-text { font-size: 13.5px; color: var(--ink); margin-bottom: 10px; line-height: 1.5; }
+.upload-cta-btn.badge { background: var(--cyl-purple); color: white; border-color: var(--cyl-purple); }
+.upload-cta-btn.badge:hover { background: var(--cyl-purple-dark); }
+
+.missing-note {
+  font-size: 13.5px;
+  color: #8a4a1f;
+  background: #fbf0e6;
+  border: 1px solid #f0d9c2;
+  border-radius: 10px;
+  padding: 11px 14px;
+  margin-top: 10px;
+}
+
+.loading { color: var(--ink-soft); font-size: 13px; margin-top: 12px; }
+
+#locate-btn {
+  position: absolute;
+  bottom: 24px;
+  right: 16px;
+  z-index: 500;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  font-size: 18px;
+  cursor: pointer;
+  transition: transform 0.12s ease;
+}
+#shuffle-btn {
+  position: absolute;
+  bottom: 78px;
+  right: 16px;
+  z-index: 500;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  font-size: 18px;
+  cursor: pointer;
+  transition: transform 0.12s ease;
+}
+#shuffle-btn:hover { transform: scale(1.08) rotate(-8deg); background: white; }
+
+#locate-btn:hover { transform: scale(1.08); background: white; }
+#locate-btn.locating { animation: pulse 1s ease-in-out infinite; }
+@keyframes pulse {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.5; }
+}
+
+.you-are-here-dot {
+  width: 18px;
+  height: 18px;
+  border-radius: 50%;
+  background: #2a6fbb;
+  border: 3px solid white;
+  box-shadow: 0 1px 6px rgba(0,0,0,0.4);
+  position: relative;
+}
+.you-are-here-dot::after {
+  content: '';
+  position: absolute;
+  inset: -8px;
+  border-radius: 50%;
+  border: 2px solid #2a6fbb;
+  animation: locate-ring 1.8s ease-out infinite;
+}
+@keyframes locate-ring {
+  0% { transform: scale(0.6); opacity: 0.8; }
+  100% { transform: scale(1.8); opacity: 0; }
+}
+
+#toast {
+  position: fixed;
+  bottom: 24px;
+  left: 50%;
+  transform: translateX(-50%) translateY(20px);
+  background: var(--ink);
+  color: white;
+  padding: 12px 20px;
+  border-radius: 10px;
+  font-size: 13.5px;
+  max-width: 320px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0,0,0,0.3);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  z-index: 2000;
+}
+#toast.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
+
+/* On big screens the map has plenty of room to spare - scale up the chrome
+   around it (topbar, legend, panel) rather than leaving it looking thin
+   and undersized next to all that empty map space. */
+@media (min-width: 1400px) {
+  #topbar { height: 66px; padding: 0 32px; }
+  #topbar .brand { font-size: 25px; }
+  #logo-mark { height: 50px; }
+  #topbar button { font-size: 14.5px; padding: 9px 17px; }
+  #lang-toggle { min-width: 42px; }
+
+  #search-wrap { max-width: 540px; margin: 0 28px; }
+  #search-input { font-size: 15px; padding: 10px 18px; }
+  .search-row { font-size: 14.5px; padding: 10px 16px; }
+  .search-section-label { font-size: 12px; }
+
+  #panel.open { width: 500px; }
+  #panel-content { width: 500px; }
+
+  .hero { height: 320px; }
+  .hero-placeholder-icon { font-size: 140px; }
+  .hero-scrim { padding: 48px 28px 22px; }
+  .hero-kicker { font-size: 13px; }
+  .hero-title { font-size: 30px; }
+
+  .panel-body { padding: 26px 30px 34px; }
+  .panel-body .meta { font-size: 14px; }
+  .panel-body h3 { font-size: 18px; margin-top: 28px; }
+  .extract { font-size: 15.5px; }
+  .source-list { font-size: 14px; }
+  .list-row { font-size: 14.5px; padding: 12px 2px; }
+  .badge { font-size: 14px; padding: 8px 16px; }
+  .gallery img { width: 80px; height: 80px; }
+}

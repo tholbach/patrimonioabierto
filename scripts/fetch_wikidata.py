@@ -1,7 +1,13 @@
 #!/usr/bin/env python3
 """Pull every Wikidata item carrying a P3177 (Patrimonio Web JCyL ID) -
-i.e. everything already linked to CyL's heritage catalog. Writes raw
-results to data/raw/ - regenerate anytime.
+i.e. everything already linked to CyL's heritage catalog - plus whether
+each one has a P18 (main image) and, if so, its ready-made Special:FilePath
+URL. The image flag feeds the coverage-history snapshot in
+build_dataset.py: linkage alone doesn't tell the whole story, an item can
+be "linked" and still have no photo. The URL itself feeds thumbnails in
+list views (nearby/search) - fetched here, once, in the same bulk query,
+rather than one Commons request per monument. Writes raw results to
+data/raw/ - regenerate anytime.
 """
 import json
 import os
@@ -12,8 +18,9 @@ RAW_DIR = os.path.join(os.path.dirname(__file__), "..", "data", "raw")
 USER_AGENT = "cylinked/0.1 (https://github.com/tholbach/cylinked)"
 
 QUERY = """
-SELECT ?item ?jcylID WHERE {
+SELECT ?item ?jcylID ?image (BOUND(?image) AS ?hasImage) WHERE {
   ?item wdt:P3177 ?jcylID .
+  OPTIONAL { ?item wdt:P18 ?image }
 }
 """
 

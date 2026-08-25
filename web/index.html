@@ -4,20 +4,55 @@
   <meta charset="utf-8">
   <title>CyLinked</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
   <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
-  <div id="map"></div>
+  <header id="topbar">
+    <span class="brand"><img src="assets/logo.png" alt="" id="logo-mark">CyLinked</span>
 
-  <div id="legend">
-    <strong>CyLinked</strong> — Bienes de Interés Cultural de Castilla y León
-    <div><span class="dot linked"></span> en Wikidata</div>
-    <div><span class="dot missing"></span> sin enlazar</div>
-    <div id="stats"></div>
+    <div id="search-wrap">
+      <input type="text" id="search-input" autocomplete="off" data-i18n-placeholder="search.placeholder" />
+      <div id="search-results"></div>
+    </div>
+
+    <nav>
+      <button type="button" data-open-panel="stats">📊 <span data-i18n="nav.stats">Estadísticas</span></button>
+      <button type="button" data-open-panel="about">ℹ️ <span data-i18n="nav.about">Acerca de</span></button>
+      <button type="button" data-open-panel="contribute">🤝 <span data-i18n="nav.contribute">Cómo contribuir</span></button>
+      <button type="button" id="lang-toggle">EN</button>
+    </nav>
+  </header>
+
+  <div id="app">
+    <!-- map-wrap, not #app, is what #legend/#locate-btn anchor to - #app
+         spans the map AND the panel side-by-side, so anchoring to it means
+         "right: 16px" measures from the panel's edge once it's open, not
+         the map's. map-wrap always matches the map's own visible area. -->
+    <div id="map-wrap">
+      <div id="map"></div>
+
+      <button type="button" id="shuffle-btn" data-i18n-title="shuffle.button_title" aria-label="Random monument">🎲</button>
+      <button type="button" id="locate-btn" data-i18n-title="geolocation.button_title" aria-label="Locate me">🎯</button>
+    </div>
+
+    <aside id="panel">
+      <div id="panel-handle"></div>
+      <button id="panel-close" aria-label="Cerrar">✕</button>
+      <div id="panel-content"></div>
+    </aside>
   </div>
 
+  <div id="toast"></div>
+
   <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+  <script src="i18n.js"></script>
   <script src="app.js"></script>
 </body>
 </html>

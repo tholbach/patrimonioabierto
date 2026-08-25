@@ -1,0 +1,128 @@
+[
+  {
+    "name": "Burgos",
+    "bbox": [
+      -4.335327,
+      41.450784,
+      -2.517397,
+      43.198747
+    ],
+    "monument_count": 429,
+    "linked_count": 166,
+    "municipality_count": 371,
+    "lat": 42.324765,
+    "lon": -3.426362
+  },
+  {
+    "name": "León",
+    "bbox": [
+      -7.077069,
+      42.029226,
+      -4.733881,
+      43.238204
+    ],
+    "monument_count": 578,
+    "linked_count": 76,
+    "municipality_count": 211,
+    "lat": 42.633715,
+    "lon": -5.905475
+  },
+  {
+    "name": "Palencia",
+    "bbox": [
+      -5.031895,
+      41.758166,
+      -3.889622,
+      43.060989
+    ],
+    "monument_count": 171,
+    "linked_count": 99,
+    "municipality_count": 191,
+    "lat": 42.409577,
+    "lon": -4.460758
+  },
+  {
+    "name": "Salamanca",
+    "bbox": [
+      -6.931705,
+      40.238924,
+      -5.089841,
+      41.294216
+    ],
+    "monument_count": 249,
+    "linked_count": 86,
+    "municipality_count": 362,
+    "lat": 40.76657,
+    "lon": -6.010773
+  },
+  {
+    "name": "Segovia",
+    "bbox": [
+      -4.724653,
+      40.632985,
+      -3.206929,
+      41.586082
+    ],
+    "monument_count": 228,
+    "linked_count": 110,
+    "municipality_count": 209,
+    "lat": 41.109533,
+    "lon": -3.965791
+  },
+  {
+    "name": "Soria",
+    "bbox": [
+      -3.550438,
+      41.056508,
+      -1.775372,
+      42.146706
+    ],
+    "monument_count": 344,
+    "linked_count": 128,
+    "municipality_count": 183,
+    "lat": 41.601607,
+    "lon": -2.662905
+  },
+  {
+    "name": "Valladolid",
+    "bbox": [
+      -5.520891,
+      41.094015,
+      -3.980442,
+      42.311842
+    ],
+    "monument_count": 194,
+    "linked_count": 143,
+    "municipality_count": 225,
+    "lat": 41.702928,
+    "lon": -4.750666
+  },
+  {
+    "name": "Zamora",
+    "bbox": [
+      -7.034043,
+      41.117173,
+      -5.228873,
+      42.254193
+    ],
+    "monument_count": 145,
+    "linked_count": 75,
+    "municipality_count": 248,
+    "lat": 41.685683,
+    "lon": -6.131458
+  },
+  {
+    "name": "Ávila",
+    "bbox": [
+      -5.737562,
+      40.081926,
+      -4.160234,
+      41.16425
+    ],
+    "monument_count": 141,
+    "linked_count": 107,
+    "municipality_count": 248,
+    "lat": 40.623088,
+    "lon": -4.948898
+  }
+]

@@ -62,8 +62,17 @@ make build   # scripts/build_dataset.py -> web/data/cyl_monuments_wikidata.json
    which one to actually use for reconciliation.
 
 Each output record also carries `already_linked` / `wikidata_qid` /
-`wikidata_conflict` — this file doubles as the source dataset for OpenRefine
+`wikidata_conflict` / `has_wikidata_image` (whether the linked item has a
+`P18` main image — linked and "has a photo" are genuinely different things,
+tracked separately) — this file doubles as the source dataset for OpenRefine
 reconciliation work, not just map data.
+
+`make build` also appends today's coverage numbers (`total`/`linked`/
+`with_image`) to `web/data/history.json` — one entry per calendar date,
+re-running the same day updates that day's entry rather than duplicating.
+This is what backs the in-app "Estadísticas" page: the point isn't just the
+map, it's proving the linking work is real, ongoing progress rather than a
+one-off snapshot for a submission deadline.
 
 ## The map (`web/`)
 
