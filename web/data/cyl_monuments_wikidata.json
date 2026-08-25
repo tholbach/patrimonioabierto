@@ -1652,11 +1652,11 @@
     "municipality_match_approx": false,
     "province": "Ávila",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=862",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43168851",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Guisando%2001%20by-dpc.jpg"
   },
   {
     "jcyl_id": 869,
@@ -5075,8 +5075,8 @@
     "municipality_match_approx": false,
     "province": "Burgos",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=2380",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q106768386",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -10451,11 +10451,11 @@
     "municipality_match_approx": false,
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=4751",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43116556",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Villarmun%2002%20iglesia%20by-dpc.jpg"
   },
   {
     "jcyl_id": 4760,
@@ -10493,11 +10493,11 @@
     "municipality_match_approx": false,
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=4776",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43172492",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Iglesia%20de%20San%20Miguel%20Arc%C3%A1ngel%2C%20Grajal%20de%20Campos.jpg"
   },
   {
     "jcyl_id": 4783,
@@ -14339,11 +14339,11 @@
     "municipality_match_approx": false,
     "province": "Palencia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=7304",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43114287",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/La%20Casa%20Grande%20%28Guardo%29.jpg"
   },
   {
     "jcyl_id": 7315,
@@ -14360,11 +14360,11 @@
     "municipality_match_approx": false,
     "province": "Palencia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=7315",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43088056",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Ermita%20de%20la%20Virgen%20de%20la%20era.jpg"
   },
   {
     "jcyl_id": 7353,
@@ -14423,11 +14423,11 @@
     "municipality_match_approx": false,
     "province": "Palencia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=7392",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q47011108",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Castillo%20de%20Hornillos%2CPalencia%20Espa%C3%B1a.jpg"
   },
   {
     "jcyl_id": 7403,
@@ -17216,11 +17216,11 @@
     "municipality_match_approx": false,
     "province": "Salamanca",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=9145",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q115687651",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Iglesia%20de%20Nuestra%20Se%C3%B1ora%20de%20la%20Asunci%C3%B3n%20en%20Galleguillos.jpg"
   },
   {
     "jcyl_id": 9163,
@@ -24443,11 +24443,11 @@
     "municipality_match_approx": false,
     "province": "Soria",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=13089",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q111217401",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/1889%2C%20Espa%C3%B1a%2C%20sus%20monumentos%20y%20sus%20artes%2C%20su%20naturaleza%20e%20historia%2C%20Soria%2C%20Iglesia%20de%20Chavaler%2C%20Isidro%20Gil.jpg"
   },
   {
     "jcyl_id": 13096,
@@ -31568,11 +31568,11 @@
     "municipality_match_approx": false,
     "province": "Zamora",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=16655",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q52851330",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Castillogranucillo.jpg"
   },
   {
     "jcyl_id": 16661,
@@ -31610,8 +31610,8 @@
     "municipality_match_approx": false,
     "province": "Zamora",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=16672",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43116624",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -40367,11 +40367,11 @@
     "municipality_match_approx": false,
     "province": "Salamanca",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=813573",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q20021642",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Cortina%20edu2.jpg"
   },
   {
     "jcyl_id": 814155,
