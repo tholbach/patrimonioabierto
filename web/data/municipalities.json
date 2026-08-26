@@ -23547,7 +23547,7 @@
       42.239684
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "San Cebrián de Castro",
@@ -23562,7 +23562,7 @@
       41.787696
     ],
     "monument_count": 2,
-    "linked_count": 1
+    "linked_count": 2
   },
   {
     "name": "San Cebrián de Mazote",
@@ -23637,7 +23637,7 @@
       42.083996
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "San Cristóbal de Segovia",
@@ -23712,7 +23712,7 @@
       43.075896
     ],
     "monument_count": 21,
-    "linked_count": 0
+    "linked_count": 2
   },
   {
     "name": "San Esteban de Gormaz",
@@ -23727,7 +23727,7 @@
       41.686995
     ],
     "monument_count": 10,
-    "linked_count": 4
+    "linked_count": 6
   },
   {
     "name": "San Esteban de Nogales",
@@ -24102,7 +24102,7 @@
       41.782326
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "San Martín de la Vega del Alberche",
@@ -24132,7 +24132,7 @@
       40.544619
     ],
     "monument_count": 3,
-    "linked_count": 0
+    "linked_count": 2
   },
   {
     "name": "San Martín del Pimpollar",
@@ -24552,7 +24552,7 @@
       41.149069
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "San Román de Hornija",
@@ -24897,7 +24897,7 @@
       42.550581
     ],
     "monument_count": 3,
-    "linked_count": 0
+    "linked_count": 2
   },
   {
     "name": "Santa Colomba de las Monjas",
@@ -24972,7 +24972,7 @@
       42.554089
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Santa Cruz de Pinares",
@@ -25107,7 +25107,7 @@
       42.765585
     ],
     "monument_count": 4,
-    "linked_count": 2
+    "linked_count": 3
   },
   {
     "name": "Santa Inés",
@@ -25197,7 +25197,7 @@
       41.29579
     ],
     "monument_count": 3,
-    "linked_count": 1
+    "linked_count": 3
   },
   {
     "name": "Santa María de Ordás",
@@ -25212,7 +25212,7 @@
       42.773451
     ],
     "monument_count": 2,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Santa María de Sando",
@@ -25527,7 +25527,7 @@
       42.441588
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Santiago de la Puebla",
@@ -25542,7 +25542,7 @@
       40.834851
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Santiago del Collado",
@@ -25917,7 +25917,7 @@
       41.630095
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Sardón de los Frailes",
@@ -25947,7 +25947,7 @@
       42.804538
     ],
     "monument_count": 2,
-    "linked_count": 1
+    "linked_count": 2
   },
   {
     "name": "Sariegos",
@@ -25992,7 +25992,7 @@
       42.462978
     ],
     "monument_count": 5,
-    "linked_count": 2
+    "linked_count": 3
   },
   {
     "name": "Saucelle",
@@ -26052,7 +26052,7 @@
       40.989049
     ],
     "monument_count": 43,
-    "linked_count": 28
+    "linked_count": 36
   },
   {
     "name": "Sena de Luna",
@@ -26097,7 +26097,7 @@
       41.357514
     ],
     "monument_count": 30,
-    "linked_count": 6
+    "linked_count": 7
   },
   {
     "name": "Sequera de Fresno",
@@ -26127,7 +26127,7 @@
       40.527497
     ],
     "monument_count": 3,
-    "linked_count": 2
+    "linked_count": 3
   },
   {
     "name": "Serrada",
@@ -26292,7 +26292,7 @@
       40.963287
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Sobrado",
@@ -26352,7 +26352,7 @@
       42.006742
     ],
     "monument_count": 2,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Soliedra",
@@ -26412,7 +26412,7 @@
       41.932852
     ],
     "monument_count": 69,
-    "linked_count": 13
+    "linked_count": 16
   },
   {
     "name": "Sorihuela",
@@ -26622,7 +26622,7 @@
       42.674108
     ],
     "monument_count": 2,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Suellacabras",
@@ -26637,7 +26637,7 @@
       41.887166
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Susinos del Páramo",
@@ -26847,7 +26847,7 @@
       42.378457
     ],
     "monument_count": 2,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Tardelcuende",
@@ -27162,7 +27162,7 @@
       41.561362
     ],
     "monument_count": 5,
-    "linked_count": 3
+    "linked_count": 5
   },
   {
     "name": "Tordillos",
@@ -27267,7 +27267,7 @@
       41.579796
     ],
     "monument_count": 15,
-    "linked_count": 11
+    "linked_count": 12
   },
   {
     "name": "Torquemada",
@@ -27492,7 +27492,7 @@
       41.520374
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Torreiglesias",
@@ -27567,7 +27567,7 @@
       42.07674
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Torres del Carrizal",
@@ -27942,7 +27942,7 @@
       42.230503
     ],
     "monument_count": 2,
-    "linked_count": 1
+    "linked_count": 2
   },
   {
     "name": "Tórtoles",

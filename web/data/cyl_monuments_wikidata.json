@@ -7322,11 +7322,11 @@
     "municipality_match_approx": false,
     "province": "Burgos",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=3313",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43168351",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/SantaGadeaDelCid%201.jpg"
   },
   {
     "jcyl_id": 3319,
@@ -7469,11 +7469,11 @@
     "municipality_match_approx": false,
     "province": "Burgos",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=3366",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q2881521",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Dolmen%20La%20Caba%C3%B1a%2004%20by-dpc.jpg"
   },
   {
     "jcyl_id": 3378,
@@ -7553,11 +7553,11 @@
     "municipality_match_approx": false,
     "province": "Burgos",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=3396",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43130480",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Iglesia%20Asunci%C3%B3n%20Olmillos%20Sasam%C3%B3n%2002.jpg"
   },
   {
     "jcyl_id": 3409,
@@ -7616,11 +7616,11 @@
     "municipality_match_approx": false,
     "province": "Burgos",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=3427",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43130792",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Solarana%20Iglesia%20Vista%20General%2001.JPG"
   },
   {
     "jcyl_id": 3435,
@@ -7679,11 +7679,11 @@
     "municipality_match_approx": false,
     "province": "Burgos",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=3463",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43174699",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Pe%C3%B1aAmaya001.JPG"
   },
   {
     "jcyl_id": 3468,
@@ -7763,8 +7763,8 @@
     "municipality_match_approx": false,
     "province": "Burgos",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=3499",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43130822",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -11732,8 +11732,8 @@
     "municipality_match_approx": false,
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=5444",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43170272",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -11753,11 +11753,11 @@
     "municipality_match_approx": false,
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=5467",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43116614",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Iglesia%20Rabanal.jpg"
   },
   {
     "jcyl_id": 5480,
@@ -11774,11 +11774,11 @@
     "municipality_match_approx": false,
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=5480",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q112664037",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Torreon%20de%20Turienzo%20de%20los%20Caballeros.jpg"
   },
   {
     "jcyl_id": 5491,
@@ -11837,11 +11837,11 @@
     "municipality_match_approx": false,
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=5517",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q112657504",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Torre%20de%20Ord%C3%A1s%2002.jpg"
   },
   {
     "jcyl_id": 5527,
@@ -11858,11 +11858,11 @@
     "municipality_match_approx": false,
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=5527",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43171316",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Santiago%20Millas.JPG"
   },
   {
     "jcyl_id": 5538,
@@ -15305,11 +15305,11 @@
     "municipality_match_approx": false,
     "province": "Palencia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=7961",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43145463",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/San%20Cebrian%20de%20Campos%2001%20iglesia%20by-dpc.jpg"
   },
   {
     "jcyl_id": 7977,
@@ -15368,11 +15368,11 @@
     "municipality_match_approx": false,
     "province": "Palencia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=7993",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43129109",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Hijosa%20de%20Boedo%20Church%20of%20San%20Mart%C3%ADn%20001.jpg"
   },
   {
     "jcyl_id": 8005,
@@ -15494,11 +15494,11 @@
     "municipality_match_approx": false,
     "province": "Palencia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=8051",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43170830",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Casa%20del%20Mayorazgo.JPG"
   },
   {
     "jcyl_id": 8063,
@@ -18875,11 +18875,11 @@
     "municipality_match_approx": false,
     "province": "Salamanca",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=10221",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43115537",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Iglesia%2C%20San%20Martin%20del%20Castanar.JPG"
   },
   {
     "jcyl_id": 10230,
@@ -18896,11 +18896,11 @@
     "municipality_match_approx": false,
     "province": "Salamanca",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=10230",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43169595",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/San%20Martin%20del%20Castanar.JPG"
   },
   {
     "jcyl_id": 10236,
@@ -18938,8 +18938,8 @@
     "municipality_match_approx": false,
     "province": "Salamanca",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=10240",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43118002",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -18959,11 +18959,11 @@
     "municipality_match_approx": false,
     "province": "Salamanca",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=10247",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43088282",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Santiago%20de%20la%20puebla%20antigua.jpg"
   },
   {
     "jcyl_id": 10255,
@@ -19064,8 +19064,8 @@
     "municipality_match_approx": false,
     "province": "Salamanca",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=10320",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43171639",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -19085,8 +19085,8 @@
     "municipality_match_approx": false,
     "province": "Salamanca",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=10330",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q111721522",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -21437,11 +21437,11 @@
     "municipality_match_approx": false,
     "province": "Segovia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=11688",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q100751081",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Segovia%20-%20Antigua%20Carcel%20Real.jpg"
   },
   {
     "jcyl_id": 11698,
@@ -21584,11 +21584,11 @@
     "municipality_match_approx": false,
     "province": "Segovia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=11748",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43074289",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Casa%20del%20Hidalgo%2C%20casa%20n%C3%BAmero%208%20calle%20San%20Agustin.JPG"
   },
   {
     "jcyl_id": 11755,
@@ -21941,11 +21941,11 @@
     "municipality_match_approx": false,
     "province": "Segovia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=11894",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q5967825",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Quintanilla.jpg"
   },
   {
     "jcyl_id": 11901,
@@ -22130,11 +22130,11 @@
     "municipality_match_approx": false,
     "province": "Segovia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=11995",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q6139765",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Teatro%20Juan%20Bravo%20-%2001.jpg"
   },
   {
     "jcyl_id": 12009,
@@ -22151,11 +22151,11 @@
     "municipality_match_approx": false,
     "province": "Segovia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=12009",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q104786169",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Segovia%20-%20Monasterio%20de%20Santo%20Domingo%20el%20Real%20y%20Torre%20de%20H%C3%A9rcules%202.jpg"
   },
   {
     "jcyl_id": 12015,
@@ -22193,11 +22193,11 @@
     "municipality_match_approx": false,
     "province": "Segovia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=12025",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43177366",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Duraton%20visigodos%20necropolis.JPG"
   },
   {
     "jcyl_id": 12039,
@@ -24717,8 +24717,8 @@
     "province": "Soria",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=13203",
     "wikidata_qid": [
-      "Q22079382",
-      "Q116571273"
+      "Q116571273",
+      "Q22079382"
     ],
     "already_linked": true,
     "wikidata_conflict": true,
@@ -25685,11 +25685,11 @@
     "municipality_match_approx": false,
     "province": "Soria",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=13677",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q116885687",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Quintanilla%20de%20Tres%20Barrios%20Atalaya%2031%201.jpg"
   },
   {
     "jcyl_id": 13683,
@@ -25727,11 +25727,11 @@
     "municipality_match_approx": false,
     "province": "Soria",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=13690",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43172455",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/IglesiaDeSanGin%C3%A9s-rectangular.jpg"
   },
   {
     "jcyl_id": 13697,
@@ -25895,11 +25895,11 @@
     "municipality_match_approx": false,
     "province": "Soria",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=13776",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43175086",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Ruinas%20cicl%C3%B3peas%2C%20Santa%20Mar%C3%ADa%20de%20Huerta%2C%20Soria%2C%20Espa%C3%B1a%2C%202018-04-06%2C%20DD%2040.jpg"
   },
   {
     "jcyl_id": 13787,
@@ -25979,11 +25979,11 @@
     "municipality_match_approx": false,
     "province": "Soria",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=13801",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43111661",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Casa%20solariega%20de%20los%20Salvadores%20Soria.JPG"
   },
   {
     "jcyl_id": 13808,
@@ -26063,11 +26063,11 @@
     "municipality_match_approx": false,
     "province": "Soria",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=13848",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43170630",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Soria-13-2-2009.jpg"
   },
   {
     "jcyl_id": 13859,
@@ -26966,8 +26966,8 @@
     "municipality_match_approx": false,
     "province": "Soria",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=14153",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43175076",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -27072,13 +27072,13 @@
     "province": "Soria",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=14183",
     "wikidata_qid": [
-      "Q22075423",
-      "Q116486073"
+      "Q116486073",
+      "Q22075423"
     ],
     "already_linked": true,
     "wikidata_conflict": true,
     "has_wikidata_image": true,
-    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/IglesiaAsuncionTREVAGO.jpg"
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Iglesia%20y%20Torre%20Bereber.%20%285389845431%29.jpg"
   },
   {
     "jcyl_id": 14188,
@@ -29195,11 +29195,11 @@
     "municipality_match_approx": false,
     "province": "Valladolid",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=15289",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q6021451",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Valladolid%20monasterio%20Retuerta%2001%20lou.JPG"
   },
   {
     "jcyl_id": 15302,
@@ -29447,11 +29447,11 @@
     "municipality_match_approx": false,
     "province": "Valladolid",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=15434",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q5411320",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Atrio%20de%20las%20Claras.jpg"
   },
   {
     "jcyl_id": 15441,
@@ -29510,11 +29510,11 @@
     "municipality_match_approx": false,
     "province": "Valladolid",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=15465",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43168931",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Tordesillas01%2020-4-03.JPG"
   },
   {
     "jcyl_id": 15480,
@@ -32030,11 +32030,11 @@
     "municipality_match_approx": false,
     "province": "Zamora",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=16913",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q24045497",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Castillo%20de%20Castrotorafe%2C%20%C3%A1ngulo%20SO.jpg"
   },
   {
     "jcyl_id": 16923,
@@ -32072,8 +32072,8 @@
     "municipality_match_approx": false,
     "province": "Zamora",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=16928",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q55873387",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -32345,11 +32345,11 @@
     "municipality_match_approx": false,
     "province": "Zamora",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=17049",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43167247",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Torre%20del%20reloj%20de%20la%20ciudad%20de%20Toro.%20%28Zamora%29.JPG"
   },
   {
     "jcyl_id": 17060,
@@ -48830,8 +48830,8 @@
     "municipality_match_approx": false,
     "province": "Burgos",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=875393",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q106807075",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -49691,11 +49691,11 @@
     "municipality_match_approx": false,
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=879821",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q112657432",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Riolago%2002%20by-dpc.jpg"
   },
   {
     "jcyl_id": 879832,
@@ -50048,11 +50048,11 @@
     "municipality_match_approx": false,
     "province": "Segovia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=2015131",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q52161410",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Segovia%20%2838625109621%29.jpg"
   },
   {
     "jcyl_id": 2015134,
@@ -50069,11 +50069,11 @@
     "municipality_match_approx": false,
     "province": "Segovia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=2015134",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q42912722",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Torre%C3%B3n%20de%20Lozoya%2C%20Casa%20de%20Bornos%2C%20Casa%20de%20Solier%2C%20monumento%20a%20Juan%20Bravo.jpg"
   },
   {
     "jcyl_id": 2015365,
@@ -50216,11 +50216,11 @@
     "municipality_match_approx": false,
     "province": "Soria",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=2016237",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q63430838",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Castillo%20de%20Belimbre.jpg"
   },
   {
     "jcyl_id": 2016246,
@@ -50279,11 +50279,11 @@
     "municipality_match_approx": false,
     "province": "Valladolid",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=2016594",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q5757572",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Castillo%20de%20San%20Mart%C3%ADn%20de%20Valven%C3%AD.JPG"
   },
   {
     "jcyl_id": 2016606,
@@ -50573,11 +50573,11 @@
     "municipality_match_approx": false,
     "province": "Soria",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=2018386",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q16489699",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Biblioteca%20P%C3%BAblica%20de%20Soria.JPG"
   },
   {
     "jcyl_id": 2018394,
@@ -51035,8 +51035,8 @@
     "municipality_match_approx": false,
     "province": "Zamora",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=2118138",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q5870528",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -51350,11 +51350,11 @@
     "municipality_match_approx": false,
     "province": "Segovia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=2216240",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q16867463",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Casa-museo-Machado-Segovia.jpg"
   },
   {
     "jcyl_id": 2226204,
