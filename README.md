@@ -1,6 +1,6 @@
 # CyLinked
 
-<img src="web/assets/logo.png" alt="CyLinked logo" width="120">
+<img src="web/assets/logo-readme.png" alt="CyLinked logo" width="120">
 
 Links Castilla y León's open heritage data (Bienes de Interés Cultural) with
 Wikidata, Wikimedia Commons, and Wikipedia — and shows the result on a map.
