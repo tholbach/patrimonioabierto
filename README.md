@@ -5,18 +5,24 @@ Wikidata, Wikimedia Commons, and Wikipedia — and shows the result on a map.
 
 ## The gap this project tracks
 
-As of the last `make build` run: **2,479** officially protected monuments in
-Castilla y León, of which **989 (40%)** have a matching Wikidata item and
-**1,490 (60%)** don't. See `web/data/cyl_monuments_wikidata.json` for the
-full per-monument breakdown, including 4 identifier conflicts (one JCyL ID
-claimed by two different Wikidata items) worth resolving by hand.
+As of the last `make build` run (2026-08-26): **2,479** officially
+protected monuments in Castilla y León, of which **1,785 (72%)** have a
+matching Wikidata item and **694 (28%)** don't. See
+`web/data/cyl_monuments_wikidata.json` for the full per-monument breakdown,
+including 4 identifier conflicts (one JCyL ID claimed by two different
+Wikidata items) worth resolving by hand.
 
-Coverage is wildly uneven by category — obvious categories like
-`MONUMENTO` (cathedrals, churches, palaces) are ~78% linked, while entire
-categories are essentially untouched: `HÓRREOS Y PALLOZAS` (traditional
-granaries) and `ARTE RUPESTRE` (rock art) are both ~99-100% missing, and
-`CASTILLOS` (434 castles) is 65% missing despite being probably the single
-most visually compelling category for this project's map.
+Coverage is still uneven by category, but far less so than early on —
+`HÓRREOS Y PALLOZAS` (traditional granaries) and `ROLLOS DE JUSTICIA`
+(pillories) went from essentially untouched to 95% and 98% linked
+respectively, driven by manual OpenRefine reconciliation/item-creation work
+(see "Related, but not part of this repo" below for the tooling that came
+out of that). The one
+category still genuinely stuck is `ARTE RUPESTRE` (rock art, 347
+monuments) at just **1% linked** — now the clearest remaining gap by far.
+`CASTILLOS` (434 castles) is next at 53% linked, still real work left
+despite being probably the single most visually compelling category for
+this project's map.
 
 ## Data sources
 
@@ -51,21 +57,27 @@ make build   # scripts/build_dataset.py -> web/data/cyl_monuments_wikidata.json
    itself via `srsName=EPSG:4326`, not reimplemented here).
 2. **Spatial join** against municipality boundaries to derive which
    municipality each monument sits in (point-in-polygon, bbox-prefiltered;
-   99.8% exact match rate, the rest fall back to nearest-municipality with
-   `municipality_match_approx: true` flagged for manual review).
+   99.8% exact match rate, the rest fall back to nearest-municipality —
+   tracked internally during the build as an approx-match count printed to
+   the console, not carried into the output).
 3. **Municipality code normalization**: the source layer's own `c_ine` field
    is an 11-digit extended code, but Wikidata's
    [`P772`](https://www.wikidata.org/wiki/Property:P772) ("INE code") uses
    the 5-digit `c_prov_mun` form — verified against a real item
-   (`Q15699`/León, `P772 = "24089"`) before trusting it. Both are kept in
-   the output (`municipality_ine_code_p772` vs `_full`) so it's obvious
-   which one to actually use for reconciliation.
+   (`Q15699`/León, `P772 = "24089"`) before trusting it. Only the P772 form
+   (`municipality_ine_code_p772`) makes it into the output; the raw 11-digit
+   code is used internally for the join and then dropped, so there's no
+   ambiguity about which one to actually use for reconciliation.
 
 Each output record also carries `already_linked` / `wikidata_qid` /
 `wikidata_conflict` / `has_wikidata_image` (whether the linked item has a
 `P18` main image — linked and "has a photo" are genuinely different things,
 tracked separately) — this file doubles as the source dataset for OpenRefine
-reconciliation work, not just map data.
+reconciliation work, not just map data. It intentionally does *not* carry
+`name_raw` (JCyL's raw uppercase denomination — only `titlecase_es()`'s
+cleaned-up `name` ships) or `category_code` (the numeric category, only its
+`category` label) — neither is read anywhere in `web/app.js`, so both are
+dropped at build time rather than shipped dead weight.
 
 `make build` also appends today's coverage numbers (`total`/`linked`/
 `with_image`) to `web/data/history.json` — one entry per calendar date,
@@ -79,11 +91,22 @@ one-off snapshot for a submission deadline.
 Plain Leaflet + vanilla JS, no build step. Loads
 `web/data/cyl_monuments_wikidata.json` once in full (2,479 records is small
 enough to load eagerly rather than paginate/tile), plots every monument as a
-marker colored by linkage status. Clicking a marker fetches Wikidata's
+marker colored by linkage status, clustered via `leaflet.markercluster`
+(clusters themselves colored by their own linked/missing ratio, not raw
+count, so even zoomed out the map reads as "where the documentation gaps
+are"). A filter button lets you toggle markers on/off by category, with a
+live count per category. Clicking a marker fetches Wikidata's
 `Special:EntityData` for that item (sitelinks + the `P18` image claim), then
 the Wikipedia REST summary and a Commons thumbnail via `Special:FilePath` —
 live, per click, not baked into the static dataset. Unlinked monuments show
 their JCyL reference instead, with a "not yet on Wikidata" note.
+
+Basemap tiles are CARTO's "Positron" style (light, muted, so markers/photos
+stay the focus) — CARTO retired anonymous keyless access to this raster
+service, so `web/app.js` carries a free, domain-restricted API key (request
+one at [carto.com/basemaps/apikey](https://carto.com/basemaps/apikey/); it's
+a public/client-side key by design, safe to commit). If tiles ever stop
+loading, that key is the first thing to check.
 
 ```
 make serve   # http://localhost:8000, for local development
@@ -118,5 +141,13 @@ makes it reachable.
 - "Add a photo" contribution flow — planned to deep-link into Commons'
   UploadWizard (with a pre-filled category) rather than build a custom
   upload/storage system, matching how Wiki Loves Monuments itself works.
-- Marker clustering (currently all 2,479 render individually — fine so far,
-  worth revisiting if it gets sluggish at low zoom levels).
+
+## Related, but not part of this repo
+
+Reconciling/creating the actual Wikidata items (the OpenRefine work behind
+the `HÓRREOS Y PALLOZAS`/`ROLLOS DE JUSTICIA` numbers above) lives outside
+this project: a sibling local-only tool, `wikidata-commons-map`, overlays a
+Wikidata SPARQL query's results against a Commons category's geotagged
+photos, to spot reusable photos for items that don't have one yet.
+Deliberately not committed here or wired into any build/deploy — see its
+own README if reused for another category.
