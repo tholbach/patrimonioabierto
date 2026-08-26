@@ -479,6 +479,15 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
   color: var(--ink);
   transition: border-color 0.15s ease, transform 0.1s ease;
 }
+.badge svg { flex-shrink: 0; }
+.wiki-w-icon {
+  font-family: var(--font-display);
+  font-weight: 700;
+  font-style: normal;
+  font-size: 14px;
+  line-height: 1;
+  flex-shrink: 0;
+}
 .badge:hover { transform: translateY(-1px); }
 .badge.wikidata { border-color: #b7d4e8; color: #0f5c85; }
 .badge.wikipedia { border-color: #d8d3cc; color: #333; }

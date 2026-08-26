@@ -295,8 +295,28 @@ function shareUrl(record) {
   return url.toString();
 }
 
+// Small inline SVG (currentColor, so each badge's own text color applies
+// automatically) instead of emoji - "share" read as more playful than
+// intended next to the plainer JCyL/Wikidata/Wikipedia badges. No icon
+// font/library added just for one glyph.
+const ICON_SHARE =
+  '<svg viewBox="0 0 24 24" width="13" height="13" aria-hidden="true"><g fill="currentColor"><circle cx="18" cy="5" r="2.6"/><circle cx="6" cy="12" r="2.6"/><circle cx="18" cy="19" r="2.6"/></g><g fill="none" stroke="currentColor" stroke-width="1.8" stroke-linecap="round"><line x1="8.3" y1="10.6" x2="15.7" y2="6.5"/><line x1="8.3" y1="13.4" x2="15.7" y2="17.5"/></g></svg>';
+
+// Real Wikidata marks, not approximations - Wikidata's is the actual
+// Commons file (commons.wikimedia.org/wiki/File:Wikidata-logo.svg, paths
+// copied verbatim, just given a small display size), in its real brand
+// colors rather than currentColor since it's a recognizable multi-color
+// mark, not meant to be recolored. Wikipedia's actual simplified mark
+// (its real favicon/touch-icon, verified by fetching it) is just a bold
+// serif "W" - rendered as text in the same Fraunces family already used
+// for the brand wordmark, rather than a hand-traced path of a complex
+// logo I can't verify pixel-for-pixel.
+const ICON_WIKIDATA =
+  '<svg viewBox="0 0 1050 590" width="18" height="10" aria-hidden="true"><path d="m 120,545 h 30 V 45 H 120 V 545 z m 60,0 h 90 V 45 H 180 V 545 z M 300,45 V 545 h 90 V 45 h -90 z" fill="#990000"/><path d="m 840,545 h 30 V 45 H 840 V 545 z M 900,45 V 545 h 30 V 45 H 900 z M 420,545 h 30 V 45 H 420 V 545 z M 480,45 V 545 h 30 V 45 h -30 z" fill="#339966"/><path d="m 540,545 h 90 V 45 h -90 V 545 z m 120,0 h 30 V 45 H 660 V 545 z M 720,45 V 545 h 90 V 45 H 720 z" fill="#006699"/></svg>';
+const ICON_WIKIPEDIA = '<span class="wiki-w-icon">W</span>';
+
 function shareButtonHtml() {
-  return `<button class="badge share-btn" id="share-btn" type="button">${t('badge.share')}</button>`;
+  return `<button class="badge share-btn" id="share-btn" type="button">${ICON_SHARE}${t('badge.share')}</button>`;
 }
 
 function wireShareButton(record) {
@@ -326,10 +346,10 @@ function linkBadges(record, sitelink) {
   let html = '<div class="link-badges">';
   html += `<a class="badge jcyl" href="${record.reference_url}" target="_blank" rel="noopener">${t('badge.jcyl')}</a>`;
   if (qid) {
-    html += `<a class="badge wikidata" href="https://www.wikidata.org/wiki/${qid}" target="_blank" rel="noopener">${t('badge.wikidata')}</a>`;
+    html += `<a class="badge wikidata" href="https://www.wikidata.org/wiki/${qid}" target="_blank" rel="noopener">${ICON_WIKIDATA}${t('badge.wikidata')}</a>`;
   }
   if (sitelink) {
-    html += `<a class="badge wikipedia" href="${sitelink.url}" target="_blank" rel="noopener">${t('badge.wikipedia')}</a>`;
+    html += `<a class="badge wikipedia" href="${sitelink.url}" target="_blank" rel="noopener">${ICON_WIKIPEDIA}${t('badge.wikipedia')}</a>`;
   }
   html += shareButtonHtml();
   html += '</div>';
