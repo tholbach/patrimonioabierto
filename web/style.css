@@ -230,7 +230,14 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
   #logo-mark { height: 32px; }
   #topbar .brand { font-size: 17px; }
   #menu-btn { width: 36px; height: 36px; font-size: 15px; }
-  #search-toggle-btn { display: inline-flex; width: 36px; height: 36px; font-size: 15px; }
+  #search-toggle-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    width: 36px;
+    height: 36px;
+    padding: 0;
+  }
 
   #search-wrap { display: none; }
   #topbar.search-active .brand,
@@ -733,6 +740,101 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
   transition: transform 0.12s ease;
 }
 #shuffle-btn:hover { transform: scale(1.08) rotate(-8deg); background: white; }
+
+/* Stacked above shuffle/locate, same 54px rhythm (78 - 24) those two
+   already use. */
+#filter-btn {
+  position: absolute;
+  bottom: 132px;
+  right: 16px;
+  z-index: 500;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  font-size: 18px;
+  cursor: pointer;
+  transition: transform 0.12s ease;
+}
+#filter-btn:hover { transform: scale(1.08); background: white; }
+#filter-btn.active { background: var(--cyl-purple); color: white; }
+
+.filter-badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  min-width: 16px;
+  height: 16px;
+  padding: 0 3px;
+  border-radius: 8px;
+  background: var(--cyl-purple);
+  color: white;
+  font-size: 10px;
+  font-weight: 600;
+  line-height: 16px;
+  text-align: center;
+}
+
+#filter-panel {
+  display: none;
+  position: absolute;
+  bottom: 132px;
+  right: 68px; /* clears #filter-btn to its left, rather than overlapping it */
+  width: 260px;
+  max-height: 60vh;
+  overflow-y: auto;
+  background: var(--card);
+  border-radius: 12px;
+  box-shadow: 0 8px 28px rgba(0,0,0,0.25);
+  z-index: 700;
+}
+#filter-panel.open { display: block; }
+
+#filter-panel-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px;
+  padding: 12px 14px 8px;
+  font-size: 12px;
+  font-weight: 600;
+  letter-spacing: 0.4px;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+#filter-panel-actions { display: flex; gap: 10px; flex-shrink: 0; }
+#filter-panel-actions button {
+  border: none;
+  background: none;
+  padding: 0;
+  font: inherit;
+  font-weight: 600;
+  text-transform: none;
+  letter-spacing: normal;
+  color: var(--cyl-purple);
+  cursor: pointer;
+}
+#filter-panel-actions button:hover { color: var(--cyl-purple-dark); }
+
+.filter-row {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 7px 14px;
+  cursor: pointer;
+  color: var(--ink);
+  font-size: 13.5px;
+}
+.filter-row:hover { background: var(--bg); }
+.filter-row input[type="checkbox"] { flex-shrink: 0; accent-color: var(--cyl-purple); }
+.filter-row-icon { font-size: 15px; flex-shrink: 0; }
+.filter-row-name { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
+.filter-row-count { color: var(--ink-soft); font-size: 12px; flex-shrink: 0; }
+.filter-row.unchecked .filter-row-name,
+.filter-row.unchecked .filter-row-count { opacity: 0.5; }
 
 #locate-btn:hover { transform: scale(1.08); background: white; }
 #locate-btn.locating { animation: pulse 1s ease-in-out infinite; }

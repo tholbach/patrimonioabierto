@@ -45,6 +45,13 @@ let allMunicipalities = [];
 let allProvinces = [];
 let datasetMeta = null;
 
+// One L.marker per record, kept around (separately from the cluster group,
+// which only ever holds the currently-visible subset) so the category
+// filter can cheaply clear+re-add just the matching ones instead of
+// recreating markers every time a checkbox is toggled.
+let allMarkerLayers = [];
+let selectedCategories = new Set(); // filled with every category once data loads = no filter applied
+
 // Tracks what's currently shown in the panel so the language toggle can
 // re-render it in place, instead of just relabeling the chrome around it.
 let currentPanelState = null; // { type: 'monument', record } | { type: 'about' } | { type: 'contribute' } | null
@@ -125,6 +132,102 @@ const markers = L.markerClusterGroup({
   disableClusteringAtZoom: 18,
 });
 map.addLayer(markers);
+
+// --- Category filter -------------------------------------------------------
+//
+// Categories are JCyL's own official terms (see i18n.js's note at the top
+// on why they're never translated), so the filter list is built from
+// whatever distinct record.category values actually show up in the
+// dataset - not a hardcoded list - and just displayed as-is, same as
+// everywhere else in the app that shows a category.
+
+const filterBtnEl = document.getElementById('filter-btn');
+const filterBadgeEl = document.getElementById('filter-badge');
+const filterPanelEl = document.getElementById('filter-panel');
+const filterListEl = document.getElementById('filter-list');
+let categoriesWithCounts = []; // [{ category, count }], sorted most common first, filled by initCategoryFilter()
+
+// record.category itself stays exactly as JCyL wrote it (ALL CAPS) - it's
+// the underlying value used for filtering/matching, and i18n.js's policy
+// is to never rewrite official source terms. This only prettifies how a
+// category reads in the filter list, mirroring build_dataset.py's own
+// titlecase_es() for monument names (same small-words-stay-lowercase
+// Spanish heritage-name style), kept in sync by hand since one's Python
+// and the other's JS.
+const SMALL_WORDS_ES = new Set(['de', 'del', 'la', 'las', 'el', 'los', 'y', 'a', 'en']);
+function titlecaseEs(text) {
+  return text
+    .toLowerCase()
+    .split(' ')
+    .map((w, i) => (SMALL_WORDS_ES.has(w) && i !== 0 ? w : w.charAt(0).toUpperCase() + w.slice(1)))
+    .join(' ');
+}
+
+function initCategoryFilter() {
+  const counts = new Map();
+  for (const record of allRecords) {
+    counts.set(record.category, (counts.get(record.category) || 0) + 1);
+  }
+  categoriesWithCounts = [...counts.entries()]
+    .map(([category, count]) => ({ category, count }))
+    .sort((a, b) => b.count - a.count);
+  selectedCategories = new Set(categoriesWithCounts.map((c) => c.category)); // start unfiltered
+
+  filterListEl.innerHTML = categoriesWithCounts
+    .map(
+      ({ category, count }) => `
+        <label class="filter-row" data-category="${category}">
+          <input type="checkbox" checked>
+          <span class="filter-row-icon">${CATEGORY_ICONS[category] || DEFAULT_ICON}</span>
+          <span class="filter-row-name">${titlecaseEs(category)}</span>
+          <span class="filter-row-count">${count.toLocaleString(currentLang)}</span>
+        </label>
+      `
+    )
+    .join('');
+  filterListEl.querySelectorAll('.filter-row').forEach((row) => {
+    const checkbox = row.querySelector('input');
+    checkbox.addEventListener('change', () => {
+      const category = row.dataset.category;
+      if (checkbox.checked) selectedCategories.add(category);
+      else selectedCategories.delete(category);
+      row.classList.toggle('unchecked', !checkbox.checked);
+      applyCategoryFilter();
+    });
+  });
+
+  applyCategoryFilter();
+}
+
+function setAllCategoryCheckboxes(checked) {
+  filterListEl.querySelectorAll('.filter-row').forEach((row) => {
+    row.querySelector('input').checked = checked;
+    row.classList.toggle('unchecked', !checked);
+  });
+  selectedCategories = checked ? new Set(categoriesWithCounts.map((c) => c.category)) : new Set();
+  applyCategoryFilter();
+}
+
+function applyCategoryFilter() {
+  markers.clearLayers();
+  markers.addLayers(allMarkerLayers.filter((m) => selectedCategories.has(m.record.category)));
+
+  const activeCount = selectedCategories.size;
+  const totalCount = categoriesWithCounts.length;
+  const filtering = activeCount < totalCount;
+  filterBtnEl.classList.toggle('active', filtering);
+  filterBadgeEl.hidden = !filtering;
+  if (filtering) filterBadgeEl.textContent = activeCount.toLocaleString(currentLang);
+}
+
+filterBtnEl.addEventListener('click', () => filterPanelEl.classList.toggle('open'));
+document.getElementById('filter-all-btn').addEventListener('click', () => setAllCategoryCheckboxes(true));
+document.getElementById('filter-none-btn').addEventListener('click', () => setAllCategoryCheckboxes(false));
+document.addEventListener('click', (e) => {
+  if (!filterPanelEl.contains(e.target) && !filterBtnEl.contains(e.target)) {
+    filterPanelEl.classList.remove('open');
+  }
+});
 
 // --- Panel open/close, with Leaflet size invalidation ----------------------
 
@@ -1413,8 +1516,9 @@ Promise.all([
       const marker = L.marker([record.lat, record.lon], { icon: iconFor(record) });
       marker.record = record; // read by clusterIcon() to compute each cluster's linked ratio
       marker.on('click', () => selectMonument(record, { flyTo: false }));
-      markers.addLayer(marker);
+      allMarkerLayers.push(marker);
     }
+    initCategoryFilter();
 
     // Deep links: ?id=<jcyl_id> / ?muni=<ine_code> / ?prov=<name> open
     // straight to that monument/municipality/province; #about / #contribute

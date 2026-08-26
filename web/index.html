@@ -44,7 +44,15 @@
     <!-- Mobile only (see CSS) - collapses #search-wrap to just this icon
          until tapped, so the default header stays one compact row instead
          of permanently reserving a full second row for it. -->
-    <button type="button" id="search-toggle-btn" data-i18n-title="search.placeholder" aria-label="Search">🔍</button>
+    <!-- Inline SVG, not the 🔍 emoji this used to be - emoji glyphs are
+         drawn by the OS's own emoji font, whose vertical metrics vary
+         enough between Apple/Noto/Samsung's color-emoji sets that it never
+         sat quite centered in this small round button on mobile. An SVG
+         with stroke="currentColor" sits exactly where the viewBox puts it,
+         on every platform, and inherits the button's own (white) color. -->
+    <button type="button" id="search-toggle-btn" data-i18n-title="search.placeholder" aria-label="Search">
+      <svg viewBox="0 0 24 24" width="21" height="21" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </button>
 
     <div id="search-wrap">
       <input type="text" id="search-input" autocomplete="off" data-i18n-placeholder="search.placeholder" />
@@ -68,6 +76,24 @@
 
       <button type="button" id="shuffle-btn" data-i18n-title="shuffle.button_title" aria-label="Random monument">🎲</button>
       <button type="button" id="locate-btn" data-i18n-title="geolocation.button_title" aria-label="Locate me">🎯</button>
+
+      <!-- Filter button + its dropdown card, same anchor-to-map-wrap /
+           click-outside-closes pattern as #search-results. Row list itself
+           is built in app.js from whatever categories actually appear in
+           the dataset, not hardcoded here. -->
+      <button type="button" id="filter-btn" data-i18n-title="filter.button_title" aria-label="Filter by category">
+        🎚️<span id="filter-badge" class="filter-badge" hidden></span>
+      </button>
+      <div id="filter-panel">
+        <div id="filter-panel-header">
+          <span data-i18n="filter.title">Categorías</span>
+          <div id="filter-panel-actions">
+            <button type="button" id="filter-all-btn" data-i18n="filter.all">Todo</button>
+            <button type="button" id="filter-none-btn" data-i18n="filter.none">Ninguno</button>
+          </div>
+        </div>
+        <div id="filter-list"></div>
+      </div>
     </div>
 
     <aside id="panel">
