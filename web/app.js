@@ -175,16 +175,59 @@ async function fetchImageMeta(filename) {
 // Other photos in the monument's Commons category, if it has one (P373) -
 // filtered to actual image files, excluding whatever's already the main
 // P18 image so the gallery doesn't just repeat it.
+//
+// Some categories are nearly empty at the top level with almost all media
+// filed under subcategories instead (split by year, by feature, "Interior
+// of X", ...) - so this walks the subcategory tree breadth-first rather
+// than only looking at the named category itself. Depth and total API
+// calls are both capped, and it stops as soon as it has enough files, so
+// the common case (main category already has plenty) costs exactly the
+// one request it always did.
 async function fetchGalleryFiles(categoryName, excludeFilename) {
-  const url =
-    'https://commons.wikimedia.org/w/api.php?action=query&list=categorymembers' +
-    '&cmtype=file&cmlimit=20&format=json&origin=*&cmtitle=' +
-    encodeURIComponent('Category:' + categoryName);
-  const resp = await fetch(url);
-  const data = await resp.json();
-  return (data.query?.categorymembers || [])
-    .map((m) => m.title.replace(/^File:/, ''))
-    .filter((title) => IMAGE_EXTENSIONS.test(title) && title !== excludeFilename);
+  const MAX_FILES = 24;
+  const MAX_DEPTH = 3;
+  const MAX_REQUESTS = 15; // total categorymembers calls across the whole walk
+
+  const seenCategories = new Set([categoryName]);
+  const seenFiles = new Set();
+  const files = [];
+  const queue = [{ name: categoryName, depth: 0 }];
+  let requestsMade = 0;
+
+  while (queue.length && files.length < MAX_FILES && requestsMade < MAX_REQUESTS) {
+    const { name, depth } = queue.shift();
+    const url =
+      'https://commons.wikimedia.org/w/api.php?action=query&list=categorymembers' +
+      '&cmtype=file|subcat&cmprop=title|type&cmlimit=50&format=json&origin=*&cmtitle=' +
+      encodeURIComponent('Category:' + name);
+    requestsMade++;
+    let members;
+    try {
+      const resp = await fetch(url);
+      const data = await resp.json();
+      members = data.query?.categorymembers || [];
+    } catch (e) {
+      continue; // one bad subcat request shouldn't sink the whole gallery
+    }
+
+    for (const m of members) {
+      if (m.type === 'subcat') {
+        const subName = m.title.replace(/^Category:/, '');
+        if (depth < MAX_DEPTH && !seenCategories.has(subName)) {
+          seenCategories.add(subName);
+          queue.push({ name: subName, depth: depth + 1 });
+        }
+      } else {
+        const title = m.title.replace(/^File:/, '');
+        if (IMAGE_EXTENSIONS.test(title) && title !== excludeFilename && !seenFiles.has(title)) {
+          seenFiles.add(title);
+          files.push(title);
+        }
+      }
+    }
+  }
+
+  return files.slice(0, MAX_FILES);
 }
 
 // Batched label lookup for entity-valued properties (architect, style,
