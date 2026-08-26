@@ -598,30 +598,145 @@ async function fetchHistory() {
 // simple series. Y-axis is scaled to the current total, not the max of the
 // series, so the lines' distance from the top visually reads as "how far
 // from 100% coverage", not just relative growth.
+const CHART_W = 400, CHART_H = 160, CHART_PAD = 20;
+
+function chartGeometry(historyData, total) {
+  const maxY = total || Math.max(...historyData.map((h) => h.total));
+  const xStep = (CHART_W - CHART_PAD * 2) / (historyData.length - 1);
+  const xFor = (i) => CHART_PAD + i * xStep;
+  const yFor = (v) => CHART_H - CHART_PAD - (v / maxY) * (CHART_H - CHART_PAD * 2);
+  return { xStep, xFor, yFor };
+}
+
 function renderHistoryChart(historyData, total) {
   if (historyData.length < 2) {
     return `<div class="stats-chart-empty">${t('stats.chart_empty')}</div>`;
   }
-  const width = 400, height = 160, padding = 20;
-  const maxY = total || Math.max(...historyData.map((h) => h.total));
-  const xStep = (width - padding * 2) / (historyData.length - 1);
-  const xFor = (i) => padding + i * xStep;
-  const yFor = (v) => height - padding - (v / maxY) * (height - padding * 2);
+  const { xStep, xFor, yFor } = chartGeometry(historyData, total);
 
   const linkedPoints = historyData.map((h, i) => `${xFor(i)},${yFor(h.linked)}`).join(' ');
   const imagePoints = historyData.map((h, i) => `${xFor(i)},${yFor(h.with_image)}`).join(' ');
+  // One invisible full-height hit rect per data point - hovering anywhere in
+  // its column (not just exactly on the line) triggers that point's tooltip.
+  const hitRects = historyData
+    .map((h, i) => `<rect class="stats-chart-hit" data-i="${i}" x="${xFor(i) - xStep / 2}" y="0" width="${xStep}" height="${CHART_H}" />`)
+    .join('');
 
   return `
-    <svg class="stats-chart" viewBox="0 0 ${width} ${height}" preserveAspectRatio="none">
-      <polyline points="${linkedPoints}" fill="none" stroke="#1c8a6d" stroke-width="2.5" />
-      <polyline points="${imagePoints}" fill="none" stroke="#742c64" stroke-width="2.5" />
-    </svg>
-    <div class="stats-chart-axis"><span>${historyData[0].date}</span><span>${historyData[historyData.length - 1].date}</span></div>
-    <div class="stats-chart-legend">
-      <span><span class="legend-swatch linked"></span>${t('stats.legend_linked')}</span>
-      <span><span class="legend-swatch image"></span>${t('stats.legend_image')}</span>
+    <div class="stats-chart-wrap">
+      <svg class="stats-chart" viewBox="0 0 ${CHART_W} ${CHART_H}" preserveAspectRatio="none">
+        <polyline points="${linkedPoints}" fill="none" stroke="#1c8a6d" stroke-width="2.5" />
+        <polyline points="${imagePoints}" fill="none" stroke="#742c64" stroke-width="2.5" />
+        <line class="stats-chart-guide" x1="0" x2="0" y1="${CHART_PAD}" y2="${CHART_H - CHART_PAD}" />
+        <circle class="stats-chart-dot linked" cx="0" cy="0"></circle>
+        <circle class="stats-chart-dot image" cx="0" cy="0"></circle>
+        ${hitRects}
+      </svg>
+      <div class="stats-chart-tooltip"></div>
+      <div class="stats-chart-axis"><span>${historyData[0].date}</span><span>${historyData[historyData.length - 1].date}</span></div>
+      <div class="stats-chart-legend">
+        <span><span class="legend-swatch linked"></span>${t('stats.legend_linked')}</span>
+        <span><span class="legend-swatch image"></span>${t('stats.legend_image')}</span>
+      </div>
     </div>
   `;
+}
+
+// Mouse-over: shows date, count, share of total and the percentage-point
+// change since the previous snapshot for both series. Positioned in real
+// pixel space (converting the viewBox's fixed units via the SVG's actual
+// on-screen size) so the tooltip sits right above the hovered point
+// regardless of how wide the panel currently is.
+function wireHistoryChart(wrapEl, historyData, total) {
+  const svg = wrapEl.querySelector('.stats-chart');
+  const tooltip = wrapEl.querySelector('.stats-chart-tooltip');
+  const guide = wrapEl.querySelector('.stats-chart-guide');
+  const dotLinked = wrapEl.querySelector('.stats-chart-dot.linked');
+  const dotImage = wrapEl.querySelector('.stats-chart-dot.image');
+  const { xFor, yFor } = chartGeometry(historyData, total);
+
+  const pctOf = (value, entry) => (entry.total ? (value / entry.total) * 100 : 0);
+  const fmtNum = (n) => n.toLocaleString(currentLang);
+  const fmtPct = (n) => n.toLocaleString(currentLang, { maximumFractionDigits: 1, minimumFractionDigits: 1 });
+
+  function deltaHtml(i, key) {
+    if (i === 0) return `<span class="tt-delta">· ${t('stats.tooltip_first')}</span>`;
+    const now = pctOf(historyData[i][key], historyData[i]);
+    const prev = pctOf(historyData[i - 1][key], historyData[i - 1]);
+    const d = now - prev;
+    const sign = d > 0 ? '+' : '';
+    return `<span class="tt-delta ${d < 0 ? 'down' : ''}">${sign}${fmtPct(d)} ${t('stats.tooltip_pts')}</span>`;
+  }
+
+  function showFor(i) {
+    const h = historyData[i];
+    const x = xFor(i);
+    const yLinked = yFor(h.linked);
+    const yImage = yFor(h.with_image);
+
+    guide.setAttribute('x1', x);
+    guide.setAttribute('x2', x);
+    guide.style.opacity = 1;
+    dotLinked.setAttribute('cx', x);
+    dotLinked.setAttribute('cy', yLinked);
+    dotImage.setAttribute('cx', x);
+    dotImage.setAttribute('cy', yImage);
+    dotLinked.setAttribute('r', 4);
+    dotImage.setAttribute('r', 4);
+
+    // Built from y/m/d directly (not `new Date(h.date)`) - a plain
+    // "YYYY-MM-DD" string parses as UTC midnight, which toLocaleDateString
+    // can then roll back a day in timezones west of UTC.
+    const [y, mo, d] = h.date.split('-').map(Number);
+    const dateLabel = new Date(y, mo - 1, d).toLocaleDateString(currentLang, { day: 'numeric', month: 'short', year: 'numeric' });
+
+    tooltip.innerHTML = `
+      <div class="tt-date">${dateLabel}</div>
+      <div class="tt-row"><span class="tt-dot linked"></span>${t('stats.legend_linked')}: ${fmtNum(h.linked)} (${fmtPct(pctOf(h.linked, h))}%) ${deltaHtml(i, 'linked')}</div>
+      <div class="tt-row"><span class="tt-dot image"></span>${t('stats.legend_image')}: ${fmtNum(h.with_image)} (${fmtPct(pctOf(h.with_image, h))}%) ${deltaHtml(i, 'with_image')}</div>
+    `;
+
+    // Viewport coordinates (position: fixed - see the CSS comment for why),
+    // not relative to the wrap - the svg also scales its viewBox
+    // non-uniformly (preserveAspectRatio="none" above), so pixel position
+    // has to go through its actual rendered size rather than viewBox units.
+    const svgRect = svg.getBoundingClientRect();
+    const scaleX = svgRect.width / CHART_W;
+    const scaleY = svgRect.height / CHART_H;
+    const topY = svgRect.top + Math.min(yLinked, yImage) * scaleY;
+    const bottomY = svgRect.top + Math.max(yLinked, yImage) * scaleY;
+    let pxX = svgRect.left + x * scaleX;
+
+    // Measure with the tooltip already sized (content is set above) but
+    // before locking in a direction, then clamp/flip so it can never run
+    // off any edge of the actual viewport.
+    const margin = 8;
+    const ttRect = tooltip.getBoundingClientRect();
+    const halfW = ttRect.width / 2;
+    pxX = Math.min(Math.max(pxX, margin + halfW), window.innerWidth - margin - halfW);
+
+    const fitsAbove = topY - ttRect.height - 10 >= margin;
+    tooltip.classList.toggle('above', fitsAbove);
+    tooltip.classList.toggle('below', !fitsAbove);
+    tooltip.style.left = `${pxX}px`;
+    tooltip.style.top = `${fitsAbove ? topY : bottomY}px`;
+    tooltip.classList.add('visible');
+  }
+
+  function hide() {
+    guide.style.opacity = 0;
+    dotLinked.setAttribute('r', 0);
+    dotImage.setAttribute('r', 0);
+    tooltip.classList.remove('visible');
+  }
+
+  wrapEl.querySelectorAll('.stats-chart-hit').forEach((rect) => {
+    const i = Number(rect.dataset.i);
+    rect.addEventListener('mouseenter', () => showFor(i));
+    rect.addEventListener('touchstart', (e) => { e.preventDefault(); showFor(i); }, { passive: false });
+  });
+  svg.addEventListener('mouseleave', hide);
+  wrapEl.addEventListener('touchend', hide);
 }
 
 async function showStatsPanel({ updateUrl = true } = {}) {
@@ -651,6 +766,8 @@ async function showStatsPanel({ updateUrl = true } = {}) {
   const historyData = await fetchHistory();
   const loadingEl = panelContentEl.querySelector('.loading');
   if (loadingEl) loadingEl.outerHTML = renderHistoryChart(historyData, total);
+  const chartWrap = panelContentEl.querySelector('.stats-chart-wrap');
+  if (chartWrap) wireHistoryChart(chartWrap, historyData, total);
 }
 
 // --- Rendering: About / Contribute panels -----------------------------------
@@ -1123,6 +1240,55 @@ function rerenderPanel(state) {
 
 applyStaticI18n();
 
+// --- Loading screen / one-time welcome modal ----------------------------
+
+function hideLoadingScreen() {
+  document.getElementById('loading-screen')?.classList.add('hidden');
+}
+
+function loadingScreenFailed() {
+  const el = document.getElementById('loading-screen');
+  if (!el) return;
+  el.querySelector('#loading-spinner')?.style.setProperty('display', 'none');
+  const p = el.querySelector('p');
+  if (p) p.textContent = t('loading.error');
+  // Deliberately not hidden - a blank map behind a silent console error is
+  // worse than staying on the branded screen with a visible message.
+}
+
+// Shown once per browser via a localStorage flag - never on top of a deep
+// link (?id=/?muni=/?prov=/#stats etc.), since someone arriving at a
+// specific monument already knows what they're looking at.
+function maybeShowWelcome() {
+  const KEY = 'cylinked_welcome_seen';
+  let alreadySeen = true;
+  try {
+    alreadySeen = !!localStorage.getItem(KEY);
+  } catch (e) {
+    return; // e.g. private browsing with storage blocked - skip rather than risk showing it every single visit
+  }
+  if (alreadySeen) return;
+
+  const modal = document.getElementById('welcome-modal');
+  if (!modal) return;
+  modal.classList.add('open');
+
+  const dismiss = () => {
+    modal.classList.remove('open');
+    try {
+      localStorage.setItem(KEY, '1');
+    } catch (e) {
+      // nothing to do - worst case it shows again next visit
+    }
+  };
+  document.getElementById('welcome-close-btn').addEventListener('click', dismiss, { once: true });
+  document.getElementById('welcome-about-link').addEventListener('click', (e) => {
+    e.preventDefault();
+    dismiss();
+    showAboutPanel();
+  });
+}
+
 // --- Load data, plot markers -------------------------------------------
 
 Promise.all([
@@ -1153,6 +1319,7 @@ Promise.all([
     const requestedId = params.get('id');
     const requestedMuni = params.get('muni');
     const requestedProv = params.get('prov');
+    const hasDeepLink = !!(requestedId || requestedMuni || requestedProv || location.hash);
     if (requestedId && recordsById.has(requestedId)) {
       selectMonument(recordsById.get(requestedId), { flyTo: true, updateUrl: false });
     } else if (requestedMuni) {
@@ -1168,7 +1335,11 @@ Promise.all([
     } else if (location.hash === '#contribute') {
       showContributePanel({ updateUrl: false });
     }
+
+    hideLoadingScreen();
+    if (!hasDeepLink) maybeShowWelcome();
   })
   .catch((err) => {
     console.error(err);
+    loadingScreenFailed();
   });

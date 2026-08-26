@@ -48,6 +48,83 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
   letter-spacing: 0.2px;
 }
 #logo-mark { height: 42px; width: auto; display: block; }
+
+/* --- Loading screen (first paint - see index.html comment) ------------ */
+#loading-screen {
+  position: fixed;
+  inset: 0;
+  z-index: 3000;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 18px;
+  background: var(--cyl-purple);
+  color: white;
+  transition: opacity 0.4s ease;
+}
+#loading-screen.hidden { opacity: 0; pointer-events: none; }
+#loading-logo { height: 64px; width: auto; }
+#loading-spinner {
+  width: 30px;
+  height: 30px;
+  border: 3px solid rgba(255,255,255,0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: loading-spin 0.8s linear infinite;
+}
+@keyframes loading-spin { to { transform: rotate(360deg); } }
+#loading-screen p { font-size: 14px; color: rgba(255,255,255,0.85); margin: 0; }
+
+/* --- Welcome modal (shown once, first visit - see app.js) ------------- */
+#welcome-modal {
+  position: fixed;
+  inset: 0;
+  z-index: 2900;
+  display: none;
+  align-items: center;
+  justify-content: center;
+  background: rgba(43, 37, 33, 0.55);
+  padding: 20px;
+}
+#welcome-modal.open { display: flex; }
+#welcome-card {
+  background: var(--card);
+  border-radius: 16px;
+  max-width: 380px;
+  padding: 28px 26px;
+  text-align: center;
+  box-shadow: 0 12px 40px rgba(0,0,0,0.3);
+}
+/* The logo's linework is white/light-gold, drawn for the purple topbar -
+   invisible on this card's white background without a matching backing. */
+#welcome-logo-badge {
+  width: 68px;
+  height: 68px;
+  border-radius: 50%;
+  background: var(--cyl-purple);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto 14px;
+}
+#welcome-logo { height: 40px; width: auto; }
+#welcome-card h2 { font-family: var(--font-display); font-size: 20px; font-weight: 600; margin: 0 0 10px; color: var(--cyl-purple-dark); }
+#welcome-card p { font-size: 14px; line-height: 1.5; color: var(--ink-soft); margin: 0 0 20px; }
+#welcome-close-btn {
+  background: var(--cyl-purple);
+  color: white;
+  border: none;
+  padding: 10px 22px;
+  border-radius: 22px;
+  font-size: 14px;
+  font-weight: 600;
+  font-family: inherit;
+  cursor: pointer;
+}
+#welcome-close-btn:hover { background: var(--cyl-purple-dark); }
+#welcome-about-link { display: block; margin-top: 14px; font-size: 12.5px; color: var(--ink-soft); }
+
 #topbar button {
   background: rgba(255,255,255,0.14);
   border: none;
@@ -391,13 +468,62 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
 .stat-pct { font-size: 13px; font-weight: 500; color: var(--ink-soft); }
 .stat-label { font-size: 11.5px; color: var(--ink-soft); margin-top: 2px; line-height: 1.3; }
 
-.stats-chart { width: 100%; height: auto; margin-top: 6px; }
+.stats-chart-wrap { position: relative; }
+.stats-chart { width: 100%; height: auto; margin-top: 6px; display: block; cursor: crosshair; }
 .stats-chart-axis { display: flex; justify-content: space-between; font-size: 11px; color: var(--ink-soft); margin-top: 2px; }
 .stats-chart-legend { display: flex; gap: 16px; font-size: 12.5px; color: var(--ink-soft); margin-top: 8px; }
 .legend-swatch { display: inline-block; width: 12px; height: 3px; margin-right: 5px; vertical-align: middle; }
 .legend-swatch.linked { background: var(--color-linked); }
 .legend-swatch.image { background: var(--cyl-purple); }
 .stats-chart-empty { font-size: 13px; color: var(--ink-soft); font-style: italic; margin-top: 4px; }
+
+/* Hover overlay: a per-point invisible hit-area, a vertical guide line and
+   two dots (one per series) that only appear while hovering, plus a
+   floating tooltip anchored above the guide line - all pure SVG/CSS, no
+   charting library. */
+.stats-chart-hit { fill: transparent; }
+.stats-chart-guide { stroke: var(--ink-soft); stroke-width: 1; stroke-dasharray: 3 3; opacity: 0; }
+/* r is intentionally not set here - it's a CSS-stylable SVG2 geometry
+   property, so a value here would override the JS setAttribute('r', ...)
+   calls that actually show/hide the dot (CSS always wins over presentation
+   attributes). Starts at the SVG default (0, i.e. invisible). */
+.stats-chart-dot { stroke-width: 2; fill: var(--bg, #fff); transition: r 0.1s ease; }
+.stats-chart-dot.linked { stroke: var(--color-linked); }
+.stats-chart-dot.image { stroke: var(--cyl-purple); }
+.stats-chart-tooltip {
+  /* Fixed, not absolute: #panel/#panel-content clip overflow (rounded
+     corners, scroll), which silently cropped the tooltip whenever it had
+     to render above the chart or near the panel's edge. Fixed positioning
+     escapes that (nothing between here and the viewport sets a transform/
+     filter, which would otherwise re-establish a containing block) - JS
+     computes left/top in viewport coordinates and clamps them to stay
+     fully on-screen. */
+  position: fixed;
+  left: 0;
+  top: 0;
+  transform: translateX(-50%);
+  background: var(--cyl-purple-dark);
+  color: #fff;
+  padding: 7px 10px;
+  border-radius: 8px;
+  font-size: 12px;
+  line-height: 1.5;
+  white-space: nowrap;
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity 0.1s ease;
+  z-index: 2000;
+}
+.stats-chart-tooltip.above { transform: translate(-50%, calc(-100% - 10px)); }
+.stats-chart-tooltip.below { transform: translate(-50%, 10px); }
+.stats-chart-tooltip.visible { opacity: 1; }
+.stats-chart-tooltip .tt-date { font-weight: 600; margin-bottom: 2px; }
+.stats-chart-tooltip .tt-row { display: flex; align-items: center; gap: 5px; }
+.stats-chart-tooltip .tt-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
+.stats-chart-tooltip .tt-dot.linked { background: var(--color-linked); }
+.stats-chart-tooltip .tt-dot.image { background: var(--cyl-purple); }
+.stats-chart-tooltip .tt-delta { color: #c9e8dc; }
+.stats-chart-tooltip .tt-delta.down { color: #f0c8c8; }
 
 .list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--border); }
 .list-row {

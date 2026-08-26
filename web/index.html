@@ -13,6 +13,31 @@
   <link rel="stylesheet" href="style.css" />
 </head>
 <body>
+  <!-- First paint, before app.js even runs: the dataset is ~2MB, worth
+       covering with something branded rather than a blank page while it
+       loads. Spanish text is hardcoded as the real initial content (not an
+       empty data-i18n placeholder) since the app always starts in 'es' -
+       applyStaticI18n() just re-confirms it once JS runs. -->
+  <div id="loading-screen">
+    <img src="assets/logo.png" alt="" id="loading-logo">
+    <div id="loading-spinner" aria-hidden="true"></div>
+    <p data-i18n="loading.screen">Cargando el catálogo…</p>
+  </div>
+
+  <!-- Shown once per browser (localStorage flag, see app.js), after the
+       data has loaded - not on top of a deep link (?id=/?muni=/?prov=/#...),
+       since someone arriving at a specific monument already knows what
+       they're looking at. -->
+  <div id="welcome-modal">
+    <div id="welcome-card">
+      <div id="welcome-logo-badge"><img src="assets/logo.png" alt="" id="welcome-logo"></div>
+      <h2 data-i18n="welcome.title">Bienvenido a CyLinked</h2>
+      <p data-i18n="welcome.body">Aquí encontrarás todos los Bienes de Interés Cultural (BIC) declarados oficialmente en Castilla y León, junto con información y material multimedia de Wikidata, Wikipedia y Wikimedia Commons. Un proyecto libre, sin cuentas ni anuncios.</p>
+      <button type="button" id="welcome-close-btn" data-i18n="welcome.cta">Empezar a explorar</button>
+      <a href="#" id="welcome-about-link" data-i18n="welcome.about_link">Más sobre el proyecto</a>
+    </div>
+  </div>
+
   <header id="topbar">
     <span class="brand"><img src="assets/logo.png" alt="" id="logo-mark">CyLinked</span>
 
