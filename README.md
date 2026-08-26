@@ -1,5 +1,7 @@
 # CyLinked
 
+<img src="web/assets/logo.png" alt="CyLinked logo" width="120">
+
 Links Castilla y León's open heritage data (Bienes de Interés Cultural) with
 Wikidata, Wikimedia Commons, and Wikipedia — and shows the result on a map.
 
@@ -114,24 +116,16 @@ make serve   # http://localhost:8000, for local development
 
 ## Deployment
 
-Runs as its own container (`docker-compose.yml`) with no exposed host ports
-or its own TLS — it joins the ingress host's existing `ingress`
-the same way the other services behind it already do (see
-[the ingress proxy's own repository](the ingress proxy's own repository#cross-stack-caddy-routes)),
-and relies on the shared Caddy there to terminate TLS and route a domain to
-it. That means going live needs one manual addition to
-`the ingress proxy's own Caddyfile` (deliberately not done from this repo —
-review it there):
+Runs as its own container (`docker-compose.yml`, Caddy serving `web/` as
+static files on internal port 80) with no exposed host ports or TLS of its
+own — it's meant to sit behind an existing reverse proxy that terminates
+TLS and routes a domain to it, rather than owning that itself. Wiring up
+that reverse-proxy side is intentionally external to this repo (a
+`reverse_proxy cylinked_web:80` site block wherever your ingress config
+lives, joined to the same Docker network `docker-compose.yml` declares).
 
-```
-cylinked.holba.ch {
-	reverse_proxy cylinked_web:80
-}
-```
-
-On the host: `docker compose up -d` here starts the container; the
-Caddyfile addition above (plus a Caddy restart on the the ingress host side)
-makes it reachable.
+On the host: `docker compose up -d` starts the container; it's reachable
+once the reverse-proxy side above points at it.
 
 ## Not built yet
 
