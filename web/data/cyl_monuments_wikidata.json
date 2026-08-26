@@ -7784,8 +7784,8 @@
     "municipality_match_approx": false,
     "province": "Burgos",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=3512",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q52867322",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -7847,11 +7847,11 @@
     "municipality_match_approx": false,
     "province": "Burgos",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=3536",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43172538",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Conjunto%20Hist%C3%B3rico%20Art%C3%ADstico%20de%20la%20Villa%20de%20Vadocondes.jpg"
   },
   {
     "jcyl_id": 3543,
@@ -7889,8 +7889,8 @@
     "municipality_match_approx": false,
     "province": "Burgos",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=3547",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43177597",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -11984,11 +11984,11 @@
     "municipality_match_approx": false,
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=5610",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q52850590",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Leon%20Valderas%20ruinas%20fortaleza%20lou.JPG"
   },
   {
     "jcyl_id": 5615,
@@ -12005,11 +12005,11 @@
     "municipality_match_approx": false,
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=5615",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43170216",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Valderas%20palacio%20Osorio1%20lou.jpg"
   },
   {
     "jcyl_id": 5629,
@@ -12047,11 +12047,11 @@
     "municipality_match_approx": false,
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=5636",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q52859007",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Muralla%20de%20Renedo%20de%20Valdetu%C3%A9jar%2002.jpg"
   },
   {
     "jcyl_id": 5641,
@@ -12068,11 +12068,11 @@
     "municipality_match_approx": false,
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=5641",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q140374665",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Igrexa%20de%20San%20Mart%C3%ADn%20de%20Valdetu%C3%A9jar%2001.jpg"
   },
   {
     "jcyl_id": 5654,
@@ -15578,11 +15578,11 @@
     "municipality_match_approx": false,
     "province": "Palencia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=8090",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43116086",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Iglesia%202012.jpg"
   },
   {
     "jcyl_id": 8108,
@@ -19211,11 +19211,11 @@
     "municipality_match_approx": false,
     "province": "Salamanca",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=10393",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43132196",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Valdefuentes%20de%20Sangus%C3%ADn%20-%20igrexa%20e%20fonte.jpg"
   },
   {
     "jcyl_id": 10406,
@@ -22424,11 +22424,11 @@
     "municipality_match_approx": false,
     "province": "Segovia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=12167",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43146374",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/La%20Cuesta%20-%20Iglesia%20de%20San%20Cristobal%20%28Vista%20Exterior%29.jpg"
   },
   {
     "jcyl_id": 12185,
@@ -22487,11 +22487,11 @@
     "municipality_match_approx": false,
     "province": "Segovia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=12202",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q116485592",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Valdeprados%2004%20torreon%20by-dpc.jpg"
   },
   {
     "jcyl_id": 12207,
@@ -22508,11 +22508,11 @@
     "municipality_match_approx": false,
     "province": "Segovia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=12207",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43146080",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Iglesia%20de%20la%20Exaltaci%C3%B3n%20de%20la%20Cruz%2C%20Valdevacas%2C%20fachada%20principal%2C%20sur.jpg"
   },
   {
     "jcyl_id": 12220,
@@ -29888,11 +29888,11 @@
     "municipality_match_approx": false,
     "province": "Valladolid",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=15677",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43168874",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Ciudad%20de%20Valladolid%2C%20desde%20el%20aire.jpg"
   },
   {
     "jcyl_id": 15692,
@@ -30455,11 +30455,11 @@
     "municipality_match_approx": false,
     "province": "Valladolid",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=16036",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q6057579",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Palacio%20Arzobispal%20VA%20%283%29.jpg"
   },
   {
     "jcyl_id": 16042,
@@ -39275,11 +39275,11 @@
     "municipality_match_approx": false,
     "province": "Valladolid",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=537703",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q6091118",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Puente%20colgante%20arco%20en%20compresi%C3%B3n%20valladolid%20rio%20pisuerga.JPG"
   },
   {
     "jcyl_id": 538616,
@@ -39401,11 +39401,11 @@
     "municipality_match_approx": false,
     "province": "Valladolid",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=539578",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q246200",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/%D0%9A%D0%B0%D1%80%D1%82%D0%B0%20%D0%BA%20%D1%81%D1%82%D0%B0%D1%82%D1%8C%D0%B5%20%C2%AB%D0%9C%D0%B5%D0%B4%D0%B8%D0%BD%D0%B0%20%D0%B4%D0%B5%D0%BB%D1%8C%20%D0%A0%D0%B8%D0%BE-%D0%A1%D0%B5%D0%BA%D0%BA%D0%BE%C2%BB.%20%D0%92%D0%BE%D0%B5%D0%BD%D0%BD%D0%B0%D1%8F%20%D1%8D%D0%BD%D1%86%D0%B8%D0%BA%D0%BB%D0%BE%D0%BF%D0%B5%D0%B4%D0%B8%D1%8F%20%D0%A1%D1%8B%D1%82%D0%B8%D0%BD%D0%B0%20%28%D0%A1%D0%B0%D0%BD%D0%BA%D1%82-%D0%9F%D0%B5%D1%82%D0%B5%D1%80%D0%B1%D1%83%D1%80%D0%B3%2C%201911-1915%29.jpg"
   },
   {
     "jcyl_id": 539585,
@@ -40430,11 +40430,11 @@
     "municipality_match_approx": false,
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=814165",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q124282433",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Cristo%20de%20Valdavido%20sobre%20el%20valle.jpg"
   },
   {
     "jcyl_id": 815387,
@@ -40535,8 +40535,8 @@
     "municipality_match_approx": false,
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=817120",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q124283053",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -40556,8 +40556,8 @@
     "municipality_match_approx": false,
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=817133",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q124283004",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
