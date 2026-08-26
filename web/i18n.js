@@ -78,6 +78,10 @@ const STRINGS = {
     'facts.part_of': 'Parte de',
     'nearby.title': 'Cerca de aquí',
     'shuffle.button_title': 'Descubrir un monumento al azar',
+    'filter.button_title': 'Filtrar por categoría',
+    'filter.title': 'Categorías',
+    'filter.all': 'Todo',
+    'filter.none': 'Ninguno',
     'text_license.note': (url) =>
       `Texto de <a href="${url}" target="_blank" rel="noopener">Wikipedia</a>, disponible bajo la licencia <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">Creative Commons Atribución-CompartirIgual 4.0</a>.`,
     'wikipedia.read_more': 'Leer más en Wikipedia →',
@@ -165,6 +169,10 @@ const STRINGS = {
     'facts.part_of': 'Part of',
     'nearby.title': 'Nearby',
     'shuffle.button_title': 'Discover a random monument',
+    'filter.button_title': 'Filter by category',
+    'filter.title': 'Categories',
+    'filter.all': 'All',
+    'filter.none': 'None',
     'text_license.note': (url) =>
       `Text from <a href="${url}" target="_blank" rel="noopener">Wikipedia</a>, available under the <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">Creative Commons Attribution-ShareAlike 4.0 License</a>.`,
     'wikipedia.read_more': 'Read more on Wikipedia →',
