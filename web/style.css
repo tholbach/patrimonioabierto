@@ -640,15 +640,25 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
   flex-shrink: 0;
 }
 .badge:hover { transform: translateY(-1px); }
-.badge.wikidata { border-color: #b7d4e8; color: #0f5c85; }
-.badge.wikipedia { border-color: #d8d3cc; color: #333; }
-.badge.jcyl { border-color: var(--border); color: var(--ink-soft); }
+/* jcyl/wikidata/wikipedia/share-btn deliberately share one neutral color -
+   previously each had its own (blue for Wikidata, near-black for
+   Wikipedia, purple for share), which read as arbitrary rather than
+   meaningful next to each other. The brand marks (Wikidata's tricolor SVG,
+   Wikipedia's serif "W") keep their own identity regardless - only the
+   button text/border is unified. */
+.badge.wikidata,
+.badge.wikipedia,
+.badge.jcyl,
+.badge.share-btn {
+  border-color: var(--border);
+  color: var(--ink-soft);
+}
 /* font-family: inherit only, NOT the "font" shorthand - "font: inherit"
    resets size/weight/line-height too, silently overriding the 13px/500
    .badge sets above and making this one button look different from its
    sibling badges (buttons don't inherit font-family by default, unlike
    every other element, so *something* here is still required). */
-.badge.share-btn { border-color: #ddc9d6; color: var(--cyl-purple); font-family: inherit; cursor: pointer; }
+.badge.share-btn { font-family: inherit; cursor: pointer; }
 
 .facts {
   margin: 4px 0 10px;

@@ -65,8 +65,12 @@ L.control.zoom({ position: 'bottomleft' }).addTo(map);
 // CARTO's light "Positron" style, not raw OSM tiles - a minimal basemap
 // with muted labels/roads so our own markers and (eventually) photos are
 // what actually draws the eye, rather than competing with a busy default
-// OSM render. Free to use with attribution, no API key required.
-L.tileLayer('https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png', {
+// OSM render. CARTO retired anonymous keyless access to this raster
+// service, so a free key (5M tiles/month, no billing) is now required -
+// request one at https://carto.com/basemaps/apikey/ and paste it below.
+// It's a public/client-side key by design, safe to ship in this file.
+const CARTO_API_KEY = 'cb1_25p3_1_d252937bdd3f17ed69ef1a14';
+L.tileLayer(`https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key=${CARTO_API_KEY}`, {
   attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
   maxZoom: 19,
   subdomains: 'abcd',
