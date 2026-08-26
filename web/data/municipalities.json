@@ -2442,7 +2442,7 @@
       42.75957
     ],
     "monument_count": 13,
-    "linked_count": 2
+    "linked_count": 13
   },
   {
     "name": "Baltanás",
@@ -2667,7 +2667,7 @@
       42.645218
     ],
     "monument_count": 4,
-    "linked_count": 0
+    "linked_count": 4
   },
   {
     "name": "Barrio de Muñó",
@@ -3612,7 +3612,7 @@
       43.116314
     ],
     "monument_count": 12,
-    "linked_count": 0
+    "linked_count": 10
   },
   {
     "name": "Boceguillas",
@@ -3807,7 +3807,7 @@
       42.991173
     ],
     "monument_count": 8,
-    "linked_count": 0
+    "linked_count": 7
   },
   {
     "name": "Brabos",
@@ -4182,7 +4182,7 @@
       43.115119
     ],
     "monument_count": 2,
-    "linked_count": 0
+    "linked_count": 2
   },
   {
     "name": "Bustillo de Chaves",
@@ -4647,7 +4647,7 @@
       43.049547
     ],
     "monument_count": 11,
-    "linked_count": 1
+    "linked_count": 9
   },
   {
     "name": "Cabrillas",
@@ -7512,7 +7512,7 @@
       42.895295
     ],
     "monument_count": 2,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Cistérniga",
@@ -8127,7 +8127,7 @@
       43.015126
     ],
     "monument_count": 6,
-    "linked_count": 1
+    "linked_count": 5
   },
   {
     "name": "Cuadros",
@@ -14457,7 +14457,7 @@
       42.640337
     ],
     "monument_count": 21,
-    "linked_count": 18
+    "linked_count": 19
   },
   {
     "name": "Liceras",
@@ -15312,7 +15312,7 @@
       42.531738
     ],
     "monument_count": 3,
-    "linked_count": 0
+    "linked_count": 2
   },
   {
     "name": "Mantinos",
@@ -15432,7 +15432,7 @@
       43.092385
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Marcilla de Campos",
@@ -19002,7 +19002,7 @@
       43.184682
     ],
     "monument_count": 30,
-    "linked_count": 0
+    "linked_count": 30
   },
   {
     "name": "Osornillo",
@@ -19332,7 +19332,7 @@
       42.939757
     ],
     "monument_count": 17,
-    "linked_count": 0
+    "linked_count": 17
   },
   {
     "name": "Palaciosrubios",
@@ -20832,7 +20832,7 @@
       43.238204
     ],
     "monument_count": 91,
-    "linked_count": 0
+    "linked_count": 90
   },
   {
     "name": "Poveda",
@@ -21087,7 +21087,7 @@
       42.818472
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Pradoluengo",
@@ -21162,7 +21162,7 @@
       42.929428
     ],
     "monument_count": 15,
-    "linked_count": 0
+    "linked_count": 15
   },
   {
     "name": "Prádanos de Bureba",
@@ -22512,7 +22512,7 @@
       43.032277
     ],
     "monument_count": 4,
-    "linked_count": 0
+    "linked_count": 3
   },
   {
     "name": "Ribas de Campos",
@@ -23712,7 +23712,7 @@
       43.075896
     ],
     "monument_count": 21,
-    "linked_count": 2
+    "linked_count": 19
   },
   {
     "name": "San Esteban de Gormaz",
@@ -24927,7 +24927,7 @@
       42.391989
     ],
     "monument_count": 2,
-    "linked_count": 0
+    "linked_count": 2
   },
   {
     "name": "Santa Cristina de la Polvorosa",
@@ -27672,7 +27672,7 @@
       42.713259
     ],
     "monument_count": 2,
-    "linked_count": 0
+    "linked_count": 2
   },
   {
     "name": "Trabanca",
@@ -28677,7 +28677,7 @@
       42.901318
     ],
     "monument_count": 6,
-    "linked_count": 4
+    "linked_count": 6
   },
   {
     "name": "Valderrábano",
@@ -28917,7 +28917,7 @@
       42.915061
     ],
     "monument_count": 8,
-    "linked_count": 1
+    "linked_count": 8
   },
   {
     "name": "Valle de Cerrato",
@@ -29412,7 +29412,7 @@
       42.616716
     ],
     "monument_count": 2,
-    "linked_count": 1
+    "linked_count": 2
   },
   {
     "name": "Valverde del Majano",
@@ -29577,7 +29577,7 @@
       42.729377
     ],
     "monument_count": 16,
-    "linked_count": 1
+    "linked_count": 16
   },
   {
     "name": "Vega de Valdetronco",
@@ -30042,7 +30042,7 @@
       43.059577
     ],
     "monument_count": 108,
-    "linked_count": 1
+    "linked_count": 107
   },
   {
     "name": "Villabraz",
