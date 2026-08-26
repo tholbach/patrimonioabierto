@@ -428,11 +428,35 @@ function heroBlock({ imageUrl, linkUrl, kicker, title, placeholderIcon }) {
     const icon = placeholderIcon ? `<div class="hero-placeholder-icon">${placeholderIcon}</div>` : '';
     return `<div class="hero hero-fallback">${icon}${scrim}</div>`;
   }
-  const img = `<img id="main-image" class="hero-img" src="${imageUrl}" alt="">`;
+  // main-image-bg is the blurred backdrop for portrait photos - see the CSS
+  // comment on .hero-img-bg. Same src as the real photo, just decorative
+  // (hidden from screen readers), and hidden by default (only .hero-portrait
+  // shows it) so it costs nothing for the common landscape-photo case.
+  const img =
+    `<img id="main-image-bg" class="hero-img-bg" src="${imageUrl}" alt="" aria-hidden="true">` +
+    `<img id="main-image" class="hero-img" src="${imageUrl}" alt="">`;
   const imgEl = linkUrl
     ? `<a href="${linkUrl}" target="_blank" rel="noopener" id="main-image-link">${img}</a>`
     : img;
   return `<div class="hero">${imgEl}${scrim}</div>`;
+}
+
+// Portrait photos (naturally taller than wide) get letterboxed with a
+// blurred backdrop instead of force-cropped to fill the hero box - see the
+// .hero-img-bg CSS comment. Handles the img already being loaded from cache
+// (no 'load' event will fire in that case) as well as the normal async case.
+function applyHeroOrientation() {
+  const img = document.getElementById('main-image');
+  const hero = img?.closest('.hero');
+  if (!img || !hero) return;
+  const decide = () => {
+    hero.classList.toggle('hero-portrait', img.naturalHeight > img.naturalWidth);
+  };
+  if (img.complete && img.naturalWidth) {
+    decide();
+  } else {
+    img.addEventListener('load', decide, { once: true });
+  }
 }
 
 // Only description/descriptionlang/categories/lat/lon are real, working
@@ -462,6 +486,7 @@ function licenseLineHtml(meta) {
 
 async function swapMainImage(filename) {
   const mainImageEl = document.getElementById('main-image');
+  const mainImageBgEl = document.getElementById('main-image-bg');
   const mainImageLinkEl = document.getElementById('main-image-link');
   const captionEl = document.getElementById('image-caption');
   if (!mainImageEl) return;
@@ -469,8 +494,10 @@ async function swapMainImage(filename) {
   try {
     const meta = await fetchImageMeta(filename);
     mainImageEl.src = meta.thumbUrl;
+    if (mainImageBgEl) mainImageBgEl.src = meta.thumbUrl;
     if (mainImageLinkEl) mainImageLinkEl.href = meta.pageUrl;
     if (captionEl) captionEl.innerHTML = licenseLineHtml(meta);
+    applyHeroOrientation();
 
     // Swap places rather than just dropping the old hero photo: it goes
     // back into the strip, in the clicked thumbnail's old spot, so every
@@ -640,6 +667,7 @@ async function selectMonument(record, { flyTo = false, updateUrl = true } = {}) 
       <div class="panel-body">${bodyHtml}</div>
     `;
 
+    applyHeroOrientation();
     wireGalleryClicks();
     wireShareButton(record);
     wireMonumentListRows(panelContentEl);
