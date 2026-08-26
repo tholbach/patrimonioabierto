@@ -435,6 +435,9 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
 .hero-scrim {
   position: absolute;
   left: 0; right: 0; bottom: 0;
+  z-index: 2; /* above .hero-img (1) and .hero-img-bg - without this it fell
+                 behind the photo once .hero-img became a positioned/
+                 z-indexed element for the portrait-photo backdrop trick */
   padding: 40px 22px 18px;
   background: linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.35) 55%, transparent 100%);
   color: white;
