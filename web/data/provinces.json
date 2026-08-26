@@ -8,7 +8,7 @@
       43.198747
     ],
     "monument_count": 429,
-    "linked_count": 230,
+    "linked_count": 268,
     "municipality_count": 371,
     "lat": 42.324765,
     "lon": -3.426362
@@ -36,7 +36,7 @@
       43.060989
     ],
     "monument_count": 171,
-    "linked_count": 149,
+    "linked_count": 150,
     "municipality_count": 191,
     "lat": 42.409577,
     "lon": -4.460758
@@ -120,7 +120,7 @@
       41.16425
     ],
     "monument_count": 141,
-    "linked_count": 115,
+    "linked_count": 127,
     "municipality_count": 248,
     "lat": 40.623088,
     "lon": -4.948898
