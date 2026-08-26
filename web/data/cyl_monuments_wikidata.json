@@ -21916,13 +21916,13 @@
     "province": "Soria",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=14183",
     "wikidata_qid": [
-      "Q116486073",
-      "Q22075423"
+      "Q22075423",
+      "Q116486073"
     ],
     "already_linked": true,
     "wikidata_conflict": true,
     "has_wikidata_image": true,
-    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Iglesia%20y%20Torre%20Bereber.%20%285389845431%29.jpg"
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/IglesiaAsuncionTREVAGO.jpg"
   },
   {
     "jcyl_id": 14188,
@@ -33546,8 +33546,8 @@
     "municipality_ine_code_p772": "24209",
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=863351",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141183448",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -33563,8 +33563,8 @@
     "municipality_ine_code_p772": "24209",
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=863354",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141183449",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -33580,8 +33580,8 @@
     "municipality_ine_code_p772": "24209",
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=863357",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141183451",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -33597,8 +33597,8 @@
     "municipality_ine_code_p772": "24209",
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=863360",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141183453",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -33614,8 +33614,8 @@
     "municipality_ine_code_p772": "24209",
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=863377",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141183454",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -33631,8 +33631,8 @@
     "municipality_ine_code_p772": "24209",
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=863382",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141183455",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -33648,8 +33648,8 @@
     "municipality_ine_code_p772": "24209",
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=863385",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141183458",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -33665,8 +33665,8 @@
     "municipality_ine_code_p772": "24209",
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=863388",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141183460",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -33682,8 +33682,8 @@
     "municipality_ine_code_p772": "24209",
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=863391",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141183462",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -33699,8 +33699,8 @@
     "municipality_ine_code_p772": "24209",
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=863394",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141183463",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -33716,8 +33716,8 @@
     "municipality_ine_code_p772": "24209",
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=863397",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141183464",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -33733,8 +33733,8 @@
     "municipality_ine_code_p772": "24209",
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=863400",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141183465",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -33750,8 +33750,8 @@
     "municipality_ine_code_p772": "24209",
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=863403",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141183466",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -33767,8 +33767,8 @@
     "municipality_ine_code_p772": "24209",
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=863406",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141183467",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -33784,8 +33784,8 @@
     "municipality_ine_code_p772": "24209",
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=863425",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141183468",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -33801,8 +33801,8 @@
     "municipality_ine_code_p772": "24209",
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=863428",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141183469",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -36660,8 +36660,8 @@
     "wikidata_qid": "Q141183269",
     "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/H%C3%B3rreo%20en%20Prioro%2002.jpg"
   },
   {
     "jcyl_id": 864558,
@@ -36796,8 +36796,8 @@
     "wikidata_qid": "Q141183277",
     "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Ria%C3%B1o%2002.jpg"
   },
   {
     "jcyl_id": 864584,
@@ -38867,8 +38867,8 @@
     "municipality_ine_code_p772": "24901",
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=865987",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141183470",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -39003,8 +39003,8 @@
     "municipality_ine_code_p772": "24222",
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=866019",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141183472",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -39054,8 +39054,8 @@
     "municipality_ine_code_p772": "24222",
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=866028",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141183477",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
