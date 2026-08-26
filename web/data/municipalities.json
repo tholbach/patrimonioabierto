@@ -117,7 +117,7 @@
       43.093498
     ],
     "monument_count": 2,
-    "linked_count": 0
+    "linked_count": 2
   },
   {
     "name": "Adalia",
@@ -312,7 +312,7 @@
       42.014555
     ],
     "monument_count": 2,
-    "linked_count": 1
+    "linked_count": 2
   },
   {
     "name": "Ahigal de Villarino",
@@ -1257,7 +1257,7 @@
       41.404178
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Almanza",
@@ -1647,7 +1647,7 @@
       41.839705
     ],
     "monument_count": 3,
-    "linked_count": 2
+    "linked_count": 3
   },
   {
     "name": "Aranda de Duero",
@@ -2577,7 +2577,7 @@
       41.349138
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Barca",
@@ -4137,7 +4137,7 @@
       41.696805
     ],
     "monument_count": 17,
-    "linked_count": 12
+    "linked_count": 15
   },
   {
     "name": "Burgohondo",
@@ -4587,7 +4587,7 @@
       41.852406
     ],
     "monument_count": 3,
-    "linked_count": 1
+    "linked_count": 2
   },
   {
     "name": "Cabrerizos",
@@ -8427,7 +8427,7 @@
       41.668729
     ],
     "monument_count": 3,
-    "linked_count": 2
+    "linked_count": 3
   },
   {
     "name": "Cuéllar",
@@ -9177,7 +9177,7 @@
       42.015796
     ],
     "monument_count": 3,
-    "linked_count": 2
+    "linked_count": 3
   },
   {
     "name": "El Sahugo",
@@ -9567,7 +9567,7 @@
       41.840642
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Espejón",
@@ -10527,7 +10527,7 @@
       41.758323
     ],
     "monument_count": 2,
-    "linked_count": 1
+    "linked_count": 2
   },
   {
     "name": "Fuentebureba",
@@ -10752,7 +10752,7 @@
       41.597713
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Fuentepiñel",
@@ -10857,7 +10857,7 @@
       41.954634
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Fuentes de Nava",
@@ -11037,7 +11037,7 @@
       41.471901
     ],
     "monument_count": 7,
-    "linked_count": 5
+    "linked_count": 6
   },
   {
     "name": "Gajates",
@@ -11607,7 +11607,7 @@
       41.544356
     ],
     "monument_count": 3,
-    "linked_count": 2
+    "linked_count": 3
   },
   {
     "name": "Gotarrendura",
@@ -12192,7 +12192,7 @@
       41.534537
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Hontalbilla",
@@ -14487,7 +14487,7 @@
       40.605841
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Llamas de la Ribera",
@@ -15657,7 +15657,7 @@
       41.118948
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Matadeón de los Oteros",
@@ -15762,7 +15762,7 @@
       42.142065
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Matilla de los Caños",
@@ -15837,7 +15837,7 @@
       42.274146
     ],
     "monument_count": 2,
-    "linked_count": 1
+    "linked_count": 2
   },
   {
     "name": "Mazariegos",
@@ -15972,7 +15972,7 @@
       41.268989
     ],
     "monument_count": 7,
-    "linked_count": 5
+    "linked_count": 6
   },
   {
     "name": "Medinilla",
@@ -16947,7 +16947,7 @@
       40.370043
     ],
     "monument_count": 3,
-    "linked_count": 2
+    "linked_count": 3
   },
   {
     "name": "Montenegro de Cameros",
@@ -17397,7 +17397,7 @@
       41.440542
     ],
     "monument_count": 3,
-    "linked_count": 2
+    "linked_count": 3
   },
   {
     "name": "Mota del Marqués",
@@ -18312,7 +18312,7 @@
       41.441566
     ],
     "monument_count": 4,
-    "linked_count": 2
+    "linked_count": 3
   },
   {
     "name": "Navarredonda de Gredos",
@@ -20292,7 +20292,7 @@
       41.35068
     ],
     "monument_count": 2,
-    "linked_count": 1
+    "linked_count": 2
   },
   {
     "name": "Piedrahita de Castro",
@@ -22182,7 +22182,7 @@
       41.364356
     ],
     "monument_count": 5,
-    "linked_count": 4
+    "linked_count": 5
   },
   {
     "name": "Remondo",
@@ -22692,7 +22692,7 @@
       41.688512
     ],
     "monument_count": 2,
-    "linked_count": 1
+    "linked_count": 2
   },
   {
     "name": "Rioseco de Tapia",
@@ -23187,7 +23187,7 @@
       40.994095
     ],
     "monument_count": 47,
-    "linked_count": 42
+    "linked_count": 43
   },
   {
     "name": "Salas de Bureba",
@@ -23487,7 +23487,7 @@
       42.676762
     ],
     "monument_count": 2,
-    "linked_count": 0
+    "linked_count": 2
   },
   {
     "name": "San Bartolomé de Béjar",
@@ -23727,7 +23727,7 @@
       41.686995
     ],
     "monument_count": 10,
-    "linked_count": 6
+    "linked_count": 7
   },
   {
     "name": "San Esteban de Nogales",
@@ -23982,7 +23982,7 @@
       42.514502
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "San Leonardo de Yagüe",
@@ -26262,7 +26262,7 @@
       41.630549
     ],
     "monument_count": 6,
-    "linked_count": 5
+    "linked_count": 6
   },
   {
     "name": "Sinlabajos",
@@ -27537,7 +27537,7 @@
       41.73279
     ],
     "monument_count": 2,
-    "linked_count": 1
+    "linked_count": 2
   },
   {
     "name": "Torremormojón",
@@ -29952,7 +29952,7 @@
       41.57184
     ],
     "monument_count": 2,
-    "linked_count": 1
+    "linked_count": 2
   },
   {
     "name": "Vidayanes",
@@ -33222,7 +33222,7 @@
       42.046955
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Vita",
