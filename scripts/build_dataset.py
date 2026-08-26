@@ -214,16 +214,12 @@ def main():
             {
                 "jcyl_id": p["c_bien_id"],
                 "name": titlecase_es(p["d_bien_denom"]),
-                "name_raw": p["d_bien_denom"],
-                "category_code": p["c_categ_adquiere"],
                 "category": p["d_categ_adquiere"],
                 "protection_date": normalize_protection_date(p["f_bien_protec"]),
                 "lat": round(lat, 6),
                 "lon": round(lon, 6),
                 "municipality": muni_props["n_mun"],
                 "municipality_ine_code_p772": muni_props["c_prov_mun"],  # matches Wikidata P772 format exactly, e.g. "24089"
-                "municipality_ine_code_full": muni_props["c_ine"],  # source layer's own 11-digit code, NOT what P772 uses
-                "municipality_match_approx": approx,
                 "province": muni_props["n_prov"],
                 "reference_url": p["l_url_pweb"],
                 "wikidata_qid": wd_qids[0] if len(wd_qids) == 1 else (wd_qids if wd_qids else None),
