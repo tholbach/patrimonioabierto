@@ -49,6 +49,14 @@ let datasetMeta = null;
 // re-render it in place, instead of just relabeling the chrome around it.
 let currentPanelState = null; // { type: 'monument', record } | { type: 'about' } | { type: 'contribute' } | null
 
+// The open monument panel's photo set: whichever filename is in the hero
+// slot right now, plus the rest waiting in the gallery strip below it -
+// swapMainImage() below swaps a clicked thumbnail into the hero and puts
+// the old hero photo back into the strip, rather than just overwriting the
+// hero and losing track of it (which used to make the original Wikidata
+// photo, specifically, unreachable again once you'd clicked past it).
+let currentGalleryState = { mainFilename: null, otherFiles: [] };
+
 // zoomControl: false + added separately at bottomleft, out of the way of
 // the shuffle/locate buttons stacked at bottomright.
 const map = L.map('map', { zoomControl: false }).setView([41.65, -4.7], 8); // roughly centered on Castilla y León
@@ -463,6 +471,22 @@ async function swapMainImage(filename) {
     mainImageEl.src = meta.thumbUrl;
     if (mainImageLinkEl) mainImageLinkEl.href = meta.pageUrl;
     if (captionEl) captionEl.innerHTML = licenseLineHtml(meta);
+
+    // Swap places rather than just dropping the old hero photo: it goes
+    // back into the strip, in the clicked thumbnail's old spot, so every
+    // photo - including the original one - stays one click away.
+    const { otherFiles, mainFilename } = currentGalleryState;
+    const clickedIndex = otherFiles.indexOf(filename);
+    if (clickedIndex !== -1 && mainFilename) {
+      otherFiles[clickedIndex] = mainFilename;
+    }
+    currentGalleryState.mainFilename = filename;
+
+    const galleryEl = panelContentEl.querySelector('.gallery');
+    if (galleryEl) {
+      galleryEl.outerHTML = renderGallery(otherFiles);
+      wireGalleryClicks();
+    }
   } catch (err) {
     if (captionEl) captionEl.textContent = '';
   }
@@ -479,6 +503,12 @@ function renderGallery(files) {
     )
     .join('');
   return `<div class="gallery">${thumbs}</div>`;
+}
+
+function wireGalleryClicks() {
+  panelContentEl.querySelectorAll('.gallery img').forEach((img) => {
+    img.addEventListener('click', () => swapMainImage(img.dataset.filename));
+  });
 }
 
 async function selectMonument(record, { flyTo = false, updateUrl = true } = {}) {
@@ -554,6 +584,7 @@ async function selectMonument(record, { flyTo = false, updateUrl = true } = {}) 
       mainImageMeta = await fetchImageMeta(galleryFiles[0]);
       galleryFiles = galleryFiles.slice(1);
     }
+    currentGalleryState = { mainFilename: mainImageMeta?.filename || null, otherFiles: galleryFiles.slice() };
 
     // Caption (and the upload CTA, when there's no photo at all) come first
     // - both are about the photo slot directly above them, so they belong
@@ -609,9 +640,7 @@ async function selectMonument(record, { flyTo = false, updateUrl = true } = {}) 
       <div class="panel-body">${bodyHtml}</div>
     `;
 
-    panelContentEl.querySelectorAll('.gallery img').forEach((img) => {
-      img.addEventListener('click', () => swapMainImage(img.dataset.filename));
-    });
+    wireGalleryClicks();
     wireShareButton(record);
     wireMonumentListRows(panelContentEl);
   } catch (err) {
