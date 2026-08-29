@@ -3702,8 +3702,8 @@
     "wikidata_qid": "Q141182480",
     "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Rollo%20jurisdiccional.jpg"
   },
   {
     "jcyl_id": 2207,
@@ -6303,8 +6303,8 @@
     "wikidata_qid": "Q52867322",
     "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Cardi%C3%B1anos%20%28Trespaderne%29%20-%20008%20%2830618338871%29.jpg"
   },
   {
     "jcyl_id": 3518,
@@ -8156,8 +8156,8 @@
     "wikidata_qid": "Q112657398",
     "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Torre%C3%B3n%20de%20Canseco.jpg"
   },
   {
     "jcyl_id": 4518,
@@ -8241,8 +8241,8 @@
     "wikidata_qid": "Q124282420",
     "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/20060414%20MJ%20Nogarejas%2C%20Casa%20La%20Pe%C3%B1a.JPG"
   },
   {
     "jcyl_id": 4594,
@@ -9363,8 +9363,8 @@
     "wikidata_qid": "Q112657473",
     "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Tapia%20de%20la%20Ribera.jpg"
   },
   {
     "jcyl_id": 5381,
@@ -9499,8 +9499,8 @@
     "wikidata_qid": "Q43170272",
     "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Riolago%20de%20Babia%20-%20009.jpg"
   },
   {
     "jcyl_id": 5467,
@@ -11083,8 +11083,8 @@
     "wikidata_qid": "Q43131991",
     "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Valberzoso%2025.jpg"
   },
   {
     "jcyl_id": 6758,
@@ -11763,8 +11763,8 @@
     "wikidata_qid": "Q43140704",
     "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Muda%2069.jpg"
   },
   {
     "jcyl_id": 7468,
@@ -15452,8 +15452,8 @@
     "wikidata_qid": "Q111721522",
     "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Casa%20del%20Parque%20%22Torre%C3%B3n%20de%20Sobradillo%22%2C%20Sobradillo%20%28Salamanca%29.jpg"
   },
   {
     "jcyl_id": 10341,
@@ -21916,13 +21916,13 @@
     "province": "Soria",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=14183",
     "wikidata_qid": [
-      "Q116486073",
-      "Q22075423"
+      "Q22075423",
+      "Q116486073"
     ],
     "already_linked": true,
     "wikidata_conflict": true,
     "has_wikidata_image": true,
-    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Iglesia%20y%20Torre%20Bereber.%20%285389845431%29.jpg"
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/IglesiaAsuncionTREVAGO.jpg"
   },
   {
     "jcyl_id": 14188,
@@ -32835,8 +32835,8 @@
     "wikidata_qid": "Q124283004",
     "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Ayuntamiento%20de%20Valdelugueros.jpg"
   },
   {
     "jcyl_id": 817521,
