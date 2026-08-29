@@ -81,10 +81,18 @@
            click-outside-closes pattern as #search-results. Row list itself
            is built in app.js from whatever categories actually appear in
            the dataset, not hardcoded here. -->
-      <button type="button" id="filter-btn" data-i18n-title="filter.button_title" aria-label="Filter by category">
+      <button type="button" id="filter-btn" data-i18n-title="filter.button_title" aria-label="Filter">
         🎚️<span id="filter-badge" class="filter-badge" hidden></span>
       </button>
       <div id="filter-panel">
+        <!-- "Estado" - orthogonal to category, AND-combined with it: a
+             record must match the selected categories AND (no status box
+             checked, or at least one checked status). Only 2 rows, so no
+             Todo/Ninguno shortcuts needed the way the longer category list
+             has. -->
+        <div class="filter-section-label" data-i18n="filter.status_title">Estado</div>
+        <div id="filter-status-list"></div>
+
         <div id="filter-panel-header">
           <span data-i18n="filter.title">Categorías</span>
           <div id="filter-panel-actions">

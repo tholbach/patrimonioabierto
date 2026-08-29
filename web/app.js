@@ -51,18 +51,22 @@ let datasetMeta = null;
 // recreating markers every time a checkbox is toggled.
 let allMarkerLayers = [];
 let selectedCategories = new Set(); // filled with every category once data loads = no filter applied
+let selectedStatuses = new Set(); // 'unlinked' | 'no_photo' - empty = no status filter applied
 
 // Tracks what's currently shown in the panel so the language toggle can
 // re-render it in place, instead of just relabeling the chrome around it.
 let currentPanelState = null; // { type: 'monument', record } | { type: 'about' } | { type: 'contribute' } | null
 
-// The open monument panel's photo set: whichever filename is in the hero
-// slot right now, plus the rest waiting in the gallery strip below it -
-// swapMainImage() below swaps a clicked thumbnail into the hero and puts
-// the old hero photo back into the strip, rather than just overwriting the
-// hero and losing track of it (which used to make the original Wikidata
-// photo, specifically, unreachable again once you'd clicked past it).
-let currentGalleryState = { mainFilename: null, otherFiles: [] };
+// The open monument panel's photo set: a fixed-order list (P18/first photo
+// at index 0, then the rest as fetched) plus which index is currently in
+// the hero slot. goToIndex() below is the single place that moves between
+// them - both a gallery-thumbnail click and a mobile hero swipe just call
+// it with a different target index, so "every photo stays reachable" (the
+// original point of this state) falls out for free rather than needing the
+// old swap-places bookkeeping. Reset in openPanel() so a stale monument's
+// gallery can't leak into e.g. the About panel's hero (which has no
+// gallery of its own, but does share the same swipe wiring).
+let currentGalleryState = { files: [], index: 0, commonsCategory: null };
 
 // zoomControl: false + added separately at bottomleft, out of the way of
 // the shuffle/locate buttons stacked at bottomright.
@@ -133,19 +137,75 @@ const markers = L.markerClusterGroup({
 });
 map.addLayer(markers);
 
-// --- Category filter -------------------------------------------------------
+// --- Filters: status + category ---------------------------------------------
 //
-// Categories are JCyL's own official terms (see i18n.js's note at the top
-// on why they're never translated), so the filter list is built from
-// whatever distinct record.category values actually show up in the
-// dataset - not a hardcoded list - and just displayed as-is, same as
+// Two independent, AND-combined dimensions: a marker shows only if its
+// category is checked AND (no status box checked, or it matches at least
+// one checked status). Categories are JCyL's own official terms (see
+// i18n.js's note at the top on why they're never translated), so that list
+// is built from whatever distinct record.category values actually show up
+// in the dataset - not a hardcoded list - and just displayed as-is, same as
 // everywhere else in the app that shows a category.
 
 const filterBtnEl = document.getElementById('filter-btn');
 const filterBadgeEl = document.getElementById('filter-badge');
 const filterPanelEl = document.getElementById('filter-panel');
 const filterListEl = document.getElementById('filter-list');
+const filterStatusListEl = document.getElementById('filter-status-list');
 let categoriesWithCounts = []; // [{ category, count }], sorted most common first, filled by initCategoryFilter()
+
+// 'unlinked' and 'no_photo' are deliberately disjoint (no_photo excludes
+// unlinked records, which trivially have no photo too) rather than
+// no_photo being the superset it technically could be - they map 1:1 onto
+// the two contribution steps in the "Cómo contribuir" panel (link/create
+// the Wikidata item, vs add a photo to an item that already exists), so
+// each checkbox corresponds to one concrete, distinct task a visitor could
+// go do, instead of two overlapping ways of saying "incomplete".
+function isUnlinked(record) {
+  return !record.wikidata_qid;
+}
+function isLinkedNoPhoto(record) {
+  return !!record.wikidata_qid && !record.has_wikidata_image;
+}
+const STATUS_MATCHERS = { unlinked: isUnlinked, no_photo: isLinkedNoPhoto };
+
+function initStatusFilter() {
+  const counts = {
+    unlinked: allRecords.filter(isUnlinked).length,
+    no_photo: allRecords.filter(isLinkedNoPhoto).length,
+  };
+  // Seed from the URL (?status=unlinked,no_photo) if present, so a
+  // reloaded or shared link reopens with the same filter active - see
+  // syncFiltersToUrl(), which writes this same param back on every change.
+  const urlStatus = new URLSearchParams(location.search).get('status');
+  if (urlStatus) {
+    for (const s of urlStatus.split('|')) {
+      if (STATUS_MATCHERS[s]) selectedStatuses.add(s);
+    }
+  }
+  filterStatusListEl.innerHTML = ['unlinked', 'no_photo']
+    .map((status) => {
+      const checked = selectedStatuses.has(status);
+      return `
+        <label class="filter-row" data-status="${status}">
+          <input type="checkbox" ${checked ? 'checked' : ''}>
+          <span class="filter-row-icon">${status === 'unlinked' ? '🔗' : '🖼️'}</span>
+          <span class="filter-row-name" data-i18n="filter.status_${status}">${t(`filter.status_${status}`)}</span>
+          <span class="filter-row-count">${counts[status].toLocaleString(currentLang)}</span>
+        </label>
+      `;
+    })
+    .join('');
+  filterStatusListEl.querySelectorAll('.filter-row').forEach((row) => {
+    const checkbox = row.querySelector('input');
+    checkbox.addEventListener('change', () => {
+      const status = row.dataset.status;
+      if (checkbox.checked) selectedStatuses.add(status);
+      else selectedStatuses.delete(status);
+      applyFilters();
+    });
+  });
+}
 
 // record.category itself stays exactly as JCyL wrote it (ALL CAPS) - it's
 // the underlying value used for filtering/matching, and i18n.js's policy
@@ -171,19 +231,28 @@ function initCategoryFilter() {
   categoriesWithCounts = [...counts.entries()]
     .map(([category, count]) => ({ category, count }))
     .sort((a, b) => b.count - a.count);
-  selectedCategories = new Set(categoriesWithCounts.map((c) => c.category)); // start unfiltered
+
+  // Seed from the URL (?cats=MONUMENTO,CASTILLOS) if present, same as
+  // initStatusFilter() does for ?status - falls back to "all" (the normal
+  // default) if the param is missing, empty, or matches nothing real (a
+  // stale/typo'd link shouldn't silently show zero markers).
+  const urlCats = new URLSearchParams(location.search).get('cats');
+  const requested = urlCats ? new Set(urlCats.split('|')) : null;
+  const requestedValid = requested ? categoriesWithCounts.map((c) => c.category).filter((c) => requested.has(c)) : [];
+  selectedCategories = new Set(requestedValid.length ? requestedValid : categoriesWithCounts.map((c) => c.category));
 
   filterListEl.innerHTML = categoriesWithCounts
-    .map(
-      ({ category, count }) => `
-        <label class="filter-row" data-category="${category}">
-          <input type="checkbox" checked>
+    .map(({ category, count }) => {
+      const checked = selectedCategories.has(category);
+      return `
+        <label class="filter-row${checked ? '' : ' unchecked'}" data-category="${category}">
+          <input type="checkbox" ${checked ? 'checked' : ''}>
           <span class="filter-row-icon">${CATEGORY_ICONS[category] || DEFAULT_ICON}</span>
           <span class="filter-row-name">${titlecaseEs(category)}</span>
           <span class="filter-row-count">${count.toLocaleString(currentLang)}</span>
         </label>
-      `
-    )
+      `;
+    })
     .join('');
   filterListEl.querySelectorAll('.filter-row').forEach((row) => {
     const checkbox = row.querySelector('input');
@@ -192,11 +261,12 @@ function initCategoryFilter() {
       if (checkbox.checked) selectedCategories.add(category);
       else selectedCategories.delete(category);
       row.classList.toggle('unchecked', !checkbox.checked);
-      applyCategoryFilter();
+      applyFilters();
     });
   });
 
-  applyCategoryFilter();
+  initStatusFilter();
+  applyFilters();
 }
 
 function setAllCategoryCheckboxes(checked) {
@@ -205,19 +275,53 @@ function setAllCategoryCheckboxes(checked) {
     row.classList.toggle('unchecked', !checked);
   });
   selectedCategories = checked ? new Set(categoriesWithCounts.map((c) => c.category)) : new Set();
-  applyCategoryFilter();
+  applyFilters();
 }
 
-function applyCategoryFilter() {
+function applyFilters() {
   markers.clearLayers();
-  markers.addLayers(allMarkerLayers.filter((m) => selectedCategories.has(m.record.category)));
+  markers.addLayers(
+    allMarkerLayers.filter((m) => {
+      if (!selectedCategories.has(m.record.category)) return false;
+      if (!selectedStatuses.size) return true;
+      return [...selectedStatuses].some((status) => STATUS_MATCHERS[status](m.record));
+    })
+  );
 
-  const activeCount = selectedCategories.size;
-  const totalCount = categoriesWithCounts.length;
-  const filtering = activeCount < totalCount;
-  filterBtnEl.classList.toggle('active', filtering);
-  filterBadgeEl.hidden = !filtering;
-  if (filtering) filterBadgeEl.textContent = activeCount.toLocaleString(currentLang);
+  const activeCategoryCount = selectedCategories.size;
+  const totalCategoryCount = categoriesWithCounts.length;
+  const categoryFiltering = activeCategoryCount < totalCategoryCount;
+  const statusFiltering = selectedStatuses.size > 0;
+  filterBtnEl.classList.toggle('active', categoryFiltering || statusFiltering);
+  filterBadgeEl.hidden = !(categoryFiltering || statusFiltering);
+  // Badge shows whichever dimension is actually narrowing things - category
+  // count takes priority since it's usually the bigger number, falling back
+  // to the status-box count so an "all categories, one status box" filter
+  // still shows *something* rather than an empty-looking active button.
+  if (categoryFiltering) filterBadgeEl.textContent = activeCategoryCount.toLocaleString(currentLang);
+  else if (statusFiltering) filterBadgeEl.textContent = selectedStatuses.size.toLocaleString(currentLang);
+
+  syncFiltersToUrl(categoryFiltering, statusFiltering);
+}
+
+// Filters are merged into whatever's already in the URL (an open ?id=
+// monument, #about, ...) via replaceState, not pushState - every checkbox
+// toggle would otherwise add a browser-history entry, making "back" step
+// through individual filter changes instead of actually navigating away
+// from the map. Symmetric with initCategoryFilter()/initStatusFilter()
+// reading these same two params back out on load.
+function syncFiltersToUrl(categoryFiltering, statusFiltering) {
+  const params = new URLSearchParams(location.search);
+  // '|', not ',' - "ARCHIVOS, MUSEOS Y BIBLIOTECAS" is itself one category
+  // name with a comma in it, which a comma-joined list can't tell apart
+  // from a separator (silently dropped that category on reload before
+  // this was caught - splitting it into two bogus, non-matching tokens).
+  if (categoryFiltering) params.set('cats', [...selectedCategories].join('|'));
+  else params.delete('cats');
+  if (statusFiltering) params.set('status', [...selectedStatuses].join('|'));
+  else params.delete('status');
+  const qs = params.toString();
+  history.replaceState(null, '', location.pathname + (qs ? `?${qs}` : '') + location.hash);
 }
 
 filterBtnEl.addEventListener('click', () => filterPanelEl.classList.toggle('open'));
@@ -235,6 +339,10 @@ const panelEl = document.getElementById('panel');
 const panelContentEl = document.getElementById('panel-content');
 
 function openPanel() {
+  // Every panel-show function sets panelContentEl.innerHTML then calls this
+  // - resetting here, not per panel type, means a stale gallery/swipe state
+  // from whatever was open before can never leak into a panel that has none.
+  currentGalleryState = { files: [], index: 0, commonsCategory: null };
   const wasOpen = panelEl.classList.contains('open');
   panelEl.classList.add('open');
   if (!wasOpen) {
@@ -527,13 +635,19 @@ function heroBlock({ imageUrl, linkUrl, kicker, title, placeholderIcon }) {
       <h2 class="hero-title">${title}</h2>
     </div>
   `;
+  // Populated by updateHeroDots() once the gallery's real length is known -
+  // empty (and so, per its :empty CSS rule, invisible) for every panel type
+  // that isn't a monument with >1 photo. Mobile-only by CSS: desktop already
+  // has click-based gallery/grid access, a swipe affordance would be noise
+  // there.
+  const dots = `<div class="hero-dots" id="hero-dots"></div>`;
   if (!imageUrl) {
     // Category-appropriate large watermark instead of a flat gradient -
     // reuses the same emoji already used for map markers, so a castle with
     // no photo still visually reads as "castle" rather than looking like a
     // generic empty/broken state.
     const icon = placeholderIcon ? `<div class="hero-placeholder-icon">${placeholderIcon}</div>` : '';
-    return `<div class="hero hero-fallback">${icon}${scrim}</div>`;
+    return `<div class="hero hero-fallback">${icon}${scrim}${dots}</div>`;
   }
   // main-image-bg is the blurred backdrop for portrait photos - see the CSS
   // comment on .hero-img-bg. Same src as the real photo, just decorative
@@ -545,7 +659,57 @@ function heroBlock({ imageUrl, linkUrl, kicker, title, placeholderIcon }) {
   const imgEl = linkUrl
     ? `<a href="${linkUrl}" target="_blank" rel="noopener" id="main-image-link">${img}</a>`
     : img;
-  return `<div class="hero">${imgEl}${scrim}</div>`;
+  return `<div class="hero">${imgEl}${scrim}${dots}</div>`;
+}
+
+// Small dot-per-photo indicator, mobile-only (see .hero-dots CSS) - the
+// only visual hint that the hero is swipeable at all, since a swipe gesture
+// with zero affordance is undiscoverable.
+function updateHeroDots(index, total) {
+  const el = document.getElementById('hero-dots');
+  if (!el) return;
+  el.innerHTML =
+    total > 1
+      ? Array.from({ length: total }, (_, i) => `<span class="hero-dot${i === index ? ' active' : ''}"></span>`).join('')
+      : '';
+}
+
+// Touch-swipe on the hero photo, mobile only in practice: touch events
+// simply don't fire from a mouse, so this needs no separate desktop
+// gate - a touchscreen desktop is the one edge case where it'd also
+// trigger, which is fine, that's still a real swipe gesture. Wired once per
+// fresh panel render (the .hero element persists across goToIndex() calls,
+// which only patch its child <img> src attributes, not recreate it - no
+// need to re-wire on every swipe).
+function wireHeroSwipe() {
+  const hero = panelContentEl.querySelector('.hero');
+  if (!hero) return;
+  const SWIPE_THRESHOLD_PX = 50;
+  let startX = null;
+  let startY = null;
+
+  hero.addEventListener(
+    'touchstart',
+    (e) => {
+      if (currentGalleryState.files.length < 2) return;
+      startX = e.touches[0].clientX;
+      startY = e.touches[0].clientY;
+    },
+    { passive: true }
+  );
+  hero.addEventListener('touchend', (e) => {
+    if (startX === null) return;
+    const dx = e.changedTouches[0].clientX - startX;
+    const dy = e.changedTouches[0].clientY - startY;
+    startX = null;
+    // Ignore short taps and mostly-vertical drags (those are just the
+    // panel/page scrolling, not a swipe) rather than misfiring on them.
+    if (Math.abs(dx) < SWIPE_THRESHOLD_PX || Math.abs(dx) < Math.abs(dy)) return;
+    const { index, files } = currentGalleryState;
+    // No wraparound at the ends - out-of-range goToIndex() calls are just
+    // no-ops, same as clicking past the edge of the gallery would be.
+    goToIndex(dx < 0 ? index + 1 : index - 1);
+  });
 }
 
 // Portrait photos (naturally taller than wide) get letterboxed with a
@@ -591,7 +755,15 @@ function licenseLineHtml(meta) {
     : (meta.artistHtml || '');
 }
 
-async function swapMainImage(filename) {
+// The single place that moves the hero to a different photo - a gallery
+// thumbnail click and a mobile hero swipe both just call this with a
+// different target index (see currentGalleryState's own comment for why
+// this replaced the old "swap places" bookkeeping). Out-of-range indexes
+// (swiping past either end, or a stale click) are silent no-ops.
+async function goToIndex(index) {
+  const { files } = currentGalleryState;
+  if (index < 0 || index >= files.length || index === currentGalleryState.index) return;
+
   const mainImageEl = document.getElementById('main-image');
   const mainImageBgEl = document.getElementById('main-image-bg');
   const mainImageLinkEl = document.getElementById('main-image-link');
@@ -599,26 +771,19 @@ async function swapMainImage(filename) {
   if (!mainImageEl) return;
   if (captionEl) captionEl.textContent = t('loading');
   try {
-    const meta = await fetchImageMeta(filename);
+    const meta = await fetchImageMeta(files[index]);
     mainImageEl.src = meta.thumbUrl;
     if (mainImageBgEl) mainImageBgEl.src = meta.thumbUrl;
     if (mainImageLinkEl) mainImageLinkEl.href = meta.pageUrl;
     if (captionEl) captionEl.innerHTML = licenseLineHtml(meta);
     applyHeroOrientation();
 
-    // Swap places rather than just dropping the old hero photo: it goes
-    // back into the strip, in the clicked thumbnail's old spot, so every
-    // photo - including the original one - stays one click away.
-    const { otherFiles, mainFilename } = currentGalleryState;
-    const clickedIndex = otherFiles.indexOf(filename);
-    if (clickedIndex !== -1 && mainFilename) {
-      otherFiles[clickedIndex] = mainFilename;
-    }
-    currentGalleryState.mainFilename = filename;
+    currentGalleryState.index = index;
+    updateHeroDots(index, files.length);
 
     const galleryEl = panelContentEl.querySelector('.gallery');
     if (galleryEl) {
-      galleryEl.outerHTML = renderGallery(otherFiles);
+      galleryEl.outerHTML = renderGallery(files, index, currentGalleryState.commonsCategory);
       wireGalleryClicks();
     }
   } catch (err) {
@@ -626,22 +791,49 @@ async function swapMainImage(filename) {
   }
 }
 
-function renderGallery(files) {
+// Shows every photo in `files` except whichever is at `currentIndex` (i.e.
+// currently in the hero slot) - always in their fixed original order, so
+// thumbnails don't reshuffle position as you click/swipe through them the
+// way the old swap-places version did.
+function renderGallery(files, currentIndex, commonsCategory) {
   if (!files.length) return '';
+  // files.length > 12 means there's strictly more than what any one window
+  // can show - fetchGalleryFiles itself caps at 24, so this can't just be
+  // "we happened to fetch exactly the whole category".
+  const hasMore = !!commonsCategory && files.length > 12;
+  // One fewer thumbnail than usual exactly when the "see more" tile is
+  // about to be appended - keeps thumbs+tile at the same total count
+  // instead of spilling one item past it, which on the desktop grid means
+  // spilling into a whole extra row for the sake of one tile.
+  const windowSize = hasMore ? 11 : 12;
+  // Whichever photo is currently in the hero slot stays visible (marked
+  // .active, see the CSS) rather than being dropped from the strip - so if
+  // it's outside the default window, slide the window forward just far
+  // enough to keep it in view, rather than always starting at 0 regardless
+  // of where you've swiped/clicked to.
+  const start = currentIndex >= windowSize ? currentIndex - (windowSize - 1) : 0;
   const thumbs = files
-    .slice(0, 12)
+    .slice(start, start + windowSize)
     .map(
-      (f) =>
-        `<img src="https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(f)}?width=100"
-              alt="" data-filename="${f.replace(/"/g, '&quot;')}">`
+      (f, offset) => {
+        const i = start + offset;
+        const activeAttr = i === currentIndex ? ' class="active"' : '';
+        return `<img${activeAttr} src="https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(f)}?width=100"
+              alt="" data-index="${i}">`;
+      }
     )
     .join('');
-  return `<div class="gallery">${thumbs}</div>`;
+  // Links to the category page directly, which has no fetch cap and
+  // browses the true full set, subcategories included.
+  const seeMore = hasMore
+    ? `<a class="gallery-more" href="https://commons.wikimedia.org/wiki/Category:${encodeURIComponent(commonsCategory)}" target="_blank" rel="noopener">${t('gallery.see_more')}</a>`
+    : '';
+  return `<div class="gallery">${thumbs}${seeMore}</div>`;
 }
 
 function wireGalleryClicks() {
   panelContentEl.querySelectorAll('.gallery img').forEach((img) => {
-    img.addEventListener('click', () => swapMainImage(img.dataset.filename));
+    img.addEventListener('click', () => goToIndex(Number(img.dataset.index)));
   });
 }
 
@@ -718,7 +910,8 @@ async function selectMonument(record, { flyTo = false, updateUrl = true } = {}) 
       mainImageMeta = await fetchImageMeta(galleryFiles[0]);
       galleryFiles = galleryFiles.slice(1);
     }
-    currentGalleryState = { mainFilename: mainImageMeta?.filename || null, otherFiles: galleryFiles.slice() };
+    const files = mainImageMeta ? [mainImageMeta.filename, ...galleryFiles] : [];
+    currentGalleryState = { files, index: 0, commonsCategory };
 
     // Caption (and the upload CTA, when there's no photo at all) come first
     // - both are about the photo slot directly above them, so they belong
@@ -747,7 +940,7 @@ async function selectMonument(record, { flyTo = false, updateUrl = true } = {}) 
     if (record.wikidata_conflict) {
       bodyHtml += `<div class="missing-note">⚠ jcyl_id: ${record.wikidata_qid.join(', ')}</div>`;
     }
-    bodyHtml += renderGallery(galleryFiles);
+    bodyHtml += renderGallery(files, 0, commonsCategory);
     if (summary?.extract) {
       bodyHtml += `<div class="extract">${summary.extract}</div>`;
       bodyHtml += `<a class="read-more-link" href="${sitelink.url}" target="_blank" rel="noopener">${t('wikipedia.read_more')}</a>`;
@@ -776,6 +969,8 @@ async function selectMonument(record, { flyTo = false, updateUrl = true } = {}) 
 
     applyHeroOrientation();
     wireGalleryClicks();
+    wireHeroSwipe();
+    updateHeroDots(0, files.length);
     wireShareButton(record);
     wireMonumentListRows(panelContentEl);
   } catch (err) {

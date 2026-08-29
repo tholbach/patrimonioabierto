@@ -466,6 +466,39 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
   text-shadow: 0 1px 8px rgba(0,0,0,0.3);
 }
 
+/* Swipe indicator - mobile-only (see the @media 768px block below), and
+   only ever populated (see updateHeroDots() in app.js) when there's
+   actually more than one photo to swipe between. Sits near the top, not
+   the bottom, since .hero-scrim/.hero-title already own the bottom edge. */
+.hero-dots {
+  position: absolute;
+  top: 12px;
+  left: 0;
+  right: 0;
+  z-index: 3;
+  display: none;
+  justify-content: center;
+  gap: 6px;
+  pointer-events: none;
+}
+.hero-dots:empty { display: none !important; }
+.hero-dot { width: 6px; height: 6px; border-radius: 50%; background: rgba(255,255,255,0.5); box-shadow: 0 1px 3px rgba(0,0,0,0.3); }
+.hero-dot.active { background: white; }
+
+@media (max-width: 768px) {
+  /* pan-y, not none: a vertical drag through the hero should still scroll
+     the page normally (mobile's bottom-sheet panel can be short enough that
+     the hero itself sits near a scroll boundary) - only horizontal gestures
+     are ours to interpret as a swipe, per wireHeroSwipe() in app.js. Kept
+     here, next to .hero-dots' own base rule, rather than in the earlier
+     global mobile block - .hero-dots{display:flex} needs to out-cascade
+     the unconditional .hero-dots{display:none} above it, which only works
+     if this comes after it in source order (equal specificity, so it's
+     purely a source-order tiebreak either way). */
+  .hero { touch-action: pan-y; }
+  .hero-dots { display: flex; }
+}
+
 .panel-body { padding: 20px 22px 28px; }
 .panel-body .meta { color: var(--ink-soft); font-size: 13px; margin-bottom: 4px; }
 .panel-body h3 {
@@ -607,6 +640,37 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
   transition: transform 0.15s ease, border-color 0.15s ease;
 }
 .gallery img:hover { border-color: var(--cyl-purple); transform: translateY(-2px); }
+/* Whichever photo is currently in the hero slot - stays in the gallery
+   rather than being excluded from it, marked instead of removed, so "which
+   one am I looking at" is always visible at a glance. */
+.gallery img.active { border-color: var(--cyl-purple); cursor: default; }
+
+/* Appended after the thumbs, only when fetchGalleryFiles() found more than
+   the 12 shown - links out to the full Commons category instead of trying
+   to fetch/paginate everything ourselves. Sized to match .gallery img so it
+   sits in the scroll strip as just one more tile, not a different kind of
+   thing. */
+.gallery-more {
+  height: 68px;
+  min-width: 68px;
+  max-width: 90px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 4px 8px;
+  border-radius: 8px;
+  border: 2px solid var(--border);
+  background: var(--bg);
+  color: var(--ink-soft);
+  font-size: 11px;
+  font-weight: 600;
+  line-height: 1.25;
+  text-decoration: none;
+  flex-shrink: 0;
+  transition: border-color 0.15s ease, color 0.15s ease;
+}
+.gallery-more:hover { border-color: var(--cyl-purple); color: var(--cyl-purple); }
 
 .extract { font-size: 14.5px; line-height: 1.6; margin: 14px 0; color: var(--ink); }
 .text-license { font-size: 11px; color: var(--ink-soft); margin: -8px 0 14px; line-height: 1.4; }
@@ -793,7 +857,8 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
 }
 #filter-panel.open { display: block; }
 
-#filter-panel-header {
+#filter-panel-header,
+.filter-section-label {
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -805,6 +870,9 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
   text-transform: uppercase;
   color: var(--ink-soft);
 }
+/* Estado sits above Categorías in the same panel - a divider between them
+   reads as two distinct groups instead of one long list with an odd gap. */
+#filter-panel-header { border-top: 1px solid var(--border); margin-top: 4px; }
 #filter-panel-actions { display: flex; gap: 10px; flex-shrink: 0; }
 #filter-panel-actions button {
   border: none;
@@ -916,5 +984,35 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
   .source-list { font-size: 14px; }
   .list-row { font-size: 14.5px; padding: 12px 2px; }
   .badge { font-size: 14px; padding: 8px 16px; }
-  .gallery img { width: 80px; height: 80px; }
+
+  /* A wrapping grid, not the mobile/compact horizontal scroll strip - past
+     this width there's room to see several rows of photos at once instead
+     of scrolling sideways through a filmstrip. auto-fill sizes the column
+     count to whatever width the gallery actually has, no fixed count
+     needed - it'll fit more columns once the 1800px tier below widens the
+     panel further. */
+  .gallery {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(90px, 1fr));
+    gap: 10px;
+    overflow: visible;
+  }
+  .gallery img, .gallery-more { width: 100%; height: 90px; max-width: none; min-width: 0; }
 }
+
+/* Large desktop: the panel gets meaningfully wider still, single column
+   (a two-column hero/text split was tried and reverted - it made the hero
+   taller but not wider, and a landscape photo's real constraint is width;
+   cover just crops harder into a narrow-but-tall box, so it read as MORE
+   zoomed-in, not bigger). The hero's height switches from a fixed pixel
+   number to aspect-ratio, so it actually grows in both dimensions together
+   as the wider panel gives it more width, instead of staying pinned at the
+   1400px tier's 320px forever while only the width around it changes. */
+@media (min-width: 1800px) {
+  #panel.open { width: 680px; }
+  #panel-content { width: 680px; }
+  .hero { height: auto; aspect-ratio: 3 / 2; }
+  .hero-placeholder-icon { font-size: 170px; }
+  .hero-title { font-size: 34px; }
+}
+
