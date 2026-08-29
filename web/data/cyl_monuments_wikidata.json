@@ -3651,8 +3651,8 @@
     "wikidata_qid": "Q52852749",
     "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Hormaza.jpg"
   },
   {
     "jcyl_id": 2185,
@@ -5810,8 +5810,8 @@
     "wikidata_qid": "Q5757226",
     "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Castillo%20de%20Castrovido%2001.jpg"
   },
   {
     "jcyl_id": 3272,
@@ -17370,11 +17370,11 @@
     "municipality_ine_code_p772": "40194",
     "province": "Segovia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=11698",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141203816",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Edifico%20calle%20Capuchinos%20Alta%207%2C%20Archivo%20Hist%C3%B3rico%20Provincial%20de%20Segovia.JPG"
   },
   {
     "jcyl_id": 11711,
@@ -17421,8 +17421,8 @@
     "municipality_ine_code_p772": "40194",
     "province": "Segovia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=11727",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141204286",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -21916,13 +21916,13 @@
     "province": "Soria",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=14183",
     "wikidata_qid": [
-      "Q22075423",
-      "Q116486073"
+      "Q116486073",
+      "Q22075423"
     ],
     "already_linked": true,
     "wikidata_conflict": true,
     "has_wikidata_image": true,
-    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/IglesiaAsuncionTREVAGO.jpg"
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Iglesia%20y%20Torre%20Bereber.%20%285389845431%29.jpg"
   },
   {
     "jcyl_id": 14188,
