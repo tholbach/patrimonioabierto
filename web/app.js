@@ -27,6 +27,31 @@ const CATEGORY_ICONS = {
 };
 const DEFAULT_ICON = '📌';
 
+// Short, stable, ASCII-only codes for the URL only (?cats=mon|cas|...) -
+// record.category itself is never rewritten (see i18n.js's note on why),
+// this is purely a cosmetic swap so the URL isn't 100+ characters of
+// percent-encoded accents and spaces for a full category list. Fixed by
+// hand, not derived from the category text, so a slug never shifts under
+// someone's saved link just because the dataset's category *counts* (and
+// so initCategoryFilter()'s sort order) changed.
+const CATEGORY_SLUGS = {
+  'MONUMENTO': 'mon',
+  'CASTILLOS': 'cas',
+  'HÓRREOS Y PALLOZAS': 'hor',
+  'ARTE RUPESTRE': 'rup',
+  'CONJUNTO HISTÓRICO': 'chi',
+  'ROLLOS DE JUSTICIA': 'rol',
+  'ZONA ARQUEOLÓGICA': 'arq',
+  'CONJUNTO ETNOLÓGICO': 'etn',
+  'ARCHIVOS, MUSEOS Y BIBLIOTECAS': 'amb',
+  'SITIO HISTÓRICO': 'sit',
+  'ESCUDOS': 'esc',
+  'PAISAJE CULTURAL': 'pai',
+  'JARDÍN HISTÓRICO': 'jar',
+  'HITOS FORALES': 'hit',
+};
+const SLUG_TO_CATEGORY = Object.fromEntries(Object.entries(CATEGORY_SLUGS).map(([cat, slug]) => [slug, cat]));
+
 // Commons file extensions worth showing in a photo gallery - excludes PDFs,
 // DjVu scans, audio, etc. that also legitimately live in a monument's
 // Commons category.
@@ -232,12 +257,14 @@ function initCategoryFilter() {
     .map(([category, count]) => ({ category, count }))
     .sort((a, b) => b.count - a.count);
 
-  // Seed from the URL (?cats=MONUMENTO,CASTILLOS) if present, same as
+  // Seed from the URL (?cats=mon|cas) if present, same as
   // initStatusFilter() does for ?status - falls back to "all" (the normal
   // default) if the param is missing, empty, or matches nothing real (a
-  // stale/typo'd link shouldn't silently show zero markers).
+  // stale/typo'd link shouldn't silently show zero markers). Each token is
+  // tried as a slug first, then as a raw category name - so links from
+  // just before CATEGORY_SLUGS existed still work, not just new ones.
   const urlCats = new URLSearchParams(location.search).get('cats');
-  const requested = urlCats ? new Set(urlCats.split('|')) : null;
+  const requested = urlCats ? new Set(urlCats.split('|').map((t) => SLUG_TO_CATEGORY[t] || t)) : null;
   const requestedValid = requested ? categoriesWithCounts.map((c) => c.category).filter((c) => requested.has(c)) : [];
   selectedCategories = new Set(requestedValid.length ? requestedValid : categoriesWithCounts.map((c) => c.category));
 
@@ -316,7 +343,10 @@ function syncFiltersToUrl(categoryFiltering, statusFiltering) {
   // name with a comma in it, which a comma-joined list can't tell apart
   // from a separator (silently dropped that category on reload before
   // this was caught - splitting it into two bogus, non-matching tokens).
-  if (categoryFiltering) params.set('cats', [...selectedCategories].join('|'));
+  // CATEGORY_SLUGS keeps each one to 3 ASCII characters instead of the
+  // full accented name - a 14-category URL used to be 100+ characters of
+  // percent-encoding, now it's ~55 of plain lowercase letters.
+  if (categoryFiltering) params.set('cats', [...selectedCategories].map((c) => CATEGORY_SLUGS[c] || c).join('|'));
   else params.delete('cats');
   if (statusFiltering) params.set('status', [...selectedStatuses].join('|'));
   else params.delete('status');
