@@ -2305,11 +2305,11 @@
     "municipality_ine_code_p772": "09038",
     "province": "Burgos",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=1476",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141221799",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Barbadillo%20del%20Mercado%20-%20Palacio%20de%20la%20Plaza.jpg"
   },
   {
     "jcyl_id": 1482,
@@ -2815,8 +2815,8 @@
     "municipality_ine_code_p772": "09059",
     "province": "Burgos",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=1765",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141221801",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -3019,8 +3019,8 @@
     "municipality_ine_code_p772": "09191",
     "province": "Burgos",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=1864",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141223042",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -4073,11 +4073,11 @@
     "municipality_ine_code_p772": "09177",
     "province": "Burgos",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=2369",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q6021431",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Monasterio%20Santa%20Maria%20de%20Bujedo%20de%20Juarros%20Portada%20Principal.jpg"
   },
   {
     "jcyl_id": 2375,
@@ -4736,8 +4736,8 @@
     "municipality_ine_code_p772": "09217",
     "province": "Burgos",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=2737",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141223044",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -4804,8 +4804,8 @@
     "municipality_ine_code_p772": "09217",
     "province": "Burgos",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=2784",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141223045",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -5960,8 +5960,8 @@
     "municipality_ine_code_p772": "09353",
     "province": "Burgos",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=3327",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141223046",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -7728,8 +7728,8 @@
     "municipality_ine_code_p772": "09906",
     "province": "Burgos",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=4141",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141223047",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -8408,8 +8408,8 @@
     "municipality_ine_code_p772": "24079",
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=4725",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141223048",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -8527,8 +8527,8 @@
     "municipality_ine_code_p772": "24082",
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=4796",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141223049",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -8731,8 +8731,8 @@
     "municipality_ine_code_p772": "24089",
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=4929",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141223050",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -11420,11 +11420,11 @@
     "municipality_ine_code_p772": "34063",
     "province": "Palencia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=7035",
-    "wikidata_qid": "Q26935247",
+    "wikidata_qid": "Q43091301",
     "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Cordovilla%20la%20Real%2009%20rollo%20by-dpc.jpg"
   },
   {
     "jcyl_id": 7071,
@@ -17863,8 +17863,8 @@
     "municipality_ine_code_p772": "40194",
     "province": "Segovia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=11940",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141221594",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -18475,11 +18475,11 @@
     "municipality_ine_code_p772": "42019",
     "province": "Soria",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=12374",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43114872",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Casa%20Fuerte%2C%20Convento%2C%20Iglesia%20de%20San%20Gregorio%20-%20Detalle%20Casa%20Fuerte.jpg"
   },
   {
     "jcyl_id": 12384,
@@ -18526,8 +18526,8 @@
     "municipality_ine_code_p772": "42019",
     "province": "Soria",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=12414",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141221738",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -18543,8 +18543,8 @@
     "municipality_ine_code_p772": "42019",
     "province": "Soria",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=12421",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141221740",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -18815,11 +18815,11 @@
     "municipality_ine_code_p772": "42032",
     "province": "Soria",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=12566",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q5910725",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/VistaSanMart%C3%ADnAguilera-rectangular.jpg"
   },
   {
     "jcyl_id": 12574,
@@ -19274,8 +19274,8 @@
     "municipality_ine_code_p772": "42043",
     "province": "Soria",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=12845",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141221744",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -19549,11 +19549,11 @@
     "municipality_ine_code_p772": "42052",
     "province": "Soria",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=12951",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q9007258",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Caracena%20San%20Pedro.jpg"
   },
   {
     "jcyl_id": 12958,
@@ -19634,8 +19634,8 @@
     "municipality_ine_code_p772": "42060",
     "province": "Soria",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=12984",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141221802",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -19719,8 +19719,8 @@
     "municipality_ine_code_p772": "42038",
     "province": "Soria",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=13022",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141221803",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -21082,11 +21082,11 @@
     "municipality_ine_code_p772": "42173",
     "province": "Soria",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=13827",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141221804",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Concatedral%20de%20San%20Pedro%2006.jpg"
   },
   {
     "jcyl_id": 13848,
@@ -24094,8 +24094,8 @@
     "municipality_ine_code_p772": "47186",
     "province": "Valladolid",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=15636",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141221805",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -25403,8 +25403,8 @@
     "municipality_ine_code_p772": "49054",
     "province": "Zamora",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=16564",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141221806",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -26134,11 +26134,11 @@
     "municipality_ine_code_p772": "49219",
     "province": "Zamora",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=17028",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q5912881",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Santosepulcrotoroex.jpg"
   },
   {
     "jcyl_id": 17035,
@@ -26253,8 +26253,8 @@
     "municipality_ine_code_p772": "49230",
     "province": "Zamora",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=17086",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141221808",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -26882,8 +26882,8 @@
     "municipality_ine_code_p772": "49275",
     "province": "Zamora",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=17446",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141221809",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
@@ -41791,8 +41791,8 @@
     "municipality_ine_code_p772": "09190",
     "province": "Burgos",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=2680703",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141223051",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "image_url": null
