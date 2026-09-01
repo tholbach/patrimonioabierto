@@ -3539,7 +3539,7 @@
     "jcyl_id": 2141,
     "name": "La Villa",
     "category": "CONJUNTO HISTÓRICO",
-    "protection_date": "1972-07-03",
+    "protection_date": "2026-08-20",
     "lat": 43.077144,
     "lon": -3.552453,
     "municipality": "Espinosa de los Monteros",
@@ -8884,11 +8884,11 @@
     "municipality_ine_code_p772": "24094",
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=5088",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43087116",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Mansilla%20Mulas%201.JPG"
   },
   {
     "jcyl_id": 5094,
