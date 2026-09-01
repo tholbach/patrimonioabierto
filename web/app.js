@@ -1459,6 +1459,98 @@ document.getElementById('shuffle-btn').addEventListener('click', () => {
   selectMonument(pick, { flyTo: true });
 });
 
+// --- Picture of the week (desktop only) ------------------------------------
+//
+// Deliberately no backend/build step: the pool of candidates is a small,
+// pre-fetched JSON file (see scripts/find_good_pictures.py - Commons files
+// that are both within a monument's own Commons category tree and tagged
+// as a "good picture" - Featured/Quality/Valued). Which one shows is
+// picked purely client-side, seeded by the ISO week number, so it's the
+// same for every visitor all week and moves on next week automatically -
+// no cron, no server state. Once the pool is exhausted for now (it's tiny
+// while the crawl is still ongoing) it just cycles back to the start
+// rather than repeating a fixed image forever; if the pool is empty the
+// card stays hidden rather than showing broken/placeholder content.
+function isoWeekNumber(date) {
+  const d = new Date(Date.UTC(date.getFullYear(), date.getMonth(), date.getDate()));
+  const dayNum = d.getUTCDay() || 7;
+  d.setUTCDate(d.getUTCDate() + 4 - dayNum);
+  const yearStart = new Date(Date.UTC(d.getUTCFullYear(), 0, 1));
+  return Math.ceil(((d - yearStart) / 86400000 + 1) / 7);
+}
+
+function dismissPotw() {
+  if (document.getElementById('potw').hidden) return; // already gone - nothing to do
+  sessionStorage.setItem('potw-dismissed', '1');
+  document.getElementById('potw').hidden = true;
+  // Drop the class that lifts the zoom control/attribution/button stack
+  // clear of the strip (see style.css) - once the strip's gone, those
+  // should settle back to their normal spot instead of leaving a gap of
+  // bare map beneath them.
+  document.getElementById('map-wrap').classList.remove('potw-visible');
+}
+
+function initPictureOfTheWeek() {
+  const potwEl = document.getElementById('potw');
+  if (sessionStorage.getItem('potw-dismissed')) return;
+
+  fetch('data/picture_of_the_week.json')
+    .then((r) => (r.ok ? r.json() : []))
+    .then(async (pool) => {
+      if (!pool.length) return;
+      const entry = pool[isoWeekNumber(new Date()) % pool.length];
+      const record = recordsById.get(String(entry.jcyl_id));
+      if (!record) return;
+
+      const meta = await fetchImageMeta(entry.file);
+      const thumbUrl = `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(entry.file)}?width=440`;
+      potwEl.innerHTML = `
+        <button type="button" id="potw-close" data-i18n-title="potw.close_title" aria-label="Close">✕</button>
+        <img src="${thumbUrl}" alt="${record.name}" loading="lazy">
+        <div id="potw-info">
+          <div id="potw-label" data-i18n="potw.label">${t('potw.label')}</div>
+          <div id="potw-name">${record.name}</div>
+          <div id="potw-credit">${licenseLineHtml(meta)}</div>
+          <div id="potw-cta" data-i18n="potw.cta">${t('potw.cta')}</div>
+        </div>
+      `;
+      applyStaticI18n();
+      potwEl.hidden = false;
+      document.getElementById('map-wrap').classList.add('potw-visible');
+
+      // Any interaction dismisses the card, not just its own close button:
+      // following through to the monument it's advertising, or clicking
+      // anywhere else on the map (a different marker, or just empty map
+      // space - see the map.on('click', dismissPotw) below), both count as
+      // "done with this suggestion" rather than something to leave sitting
+      // there stale over whatever's now on screen.
+      //
+      // Ignore clicks on the credit line's own links (artist/license, both
+      // pointing at Commons) though - they should navigate there directly,
+      // not also fire selectMonument on top of it.
+      potwEl.addEventListener('click', (e) => {
+        if (e.target.closest('a')) return;
+        dismissPotw();
+        selectMonument(record, { flyTo: true });
+      });
+      document.getElementById('potw-close').addEventListener('click', (e) => {
+        e.stopPropagation();
+        dismissPotw();
+      });
+    })
+    .catch(() => {}); // no data file yet, or offline - just stay hidden
+}
+
+// Individual marker clicks bubble up to the map's own click event by
+// default in Leaflet (Marker's bubblingMouseEvents defaults to true), so
+// map.on('click', ...) alone covers those plus clicking empty map space.
+// It does NOT cover clicking a cluster icon, though (Leaflet.markercluster
+// handles that click on the cluster group layer itself, spiderfying/zooming
+// rather than bubbling a plain map click) - confirmed by testing, so that
+// needs its own listener on `markers`, the cluster group.
+map.on('click', dismissPotw);
+markers.on('click', dismissPotw);
+
 const locateBtn = document.getElementById('locate-btn');
 let userLocationMarker = null;
 let userAccuracyCircle = null;
@@ -1753,6 +1845,12 @@ Promise.all([
     const requestedMuni = params.get('muni');
     const requestedProv = params.get('prov');
     const hasDeepLink = !!(requestedId || requestedMuni || requestedProv || location.hash);
+    // Same reasoning as maybeShowWelcome() below: someone landing on a
+    // specific monument/municipality/province/static page came for that
+    // page, not the map's own landing view - a card advertising an
+    // unrelated monument, floating over a map they may not even look at
+    // this visit, doesn't belong there.
+    if (!hasDeepLink) initPictureOfTheWeek();
     if (requestedId && recordsById.has(requestedId)) {
       selectMonument(recordsById.get(requestedId), { flyTo: true, updateUrl: false });
     } else if (requestedMuni) {

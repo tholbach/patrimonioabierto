@@ -904,6 +904,104 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
 .filter-row.unchecked .filter-row-name,
 .filter-row.unchecked .filter-row-count { opacity: 0.5; }
 
+/* Picture of the week - docked flush to the map's own bottom edge, full
+   width, no rounded corners/gap floating it over the map: a shelf that's
+   clearly part of the map chrome, not a card that landed adrift in open
+   space (that first version - a rounded floating card centered in empty
+   map area - read as lost/arbitrary; anchoring to the edge fixes that).
+   Desktop-only: on mobile the map is too cramped for a docked strip, and
+   the swipeable gallery already covers "surface a good photo" there.
+   POTW_STRIP_HEIGHT below (116px) is echoed in the desktop-only block
+   further down that lifts the zoom control/attribution/shuffle/locate/
+   filter buttons clear of this strip - keep both in sync if it changes. */
+#potw {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 500;
+  height: 116px;
+  display: flex;
+  align-items: center;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 -4px 16px rgba(0,0,0,0.15);
+  cursor: pointer;
+}
+#potw:hover { background: rgba(255,255,255,0.98); }
+#potw[hidden] { display: none; }
+#potw img { display: block; width: 168px; height: 116px; object-fit: cover; flex-shrink: 0; }
+#potw-info { padding: 0 16px; overflow: hidden; }
+#potw-label {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 0.4px;
+  color: var(--cyl-purple);
+}
+#potw-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--ink);
+  margin-top: 3px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#potw-credit {
+  font-size: 11.5px;
+  color: var(--ink-soft);
+  margin-top: 5px;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+#potw-credit a { color: var(--ink-soft); }
+#potw-credit:empty { display: none; }
+#potw-cta {
+  font-size: 12.5px;
+  font-weight: 600;
+  color: var(--cyl-purple);
+  margin-top: 8px;
+}
+#potw:hover #potw-cta { text-decoration: underline; }
+#potw-close {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  z-index: 1;
+  width: 22px;
+  height: 22px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(0,0,0,0.35);
+  color: white;
+  font-size: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+}
+#potw-close:hover { background: rgba(0,0,0,0.55); }
+@media (max-width: 768px) {
+  #potw { display: none; }
+}
+/* Lift the map's own bottom-anchored chrome (Leaflet's zoom control +
+   attribution share the .leaflet-bottom corner containers) and our own
+   button stack clear of the 116px strip above - only while #map-wrap
+   actually carries .potw-visible (toggled in app.js alongside #potw's own
+   hidden state), so once the strip is dismissed everything settles back
+   down instead of leaving a gap of bare map beneath it. Desktop-only,
+   matching #potw's own breakpoint - mobile (where the strip never shows,
+   so the class is never added) needs no override either way. */
+@media (min-width: 769px) {
+  #map-wrap.potw-visible .leaflet-bottom { bottom: 116px; }
+  #map-wrap.potw-visible #locate-btn { bottom: 140px; }
+  #map-wrap.potw-visible #shuffle-btn { bottom: 194px; }
+  #map-wrap.potw-visible #filter-btn,
+  #map-wrap.potw-visible #filter-panel { bottom: 248px; }
+}
+
 #locate-btn:hover { transform: scale(1.08); background: white; }
 #locate-btn.locating { animation: pulse 1s ease-in-out infinite; }
 @keyframes pulse {

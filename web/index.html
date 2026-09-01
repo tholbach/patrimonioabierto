@@ -102,6 +102,14 @@
         </div>
         <div id="filter-list"></div>
       </div>
+
+      <!-- Desktop-only (hidden <=768px, see style.css) - a rotating
+           highlight card, one photo picked deterministically per ISO week
+           from web/data/picture_of_the_week.json (see find_good_pictures.py)
+           so it changes weekly with no server/build step involved, and
+           stays identical for every visitor that same week. Hidden
+           entirely (not just empty) whenever that pool is empty. -->
+      <div id="potw" hidden></div>
     </div>
 
     <aside id="panel">
