@@ -9564,11 +9564,11 @@
     "municipality_ine_code_p772": "24158",
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=5496",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q43140994",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Campanario%20de%20Callejo%20de%20Ordas.jpg"
   },
   {
     "jcyl_id": 5517,
@@ -9836,11 +9836,11 @@
     "municipality_ine_code_p772": "24196",
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=5697",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q5654649",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Vega%20de%20Espinareda%2003%20Abadia%20San%20Andres%20by-dpc.jpg"
   },
   {
     "jcyl_id": 5720,
@@ -10910,11 +10910,11 @@
     "municipality_ine_code_p772": "34027",
     "province": "Palencia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=6586",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q5654649",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Vega%20de%20Espinareda%2003%20Abadia%20San%20Andres%20by-dpc.jpg"
   },
   {
     "jcyl_id": 6605,
@@ -13834,11 +13834,11 @@
     "municipality_ine_code_p772": "37108",
     "province": "Salamanca",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=9093",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q115680095",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Iglesia%20de%20Coca%20de%20Alba.JPG"
   },
   {
     "jcyl_id": 9102,
@@ -13919,11 +13919,11 @@
     "municipality_ine_code_p772": "37223",
     "province": "Salamanca",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=9133",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q427907",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Linea%20La%20Fregeneda%20-%20Ruta%20de%20los%20tuneles%20-%20Jose%20Antonio%20Gil%20Martinez.jpg"
   },
   {
     "jcyl_id": 9145,
@@ -14956,11 +14956,11 @@
     "municipality_ine_code_p772": "37274",
     "province": "Salamanca",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=9978",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q5911235",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Salamanca.%20San%20Polo.jpg"
   },
   {
     "jcyl_id": 9990,
@@ -32662,11 +32662,11 @@
     "municipality_ine_code_p772": "42173",
     "province": "Soria",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=812654",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q5796503",
+    "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
-    "image_url": null
+    "has_wikidata_image": true,
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Fachadacasinoamistadnumancia2012.JPG"
   },
   {
     "jcyl_id": 813573,
