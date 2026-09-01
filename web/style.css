@@ -398,6 +398,11 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
   font-size: 110px;
   line-height: 1;
   opacity: 0.28;
+  /* Most emoji glyphs render with a bit of extra right-side bearing inside
+     their own character cell, so a flexbox-centered box still reads as
+     slightly left-of-center - a small rightward nudge, in em so it scales
+     with font-size across breakpoints, corrects for that. */
+  transform: translateX(0.06em);
   pointer-events: none;
 }
 .hero-fallback::before {
@@ -407,6 +412,14 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
   inset: 0;
   background: radial-gradient(circle at 25% 20%, rgba(255,255,255,0.12), transparent 55%);
 }
+/* Shorter than a real photo hero: pages that only ever show this icon
+   placeholder (About/Contribute/Stats/menu, or a monument with no photo
+   anywhere) don't need as much vertical space as an actual Commons photo,
+   which stays at its own full size (.hero's own height/aspect-ratio rules,
+   untouched) - this only overrides the fallback case, same specificity as
+   .hero so it needs to come after it in source order to win. */
+.hero-fallback { height: 180px; }
+.hero-fallback .hero-placeholder-icon { font-size: 78px; }
 .hero a { display: block; height: 100%; position: relative; }
 .hero-img {
   position: relative;
@@ -438,6 +451,36 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
 }
 .hero-portrait .hero-img { object-fit: contain; background: transparent; }
 .hero-portrait .hero-img-bg { display: block; }
+
+/* The neighbor photo peeking in from off-screen while wireHeroSwipe() in
+   app.js is live-tracking a horizontal drag - mirrors #main-image-link's
+   own bg+fg pair (.hero-img-bg/.hero-img) so a portrait photo is already
+   letterboxed with its blurred backdrop *during* the drag, not just once
+   goToIndex() commits the swap and applyHeroOrientation() takes over for
+   real. .hero-drag-preview is the wrapper the JS transforms as one unit -
+   sized/positioned exactly like #main-image-link so it tiles edge-to-edge
+   with it as both get dragged; z-index 1 on the wrapper keeps the whole
+   thing under .hero-scrim (2) as it slides past the title/gradient. */
+.hero-drag-preview {
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  pointer-events: none;
+}
+.hero-drag-preview-bg,
+.hero-drag-preview-img {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+.hero-drag-preview-bg {
+  display: none; /* shown only once wireHeroSwipe()'s decideOrientation() finds this preview is a portrait photo */
+  filter: blur(28px) brightness(0.55) saturate(1.15);
+  transform: scale(1.15); /* same over-scale as .hero-img-bg - the blur softens past its own edges otherwise */
+}
+.hero-drag-preview-img.portrait { object-fit: contain; background: transparent; }
 
 .hero-scrim {
   position: absolute;
@@ -1074,6 +1117,8 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
   .hero-scrim { padding: 48px 28px 22px; }
   .hero-kicker { font-size: 13px; }
   .hero-title { font-size: 30px; }
+  .hero-fallback { height: 200px; }
+  .hero-fallback .hero-placeholder-icon { font-size: 92px; }
 
   .panel-body { padding: 26px 30px 34px; }
   .panel-body .meta { font-size: 14px; }
@@ -1112,5 +1157,10 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
   .hero { height: auto; aspect-ratio: 3 / 2; }
   .hero-placeholder-icon { font-size: 170px; }
   .hero-title { font-size: 34px; }
+  /* Real photos scale up with the wider panel via aspect-ratio above - the
+     icon placeholder shouldn't grow the same way, it's not a photo with a
+     "bigger is better" case for it. Back to a fixed, modest height. */
+  .hero-fallback { height: 200px; aspect-ratio: auto; }
+  .hero-fallback .hero-placeholder-icon { font-size: 100px; }
 }
 

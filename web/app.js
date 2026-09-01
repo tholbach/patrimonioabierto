@@ -392,6 +392,19 @@ function closePanel() {
 
 document.getElementById('panel-close').addEventListener('click', closePanel);
 
+// Every panel-open path (selectMonument(), showMunicipalityPanel(), ...)
+// pairs its openPanel() call with a history.pushState(), so the browser's/
+// OS's own back button or swipe-back gesture already lands on the right
+// history entry - it just did nothing *visible* before this, since nothing
+// was listening for popstate. That read as most broken on mobile, where the
+// panel is a bottom sheet leaving the map visible above it (see the 768px
+// #panel CSS): back button, panel just sits there. Mirror the panel's own
+// close button exactly - fully closed, back to the plain map - rather than
+// trying to restore whatever panel (if any) was open before this one.
+window.addEventListener('popstate', () => {
+  if (panelEl.classList.contains('open')) closePanel();
+});
+
 // --- Wikimedia API calls ----------------------------------------------------
 
 async function fetchWikidataEntity(qid) {
@@ -403,6 +416,13 @@ async function fetchWikidataEntity(qid) {
 async function fetchWikipediaSummary(lang, title) {
   const resp = await fetch(`https://${lang}.wikipedia.org/api/rest_v1/page/summary/${encodeURIComponent(title)}`);
   return resp.ok ? resp.json() : null;
+}
+
+// Commons' Special:FilePath redirects straight to a rendered thumbnail of
+// any width, keyed only by filename - no API call needed to know a photo's
+// URL up front, which is what makes preloadNeighbors() below possible.
+function commonsThumbUrl(filename, width) {
+  return `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(filename)}?width=${width}`;
 }
 
 // License/author + a direct link to the File: page for one Commons filename.
@@ -417,12 +437,27 @@ async function fetchImageMeta(filename) {
   const meta = page?.imageinfo?.[0]?.extmetadata || {};
   return {
     filename,
-    thumbUrl: `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(filename)}?width=500`,
+    thumbUrl: commonsThumbUrl(filename, 500),
     pageUrl: `https://commons.wikimedia.org/wiki/File:${encodeURIComponent(filename)}`,
     artistHtml: meta.Artist?.value || null,
     license: meta.LicenseShortName?.value || null,
     licenseUrl: meta.LicenseUrl?.value || null,
   };
+}
+
+// Fires off a plain Image() fetch for both of `index`'s neighbors, in the
+// exact size (width=500) the hero itself displays - matching the URL
+// exactly is what lets the browser's own HTTP cache serve goToIndex()'s
+// later mainImageEl.src= from memory instead of hitting the network. Both
+// directions, since a swipe can go either way; out-of-range neighbors (the
+// ends of the gallery) are just skipped. Nothing to await - the point is
+// to let these fetches run in the background while the current photo sits
+// on screen, not to block on them.
+function preloadNeighbors(files, index) {
+  for (const i of [index - 1, index + 1]) {
+    if (i < 0 || i >= files.length) continue;
+    new Image().src = commonsThumbUrl(files[i], 500);
+  }
 }
 
 // Other photos in the monument's Commons category, if it has one (P373) -
@@ -711,35 +746,167 @@ function updateHeroDots(index, total) {
 // fresh panel render (the .hero element persists across goToIndex() calls,
 // which only patch its child <img> src attributes, not recreate it - no
 // need to re-wire on every swipe).
+//
+// Live-tracks the finger rather than just animating on release: the
+// dragged-from photo (#main-image-link, which carries both #main-image and
+// its portrait backdrop along as its children) and a plain preview clone of
+// the neighbor it's revealing both move 1:1 with touchmove, the same way a
+// native photo swipe does. commonsThumbUrl() (no API call needed - see its
+// own comment) is what makes creating that preview mid-gesture cheap, and
+// preloadNeighbors() already has its image sitting in the browser's cache
+// most of the time.
 function wireHeroSwipe() {
   const hero = panelContentEl.querySelector('.hero');
   if (!hero) return;
-  const SWIPE_THRESHOLD_PX = 50;
+  const COMMIT_THRESHOLD_PX = 50; // drag past this far to commit to the next/prev photo; short of it, snap back
+  const SETTLE_MS = 240; // release-to-rest animation length - kept in one place so the CSS and the cleanup timeout below can't drift apart
+  const EDGE_RESISTANCE = 3; // divides the drag at the first/last photo, where there's no neighbor to reveal - rubber-band, not a dead stop
+
   let startX = null;
   let startY = null;
+  let dx = 0;
+  let axis = null; // null until the first move past a small deadzone decides it: 'x' (ours) or 'y' (let the page scroll, untouched)
+  let previewDirection = 0; // +1 dragging left (next photo enters from the right), -1 dragging right (previous enters from the left)
+  let previewEl = null;
+  let settleTimer = null;
+
+  const currentEl = () => document.getElementById('main-image-link') || document.getElementById('main-image');
+
+  // Jumps straight to the resting state with no animation - used both by
+  // the normal end-of-settle cleanup and to recover instantly if a new
+  // gesture starts while a previous one is still mid-settle, so state never
+  // has two drags' worth of leftover transforms fighting each other.
+  function resetImmediately() {
+    clearTimeout(settleTimer);
+    settleTimer = null;
+    previewEl?.remove();
+    previewEl = null;
+    const el = currentEl();
+    if (el) {
+      el.style.transition = 'none';
+      el.style.transform = '';
+    }
+  }
 
   hero.addEventListener(
     'touchstart',
     (e) => {
       if (currentGalleryState.files.length < 2) return;
+      resetImmediately(); // in case a previous drag's release animation was still settling
       startX = e.touches[0].clientX;
       startY = e.touches[0].clientY;
+      dx = 0;
+      axis = null;
     },
     { passive: true }
   );
-  hero.addEventListener('touchend', (e) => {
+
+  hero.addEventListener(
+    'touchmove',
+    (e) => {
+      if (startX === null) return;
+      dx = e.touches[0].clientX - startX;
+      const dy = e.touches[0].clientY - startY;
+
+      if (axis === null) {
+        // A few px of deadzone before committing to an axis, so a slightly
+        // wobbly finger at the very start of a vertical scroll doesn't get
+        // mistaken for a horizontal swipe (or vice versa).
+        if (Math.abs(dx) < 6 && Math.abs(dy) < 6) return;
+        axis = Math.abs(dx) > Math.abs(dy) ? 'x' : 'y';
+        if (axis !== 'x') return; // vertical: leave it to the page/panel's own scrolling, untouched from here on
+        const { index, files } = currentGalleryState;
+        previewDirection = dx < 0 ? 1 : -1;
+        const previewIndex = index + previewDirection;
+        if (previewIndex >= 0 && previewIndex < files.length) {
+          // Mirrors #main-image-link's own bg+fg pair (see the CSS) - the
+          // wrapper is what gets dragged, its two <img> children just ride
+          // along untransformed themselves.
+          previewEl = document.createElement('div');
+          previewEl.className = 'hero-drag-preview';
+          const previewSrc = commonsThumbUrl(files[previewIndex], 500);
+          const previewBg = document.createElement('img');
+          previewBg.className = 'hero-drag-preview-bg';
+          previewBg.alt = '';
+          previewBg.src = previewSrc;
+          const previewFg = document.createElement('img');
+          previewFg.className = 'hero-drag-preview-img';
+          previewFg.alt = '';
+          previewFg.src = previewSrc;
+          previewEl.append(previewBg, previewFg);
+          hero.insertBefore(previewEl, hero.querySelector('.hero-scrim'));
+
+          // Same check applyHeroOrientation() runs for the settled photo,
+          // aimed at this temporary clone instead: preloadNeighbors() has
+          // usually already pulled previewSrc into cache by the time you
+          // actually swipe, so this often resolves before the preview is
+          // even visible - fitted with its blurred backdrop from the very
+          // first frame, instead of showing full-bleed-cropped throughout
+          // the drag and only popping to fitted once the swap commits.
+          const decideOrientation = () => {
+            const portrait = previewFg.naturalHeight > previewFg.naturalWidth;
+            previewFg.classList.toggle('portrait', portrait);
+            previewBg.style.display = portrait ? 'block' : 'none';
+          };
+          if (previewFg.complete && previewFg.naturalWidth) decideOrientation();
+          else previewFg.addEventListener('load', decideOrientation, { once: true });
+        }
+        const el = currentEl();
+        if (el) el.style.transition = 'none'; // direct 1:1 tracking below, no easing lag behind the finger
+      }
+      if (axis !== 'x') return;
+      e.preventDefault(); // committed to a horizontal swipe now - don't also let the page interpret it as anything else
+
+      const heroWidth = hero.getBoundingClientRect().width || 1;
+      const draggedPx = previewEl ? dx : dx / EDGE_RESISTANCE;
+      const el = currentEl();
+      if (el) el.style.transform = `translateX(${draggedPx}px)`;
+      if (previewEl) previewEl.style.transform = `translateX(${previewDirection * heroWidth + dx}px)`;
+    },
+    { passive: false }
+  );
+
+  function endDrag() {
     if (startX === null) return;
-    const dx = e.changedTouches[0].clientX - startX;
-    const dy = e.changedTouches[0].clientY - startY;
     startX = null;
-    // Ignore short taps and mostly-vertical drags (those are just the
-    // panel/page scrolling, not a swipe) rather than misfiring on them.
-    if (Math.abs(dx) < SWIPE_THRESHOLD_PX || Math.abs(dx) < Math.abs(dy)) return;
+    if (axis !== 'x') {
+      axis = null;
+      return;
+    }
+    axis = null;
+
     const { index, files } = currentGalleryState;
-    // No wraparound at the ends - out-of-range goToIndex() calls are just
-    // no-ops, same as clicking past the edge of the gallery would be.
-    goToIndex(dx < 0 ? index + 1 : index - 1);
-  });
+    const targetIndex = index + previewDirection;
+    const committed = !!previewEl && Math.abs(dx) >= COMMIT_THRESHOLD_PX && targetIndex >= 0 && targetIndex < files.length;
+    const heroWidth = hero.getBoundingClientRect().width || 1;
+
+    const el = currentEl();
+    if (el) {
+      el.style.transition = `transform ${SETTLE_MS}ms ease`;
+      el.style.transform = `translateX(${committed ? previewDirection * -heroWidth : 0}px)`;
+    }
+    if (previewEl) {
+      previewEl.style.transition = `transform ${SETTLE_MS}ms ease`;
+      previewEl.style.transform = `translateX(${committed ? 0 : previewDirection * heroWidth}px)`;
+    }
+
+    settleTimer = setTimeout(() => {
+      settleTimer = null;
+      previewEl?.remove();
+      previewEl = null;
+      if (el) {
+        el.style.transition = '';
+        el.style.transform = '';
+      }
+      // No wraparound at the ends - out-of-range goToIndex() calls are just
+      // no-ops, same as clicking past the edge of the gallery would be (not
+      // that this path can reach one: `committed` already checked range).
+      if (committed) goToIndex(targetIndex);
+    }, SETTLE_MS);
+  }
+
+  hero.addEventListener('touchend', endDrag);
+  hero.addEventListener('touchcancel', endDrag);
 }
 
 // Portrait photos (naturally taller than wide) get letterboxed with a
@@ -799,23 +966,39 @@ async function goToIndex(index) {
   const mainImageLinkEl = document.getElementById('main-image-link');
   const captionEl = document.getElementById('image-caption');
   if (!mainImageEl) return;
+
+  // The photo's own URL is deterministic from the filename (commonsThumbUrl()
+  // needs no API round-trip) - and preloadNeighbors() already kicked off
+  // this exact fetch, at this exact size, back when the *previous* photo
+  // went up. So the swap itself doesn't need to wait on fetchImageMeta()
+  // below at all: painting here comes straight out of the browser's cache
+  // instead of stalling on a Commons API call just to re-derive a URL we
+  // already knew, which used to make every swipe visibly hang until that
+  // call resolved.
+  const thumbUrl = commonsThumbUrl(files[index], 500);
+  mainImageEl.src = thumbUrl;
+  if (mainImageBgEl) mainImageBgEl.src = thumbUrl;
+  applyHeroOrientation();
+
+  currentGalleryState.index = index;
+  updateHeroDots(index, files.length);
+  preloadNeighbors(files, index);
+
+  const galleryEl = panelContentEl.querySelector('.gallery');
+  if (galleryEl) {
+    galleryEl.outerHTML = renderGallery(files, index, currentGalleryState.commonsCategory);
+    wireGalleryClicks();
+  }
+
+  // License/author + the File: page link still need the API call - fetch
+  // it in the background and patch the caption in once it lands, without
+  // holding up the photo swap above.
   if (captionEl) captionEl.textContent = t('loading');
   try {
     const meta = await fetchImageMeta(files[index]);
-    mainImageEl.src = meta.thumbUrl;
-    if (mainImageBgEl) mainImageBgEl.src = meta.thumbUrl;
+    if (currentGalleryState.index !== index) return; // swiped elsewhere before this landed
     if (mainImageLinkEl) mainImageLinkEl.href = meta.pageUrl;
     if (captionEl) captionEl.innerHTML = licenseLineHtml(meta);
-    applyHeroOrientation();
-
-    currentGalleryState.index = index;
-    updateHeroDots(index, files.length);
-
-    const galleryEl = panelContentEl.querySelector('.gallery');
-    if (galleryEl) {
-      galleryEl.outerHTML = renderGallery(files, index, currentGalleryState.commonsCategory);
-      wireGalleryClicks();
-    }
   } catch (err) {
     if (captionEl) captionEl.textContent = '';
   }
@@ -942,6 +1125,7 @@ async function selectMonument(record, { flyTo = false, updateUrl = true } = {}) 
     }
     const files = mainImageMeta ? [mainImageMeta.filename, ...galleryFiles] : [];
     currentGalleryState = { files, index: 0, commonsCategory };
+    preloadNeighbors(files, 0); // get photo #2 (if any) in flight before the first swipe even happens
 
     // Caption (and the upload CTA, when there's no photo at all) come first
     // - both are about the photo slot directly above them, so they belong
@@ -1550,6 +1734,25 @@ function initPictureOfTheWeek() {
 // needs its own listener on `markers`, the cluster group.
 map.on('click', dismissPotw);
 markers.on('click', dismissPotw);
+
+// Mobile only: the panel is a bottom sheet that leaves the map visible
+// above it (see the 768px #panel CSS), so tapping that visible strip of map
+// while a monument/municipality/etc. panel is open should feel like tapping
+// the panel's own close button - back to the plain map. Desktop's panel
+// sits beside the map instead of over it, so this would just be annoying
+// there.
+//
+// Guard on the click's real target, not just "a panel is open": marker
+// clicks bubble up to this same map click event (see the comment above
+// dismissPotw's bindings), and closing right back down would undo the
+// panel a marker tap just opened or switched to. Cluster-icon clicks don't
+// bubble here at all (same as for dismissPotw), so they're a non-issue.
+map.on('click', (e) => {
+  if (window.innerWidth > 768) return;
+  if (!panelEl.classList.contains('open')) return;
+  if (e.originalEvent.target.closest('.leaflet-marker-icon')) return;
+  closePanel();
+});
 
 const locateBtn = document.getElementById('locate-btn');
 let userLocationMarker = null;
