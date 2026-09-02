@@ -1272,6 +1272,16 @@ async function fetchHistory() {
   return resp.ok ? resp.json() : [];
 }
 
+// photo_stats.json only exists once someone has manually run `make
+// photo-stats` at least once (see fetch_commons_photo_counts.py's own
+// comment on why that's not part of the routine fetch/build - several
+// hundred Commons API calls, deliberately not paid on every refresh) - a
+// 404 here just means nobody has yet, not a broken build.
+async function fetchPhotoStats() {
+  const resp = await fetch('data/photo_stats.json');
+  return resp.ok ? resp.json() : null;
+}
+
 // Hand-rolled inline SVG line chart - no charting library needed for two
 // simple series. Y-axis is scaled to the current total, not the max of the
 // series, so the lines' distance from the top visually reads as "how far
@@ -1481,11 +1491,33 @@ async function showStatsPanel({ updateUrl = true } = {}) {
   wirePageNav();
   if (updateUrl) history.pushState(null, '', '#stats');
 
-  const historyData = await fetchHistory();
+  const [historyData, photoStats] = await Promise.all([fetchHistory(), fetchPhotoStats()]);
   const loadingEl = panelContentEl.querySelector('.loading');
   if (loadingEl) loadingEl.outerHTML = renderHistoryChart(historyData, total);
   const chartWrap = panelContentEl.querySelector('.stats-chart-wrap');
   if (chartWrap) wireHistoryChart(chartWrap, historyData, total);
+
+  // Absent entirely (not just empty) until someone's manually run `make
+  // photo-stats` at least once - see fetchPhotoStats()'s own comment.
+  if (photoStats) {
+    const statsNumbersEl = panelContentEl.querySelector('.stats-numbers');
+    if (statsNumbersEl) statsNumbersEl.insertAdjacentHTML('afterend', renderPhotoStats(photoStats));
+  }
+}
+
+// The Stats page's three .stat-box figures all come from every `make
+// build` - this one doesn't (see fetch_commons_photo_counts.py), so it
+// gets its own separate, clearly-dated callout rather than blending in as
+// a fourth equal .stat-box that implies the same freshness/rigor.
+function renderPhotoStats(photoStats) {
+  const asOfDate = new Date(photoStats.generated_at).toLocaleDateString(currentLang);
+  return `
+    <div class="stats-photos">
+      <div class="stats-photos-value">${photoStats.total_photos.toLocaleString(currentLang)}</div>
+      <div class="stats-photos-label">${t('stats.photos_label')}</div>
+      <div class="stats-photos-note">${t('stats.photos_note', photoStats.monuments_with_gallery.toLocaleString(currentLang), asOfDate)}</div>
+    </div>
+  `;
 }
 
 function showAboutPanel({ updateUrl = true } = {}) {
