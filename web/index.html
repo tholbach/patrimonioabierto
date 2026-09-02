@@ -47,7 +47,11 @@
   </div>
 
   <header id="topbar">
-    <span class="brand"><img src="assets/logo.png" alt="" id="logo-mark">CyLinked</span>
+    <!-- Real link (not a <span>/<button>) - see wireSpaLink() in app.js:
+         hovering shows the URL, right-click/ctrl-click/middle-click all do
+         a real navigation back to the plain map, and a normal click gets
+         the instant in-app close instead of a reload. -->
+    <a class="brand" href="." id="brand-link"><img src="assets/logo.png" alt="" id="logo-mark">CyLinked</a>
 
     <!-- Mobile only (see CSS) - collapses #search-wrap to just this icon
          until tapped, so the default header stays one compact row instead

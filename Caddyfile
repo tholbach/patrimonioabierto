@@ -4,5 +4,11 @@
 ## site block to add there.
 :80 {
 	root * /srv
+	# web/data/*.json is the bulk of what a first visit downloads
+	# (~2.1MB combined for cyl_monuments_wikidata.json/municipalities.json/
+	# provinces.json/meta.json) - almost all of that is whitespace/
+	# repetition gzip crushes (measured ~89% smaller compressed). Without
+	# this, file_server was serving everything uncompressed.
+	encode zstd gzip
 	file_server
 }
