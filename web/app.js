@@ -333,20 +333,25 @@ function showMapFilteredByStatus(status) {
   closePanel();
 }
 
-// Wires a real <a href="?status=..."> (see e.g. showContributePanel()) so
-// it behaves like an actual link - hovering shows the URL, and
-// right-click/copy-link/ctrl-or-cmd-click/middle-click all do a real
-// navigation, landing on the map already filtered since initCategoryFilter()
-// / initStatusFilter() read ?status= (and ?cats=) from the URL on load the
-// same way a shared monument/municipality/province link does. A plain left
-// click gets the instant in-app transition instead of a full reload of the
-// ~2MB dataset.
-function wireFilterLink(el, status) {
+// Wires a real <a href="..."> so it behaves like an actual link - hovering
+// shows the URL, and right-click/copy-link/ctrl-or-cmd-click/middle-click
+// all do a real navigation/reload, landing in the right place since that's
+// exactly what the href itself points at. A plain left click instead runs
+// onNavigate() for the instant in-app transition, skipping the reload.
+function wireSpaLink(el, onNavigate) {
   el.addEventListener('click', (e) => {
     if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     e.preventDefault();
-    showMapFilteredByStatus(status);
+    onNavigate();
   });
+}
+
+// href="?status=..." (see e.g. showContributePanel()) lands on the map
+// already filtered on a real navigation, since initCategoryFilter() /
+// initStatusFilter() read ?status= (and ?cats=) from the URL on load, the
+// same way a shared monument/municipality/province link does.
+function wireFilterLink(el, status) {
+  wireSpaLink(el, () => showMapFilteredByStatus(status));
 }
 
 function applyFilters() {
@@ -1835,6 +1840,14 @@ function showMenuPanel() {
 }
 
 document.getElementById('menu-btn').addEventListener('click', showMenuPanel);
+
+// Logo/wordmark - the usual "click the brand to go home" convention.
+// closePanel() is the plain map with nothing open, exactly what "home"
+// means here, so this is a no-op (correctly - no stray history entry)
+// when nothing's open already.
+wireSpaLink(document.getElementById('brand-link'), () => {
+  if (panelEl.classList.contains('open')) closePanel();
+});
 
 // --- Geolocation ---------------------------------------------------------
 

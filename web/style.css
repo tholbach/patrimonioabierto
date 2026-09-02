@@ -46,7 +46,12 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
   font-weight: 600;
   font-size: 20px;
   letter-spacing: 0.2px;
+  color: inherit; /* now a real <a> (see index.html) - undo the default link blue/underline, it's still just header text */
+  text-decoration: none;
+  opacity: 1;
+  transition: opacity 0.15s ease;
 }
+#topbar .brand:hover { opacity: 0.85; }
 #logo-mark { height: 42px; width: auto; display: block; }
 
 /* --- Loading screen (first paint - see index.html comment) ------------ */
