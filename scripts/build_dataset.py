@@ -21,6 +21,8 @@ OUT_PATH = os.path.join(WEB_DATA_DIR, "cyl_monuments_wikidata.json")
 MUNICIPALITIES_PATH = os.path.join(WEB_DATA_DIR, "municipalities.json")
 PROVINCES_PATH = os.path.join(WEB_DATA_DIR, "provinces.json")
 HISTORY_PATH = os.path.join(WEB_DATA_DIR, "history.json")
+PHOTO_COUNTS_RAW_PATH = os.path.join(RAW_DIR, "commons_photo_counts.json")
+PHOTO_STATS_PATH = os.path.join(WEB_DATA_DIR, "photo_stats.json")
 
 SMALL_WORDS = {"de", "del", "la", "las", "el", "los", "y", "a", "en"}
 
@@ -166,6 +168,43 @@ def append_history_snapshot(records):
     print(f"history.json: {len(history)} snapshot(s), latest: {snapshot}")
 
 
+def write_photo_stats(records):
+    """web/data/photo_stats.json - how many actual photos CyLinked makes
+    browsable, not just how many monuments have "a" photo. Entirely
+    optional: fetch_commons_photo_counts.py is a separate, manually-run
+    script (several hundred Commons API calls - not something to re-pay on
+    every routine `make build`), so its raw output may be stale or simply
+    not exist yet. Either is fine - this just skips writing the file
+    rather than failing the whole build, and the Stats page already treats
+    a missing photo_stats.json as "nothing to show here yet".
+    """
+    if not os.path.exists(PHOTO_COUNTS_RAW_PATH):
+        print("photo_stats.json: skipped (no data/raw/commons_photo_counts.json - run `make photo-stats` first)")
+        return
+
+    photo_raw = json.load(open(PHOTO_COUNTS_RAW_PATH))
+    item_category = photo_raw["item_category"]
+    category_files = photo_raw["category_files"]
+
+    used_categories = set()
+    monuments_with_gallery = 0
+    for record in records:
+        qids = record["wikidata_qid"]
+        qids = qids if isinstance(qids, list) else ([qids] if qids else [])
+        category = next((item_category[q] for q in qids if q in item_category), None)
+        if category:
+            used_categories.add(category)
+            monuments_with_gallery += 1
+
+    stats = {
+        "generated_at": photo_raw["generated_at"],
+        "total_photos": sum(category_files.get(c, 0) for c in used_categories),
+        "monuments_with_gallery": monuments_with_gallery,
+    }
+    json.dump(stats, open(PHOTO_STATS_PATH, "w"))
+    print(f"photo_stats.json: {stats}")
+
+
 def main():
     monuments = json.load(open(os.path.join(RAW_DIR, "monuments.json")))["features"]
     munis_geojson = json.load(open(os.path.join(RAW_DIR, "municipios.json")))
@@ -240,6 +279,8 @@ def main():
 
     records.sort(key=lambda r: r["jcyl_id"])
     json.dump(records, open(OUT_PATH, "w"), ensure_ascii=False, indent=2)
+
+    write_photo_stats(records)
 
     municipalities, provinces = build_geo_indexes(indexed_munis, records)
     json.dump(municipalities, open(MUNICIPALITIES_PATH, "w"), ensure_ascii=False, indent=2)
