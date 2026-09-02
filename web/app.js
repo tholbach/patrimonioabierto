@@ -179,25 +179,35 @@ const filterListEl = document.getElementById('filter-list');
 const filterStatusListEl = document.getElementById('filter-status-list');
 let categoriesWithCounts = []; // [{ category, count }], sorted most common first, filled by initCategoryFilter()
 
-// 'unlinked' and 'no_photo' are deliberately disjoint (no_photo excludes
-// unlinked records, which trivially have no photo too) rather than
-// no_photo being the superset it technically could be - they map 1:1 onto
-// the two contribution steps in the "Cómo contribuir" panel (link/create
-// the Wikidata item, vs add a photo to an item that already exists), so
-// each checkbox corresponds to one concrete, distinct task a visitor could
-// go do, instead of two overlapping ways of saying "incomplete".
+// 'no_photo' and 'no_wikipedia' both deliberately exclude unlinked records
+// (which trivially have neither too) rather than being the superset they
+// technically could be - each maps 1:1 onto one of the concrete
+// contribution steps in the "Cómo contribuir" panel (add a photo / write a
+// Wikipedia article for an item that already exists), so a checkbox
+// corresponds to one distinct task a visitor could go do, not an
+// overlapping way of saying "incomplete". They're NOT disjoint from *each
+// other* though, on purpose - a linked item can genuinely lack both a
+// photo and an article at once, and should show up under both. 'unlinked'
+// itself no longer has a matching Contribute step (CyL's own catalog is
+// expected to be fully linked by the time these pages ship) but stays as a
+// filter in its own right.
 function isUnlinked(record) {
   return !record.wikidata_qid;
 }
 function isLinkedNoPhoto(record) {
   return !!record.wikidata_qid && !record.has_wikidata_image;
 }
-const STATUS_MATCHERS = { unlinked: isUnlinked, no_photo: isLinkedNoPhoto };
+function isLinkedNoWikipedia(record) {
+  return !!record.wikidata_qid && !record.has_wikipedia_article;
+}
+const STATUS_MATCHERS = { unlinked: isUnlinked, no_photo: isLinkedNoPhoto, no_wikipedia: isLinkedNoWikipedia };
+const STATUS_ICONS = { unlinked: '🔗', no_photo: '🖼️', no_wikipedia: '📖' };
 
 function initStatusFilter() {
   const counts = {
     unlinked: allRecords.filter(isUnlinked).length,
     no_photo: allRecords.filter(isLinkedNoPhoto).length,
+    no_wikipedia: allRecords.filter(isLinkedNoWikipedia).length,
   };
   // Seed from the URL (?status=unlinked,no_photo) if present, so a
   // reloaded or shared link reopens with the same filter active - see
@@ -208,13 +218,13 @@ function initStatusFilter() {
       if (STATUS_MATCHERS[s]) selectedStatuses.add(s);
     }
   }
-  filterStatusListEl.innerHTML = ['unlinked', 'no_photo']
+  filterStatusListEl.innerHTML = Object.keys(STATUS_MATCHERS)
     .map((status) => {
       const checked = selectedStatuses.has(status);
       return `
         <label class="filter-row" data-status="${status}">
           <input type="checkbox" ${checked ? 'checked' : ''}>
-          <span class="filter-row-icon">${status === 'unlinked' ? '🔗' : '🖼️'}</span>
+          <span class="filter-row-icon">${STATUS_ICONS[status]}</span>
           <span class="filter-row-name" data-i18n="filter.status_${status}">${t(`filter.status_${status}`)}</span>
           <span class="filter-row-count">${counts[status].toLocaleString(currentLang)}</span>
         </label>
@@ -305,6 +315,40 @@ function setAllCategoryCheckboxes(checked) {
   applyFilters();
 }
 
+// Jumps from a written page (e.g. Contribute's "add photos" section) straight
+// to the map, filtered to exactly one status - every category included, and
+// any status filter that happened to be active before is replaced rather
+// than merged in, so "see items without a photo" always shows exactly that,
+// never an accidental intersection with a filter left on from an earlier
+// visit. Sets both the underlying state AND the (currently closed) filter
+// panel's own checkboxes, same as setAllCategoryCheckboxes() already does
+// for categories - otherwise they'd show stale checked state the next time
+// someone actually opens the filter panel.
+function showMapFilteredByStatus(status) {
+  selectedStatuses = new Set([status]);
+  filterStatusListEl.querySelectorAll('.filter-row').forEach((row) => {
+    row.querySelector('input').checked = row.dataset.status === status;
+  });
+  setAllCategoryCheckboxes(true); // clears any category filter; its own applyFilters() call picks up the status change above too
+  closePanel();
+}
+
+// Wires a real <a href="?status=..."> (see e.g. showContributePanel()) so
+// it behaves like an actual link - hovering shows the URL, and
+// right-click/copy-link/ctrl-or-cmd-click/middle-click all do a real
+// navigation, landing on the map already filtered since initCategoryFilter()
+// / initStatusFilter() read ?status= (and ?cats=) from the URL on load the
+// same way a shared monument/municipality/province link does. A plain left
+// click gets the instant in-app transition instead of a full reload of the
+// ~2MB dataset.
+function wireFilterLink(el, status) {
+  el.addEventListener('click', (e) => {
+    if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    e.preventDefault();
+    showMapFilteredByStatus(status);
+  });
+}
+
 function applyFilters() {
   markers.clearLayers();
   markers.addLayers(
@@ -367,6 +411,15 @@ document.addEventListener('click', (e) => {
 
 const panelEl = document.getElementById('panel');
 const panelContentEl = document.getElementById('panel-content');
+const appEl = document.getElementById('app');
+
+// The "written pages" - About/Contribute/Stats/Privacy/Imprint - replace
+// the map entirely instead of sharing the screen with it (see the
+// #app.page-mode CSS), on both desktop and mobile. Every other panel type
+// (monument/municipality/province/menu) keeps the normal map-side
+// panel/bottom-sheet treatment. Checked against currentPanelState.type,
+// which every show*Panel() function sets before calling openPanel().
+const PAGE_PANEL_TYPES = new Set(['about', 'contribute', 'stats', 'privacy', 'imprint']);
 
 function openPanel() {
   // Every panel-show function sets panelContentEl.innerHTML then calls this
@@ -374,8 +427,16 @@ function openPanel() {
   // from whatever was open before can never leak into a panel that has none.
   currentGalleryState = { files: [], index: 0, commonsCategory: null };
   const wasOpen = panelEl.classList.contains('open');
+  const isPage = PAGE_PANEL_TYPES.has(currentPanelState?.type);
+  const wasPage = appEl.classList.contains('page-mode');
+  appEl.classList.toggle('page-mode', isPage);
   panelEl.classList.add('open');
-  if (!wasOpen) {
+  // The map's container is display:none in page mode, not just resized, so
+  // besides the normal closed->open transition, switching between a page
+  // and a regular map-side panel while the panel stays open the whole time
+  // (e.g. About -> search selects a monument) also needs a fresh
+  // invalidateSize() once the map's own visibility/size has settled.
+  if (!wasOpen || isPage !== wasPage) {
     // Leaflet needs to recompute its size once the layout transition that
     // shrinks/grows #map has actually finished, or tiles render into the
     // wrong area until the next manual pan/zoom.
@@ -385,6 +446,7 @@ function openPanel() {
 
 function closePanel() {
   panelEl.classList.remove('open');
+  appEl.classList.remove('page-mode');
   setTimeout(() => map.invalidateSize(), 260);
   history.pushState(null, '', location.pathname);
   currentPanelState = null;
@@ -1355,6 +1417,44 @@ function wireHistoryChart(wrapEl, historyData, total) {
   wrapEl.addEventListener('touchend', hide);
 }
 
+// --- Rendering: written pages (About / Contribute / Stats / Privacy / Imprint) ---
+//
+// These five - and only these - are PAGE_PANEL_TYPES (see openPanel()):
+// full takeovers with the map hidden, not the usual map-side panel. They
+// share pageNavHtml()'s cross-link row so reading one leads straight into
+// the next.
+
+// activeType gets the .active treatment and a disabled click (see
+// wirePageNav()) - everything else is a plain nav button.
+function pageNavHtml(activeType) {
+  const pages = [
+    ['about', t('nav.about')],
+    ['contribute', t('nav.contribute')],
+    ['stats', t('nav.stats')],
+    ['privacy', t('nav.privacy')],
+    ['imprint', t('nav.imprint')],
+  ];
+  return `<nav class="page-nav">${pages
+    .map(([type, label]) => `<button type="button" class="page-nav-link${type === activeType ? ' active' : ''}" data-page="${type}">${label}</button>`)
+    .join('')}</nav>`;
+}
+
+// Called by every show*Panel() below right after it sets panelContentEl's
+// innerHTML (same spot they already call e.g. wireGalleryClicks() from).
+function wirePageNav() {
+  panelContentEl.querySelectorAll('.page-nav-link[data-page]').forEach((btn) => {
+    btn.addEventListener('click', () => {
+      if (btn.classList.contains('active')) return; // already on this page
+      const page = btn.dataset.page;
+      if (page === 'about') showAboutPanel();
+      else if (page === 'contribute') showContributePanel();
+      else if (page === 'stats') showStatsPanel();
+      else if (page === 'privacy') showPrivacyPanel();
+      else if (page === 'imprint') showImprintPanel();
+    });
+  });
+}
+
 async function showStatsPanel({ updateUrl = true } = {}) {
   currentPanelState = { type: 'stats' };
   const total = allRecords.length;
@@ -1366,6 +1466,7 @@ async function showStatsPanel({ updateUrl = true } = {}) {
   panelContentEl.innerHTML = `
     ${heroBlock({ title: t('stats.title'), placeholderIcon: '📊' })}
     <div class="panel-body">
+      ${pageNavHtml('stats')}
       <div class="extract stats-mission">${t('stats.mission')}</div>
       <div class="stats-numbers">
         <div class="stat-box"><div class="stat-value">${total}</div><div class="stat-label">${t('stats.total')}</div></div>
@@ -1377,6 +1478,7 @@ async function showStatsPanel({ updateUrl = true } = {}) {
     </div>
   `;
   openPanel();
+  wirePageNav();
   if (updateUrl) history.pushState(null, '', '#stats');
 
   const historyData = await fetchHistory();
@@ -1385,8 +1487,6 @@ async function showStatsPanel({ updateUrl = true } = {}) {
   const chartWrap = panelContentEl.querySelector('.stats-chart-wrap');
   if (chartWrap) wireHistoryChart(chartWrap, historyData, total);
 }
-
-// --- Rendering: About / Contribute panels -----------------------------------
 
 function showAboutPanel({ updateUrl = true } = {}) {
   currentPanelState = { type: 'about' };
@@ -1397,8 +1497,15 @@ function showAboutPanel({ updateUrl = true } = {}) {
   panelContentEl.innerHTML = `
     ${heroBlock({ title: t('about.title'), placeholderIcon: 'ℹ️' })}
     <div class="panel-body">
+      ${pageNavHtml('about')}
       <div class="extract">${t('about.intro', linked, total, pct)}</div>
       ${datasetMeta ? `<div class="meta">${t('about.updated', new Date(datasetMeta.generated_at).toLocaleDateString(currentLang))}</div>` : ''}
+      <h3>${t('about.goals.title')}</h3>
+      <ul class="source-list">
+        <li>${t('about.goals.accessible')}</li>
+        <li>${t('about.goals.free_knowledge')}</li>
+        <li>${t('about.goals.participate')}</li>
+      </ul>
       <h3>${t('about.sources.title')}</h3>
       <ul class="source-list">
         <li>${t('about.sources.jcyl')}</li>
@@ -1406,11 +1513,16 @@ function showAboutPanel({ updateUrl = true } = {}) {
         <li>${t('about.sources.commons')}</li>
         <li>${t('about.sources.wikipedia')}</li>
       </ul>
-      <h3>${t('about.methodology.title')}</h3>
-      <div class="extract">${t('about.methodology.body')}</div>
+      <h3>${t('about.tech.title')}</h3>
+      <div class="extract">${t('about.tech.data')}</div>
+      <div class="extract">${t('about.tech.site')}</div>
+      <div class="link-badges">
+        <a class="badge" href="https://github.com/tholbach/cylinked" target="_blank" rel="noopener">${t('about.tech.github')}</a>
+      </div>
     </div>
   `;
   openPanel();
+  wirePageNav();
   if (updateUrl) history.pushState(null, '', '#about');
 }
 
@@ -1420,18 +1532,86 @@ function showContributePanel({ updateUrl = true } = {}) {
   panelContentEl.innerHTML = `
     ${heroBlock({ title: t('contribute.title'), placeholderIcon: '🤝' })}
     <div class="panel-body">
+      ${pageNavHtml('contribute')}
       <div class="extract">${t('contribute.intro')}</div>
-      <h3>${t('contribute.reconcile.title')}</h3>
-      <div class="extract">${t('contribute.reconcile.body')}</div>
       <h3>${t('contribute.photos.title')}</h3>
       <div class="extract">${t('contribute.photos.body')}</div>
       <div class="link-badges">
         <a class="badge wikidata" href="https://commons.wikimedia.org/wiki/Special:UploadWizard" target="_blank" rel="noopener">${t('contribute.upload.button')}</a>
+        <a class="badge" href="${t('contribute.photos.guide_href')}" target="_blank" rel="noopener">${t('contribute.photos.guide_button')}</a>
+        <a class="badge filter-link" id="contribute-see-no-photo" href="?status=no_photo">${t('contribute.photos.see_missing_button')}</a>
+      </div>
+      <h3>${t('contribute.wikipedia.title')}</h3>
+      <div class="extract">${t('contribute.wikipedia.body')}</div>
+      <div class="link-badges">
+        <a class="badge" href="${t('contribute.wikipedia.href')}" target="_blank" rel="noopener">${t('contribute.wikipedia.button')}</a>
+        <a class="badge filter-link" id="contribute-see-no-wikipedia" href="?status=no_wikipedia">${t('contribute.wikipedia.see_missing_button')}</a>
+      </div>
+      <h3>${t('contribute.website.title')}</h3>
+      <div class="extract">${t('contribute.website.body')}</div>
+      <div class="link-badges">
+        <a class="badge" href="https://github.com/tholbach/cylinked" target="_blank" rel="noopener">${t('contribute.website.button')}</a>
       </div>
     </div>
   `;
   openPanel();
+  wirePageNav();
+  wireFilterLink(document.getElementById('contribute-see-no-photo'), 'no_photo');
+  wireFilterLink(document.getElementById('contribute-see-no-wikipedia'), 'no_wikipedia');
   if (updateUrl) history.pushState(null, '', '#contribute');
+}
+
+function showPrivacyPanel({ updateUrl = true } = {}) {
+  currentPanelState = { type: 'privacy' };
+
+  panelContentEl.innerHTML = `
+    ${heroBlock({ title: t('privacy.title'), placeholderIcon: '🔒' })}
+    <div class="panel-body">
+      ${pageNavHtml('privacy')}
+      <div class="extract">${t('privacy.intro')}</div>
+      <h3>${t('privacy.controller.title')}</h3>
+      <div class="extract">${t('privacy.controller.body')}</div>
+      <h3>${t('privacy.data_processed.title')}</h3>
+      <div class="extract">${t('privacy.data_processed.body')}</div>
+      <h3>${t('privacy.local_storage.title')}</h3>
+      <div class="extract">${t('privacy.local_storage.body')}</div>
+      <h3>${t('privacy.external.title')}</h3>
+      <div class="extract">${t('privacy.external.intro')}</div>
+      <ul class="source-list">
+        <li>${t('privacy.external.tiles')}</li>
+        <li>${t('privacy.external.fonts')}</li>
+        <li>${t('privacy.external.wiki')}</li>
+        <li>${t('privacy.external.geolocation')}</li>
+      </ul>
+      <h3>${t('privacy.retention.title')}</h3>
+      <div class="extract">${t('privacy.retention.body')}</div>
+      <h3>${t('privacy.rights.title')}</h3>
+      <div class="extract">${t('privacy.rights.body')}</div>
+      <h3>${t('privacy.changes.title')}</h3>
+      <div class="extract">${t('privacy.changes.body')}</div>
+    </div>
+  `;
+  openPanel();
+  wirePageNav();
+  if (updateUrl) history.pushState(null, '', '#privacy');
+}
+
+// TODO content placeholder - imprint.body is a stand-in until real
+// name/contact/address details are supplied; not meant to ship as-is (see
+// PR/commit description).
+function showImprintPanel({ updateUrl = true } = {}) {
+  currentPanelState = { type: 'imprint' };
+
+  panelContentEl.innerHTML = `
+    ${heroBlock({ title: t('imprint.title'), placeholderIcon: '📜' })}
+    <div class="panel-body">
+      ${pageNavHtml('imprint')}
+      <div class="extract">${t('imprint.body')}</div>
+    </div>
+  `;
+  openPanel();
+  wirePageNav();
+  if (updateUrl) history.pushState(null, '', '#imprint');
 }
 
 // --- Rendering: Municipality / Province panels ------------------------------
@@ -1598,6 +1778,8 @@ function showMenuPanel() {
         <li class="list-row" data-menu="stats"><span class="list-row-icon-plain">📊</span><span class="list-row-name">${t('nav.stats')}</span></li>
         <li class="list-row" data-menu="about"><span class="list-row-icon-plain">ℹ️</span><span class="list-row-name">${t('nav.about')}</span></li>
         <li class="list-row" data-menu="contribute"><span class="list-row-icon-plain">🤝</span><span class="list-row-name">${t('nav.contribute')}</span></li>
+        <li class="list-row" data-menu="privacy"><span class="list-row-icon-plain">🔒</span><span class="list-row-name">${t('nav.privacy')}</span></li>
+        <li class="list-row" data-menu="imprint"><span class="list-row-icon-plain">📜</span><span class="list-row-name">${t('nav.imprint')}</span></li>
         <li class="list-row" data-menu="lang"><span class="list-row-icon-plain">🌐</span><span class="list-row-name">${currentLang === 'es' ? 'English' : 'Español'}</span></li>
       </ul>
     </div>
@@ -1609,6 +1791,8 @@ function showMenuPanel() {
       if (action === 'stats') showStatsPanel();
       else if (action === 'about') showAboutPanel();
       else if (action === 'contribute') showContributePanel();
+      else if (action === 'privacy') showPrivacyPanel();
+      else if (action === 'imprint') showImprintPanel();
       else if (action === 'lang') {
         currentLang = currentLang === 'es' ? 'en' : 'es';
         applyStaticI18n();
@@ -1960,6 +2144,10 @@ function rerenderPanel(state) {
     showAboutPanel({ updateUrl: false });
   } else if (state?.type === 'contribute') {
     showContributePanel({ updateUrl: false });
+  } else if (state?.type === 'privacy') {
+    showPrivacyPanel({ updateUrl: false });
+  } else if (state?.type === 'imprint') {
+    showImprintPanel({ updateUrl: false });
   } else {
     closePanel(); // nothing was open before - just back to the plain map
   }
@@ -2042,7 +2230,8 @@ Promise.all([
 
     // Deep links: ?id=<jcyl_id> / ?muni=<ine_code> / ?prov=<name> open
     // straight to that monument/municipality/province; #about / #contribute
-    // open those static panels.
+    // / #stats / #privacy / #imprint open those written pages (see
+    // PAGE_PANEL_TYPES).
     const params = new URLSearchParams(location.search);
     const requestedId = params.get('id');
     const requestedMuni = params.get('muni');
@@ -2068,6 +2257,10 @@ Promise.all([
       showAboutPanel({ updateUrl: false });
     } else if (location.hash === '#contribute') {
       showContributePanel({ updateUrl: false });
+    } else if (location.hash === '#privacy') {
+      showPrivacyPanel({ updateUrl: false });
+    } else if (location.hash === '#imprint') {
+      showImprintPanel({ updateUrl: false });
     }
 
     hideLoadingScreen();

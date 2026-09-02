@@ -177,13 +177,15 @@ def main():
     wd_by_jcyl = {}
     wd_has_image_by_jcyl = {}
     wd_image_url_by_jcyl = {}
+    wd_has_wikipedia_by_jcyl = {}
     for row in wd_raw:
         jcyl_id = row["jcylID"]["value"].strip()
         qid = row["item"]["value"].rsplit("/", 1)[-1]
-        # An item with >1 P18 value (multiple photos) produces >1 row for
-        # the same item+jcylID via the OPTIONAL join in fetch_wikidata.py -
-        # dedupe here, or a photogenic item with 3 images falsely looks
-        # like 3 different items conflicting over the same jcyl_id.
+        # An item with >1 P18 value (multiple photos), or a sitelink in
+        # >1 Wikipedia language, produces >1 row for the same item+jcylID
+        # via the OPTIONAL joins in fetch_wikidata.py - dedupe here, or a
+        # photogenic, well-documented item falsely looks like several
+        # different items conflicting over the same jcyl_id.
         if qid not in wd_by_jcyl.setdefault(jcyl_id, []):
             wd_by_jcyl[jcyl_id].append(qid)
         # True if ANY of (possibly several, in conflict cases) linked items
@@ -191,6 +193,11 @@ def main():
         # things worth tracking separately (see history.json below).
         has_image = row.get("hasImage", {}).get("value") == "true"
         wd_has_image_by_jcyl[jcyl_id] = wd_has_image_by_jcyl.get(jcyl_id, False) or has_image
+        # Same OR-aggregation, for "has a sitelink to at least one Wikipedia
+        # edition" - feeds the map's own "no_wikipedia" status filter and
+        # the Contribute page's "see items lacking a Wikipedia article" link.
+        has_wikipedia = row.get("hasWikipediaArticle", {}).get("value") == "true"
+        wd_has_wikipedia_by_jcyl[jcyl_id] = wd_has_wikipedia_by_jcyl.get(jcyl_id, False) or has_wikipedia
         # First image URL wins if there are several - just needs to be *a*
         # representative thumbnail for list views, not necessarily the same
         # one the per-monument panel picks (that re-fetches the item's own
@@ -226,6 +233,7 @@ def main():
                 "already_linked": bool(wd_qids),
                 "wikidata_conflict": len(wd_qids) > 1,
                 "has_wikidata_image": wd_has_image_by_jcyl.get(cid, False),
+                "has_wikipedia_article": wd_has_wikipedia_by_jcyl.get(cid, False),
                 "image_url": wd_image_url_by_jcyl.get(cid),  # ready-made Special:FilePath URL, or None
             }
         )
