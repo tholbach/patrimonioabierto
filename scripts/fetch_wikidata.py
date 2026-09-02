@@ -1,13 +1,21 @@
 #!/usr/bin/env python3
 """Pull every Wikidata item carrying a P3177 (Patrimonio Web JCyL ID) -
 i.e. everything already linked to CyL's heritage catalog - plus whether
-each one has a P18 (main image) and, if so, its ready-made Special:FilePath
-URL. The image flag feeds the coverage-history snapshot in
-build_dataset.py: linkage alone doesn't tell the whole story, an item can
-be "linked" and still have no photo. The URL itself feeds thumbnails in
-list views (nearby/search) - fetched here, once, in the same bulk query,
-rather than one Commons request per monument. Writes raw results to
-data/raw/ - regenerate anytime.
+each one has a P18 (main image) and whether it has a sitelink to any
+Wikipedia edition, and if it has an image, its ready-made Special:FilePath
+URL. Both flags feed the coverage-history snapshot in build_dataset.py and
+the map's own status filter/Contribute page links: linkage alone doesn't
+tell the whole story, an item can be "linked" and still have no photo, or
+no Wikipedia article. The image URL itself feeds thumbnails in list views
+(nearby/search) - fetched here, once, in the same bulk query, rather than
+one Commons request per monument. Writes raw results to data/raw/ -
+regenerate anytime.
+
+The image and sitelink OPTIONALs are two independent joins on ?item, so an
+item with e.g. 2 photos and 3 Wikipedia-language articles produces 2*3=6
+rows for that one item - inflates the row count some, but build_dataset.py
+already had to dedupe/OR-aggregate multi-row items for P18 alone (a
+photogenic item can have several), and does the exact same thing here.
 """
 import json
 import os
@@ -17,10 +25,21 @@ import urllib.request
 RAW_DIR = os.path.join(os.path.dirname(__file__), "..", "data", "raw")
 USER_AGENT = "cylinked/0.1 (https://github.com/tholbach/cylinked)"
 
+# schema:/wikibase: aren't part of the query service's built-in prefixes the
+# way wdt:/wd: are (confirmed by testing - omitting these left
+# ?hasWikipediaArticle silently unbound on every row instead of erroring),
+# so they need declaring explicitly here.
 QUERY = """
-SELECT ?item ?jcylID ?image (BOUND(?image) AS ?hasImage) WHERE {
+PREFIX schema: <http://schema.org/>
+PREFIX wikibase: <http://wikiba.se/ontology#>
+SELECT ?item ?jcylID ?image (BOUND(?image) AS ?hasImage) (BOUND(?article) AS ?hasWikipediaArticle) WHERE {
   ?item wdt:P3177 ?jcylID .
   OPTIONAL { ?item wdt:P18 ?image }
+  OPTIONAL {
+    ?article schema:about ?item ;
+             schema:isPartOf ?site .
+    ?site wikibase:wikiGroup "wikipedia" .
+  }
 }
 """
 
@@ -36,7 +55,11 @@ def main():
         data = json.load(resp)
 
     rows = data["results"]["bindings"]
-    print(f"{len(rows)} Wikidata items with P3177 set")
+    distinct_items = {row["item"]["value"] for row in rows}
+    # len(rows) alone is now a much less meaningful number than it used to
+    # be - the sitelink OPTIONAL means one item can legitimately produce
+    # several rows (see the module docstring) - so print both.
+    print(f"{len(distinct_items)} Wikidata items with P3177 set ({len(rows)} raw rows)")
     json.dump(data, open(os.path.join(RAW_DIR, "wikidata_p3177.json"), "w"), ensure_ascii=False)
 
 

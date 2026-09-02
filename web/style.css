@@ -321,6 +321,36 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
 }
 #panel-close:hover { background: white; }
 
+/* "Written pages" - About/Contribute/Stats/Privacy/Imprint - replace the
+   map entirely instead of sharing the screen with it, on both desktop and
+   mobile. Same #panel element as the regular map-side panel/bottom sheet,
+   just stretched to fill #app completely; openPanel()/closePanel() in
+   app.js add/remove .page-mode on #app based on whether
+   currentPanelState.type is one of PAGE_PANEL_TYPES. Specificity (an #app
+   ancestor plus its own class, on top of #panel/#panel-content's own ID)
+   is what lets this win over the plain #panel.open{width:420px} above and
+   every wider-breakpoint variant of it further down, without needing
+   !important anywhere. */
+#app.page-mode #map-wrap { display: none; }
+#app.page-mode #panel.open { width: 100%; border-radius: 0; box-shadow: none; }
+#app.page-mode #panel-content { width: 100%; }
+#app.page-mode #panel-handle { display: none; }
+/* Full viewport width still reads badly as a single text column - cap it
+   like a normal article/docs page and center it, independent of #panel's
+   own (now 100%) width. .hero gets the same cap so its icon/title sits
+   above the text column it belongs to instead of spanning the full page
+   width above a much narrower column - it's a sibling of .panel-body, not
+   a descendant, so needs its own copy of the rule. */
+#app.page-mode .panel-body,
+#app.page-mode .hero { max-width: 720px; margin: 0 auto; }
+
+@media (max-width: 768px) {
+  /* Mobile's #panel.open is normally a 68vh bottom sheet (see below) -
+     page-mode wants the full height instead, same as desktop already gets
+     for free (#panel is 100% tall at rest; only its *width* toggles there). */
+  #app.page-mode #panel.open { height: 100%; }
+}
+
 @media (max-width: 768px) {
   #app { flex-direction: column; }
   #map-wrap { flex: 1 1 auto; min-height: 0; width: 100%; }
@@ -394,15 +424,24 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
   display: flex;
   align-items: center;
   justify-content: center;
-  padding-bottom: 15%; /* nudges it above dead-center, out of the scrim/title's way */
   font-size: 110px;
   line-height: 1;
   opacity: 0.28;
-  /* Most emoji glyphs render with a bit of extra right-side bearing inside
-     their own character cell, so a flexbox-centered box still reads as
-     slightly left-of-center - a small rightward nudge, in em so it scales
-     with font-size across breakpoints, corrects for that. */
-  transform: translateX(0.06em);
+  /* translateY(-15%) - not padding-bottom, which this used to be - nudges
+     the icon above dead-center, out of the scrim/title's way at the
+     bottom. padding-bottom looked identical everywhere this shipped
+     narrow (sidebar panel, or mobile's full-width-but-short bottom sheet)
+     but is a CSS trap: percentage padding resolves against the
+     *containing block's width*, even on the vertical axis - once a
+     written page (About/Contribute/...) went full-width in page mode, 15%
+     of a 1400px+ hero was a couple hundred px, shoving the icon mostly
+     above the (overflow:hidden) top edge. transform percentages resolve
+     against the element's own box instead, so this reads the same at any
+     width - combined with the existing rightward nudge (most emoji glyphs
+     render with extra right-side bearing inside their own character cell,
+     so true flex-centering still looks slightly left-of-center), in one
+     transform since an element only gets the one. */
+  transform: translate(0.06em, -15%);
   pointer-events: none;
 }
 .hero-fallback::before {
@@ -554,6 +593,33 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
 
 .source-list { margin: 0; padding-left: 20px; font-size: 13px; line-height: 1.8; color: var(--ink); }
 .source-list a { color: var(--cyl-purple); }
+
+/* Cross-links between the "written pages" (About/Contribute/Stats/Privacy/
+   Imprint - see pageNavHtml() in app.js) - first thing in .panel-body so
+   it reads as this page's own sub-nav, not part of the page content
+   proper. Buttons, not <a href>, matching how the rest of the app's
+   navigation (list rows, menu) is JS-driven rather than real links. */
+.page-nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 6px;
+  margin-bottom: 18px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--border);
+}
+.page-nav-link {
+  font-family: inherit;
+  font-size: 13px;
+  font-weight: 500;
+  padding: 6px 12px;
+  border-radius: 14px;
+  border: 1.5px solid var(--border);
+  background: var(--card);
+  color: var(--ink-soft);
+  cursor: pointer;
+}
+.page-nav-link:hover { border-color: var(--cyl-purple); color: var(--ink); }
+.page-nav-link.active { background: var(--cyl-purple); border-color: var(--cyl-purple); color: white; cursor: default; }
 
 .stats-mission {
   border-left: 3px solid var(--cyl-purple);
@@ -754,16 +820,17 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
   flex-shrink: 0;
 }
 .badge:hover { transform: translateY(-1px); }
-/* jcyl/wikidata/wikipedia/share-btn deliberately share one neutral color -
-   previously each had its own (blue for Wikidata, near-black for
-   Wikipedia, purple for share), which read as arbitrary rather than
-   meaningful next to each other. The brand marks (Wikidata's tricolor SVG,
-   Wikipedia's serif "W") keep their own identity regardless - only the
-   button text/border is unified. */
+/* jcyl/wikidata/wikipedia/share-btn/filter-link deliberately share one
+   neutral color - previously each had its own (blue for Wikidata,
+   near-black for Wikipedia, purple for share), which read as arbitrary
+   rather than meaningful next to each other. The brand marks (Wikidata's
+   tricolor SVG, Wikipedia's serif "W") keep their own identity regardless -
+   only the button text/border is unified. */
 .badge.wikidata,
 .badge.wikipedia,
 .badge.jcyl,
-.badge.share-btn {
+.badge.share-btn,
+.badge.filter-link {
   border-color: var(--border);
   color: var(--ink-soft);
 }
