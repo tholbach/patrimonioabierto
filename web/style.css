@@ -465,6 +465,11 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
 .hero-fallback { height: 180px; }
 .hero-fallback .hero-placeholder-icon { font-size: 78px; }
 .hero a { display: block; height: 100%; position: relative; }
+/* goToIndex() now hides #main-image-link (the <a> above) while a video is
+   showing instead - same reasoning as .hero-video[hidden] just below: the
+   display:block right above would otherwise out-cascade the hidden
+   attribute's own (lower-priority, browser-default) display:none. */
+.hero a[hidden] { display: none; }
 .hero-img {
   position: relative;
   z-index: 1;
@@ -495,6 +500,29 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
 }
 .hero-portrait .hero-img { object-fit: contain; background: transparent; }
 .hero-portrait .hero-img-bg { display: block; }
+
+/* A video in the gallery (see VIDEO_EXTENSIONS/isVideoFile() in app.js) -
+   positioned exactly like .hero-img-bg (absolute, filling .hero) since
+   it's a sibling of #main-image-link now, not nested inside it (see the
+   comment on #main-video in heroBlock()). display: block is needed since
+   goToIndex() toggles this element's hidden attribute to show/hide it, and
+   the [hidden] rule right below has to come *after* this one - author
+   rules of equal specificity are decided by source order, and the
+   hidden="" attribute's own display:none only comes from the browser's
+   default (lowest-priority) stylesheet, so any later same-specificity
+   author rule would otherwise silently win and defeat it. */
+.hero-video {
+  display: block;
+  position: absolute;
+  inset: 0;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  background: black;
+}
+.hero-video[hidden] { display: none; }
+.hero-portrait .hero-video { object-fit: contain; }
 
 /* The neighbor photo peeking in from off-screen while wireHeroSwipe() in
    app.js is live-tracking a horizontal drag - mirrors #main-image-link's
@@ -775,6 +803,26 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
    rather than being excluded from it, marked instead of removed, so "which
    one am I looking at" is always visible at a glance. */
 .gallery img.active { border-color: var(--cyl-purple); cursor: default; }
+
+/* Wraps each thumbnail (see renderGallery() in app.js) purely as an anchor
+   for .video-thumb's play-icon overlay below - sizing/hover/border all
+   stay on the <img> itself, unchanged; this shrinks to fit it exactly. */
+.gallery-thumb { position: relative; display: inline-flex; flex-shrink: 0; }
+.video-thumb::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  margin: auto;
+  width: 0;
+  height: 0;
+  /* a solid CSS triangle, not an emoji/icon font glyph - crisp at any
+     size and never waits on a font to load */
+  border-style: solid;
+  border-width: 7px 0 7px 11px;
+  border-color: transparent transparent transparent white;
+  filter: drop-shadow(0 1px 2px rgba(0,0,0,0.6));
+  pointer-events: none; /* clicks fall through to the <img> underneath, same goToIndex() as any other thumbnail */
+}
 
 /* Appended after the thumbs, only when fetchGalleryFiles() found more than
    the 12 shown - links out to the full Commons category instead of trying
@@ -1097,6 +1145,60 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
   margin-top: 8px;
 }
 #potw:hover #potw-cta { text-decoration: underline; }
+
+/* Collaboration ask (see initPictureOfTheWeek() in app.js) - two real
+   links (map/Contribute), not one destination. Was a small rounded pill
+   floating in the strip's own leftover space; now it's its own full-height,
+   full-width-of-its-share zone instead (flex: 1 + align-self: stretch, no
+   border-radius/max-width to cap it) - the tint fills the whole part of
+   the bar this content owns, right out to #potw's own right edge, rather
+   than a card-shaped island with bare strip still showing around it.
+   #potw-collab-text still caps its own width (so the sentence wraps at a
+   sane measure instead of stretching edge to edge on a wide screen) and
+   the whole thing is centered in whatever space is actually available.
+   Hidden below 960px - #potw-info alone already wants most of that width,
+   no good place left to put this. */
+#potw-collab {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 12px;
+  flex: 1;
+  align-self: stretch;
+  margin-left: 28px;
+  padding: 8px 24px;
+  background: linear-gradient(135deg, rgba(116,44,100,0.09), rgba(116,44,100,0.03));
+}
+/* Same "big bold number" language as .stat-value/.stats-photos-value on
+   the Stats page - a familiar visual cue for "here's a figure worth
+   noticing" rather than a plain inline number lost in a sentence. */
+#potw-collab-count {
+  font-family: var(--font-display);
+  font-size: 19px;
+  font-weight: 700;
+  color: white;
+  background: var(--cyl-purple);
+  border-radius: 10px;
+  min-width: 40px;
+  height: 40px;
+  padding: 0 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+}
+#potw-collab-text { max-width: 320px; }
+/* 500, not the 600 the short label used to be - a full sentence set in a
+   heavier weight starts reading as shouty rather than just noticeable. */
+#potw-collab-label { font-size: 12.5px; font-weight: 500; color: var(--ink); line-height: 1.4; }
+#potw-collab-links { font-size: 11.5px; margin-top: 5px; }
+#potw-collab-links a { color: var(--cyl-purple); font-weight: 600; text-decoration: none; }
+#potw-collab-links a:hover { text-decoration: underline; }
+#potw-collab-links .sep { color: var(--ink-soft); margin: 0 3px; }
+@media (max-width: 960px) {
+  #potw-collab { display: none; }
+}
+
 #potw-close {
   position: absolute;
   top: 8px;
@@ -1229,7 +1331,12 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
     gap: 10px;
     overflow: visible;
   }
-  .gallery img, .gallery-more { width: 100%; height: 90px; max-width: none; min-width: 0; }
+  /* .gallery-thumb (the grid cell) fills the cell; .gallery-thumb img
+     (the actual thumbnail) then fills *that*, overriding its own base
+     68x68 fixed size - same two-rule split .gallery-more already needed
+     when this was still a bare <img>, just spread across the wrapper now. */
+  .gallery-thumb, .gallery-more { width: 100%; height: 90px; max-width: none; min-width: 0; }
+  .gallery-thumb img { width: 100%; height: 100%; }
 }
 
 /* Large desktop: the panel gets meaningfully wider still, single column

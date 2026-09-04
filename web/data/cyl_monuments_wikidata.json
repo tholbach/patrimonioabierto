@@ -5432,7 +5432,7 @@
     "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": true,
-    "has_wikipedia_article": false,
+    "has_wikipedia_article": true,
     "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Pampliega%20-%20Iglesia%20San%20Pedro%2019.jpg"
   },
   {
@@ -7393,9 +7393,9 @@
     "wikidata_qid": "Q106979009",
     "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
+    "has_wikidata_image": true,
     "has_wikipedia_article": false,
-    "image_url": null
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Torre%20de%20Villagonzalo-Arenas%2001.jpg"
   },
   {
     "jcyl_id": 3815,
@@ -8182,12 +8182,15 @@
     "municipality_ine_code_p772": "09906",
     "province": "Burgos",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=4141",
-    "wikidata_qid": "Q141223047",
+    "wikidata_qid": [
+      "Q43140879",
+      "Q141223047"
+    ],
     "already_linked": true,
-    "wikidata_conflict": false,
-    "has_wikidata_image": false,
+    "wikidata_conflict": true,
+    "has_wikidata_image": true,
     "has_wikipedia_article": false,
-    "image_url": null
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/VillanuevaDeR%C3%ADoUbierna%209282175.jpg"
   },
   {
     "jcyl_id": 4161,
@@ -24687,7 +24690,7 @@
     "wikidata_conflict": false,
     "has_wikidata_image": true,
     "has_wikipedia_article": true,
-    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Pe%C3%B1afiel%20PM%2017927.jpg"
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Penafiel-Espana0011.JPG"
   },
   {
     "jcyl_id": 15077,
@@ -26001,7 +26004,7 @@
     "wikidata_conflict": false,
     "has_wikidata_image": true,
     "has_wikipedia_article": true,
-    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Valladolid%20-%20M%C2%BA%20Descalzas%20Reales%204.jpg"
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Valladolid%20-%20Convento%20de%20la%20Descalzas%20Reales%20002.jpg"
   },
   {
     "jcyl_id": 15975,
@@ -28465,9 +28468,9 @@
     "wikidata_qid": "Q141221809",
     "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
+    "has_wikidata_image": true,
     "has_wikipedia_article": false,
-    "image_url": null
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Iglesia%20de%20San%20Vicente%20%28Zamora%29%20%28torre%29.JPG"
   },
   {
     "jcyl_id": 17452,
