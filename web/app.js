@@ -54,8 +54,15 @@ const SLUG_TO_CATEGORY = Object.fromEntries(Object.entries(CATEGORY_SLUGS).map((
 
 // Commons file extensions worth showing in a photo gallery - excludes PDFs,
 // DjVu scans, audio, etc. that also legitimately live in a monument's
-// Commons category.
+// Commons category. Video (webm/ogv - the two formats Commons actually
+// accepts uploads in) is its own category, checked separately wherever the
+// gallery needs to tell them apart (goToIndex(), renderGallery(), ...) -
+// still shown, just needing real playback rather than a plain <img>.
 const IMAGE_EXTENSIONS = /\.(jpe?g|png|gif|webp|tiff?)$/i;
+const VIDEO_EXTENSIONS = /\.(webm|ogv)$/i;
+function isVideoFile(filename) {
+  return VIDEO_EXTENSIONS.test(filename);
+}
 
 // bbox arrays from the dataset are GeoJSON-style [minlon, minlat, maxlon,
 // maxlat] - Leaflet's flyToBounds wants [[lat, lon], [lat, lon]] instead.
@@ -488,8 +495,40 @@ async function fetchWikipediaSummary(lang, title) {
 // Commons' Special:FilePath redirects straight to a rendered thumbnail of
 // any width, keyed only by filename - no API call needed to know a photo's
 // URL up front, which is what makes preloadNeighbors() below possible.
+// Works for video files too (confirmed by hand): Commons redirects a
+// width= request for a .webm the same way, to a real JPG poster frame -
+// exactly what's needed for gallery thumbnails and the drag-preview clone,
+// neither of which plays video, they just need something to show.
 function commonsThumbUrl(filename, width) {
   return `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(filename)}?width=${width}`;
+}
+
+// The *playable* URL for a video file - unlike commonsThumbUrl() this
+// needs a real API call, because a video's original upload can be
+// enormous (this project's own example, Pirámide de los Italianos' video,
+// is a 226MB 4K original) and isn't something to hand a <video> element
+// and hope for the best. videoinfo's own `derivatives` list is Commons'
+// pre-transcoded, much smaller versions of the same file - prefer a
+// modest one (480p, a few MB, still watchable) over the original, only
+// falling back to whatever's actually available if that specific transcode
+// doesn't exist (e.g. a very recent upload Commons hasn't transcoded yet).
+async function fetchVideoInfo(filename) {
+  const url =
+    'https://commons.wikimedia.org/w/api.php?action=query&prop=videoinfo' +
+    '&viprop=derivatives|url&format=json&origin=*&titles=' +
+    encodeURIComponent('File:' + filename);
+  const resp = await fetch(url);
+  const data = await resp.json();
+  const page = Object.values(data.query.pages)[0];
+  const info = page?.videoinfo?.[0];
+  if (!info) return null;
+  const derivatives = info.derivatives || [];
+  const videoUrl =
+    derivatives.find((d) => d.transcodekey === '480p.vp9.webm')?.src ||
+    derivatives.find((d) => d.transcodekey?.startsWith('360p') && d.type?.startsWith('video/webm'))?.src ||
+    derivatives.find((d) => d.transcodekey?.startsWith('240p'))?.src ||
+    info.url; // no transcode ready yet - the original is all there is
+  return { videoUrl };
 }
 
 // License/author + a direct link to the File: page for one Commons filename.
@@ -527,9 +566,10 @@ function preloadNeighbors(files, index) {
   }
 }
 
-// Other photos in the monument's Commons category, if it has one (P373) -
-// filtered to actual image files, excluding whatever's already the main
-// P18 image so the gallery doesn't just repeat it.
+// Other photos (and videos - see VIDEO_EXTENSIONS) in the monument's
+// Commons category, if it has one (P373) - filtered to actual media files
+// (not PDFs, DjVu scans, audio, ...), excluding whatever's already the
+// main P18 image so the gallery doesn't just repeat it.
 //
 // Some categories are nearly empty at the top level with almost all media
 // filed under subcategories instead (split by year, by feature, "Interior
@@ -574,7 +614,8 @@ async function fetchGalleryFiles(categoryName, excludeFilename) {
         }
       } else {
         const title = m.title.replace(/^File:/, '');
-        if (IMAGE_EXTENSIONS.test(title) && title !== excludeFilename && !seenFiles.has(title)) {
+        const isMedia = IMAGE_EXTENSIONS.test(title) || VIDEO_EXTENSIONS.test(title);
+        if (isMedia && title !== excludeFilename && !seenFiles.has(title)) {
           seenFiles.add(title);
           files.push(title);
         }
@@ -781,17 +822,31 @@ function heroBlock({ imageUrl, linkUrl, kicker, title, placeholderIcon }) {
     const icon = placeholderIcon ? `<div class="hero-placeholder-icon">${placeholderIcon}</div>` : '';
     return `<div class="hero hero-fallback">${icon}${scrim}${dots}</div>`;
   }
-  // main-image-bg is the blurred backdrop for portrait photos - see the CSS
-  // comment on .hero-img-bg. Same src as the real photo, just decorative
-  // (hidden from screen readers), and hidden by default (only .hero-portrait
-  // shows it) so it costs nothing for the common landscape-photo case.
-  const img =
-    `<img id="main-image-bg" class="hero-img-bg" src="${imageUrl}" alt="" aria-hidden="true">` +
-    `<img id="main-image" class="hero-img" src="${imageUrl}" alt="">`;
-  const imgEl = linkUrl
-    ? `<a href="${linkUrl}" target="_blank" rel="noopener" id="main-image-link">${img}</a>`
-    : img;
-  return `<div class="hero">${imgEl}${scrim}${dots}</div>`;
+  // main-image-bg is the blurred backdrop for portrait photos/videos - see
+  // the CSS comment on .hero-img-bg. Same src as the real photo, just
+  // decorative (hidden from screen readers), and hidden by default (only
+  // .hero-portrait shows it) so it costs nothing for the common
+  // landscape-photo case. A sibling of #main-image-link, not nested inside
+  // its <a>, on purpose: goToIndex() needs to be able to hide the
+  // foreground (swapping in #main-video instead) while leaving this
+  // backdrop showing behind it, which nesting would rule out.
+  const bgImg = `<img id="main-image-bg" class="hero-img-bg" src="${imageUrl}" alt="" aria-hidden="true">`;
+  const fgImg = `<img id="main-image" class="hero-img" src="${imageUrl}" alt="">`;
+  const fgEl = linkUrl
+    ? `<a href="${linkUrl}" target="_blank" rel="noopener" id="main-image-link">${fgImg}</a>`
+    : fgImg;
+  // #main-video is a sibling too, not wrapped inside #main-image-link's
+  // <a> - a video's own play/pause controls shouldn't risk a click
+  // bubbling into a Commons-navigation link the way it safely can for a
+  // plain <img>. Hidden until goToIndex() actually swaps a video into the
+  // hero slot - the initial photo here (P18) is always an image; videos
+  // only ever arrive later, via the gallery.
+  // preload="metadata", not the browser default (which for some is "auto")
+  // - goToIndex() doesn't set .src until fetchVideoInfo() resolves anyway,
+  // but being explicit here means no surprise eager-downloading later just
+  // because a browser's default happened to be more aggressive than this.
+  const video = `<video id="main-video" class="hero-video" controls playsinline preload="metadata" hidden></video>`;
+  return `<div class="hero">${bgImg}${fgEl}${video}${scrim}${dots}</div>`;
 }
 
 // Small dot-per-photo indicator, mobile-only (see .hero-dots CSS) - the
@@ -897,7 +952,7 @@ function wireHeroSwipe() {
           previewBg.alt = '';
           previewBg.src = previewSrc;
           const previewFg = document.createElement('img');
-          previewFg.className = 'hero-drag-preview-img';
+          previewFg.className = isVideoFile(files[previewIndex]) ? 'hero-drag-preview-img video-thumb' : 'hero-drag-preview-img';
           previewFg.alt = '';
           previewFg.src = previewSrc;
           previewEl.append(previewBg, previewFg);
@@ -976,21 +1031,30 @@ function wireHeroSwipe() {
   hero.addEventListener('touchcancel', endDrag);
 }
 
-// Portrait photos (naturally taller than wide) get letterboxed with a
-// blurred backdrop instead of force-cropped to fill the hero box - see the
-// .hero-img-bg CSS comment. Handles the img already being loaded from cache
-// (no 'load' event will fire in that case) as well as the normal async case.
-function applyHeroOrientation() {
-  const img = document.getElementById('main-image');
-  const hero = img?.closest('.hero');
-  if (!img || !hero) return;
+// Portrait photos/videos (naturally taller than wide) get letterboxed with
+// a blurred backdrop instead of force-cropped to fill the hero box - see
+// the .hero-img-bg CSS comment. Handles the img already being loaded from
+// cache (no 'load' event will fire in that case) as well as the normal
+// async case - videos have their own equivalent (videoWidth/videoHeight,
+// known once 'loadedmetadata' fires, or already if we're re-checking after
+// the fact).
+function applyHeroOrientation(isVideo) {
+  const el = document.getElementById(isVideo ? 'main-video' : 'main-image');
+  const hero = el?.closest('.hero');
+  if (!el || !hero) return;
+  if (isVideo) {
+    const decide = () => hero.classList.toggle('hero-portrait', el.videoHeight > el.videoWidth);
+    if (el.videoWidth) decide();
+    else el.addEventListener('loadedmetadata', decide, { once: true });
+    return;
+  }
   const decide = () => {
-    hero.classList.toggle('hero-portrait', img.naturalHeight > img.naturalWidth);
+    hero.classList.toggle('hero-portrait', el.naturalHeight > el.naturalWidth);
   };
-  if (img.complete && img.naturalWidth) {
+  if (el.complete && el.naturalWidth) {
     decide();
   } else {
-    img.addEventListener('load', decide, { once: true });
+    el.addEventListener('load', decide, { once: true });
   }
 }
 
@@ -1031,21 +1095,41 @@ async function goToIndex(index) {
   const mainImageEl = document.getElementById('main-image');
   const mainImageBgEl = document.getElementById('main-image-bg');
   const mainImageLinkEl = document.getElementById('main-image-link');
+  const mainVideoEl = document.getElementById('main-video');
   const captionEl = document.getElementById('image-caption');
   if (!mainImageEl) return;
 
-  // The photo's own URL is deterministic from the filename (commonsThumbUrl()
-  // needs no API round-trip) - and preloadNeighbors() already kicked off
-  // this exact fetch, at this exact size, back when the *previous* photo
-  // went up. So the swap itself doesn't need to wait on fetchImageMeta()
-  // below at all: painting here comes straight out of the browser's cache
-  // instead of stalling on a Commons API call just to re-derive a URL we
-  // already knew, which used to make every swipe visibly hang until that
-  // call resolved.
-  const thumbUrl = commonsThumbUrl(files[index], 500);
-  mainImageEl.src = thumbUrl;
-  if (mainImageBgEl) mainImageBgEl.src = thumbUrl;
-  applyHeroOrientation();
+  const filename = files[index];
+  const isVideo = isVideoFile(filename);
+
+  // The poster/thumbnail URL is deterministic from the filename
+  // (commonsThumbUrl() needs no API round-trip, and works for video too -
+  // see its own comment) - and preloadNeighbors() already kicked off this
+  // exact fetch, at this exact size, back when the *previous* item went
+  // up. So the swap itself doesn't need to wait on any API call: painting
+  // here comes straight out of the browser's cache instead of stalling on
+  // a round-trip just to re-derive a URL we already knew, which used to
+  // make every swipe visibly hang until that call resolved.
+  const thumbUrl = commonsThumbUrl(filename, 500);
+  if (mainImageBgEl) mainImageBgEl.src = thumbUrl; // blurred backdrop - same poster either way, video included
+
+  if (mainVideoEl) {
+    // Stop and fully release whatever was previously playing before
+    // swapping content - a <video> element keeps buffering/playing in the
+    // background otherwise, even once hidden.
+    mainVideoEl.pause();
+    mainVideoEl.removeAttribute('src');
+    mainVideoEl.load();
+    mainVideoEl.hidden = !isVideo;
+  }
+  if (mainImageLinkEl) mainImageLinkEl.hidden = isVideo;
+  else mainImageEl.hidden = isVideo; // no link wrapper (shouldn't happen with a real gallery, but just in case) - hide the bare <img> itself instead
+  if (isVideo) {
+    if (mainVideoEl) mainVideoEl.poster = thumbUrl;
+  } else {
+    mainImageEl.src = thumbUrl;
+  }
+  applyHeroOrientation(isVideo);
 
   currentGalleryState.index = index;
   updateHeroDots(index, files.length);
@@ -1059,13 +1143,19 @@ async function goToIndex(index) {
 
   // License/author + the File: page link still need the API call - fetch
   // it in the background and patch the caption in once it lands, without
-  // holding up the photo swap above.
+  // holding up the poster swap above. A video additionally needs its real
+  // playable source resolved the same way (see fetchVideoInfo()) - done
+  // alongside, not blocking on, the caption fetch.
   if (captionEl) captionEl.textContent = t('loading');
   try {
-    const meta = await fetchImageMeta(files[index]);
+    const [meta, videoInfo] = await Promise.all([
+      fetchImageMeta(filename),
+      isVideo ? fetchVideoInfo(filename) : Promise.resolve(null),
+    ]);
     if (currentGalleryState.index !== index) return; // swiped elsewhere before this landed
     if (mainImageLinkEl) mainImageLinkEl.href = meta.pageUrl;
     if (captionEl) captionEl.innerHTML = licenseLineHtml(meta);
+    if (isVideo && mainVideoEl && videoInfo) mainVideoEl.src = videoInfo.videoUrl;
   } catch (err) {
     if (captionEl) captionEl.textContent = '';
   }
@@ -1076,7 +1166,11 @@ async function goToIndex(index) {
 // thumbnails don't reshuffle position as you click/swipe through them the
 // way the old swap-places version did.
 function renderGallery(files, currentIndex, commonsCategory) {
-  if (!files.length) return '';
+  // Not just !files.length - a single-photo gallery would render one
+  // thumbnail: itself, already sitting in the hero above. Nothing to
+  // browse to, so nothing to show (matches wireHeroSwipe()'s own
+  // files.length < 2 check disabling swipe for the same reason).
+  if (files.length < 2) return '';
   // files.length > 12 means there's strictly more than what any one window
   // can show - fetchGalleryFiles itself caps at 24, so this can't just be
   // "we happened to fetch exactly the whole category".
@@ -1092,14 +1186,19 @@ function renderGallery(files, currentIndex, commonsCategory) {
   // enough to keep it in view, rather than always starting at 0 regardless
   // of where you've swiped/clicked to.
   const start = currentIndex >= windowSize ? currentIndex - (windowSize - 1) : 0;
+  // .gallery-thumb wraps each thumbnail <img> - needed for the video play
+  // icon below (an ::after on a replaced element like <img> itself doesn't
+  // render, per spec; a wrapper is the standard workaround), everything
+  // else about sizing/hover/active stays on the <img> exactly as before.
   const thumbs = files
     .slice(start, start + windowSize)
     .map(
       (f, offset) => {
         const i = start + offset;
         const activeAttr = i === currentIndex ? ' class="active"' : '';
-        return `<img${activeAttr} src="https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(f)}?width=100"
-              alt="" data-index="${i}">`;
+        const wrapClass = isVideoFile(f) ? ' class="gallery-thumb video-thumb"' : ' class="gallery-thumb"';
+        return `<span${wrapClass}><img${activeAttr} src="https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(f)}?width=100"
+              alt="" data-index="${i}"></span>`;
       }
     )
     .join('');
@@ -1917,6 +2016,35 @@ function initPictureOfTheWeek() {
 
       const meta = await fetchImageMeta(entry.file);
       const thumbUrl = `https://commons.wikimedia.org/wiki/Special:FilePath/${encodeURIComponent(entry.file)}?width=440`;
+
+      // Same "linked but no photo" count the Contribute page's own "see
+      // monuments without a photo" link uses (isLinkedNoPhoto) - the
+      // picture of the week already has everyone's attention on exactly
+      // this gap (a nice photo of one monument), so it's the natural place
+      // to also ask for help closing it for the rest. Only shown on wide
+      // enough screens (see CSS) - there isn't room next to the photo
+      // otherwise, and the strip already does its main job without it.
+      const missingPhotoCount = allRecords.filter(isLinkedNoPhoto).length;
+      // Two real links (map/Contribute), not one block - #potw's own
+      // click-through handler below already ignores clicks on any <a>, so
+      // neither needs its own stopPropagation() the way #potw-close does.
+      const collabHtml =
+        missingPhotoCount > 0
+          ? `
+        <div id="potw-collab">
+          <div id="potw-collab-count">${missingPhotoCount.toLocaleString(currentLang)}</div>
+          <div id="potw-collab-text">
+            <div id="potw-collab-label" data-i18n="potw.collab_label">${t('potw.collab_label')}</div>
+            <div id="potw-collab-links">
+              <a id="potw-collab-map-link" href="?status=no_photo" data-i18n="potw.collab_map_link">${t('potw.collab_map_link')}</a>
+              <span class="sep">·</span>
+              <a id="potw-collab-help-link" href="#contribute" data-i18n="potw.collab_help_link">${t('potw.collab_help_link')}</a>
+            </div>
+          </div>
+        </div>
+      `
+          : '';
+
       potwEl.innerHTML = `
         <button type="button" id="potw-close" data-i18n-title="potw.close_title" aria-label="Close">✕</button>
         <img src="${thumbUrl}" alt="${record.name}" loading="lazy">
@@ -1926,6 +2054,7 @@ function initPictureOfTheWeek() {
           <div id="potw-credit">${licenseLineHtml(meta)}</div>
           <div id="potw-cta" data-i18n="potw.cta">${t('potw.cta')}</div>
         </div>
+        ${collabHtml}
       `;
       applyStaticI18n();
       potwEl.hidden = false;
@@ -1938,9 +2067,9 @@ function initPictureOfTheWeek() {
       // "done with this suggestion" rather than something to leave sitting
       // there stale over whatever's now on screen.
       //
-      // Ignore clicks on the credit line's own links (artist/license, both
-      // pointing at Commons) though - they should navigate there directly,
-      // not also fire selectMonument on top of it.
+      // Ignore clicks on any of the strip's own <a> links though (credit
+      // line's artist/license links, and now #potw-collab's own two) -
+      // each handles its own destination, not this monument.
       potwEl.addEventListener('click', (e) => {
         if (e.target.closest('a')) return;
         dismissPotw();
@@ -1950,6 +2079,20 @@ function initPictureOfTheWeek() {
         e.stopPropagation();
         dismissPotw();
       });
+      const collabMapLink = document.getElementById('potw-collab-map-link');
+      if (collabMapLink) {
+        wireSpaLink(collabMapLink, () => {
+          dismissPotw(); // showMapFilteredByStatus() only closes the panel - the strip itself is a separate element
+          showMapFilteredByStatus('no_photo');
+        });
+      }
+      const collabHelpLink = document.getElementById('potw-collab-help-link');
+      if (collabHelpLink) {
+        wireSpaLink(collabHelpLink, () => {
+          dismissPotw();
+          showContributePanel();
+        });
+      }
     })
     .catch(() => {}); // no data file yet, or offline - just stay hidden
 }
