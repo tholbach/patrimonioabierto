@@ -928,16 +928,21 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
 .fact-label { color: var(--ink-soft); flex: 0 0 auto; min-width: 90px; }
 .fact-value { color: var(--ink); font-weight: 500; }
 
-.upload-cta {
+/* Generic "this monument is missing X, here's how to add it" callout -
+   originally just the no-photo case (still .contribute-cta in the DOM,
+   renamed from upload-cta since it's now shared), reused as-is for the
+   no-Wikipedia-article case below. Purely a visual pattern, nothing
+   upload-specific in it. */
+.contribute-cta {
   margin-top: 12px;
   padding: 14px;
   background: #f5f0f7;
   border: 1px solid #e5d5e2;
   border-radius: 10px;
 }
-.upload-cta-text { font-size: 13.5px; color: var(--ink); margin-bottom: 10px; line-height: 1.5; }
-.upload-cta-btn.badge { background: var(--cyl-purple); color: white; border-color: var(--cyl-purple); }
-.upload-cta-btn.badge:hover { background: var(--cyl-purple-dark); }
+.contribute-cta-text { font-size: 13.5px; color: var(--ink); margin-bottom: 10px; line-height: 1.5; }
+.contribute-cta-btn.badge { background: var(--cyl-purple); color: white; border-color: var(--cyl-purple); }
+.contribute-cta-btn.badge:hover { background: var(--cyl-purple-dark); }
 
 .missing-note {
   font-size: 13.5px;
