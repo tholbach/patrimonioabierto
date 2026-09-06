@@ -1076,6 +1076,15 @@ function uploadWizardUrl(record, commonsCategory) {
   return `https://commons.wikimedia.org/wiki/Special:UploadWizard?${params.toString()}`;
 }
 
+// action=edit on a title that doesn't exist yet lands on Wikipedia's own
+// "there's no article called X" page - which itself offers the guided
+// Article Wizard alongside a raw edit box (verified by hand), so this is
+// the one link that covers both "just let me start typing" and "actually
+// walk me through it" without picking one for the visitor.
+function wikipediaCreateUrl(record, lang) {
+  return `https://${lang}.wikipedia.org/w/index.php?${new URLSearchParams({ title: record.name, action: 'edit' })}`;
+}
+
 function licenseLineHtml(meta) {
   if (!meta) return '';
   return meta.license
@@ -1236,8 +1245,18 @@ async function selectMonument(record, { flyTo = false, updateUrl = true } = {}) 
   }
 
   if (!record.already_linked) {
+    // Not linked to Wikidata at all yet - which trivially means no known
+    // Wikipedia article either, same as the linked-but-no-sitelink case
+    // further down. Worth the identical CTA here too: this is most of
+    // what a visitor clicking around actually lands on (633 unlinked vs.
+    // ~860 linked-but-no-article), so gating the suggestion on "already
+    // linked" would miss most of its actual audience.
     panelContentEl.querySelector('.loading').outerHTML = `
       <div class="missing-note">${t('missing.note')}</div>
+      <div class="contribute-cta">
+        <div class="contribute-cta-text">${t('wikipedia_cta.text')}</div>
+        <a class="badge contribute-cta-btn" href="${wikipediaCreateUrl(record, currentLang)}" target="_blank" rel="noopener">${t('wikipedia_cta.button')}</a>
+      </div>
       <div class="link-badges"><a class="badge jcyl" href="${record.reference_url}" target="_blank" rel="noopener">${t('badge.jcyl')}</a>${shareButtonHtml()}</div>
       ${renderNearby(record)}
     `;
@@ -1293,13 +1312,18 @@ async function selectMonument(record, { flyTo = false, updateUrl = true } = {}) 
     currentGalleryState = { files, index: 0, commonsCategory };
     preloadNeighbors(files, 0); // get photo #2 (if any) in flight before the first swipe even happens
 
-    // Caption (and the upload CTA, when there's no photo at all) come first
-    // - both are about the photo slot directly above them, so they belong
-    // immediately under the hero, not buried after the facts panel.
+    // Roughly "media, then the core facts, then each contribution CTA
+    // right next to the thing it's actually offering to fill in, then
+    // links, then the more secondary/technical facts, then nearby" - see
+    // the reasoning behind this exact order (and why it changed from a
+    // flatter one) in the conversation that produced it.
     let bodyHtml = '';
     if (mainImageMeta) {
       bodyHtml += `<div class="image-caption" id="image-caption">${licenseLineHtml(mainImageMeta)}</div>`;
-    } else {
+    }
+    bodyHtml += `<div class="meta">${bodyMetaLine(record)}</div>`;
+    bodyHtml += renderGallery(files, 0, commonsCategory);
+    if (!mainImageMeta) {
       // Has a Wikidata item but genuinely no photo anywhere (no P18, no
       // Commons category images either) - this is exactly the case worth a
       // direct call to action, prefilled with what we can legitimately
@@ -1309,18 +1333,12 @@ async function selectMonument(record, { flyTo = false, updateUrl = true } = {}) 
       // a registered campaign (a real Commons permissions process, out of
       // scope here) - so the CTA text says so rather than implying it's automatic.
       bodyHtml += `
-        <div class="upload-cta">
-          <div class="upload-cta-text">${t('upload_cta.text')}</div>
-          <a class="badge upload-cta-btn" href="${uploadWizardUrl(record, commonsCategory)}" target="_blank" rel="noopener">${t('contribute.upload.button')}</a>
+        <div class="contribute-cta">
+          <div class="contribute-cta-text">${t('upload_cta.text')}</div>
+          <a class="badge contribute-cta-btn" href="${uploadWizardUrl(record, commonsCategory)}" target="_blank" rel="noopener">${t('contribute.upload.button')}</a>
         </div>
       `;
     }
-    bodyHtml += `<div class="meta">${bodyMetaLine(record)}</div>`;
-    bodyHtml += renderFacts(facts);
-    if (record.wikidata_conflict) {
-      bodyHtml += `<div class="missing-note">⚠ jcyl_id: ${record.wikidata_qid.join(', ')}</div>`;
-    }
-    bodyHtml += renderGallery(files, 0, commonsCategory);
     if (summary?.extract) {
       bodyHtml += `<div class="extract">${summary.extract}</div>`;
       bodyHtml += `<a class="read-more-link" href="${sitelink.url}" target="_blank" rel="noopener">${t('wikipedia.read_more')}</a>`;
@@ -1332,8 +1350,24 @@ async function selectMonument(record, { flyTo = false, updateUrl = true } = {}) 
       // default) is the standard, safe choice rather than asserting one
       // exact version for the whole article.
       bodyHtml += `<div class="text-license">${t('text_license.note', sitelink?.url)}</div>`;
+    } else if (!sitelink) {
+      // No article in *either* language (sitelink is only falsy when both
+      // preferred and fallback came up empty) - not "the summary fetch
+      // failed", a real gap worth the same direct-CTA treatment as the
+      // no-photo case above, prefilled with this exact monument's title so
+      // there's nothing left to figure out except the actual writing.
+      bodyHtml += `
+        <div class="contribute-cta">
+          <div class="contribute-cta-text">${t('wikipedia_cta.text')}</div>
+          <a class="badge contribute-cta-btn" href="${wikipediaCreateUrl(record, currentLang)}" target="_blank" rel="noopener">${t('wikipedia_cta.button')}</a>
+        </div>
+      `;
     }
     bodyHtml += linkBadges(record, sitelink);
+    bodyHtml += renderFacts(facts);
+    if (record.wikidata_conflict) {
+      bodyHtml += `<div class="missing-note">⚠ jcyl_id: ${record.wikidata_qid.join(', ')}</div>`;
+    }
     bodyHtml += renderNearby(record);
 
     panelContentEl.innerHTML = `
