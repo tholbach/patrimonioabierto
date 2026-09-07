@@ -8189,7 +8189,7 @@
     "already_linked": true,
     "wikidata_conflict": true,
     "has_wikidata_image": true,
-    "has_wikipedia_article": false,
+    "has_wikipedia_article": true,
     "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/VillanuevaDeR%C3%ADoUbierna%209282175.jpg"
   },
   {
@@ -12081,7 +12081,7 @@
     "wikidata_conflict": false,
     "has_wikidata_image": true,
     "has_wikipedia_article": false,
-    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Cordovilla%20la%20Real%2001%20rollo%20by-dpc.jpg"
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Cordovilla%20la%20real%20103%20%28Rollo%20de%20justicia%29.jpg"
   },
   {
     "jcyl_id": 7035,
@@ -24690,7 +24690,7 @@
     "wikidata_conflict": false,
     "has_wikidata_image": true,
     "has_wikipedia_article": true,
-    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Penafiel-Espana0011.JPG"
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Castillo%20pe%C3%B1afiel%20desde%20plaza%20coso%20valladolid.jpg"
   },
   {
     "jcyl_id": 15077,
@@ -26004,7 +26004,7 @@
     "wikidata_conflict": false,
     "has_wikidata_image": true,
     "has_wikipedia_article": true,
-    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Valladolid%20-%20Convento%20de%20la%20Descalzas%20Reales%20002.jpg"
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Valladolid%20-%20M%C2%BA%20Descalzas%20Reales%204.jpg"
   },
   {
     "jcyl_id": 15975,
@@ -27012,7 +27012,7 @@
     "wikidata_conflict": false,
     "has_wikidata_image": true,
     "has_wikipedia_article": true,
-    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Iglesia%20Parroquial%20de%20Santa%20Mar%C3%ADa%20del%20Castillo.jpg"
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Iglesia%20de%20Santa%20Mar%C3%ADa%20del%20Castillo%2C%20Fuentesa%C3%BAco%2001.jpg"
   },
   {
     "jcyl_id": 16632,
@@ -27948,7 +27948,7 @@
     "wikidata_conflict": false,
     "has_wikidata_image": true,
     "has_wikipedia_article": false,
-    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Campanario%20Iglesia%20Villanueva%20de%20Azoague.jpg"
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Glesia%20Villanueva%20de%20Azoague.jpg"
   },
   {
     "jcyl_id": 17174,
@@ -28488,7 +28488,7 @@
     "wikidata_conflict": false,
     "has_wikidata_image": true,
     "has_wikipedia_article": true,
-    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Puerta%20de%20Do%C3%B1a%20Urraca.JPG"
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Puerta%20de%20Do%C3%B1a%20Urraca%2C%20Zamora.jpg"
   },
   {
     "jcyl_id": 17458,
@@ -28951,8 +28951,8 @@
     "municipality_ine_code_p772": "34004",
     "province": "Palencia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=118008",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141342678",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "has_wikipedia_article": false,
@@ -29005,8 +29005,8 @@
     "municipality_ine_code_p772": "34032",
     "province": "Palencia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=121304",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141347735",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "has_wikipedia_article": false,
@@ -29761,8 +29761,8 @@
     "municipality_ine_code_p772": "37044",
     "province": "Salamanca",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=141136",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141347730",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "has_wikipedia_article": false,
@@ -30157,8 +30157,8 @@
     "municipality_ine_code_p772": "40030",
     "province": "Segovia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=165121",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141347733",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "has_wikipedia_article": false,
@@ -30175,8 +30175,8 @@
     "municipality_ine_code_p772": "40030",
     "province": "Segovia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=165173",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141347734",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "has_wikipedia_article": false,
@@ -33019,8 +33019,8 @@
     "municipality_ine_code_p772": "49023",
     "province": "Zamora",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=258008",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141347731",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "has_wikipedia_article": false,
@@ -33037,8 +33037,8 @@
     "municipality_ine_code_p772": "49023",
     "province": "Zamora",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=258079",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141347732",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "has_wikipedia_article": false,
@@ -42793,8 +42793,8 @@
     "municipality_ine_code_p772": "34005",
     "province": "Palencia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=943822",
-    "wikidata_qid": null,
-    "already_linked": false,
+    "wikidata_qid": "Q141342706",
+    "already_linked": true,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
     "has_wikipedia_article": false,
