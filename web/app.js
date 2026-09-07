@@ -198,24 +198,44 @@ let categoriesWithCounts = []; // [{ category, count }], sorted most common firs
 // itself no longer has a matching Contribute step (CyL's own catalog is
 // expected to be fully linked by the time these pages ship) but stays as a
 // filter in its own right.
+//
+// 'linked'/'has_photo' are the positive counterparts - "show me what's
+// already working", not just "show me the gaps". No positive counterpart
+// for 'no_wikipedia' (wasn't asked for) - easy to add the same way later
+// if that changes. has_photo doesn't need its own "is this actually
+// linked" check the no_photo pair has: has_wikidata_image can only ever
+// be true on a record fetch_wikidata.py already found a P18 image for,
+// which only happens for items wdt:P3177 matched in the first place - so
+// it already implies linked, same data, no need to re-derive it.
 function isUnlinked(record) {
   return !record.wikidata_qid;
+}
+function isLinked(record) {
+  return !!record.wikidata_qid;
 }
 function isLinkedNoPhoto(record) {
   return !!record.wikidata_qid && !record.has_wikidata_image;
 }
+function hasPhoto(record) {
+  return !!record.has_wikidata_image;
+}
 function isLinkedNoWikipedia(record) {
   return !!record.wikidata_qid && !record.has_wikipedia_article;
 }
-const STATUS_MATCHERS = { unlinked: isUnlinked, no_photo: isLinkedNoPhoto, no_wikipedia: isLinkedNoWikipedia };
-const STATUS_ICONS = { unlinked: '🔗', no_photo: '🖼️', no_wikipedia: '📖' };
+const STATUS_MATCHERS = {
+  unlinked: isUnlinked,
+  linked: isLinked,
+  no_photo: isLinkedNoPhoto,
+  has_photo: hasPhoto,
+  no_wikipedia: isLinkedNoWikipedia,
+};
+const STATUS_ICONS = { unlinked: '🔗', linked: '🔗', no_photo: '🖼️', has_photo: '🖼️', no_wikipedia: '📖' };
 
 function initStatusFilter() {
-  const counts = {
-    unlinked: allRecords.filter(isUnlinked).length,
-    no_photo: allRecords.filter(isLinkedNoPhoto).length,
-    no_wikipedia: allRecords.filter(isLinkedNoWikipedia).length,
-  };
+  // Built from STATUS_MATCHERS' own keys, not hand-listed - adding a new
+  // status above (like has_photo/linked just now) only needs to happen in
+  // one place, not two that can silently drift apart.
+  const counts = Object.fromEntries(Object.keys(STATUS_MATCHERS).map((status) => [status, allRecords.filter(STATUS_MATCHERS[status]).length]));
   // Seed from the URL (?status=unlinked,no_photo) if present, so a
   // reloaded or shared link reopens with the same filter active - see
   // syncFiltersToUrl(), which writes this same param back on every change.
