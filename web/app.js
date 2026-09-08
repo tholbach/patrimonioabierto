@@ -480,7 +480,21 @@ const appEl = document.getElementById('app');
 // which every show*Panel() function sets before calling openPanel().
 const PAGE_PANEL_TYPES = new Set(['about', 'contribute', 'stats', 'privacy', 'imprint']);
 
-function openPanel() {
+// onMapReady (optional): called once the map's own size is actually
+// correct - immediately, if this call isn't resizing/revealing #map at
+// all, or otherwise only after the same invalidateSize() below runs. Any
+// flyTo()/flyToBounds() paired with an openPanel() call MUST go through
+// this, not run right after it unconditionally - confirmed by testing
+// (mobile, page-mode list view -> tap a monument): calling flyTo()
+// synchronously left the map centered wrong, because at that exact
+// instant #map-wrap had just gone display:none -> block and #panel's
+// height was still mid-transition (100% -> 68vh takes 300ms) - Leaflet's
+// own cached container size was still stale, so flyTo() aimed at the
+// wrong pixel geometry entirely. invalidateSize() alone doesn't fix a
+// flyTo() that already ran against bad geometry - it only fixes the
+// map's *size*, not wherever that earlier, wrongly-aimed flyTo() left the
+// view sitting.
+function openPanel(onMapReady) {
   // Every panel-show function sets panelContentEl.innerHTML then calls this
   // - resetting here, not per panel type, means a stale gallery/swipe state
   // from whatever was open before can never leak into a panel that has none.
@@ -499,7 +513,12 @@ function openPanel() {
     // Leaflet needs to recompute its size once the layout transition that
     // shrinks/grows #map has actually finished, or tiles render into the
     // wrong area until the next manual pan/zoom.
-    setTimeout(() => map.invalidateSize(), 260);
+    setTimeout(() => {
+      map.invalidateSize();
+      onMapReady?.();
+    }, 260);
+  } else {
+    onMapReady?.();
   }
 }
 
@@ -1282,13 +1301,12 @@ async function selectMonument(record, { flyTo = false, updateUrl = true } = {}) 
       <div class="loading">${t('loading')}</div>
     </div>
   `;
-  openPanel();
+  openPanel(() => {
+    if (flyTo) map.flyTo([record.lat, record.lon], Math.max(map.getZoom(), 14));
+  });
 
   if (updateUrl) {
     history.pushState(null, '', shareUrl(record));
-  }
-  if (flyTo) {
-    map.flyTo([record.lat, record.lon], Math.max(map.getZoom(), 14));
   }
 
   if (!record.already_linked) {
@@ -1925,9 +1943,10 @@ function showMunicipalityPanel(muni, { flyTo = false, updateUrl = true } = {}) {
     </div>
   `;
   wireMonumentListRows(panelContentEl);
-  openPanel();
+  openPanel(() => {
+    if (flyTo) map.flyToBounds(bboxToLeafletBounds(muni.bbox), { padding: [40, 40] });
+  });
   if (updateUrl) history.pushState(null, '', municipalityShareUrl(muni));
-  if (flyTo) map.flyToBounds(bboxToLeafletBounds(muni.bbox), { padding: [40, 40] });
 }
 
 function provinceShareUrl(prov) {
@@ -1974,9 +1993,10 @@ function showProvincePanel(prov, { flyTo = false, updateUrl = true } = {}) {
       if (muni) showMunicipalityPanel(muni, { flyTo: true });
     });
   });
-  openPanel();
+  openPanel(() => {
+    if (flyTo) map.flyToBounds(bboxToLeafletBounds(prov.bbox), { padding: [40, 40] });
+  });
   if (updateUrl) history.pushState(null, '', provinceShareUrl(prov));
-  if (flyTo) map.flyToBounds(bboxToLeafletBounds(prov.bbox), { padding: [40, 40] });
 }
 
 // Mobile only (see CSS) - the topbar's four nav items collapse into this
