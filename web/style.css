@@ -26,6 +26,26 @@
 html, body { height: 100%; margin: 0; }
 body { display: flex; flex-direction: column; font-family: var(--font-body); background: var(--bg); color: var(--ink); }
 
+/* Standard "skip link" pattern - see the HTML comment on
+   #skip-to-list-link. Off-screen (not display:none/visibility:hidden,
+   which would also pull it out of the tab order) until it actually
+   receives keyboard focus, at which point it snaps into view as the very
+   first thing on the page. */
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: -9999px;
+  z-index: 2000;
+  padding: 14px 20px;
+  background: var(--cyl-purple);
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  border-radius: 0 0 8px 0;
+}
+.skip-link:focus { left: 0; }
+
 #topbar {
   flex: 0 0 auto;
   height: 56px;
@@ -1079,26 +1099,35 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
 
 /* Stacked above filter, same 54px rhythm - the accessible, keyboard-
    reachable alternative to clicking a map marker (see showListPanel() in
-   app.js). Deliberately a real, always-visible button rather than buried
-   only inside the hamburger menu - the whole point is a fallback that
-   doesn't depend on already knowing where to look. */
+   app.js). Deliberately a labeled pill, not a same-size circle like its
+   icon-only neighbors above it - a bare 📋 doesn't read as "list view" on
+   its own the way a target/dice does for locate/shuffle, so this one gets
+   real text instead of relying on the emoji alone (see the HTML comment).
+   right-anchored like the rest of the stack, but its own width instead of
+   the fixed 44px circle - same "wider than its neighbors, same right
+   edge" layout #filter-panel already uses next to #filter-btn. */
 #list-btn {
   position: absolute;
   bottom: 186px;
   right: 16px;
   z-index: 500;
-  width: 44px;
-  height: 44px;
-  border-radius: 50%;
+  height: 40px;
+  padding: 0 16px 0 12px;
+  border-radius: 20px;
   border: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
   background: rgba(255,255,255,0.92);
   backdrop-filter: blur(8px);
   box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-  font-size: 18px;
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink);
   cursor: pointer;
   transition: transform 0.12s ease;
 }
-#list-btn:hover { transform: scale(1.08); background: white; }
+#list-btn:hover { transform: scale(1.04); background: white; }
 
 .filter-badge {
   position: absolute;

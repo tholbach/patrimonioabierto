@@ -2014,6 +2014,10 @@ function showListPanel() {
 }
 
 document.getElementById('list-btn').addEventListener('click', () => showListPanel());
+wireSpaLink(document.getElementById('skip-to-list-link'), () => {
+  dismissWelcomeModal(); // see its own comment - don't leave a keyboard user stuck behind it
+  showListPanel();
+});
 
 function provinceShareUrl(prov) {
   const url = new URL(location.href);
@@ -2547,14 +2551,30 @@ function loadingScreenFailed() {
   // worse than staying on the branded screen with a visible message.
 }
 
+const WELCOME_SEEN_KEY = 'patrimonioabierto_welcome_seen';
+
+// Also called directly by the skip-to-list link (see its own wiring) - a
+// keyboard/screen-reader user's very first action landing them behind an
+// unrelated modal they now have to fight through first would defeat the
+// whole point of a skip link being the fastest way to the list.
+function dismissWelcomeModal() {
+  const modal = document.getElementById('welcome-modal');
+  if (!modal || !modal.classList.contains('open')) return;
+  modal.classList.remove('open');
+  try {
+    localStorage.setItem(WELCOME_SEEN_KEY, '1');
+  } catch (e) {
+    // nothing to do - worst case it shows again next visit
+  }
+}
+
 // Shown once per browser via a localStorage flag - never on top of a deep
 // link (?id=/?muni=/?prov=/#stats etc.), since someone arriving at a
 // specific monument already knows what they're looking at.
 function maybeShowWelcome() {
-  const KEY = 'patrimonioabierto_welcome_seen';
   let alreadySeen = true;
   try {
-    alreadySeen = !!localStorage.getItem(KEY);
+    alreadySeen = !!localStorage.getItem(WELCOME_SEEN_KEY);
   } catch (e) {
     return; // e.g. private browsing with storage blocked - skip rather than risk showing it every single visit
   }
@@ -2564,18 +2584,10 @@ function maybeShowWelcome() {
   if (!modal) return;
   modal.classList.add('open');
 
-  const dismiss = () => {
-    modal.classList.remove('open');
-    try {
-      localStorage.setItem(KEY, '1');
-    } catch (e) {
-      // nothing to do - worst case it shows again next visit
-    }
-  };
-  document.getElementById('welcome-close-btn').addEventListener('click', dismiss, { once: true });
+  document.getElementById('welcome-close-btn').addEventListener('click', dismissWelcomeModal, { once: true });
   document.getElementById('welcome-about-link').addEventListener('click', (e) => {
     e.preventDefault();
-    dismiss();
+    dismissWelcomeModal();
     showAboutPanel();
   });
 }
