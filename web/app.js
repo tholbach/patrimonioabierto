@@ -169,6 +169,33 @@ const markers = L.markerClusterGroup({
 });
 map.addLayer(markers);
 
+// Leaflet gives every marker (and, confirmed by testing, every
+// Leaflet.markercluster cluster icon too - they're L.Marker instances
+// internally) tabindex="0"/role="button" by default, with no accessible
+// name on any of them. Individual markers get keyboard:false at creation
+// below (allMarkerLayers.push()), which does stop *those* - but that same
+// option passed to L.markerClusterGroup() above does NOT reach the
+// plugin's own internally-created cluster icons (verified: still
+// tabbable), and there's no group-level option that does. Since a cluster
+// icon is recreated on every zoom/pan/filter change, not just once, a
+// MutationObserver watching for it actually landing in the DOM is more
+// robust than trying to catch every Leaflet/plugin event that might
+// trigger a re-render. Before this: Tab from the top of the page took 113
+// presses (one per marker/cluster icon on screen at the starting zoom) to
+// even reach the map's own buttons - unusable, not just imperfect. Search
+// (#search-input, arrow-key-navigable results) is the real, actually-
+// labeled keyboard/screen-reader path to a monument, not these.
+new MutationObserver((mutations) => {
+  for (const mutation of mutations) {
+    for (const node of mutation.addedNodes) {
+      if (node.nodeType === 1 && node.classList?.contains('cluster-icon')) {
+        node.removeAttribute('tabindex');
+        node.removeAttribute('role');
+      }
+    }
+  }
+}).observe(document.getElementById('map'), { childList: true, subtree: true });
+
 // --- Filters: status + category ---------------------------------------------
 //
 // Two independent, AND-combined dimensions: a marker shows only if its
@@ -453,7 +480,21 @@ const appEl = document.getElementById('app');
 // which every show*Panel() function sets before calling openPanel().
 const PAGE_PANEL_TYPES = new Set(['about', 'contribute', 'stats', 'privacy', 'imprint']);
 
-function openPanel() {
+// onMapReady (optional): called once the map's own size is actually
+// correct - immediately, if this call isn't resizing/revealing #map at
+// all, or otherwise only after the same invalidateSize() below runs. Any
+// flyTo()/flyToBounds() paired with an openPanel() call MUST go through
+// this, not run right after it unconditionally - confirmed by testing
+// (mobile, Stats page -> search selects a monument): calling flyTo()
+// synchronously left the map centered wrong, because at that exact
+// instant #map-wrap had just gone display:none -> block and #panel's
+// height was still mid-transition (100% -> 68vh takes 300ms) - Leaflet's
+// own cached container size was still stale, so flyTo() aimed at the
+// wrong pixel geometry entirely. invalidateSize() alone doesn't fix a
+// flyTo() that already ran against bad geometry - it only fixes the
+// map's *size*, not wherever that earlier, wrongly-aimed flyTo() left the
+// view sitting.
+function openPanel(onMapReady) {
   // Every panel-show function sets panelContentEl.innerHTML then calls this
   // - resetting here, not per panel type, means a stale gallery/swipe state
   // from whatever was open before can never leak into a panel that has none.
@@ -472,7 +513,12 @@ function openPanel() {
     // Leaflet needs to recompute its size once the layout transition that
     // shrinks/grows #map has actually finished, or tiles render into the
     // wrong area until the next manual pan/zoom.
-    setTimeout(() => map.invalidateSize(), 260);
+    setTimeout(() => {
+      map.invalidateSize();
+      onMapReady?.();
+    }, 260);
+  } else {
+    onMapReady?.();
   }
 }
 
@@ -1255,13 +1301,12 @@ async function selectMonument(record, { flyTo = false, updateUrl = true } = {}) 
       <div class="loading">${t('loading')}</div>
     </div>
   `;
-  openPanel();
+  openPanel(() => {
+    if (flyTo) map.flyTo([record.lat, record.lon], Math.max(map.getZoom(), 14));
+  });
 
   if (updateUrl) {
     history.pushState(null, '', shareUrl(record));
-  }
-  if (flyTo) {
-    map.flyTo([record.lat, record.lon], Math.max(map.getZoom(), 14));
   }
 
   if (!record.already_linked) {
@@ -1812,22 +1857,31 @@ function monumentListItemHtml(record, subValue) {
   // Thumbnail when we already know the filename (from the bulk SPARQL
   // pull, not a per-row fetch) - falls back to the emoji dot for anything
   // without a photo, same as before. loading="lazy" so rows off-screen
-  // (e.g. a long municipality list) don't all fetch at once.
+  // (e.g. a long municipality list) don't all fetch at once. The emoji dot
+  // also carries a text aria-label (same linked/missing status a map
+  // marker for this record would show via color) - a screen reader has no
+  // way to read "green" or "terracotta" otherwise.
+  const statusLabel = t(record.already_linked ? 'filter.status_linked' : 'filter.status_unlinked');
   const icon = record.image_url
     ? `<img class="list-row-thumb" src="${record.image_url}?width=64" alt="" loading="lazy">`
-    : `<span class="list-row-icon ${statusClass}">${emoji}</span>`;
+    : `<span class="list-row-icon ${statusClass}" role="img" aria-label="${statusLabel}">${emoji}</span>`;
+  // A real <a href="?id=...">, not a plain click target - see
+  // wireMonumentListRows()/wireSpaLink(): Tab/Enter reaches it, a screen
+  // reader reads it as a link (not silent inert text), and right-click/
+  // copy-link/ctrl-click do a real navigation, matching every other "link"
+  // in this app.
   return `
-    <li class="list-row" data-jcyl-id="${record.jcyl_id}">
+    <li><a class="list-row" href="${shareUrl(record)}" data-jcyl-id="${record.jcyl_id}">
       ${icon}
       <span class="list-row-name">${record.name}</span>
       ${subValue ? `<span class="list-row-stat">${subValue}</span>` : ''}
-    </li>
+    </a></li>
   `;
 }
 
 function wireMonumentListRows(container) {
   container.querySelectorAll('.list-row[data-jcyl-id]').forEach((row) => {
-    row.addEventListener('click', () => {
+    wireSpaLink(row, () => {
       const record = recordsById.get(row.dataset.jcylId);
       if (record) selectMonument(record, { flyTo: true });
     });
@@ -1898,9 +1952,10 @@ function showMunicipalityPanel(muni, { flyTo = false, updateUrl = true } = {}) {
     </div>
   `;
   wireMonumentListRows(panelContentEl);
-  openPanel();
+  openPanel(() => {
+    if (flyTo) map.flyToBounds(bboxToLeafletBounds(muni.bbox), { padding: [40, 40] });
+  });
   if (updateUrl) history.pushState(null, '', municipalityShareUrl(muni));
-  if (flyTo) map.flyToBounds(bboxToLeafletBounds(muni.bbox), { padding: [40, 40] });
 }
 
 function provinceShareUrl(prov) {
@@ -1947,9 +2002,10 @@ function showProvincePanel(prov, { flyTo = false, updateUrl = true } = {}) {
       if (muni) showMunicipalityPanel(muni, { flyTo: true });
     });
   });
-  openPanel();
+  openPanel(() => {
+    if (flyTo) map.flyToBounds(bboxToLeafletBounds(prov.bbox), { padding: [40, 40] });
+  });
   if (updateUrl) history.pushState(null, '', provinceShareUrl(prov));
-  if (flyTo) map.flyToBounds(bboxToLeafletBounds(prov.bbox), { padding: [40, 40] });
 }
 
 // Mobile only (see CSS) - the topbar's four nav items collapse into this
@@ -2479,8 +2535,19 @@ Promise.all([
 
     recordsById = new Map(records.map((r) => [String(r.jcyl_id), r]));
 
+    // keyboard: false - Leaflet gives every marker tabindex="0"/role="button"
+    // by default (and, confirmed by testing, so does Leaflet.markercluster
+    // for its own cluster icons - see the matching option on the
+    // markerClusterGroup above), but none of them ever gets an accessible
+    // name, and there are 2,479 of them. Measured before this fix: Tab from
+    // the top of the page took 113 presses (one per marker/cluster icon
+    // rendered at the starting zoom) to even reach the map's own buttons -
+    // unusable, not just imperfect. Turning marker keyboard focus off
+    // entirely, in favor of search (arrow-key-navigable, real accessible
+    // names) as the one keyboard/screen-reader path to open a monument,
+    // fixed that outright (re-verified: 0 marker-related tab stops).
     for (const record of records) {
-      const marker = L.marker([record.lat, record.lon], { icon: iconFor(record) });
+      const marker = L.marker([record.lat, record.lon], { icon: iconFor(record), keyboard: false });
       marker.record = record; // read by clusterIcon() to compute each cluster's linked ratio
       marker.on('click', () => selectMonument(record, { flyTo: false }));
       allMarkerLayers.push(marker);
