@@ -166,6 +166,14 @@
         <div id="filter-list"></div>
       </div>
 
+      <!-- Map markers (Leaflet) have no keyboard path at all - clicking one
+           is a mouse/touch-only interaction. This button is the accessible
+           way in: a plain, scrollable, real-<a>-per-row list of the same
+           (filtered) monuments the map shows, fully reachable by Tab/Enter
+           and readable by a screen reader with no map involved. See
+           showListPanel() in app.js. -->
+      <button type="button" id="list-btn" data-i18n-title="list.button_title" aria-label="List view">📋</button>
+
       <!-- Desktop-only (hidden <=768px, see style.css) - a rotating
            highlight card, one photo picked deterministically per ISO week
            from web/data/picture_of_the_week.json (see find_good_pictures.py)

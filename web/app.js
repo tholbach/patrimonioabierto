@@ -478,7 +478,12 @@ const appEl = document.getElementById('app');
 // (monument/municipality/province/menu) keeps the normal map-side
 // panel/bottom-sheet treatment. Checked against currentPanelState.type,
 // which every show*Panel() function sets before calling openPanel().
-const PAGE_PANEL_TYPES = new Set(['about', 'contribute', 'stats', 'privacy', 'imprint']);
+// 'list' joins these too: it's a full alternate way to browse the same
+// data as the map (see showListPanel()), not a quick transient panel like
+// municipality/province/menu - map-side real estate would just be
+// clutter (and, for a screen-reader user, noise) next to a page whose
+// whole point is not needing the map at all.
+const PAGE_PANEL_TYPES = new Set(['about', 'contribute', 'stats', 'privacy', 'imprint', 'list']);
 
 // onMapReady (optional): called once the map's own size is actually
 // correct - immediately, if this call isn't resizing/revealing #map at
@@ -1974,6 +1979,42 @@ function showMunicipalityPanel(muni, { flyTo = false, updateUrl = true } = {}) {
   if (updateUrl) history.pushState(null, '', municipalityShareUrl(muni));
 }
 
+// --- List view (accessible fallback for browsing without the map) ---------
+//
+// Leaflet markers have no keyboard path at all - clicking one to open a
+// monument is a mouse/touch-only interaction (confirmed: Leaflet's marker
+// <img>/divIcon elements carry no tabindex or key handling of their own).
+// This panel is the way in for anyone who can't (or doesn't want to) drive
+// the map: the exact same set of monuments the map currently shows -
+// selectedCategories/selectedStatuses, the same two filters applyFilters()
+// itself reads - as a plain, scrollable list. Rows reuse
+// monumentListItemHtml()/wireMonumentListRows(), the same real-<a>-per-row
+// helper the Municipality panel and "Nearby" already use, rather than a
+// one-off template that could drift from them.
+function showListPanel() {
+  currentPanelState = { type: 'list' };
+  const filtered = allRecords
+    .filter((r) => selectedCategories.has(r.category))
+    .filter((r) => !selectedStatuses.size || [...selectedStatuses].some((s) => STATUS_MATCHERS[s](r)))
+    .sort((a, b) => a.name.localeCompare(b.name, 'es'));
+
+  const rowsHtml = filtered.length
+    ? filtered.map((r) => monumentListItemHtml(r, r.municipality)).join('')
+    : `<div class="missing-note">${t('list.empty')}</div>`;
+
+  panelContentEl.innerHTML = `
+    ${heroBlock({ title: t('list.title'), placeholderIcon: '📋' })}
+    <div class="panel-body">
+      <div class="meta">${t('list.count', filtered.length)} · ${t('list.filtered_note')}</div>
+      <ul class="list">${rowsHtml}</ul>
+    </div>
+  `;
+  wireMonumentListRows(panelContentEl);
+  openPanel();
+}
+
+document.getElementById('list-btn').addEventListener('click', () => showListPanel());
+
 function provinceShareUrl(prov) {
   const url = new URL(location.href);
   url.search = new URLSearchParams({ prov: prov.name }).toString();
@@ -2037,6 +2078,7 @@ function showMenuPanel() {
     ${heroBlock({ title: t('menu.title'), placeholderIcon: '☰' })}
     <div class="panel-body">
       <ul class="list">
+        <li class="list-row" data-menu="list"><span class="list-row-icon-plain">📋</span><span class="list-row-name">${t('nav.list')}</span></li>
         <li class="list-row" data-menu="stats"><span class="list-row-icon-plain">📊</span><span class="list-row-name">${t('nav.stats')}</span></li>
         <li class="list-row" data-menu="about"><span class="list-row-icon-plain">ℹ️</span><span class="list-row-name">${t('nav.about')}</span></li>
         <li class="list-row" data-menu="contribute"><span class="list-row-icon-plain">🤝</span><span class="list-row-name">${t('nav.contribute')}</span></li>
@@ -2050,7 +2092,8 @@ function showMenuPanel() {
   panelContentEl.querySelectorAll('.list-row[data-menu]').forEach((row) => {
     row.addEventListener('click', () => {
       const action = row.dataset.menu;
-      if (action === 'stats') showStatsPanel();
+      if (action === 'list') showListPanel();
+      else if (action === 'stats') showStatsPanel();
       else if (action === 'about') showAboutPanel();
       else if (action === 'contribute') showContributePanel();
       else if (action === 'privacy') showPrivacyPanel();
@@ -2469,6 +2512,8 @@ function rerenderPanel(state) {
     showMunicipalityPanel(state.muni, { flyTo: false, updateUrl: false });
   } else if (state?.type === 'province') {
     showProvincePanel(state.prov, { flyTo: false, updateUrl: false });
+  } else if (state?.type === 'list') {
+    showListPanel();
   } else if (state?.type === 'stats') {
     showStatsPanel({ updateUrl: false });
   } else if (state?.type === 'about') {

@@ -802,10 +802,10 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
 .stats-chart-tooltip .tt-delta.down { color: #f0c8c8; }
 
 .list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--border); }
-/* .list-row is a real <a href="?id=..."> now (see monumentListItemHtml()
-   in app.js), not a plain click-only <li> - reset the default link look
-   since visually it should still read as one plain row, same as before
-   this was a real link. */
+/* .list-row is a real <a href="?id=..."> now (see monumentListItemHtml() /
+   showListPanel() in app.js), not a plain click-only <li> - reset the
+   default link look since visually it should still read as one plain row,
+   same as before this was a real link. */
 .list-row {
   display: flex;
   align-items: center;
@@ -1077,6 +1077,29 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
 #filter-btn:hover { transform: scale(1.08); background: white; }
 #filter-btn.active { background: var(--cyl-purple); color: white; }
 
+/* Stacked above filter, same 54px rhythm - the accessible, keyboard-
+   reachable alternative to clicking a map marker (see showListPanel() in
+   app.js). Deliberately a real, always-visible button rather than buried
+   only inside the hamburger menu - the whole point is a fallback that
+   doesn't depend on already knowing where to look. */
+#list-btn {
+  position: absolute;
+  bottom: 186px;
+  right: 16px;
+  z-index: 500;
+  width: 44px;
+  height: 44px;
+  border-radius: 50%;
+  border: none;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  font-size: 18px;
+  cursor: pointer;
+  transition: transform 0.12s ease;
+}
+#list-btn:hover { transform: scale(1.08); background: white; }
+
 .filter-badge {
   position: absolute;
   top: -2px;
@@ -1305,6 +1328,7 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
   #map-wrap.potw-visible #shuffle-btn { bottom: 194px; }
   #map-wrap.potw-visible #filter-btn,
   #map-wrap.potw-visible #filter-panel { bottom: 248px; }
+  #map-wrap.potw-visible #list-btn { bottom: 302px; }
 }
 
 #locate-btn:hover { transform: scale(1.08); background: white; }
