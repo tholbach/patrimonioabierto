@@ -490,7 +490,8 @@ const PAGE_PANEL_TYPES = new Set(['about', 'contribute', 'stats', 'privacy', 'im
 // all, or otherwise only after the same invalidateSize() below runs. Any
 // flyTo()/flyToBounds() paired with an openPanel() call MUST go through
 // this, not run right after it unconditionally - confirmed by testing
-// (mobile, Stats page -> search selects a monument): calling flyTo()
+// (mobile, Stats page -> search selects a monument; page-mode list view ->
+// tap a monument): calling flyTo()
 // synchronously left the map centered wrong, because at that exact
 // instant #map-wrap had just gone display:none -> block and #panel's
 // height was still mid-transition (100% -> 68vh takes 300ms) - Leaflet's
