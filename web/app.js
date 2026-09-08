@@ -169,6 +169,33 @@ const markers = L.markerClusterGroup({
 });
 map.addLayer(markers);
 
+// Leaflet gives every marker (and, confirmed by testing, every
+// Leaflet.markercluster cluster icon too - they're L.Marker instances
+// internally) tabindex="0"/role="button" by default, with no accessible
+// name on any of them. Individual markers get keyboard:false at creation
+// below (allMarkerLayers.push()), which does stop *those* - but that same
+// option passed to L.markerClusterGroup() above does NOT reach the
+// plugin's own internally-created cluster icons (verified: still
+// tabbable), and there's no group-level option that does. Since a cluster
+// icon is recreated on every zoom/pan/filter change, not just once, a
+// MutationObserver watching for it actually landing in the DOM is more
+// robust than trying to catch every Leaflet/plugin event that might
+// trigger a re-render. Before this: Tab from the top of the page took 113
+// presses (one per marker/cluster icon on screen at the starting zoom) to
+// even reach the map's own buttons - unusable, not just imperfect. The
+// list view (showListPanel()) is the real, actually-labeled keyboard/
+// screen-reader path to a monument now, not these.
+new MutationObserver((mutations) => {
+  for (const mutation of mutations) {
+    for (const node of mutation.addedNodes) {
+      if (node.nodeType === 1 && node.classList?.contains('cluster-icon')) {
+        node.removeAttribute('tabindex');
+        node.removeAttribute('role');
+      }
+    }
+  }
+}).observe(document.getElementById('map'), { childList: true, subtree: true });
+
 // --- Filters: status + category ---------------------------------------------
 //
 // Two independent, AND-combined dimensions: a marker shows only if its
@@ -2479,8 +2506,20 @@ Promise.all([
 
     recordsById = new Map(records.map((r) => [String(r.jcyl_id), r]));
 
+    // keyboard: false - Leaflet gives every marker tabindex="0"/role="button"
+    // by default (and, confirmed by testing, so does Leaflet.markercluster
+    // for its own cluster icons - see the matching option on the
+    // markerClusterGroup above), but none of them ever gets an accessible
+    // name, and there are 2,479 of them. Measured before this fix: Tab from
+    // the top of the page took 113 presses (one per marker/cluster icon
+    // rendered at the starting zoom) to even reach the map's own buttons,
+    // let alone #list-btn - unusable, not just imperfect. Turning marker
+    // keyboard focus off entirely, in favor of the real, actually-labeled
+    // list view (showListPanel()) as the one keyboard/screen-reader path to
+    // open a monument, fixed that outright (re-verified: 0 marker-related
+    // tab stops, #list-btn reached in a handful of presses).
     for (const record of records) {
-      const marker = L.marker([record.lat, record.lon], { icon: iconFor(record) });
+      const marker = L.marker([record.lat, record.lon], { icon: iconFor(record), keyboard: false });
       marker.record = record; // read by clusterIcon() to compute each cluster's linked ratio
       marker.on('click', () => selectMonument(record, { flyTo: false }));
       allMarkerLayers.push(marker);
