@@ -2,8 +2,59 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
-  <title>CyLinked</title>
+  <title>CyLinked - Patrimonio cultural de Castilla y León en un mapa</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- SEO/social preview. SITE_URL appears in three places below
+       (canonical, og:url, twitter/og:image) - if this project ever renames
+       to patrimonioabierto.es (under discussion), update all three together
+       plus the <title>/og:title/og:site_name text above, or a shared link
+       preview will keep pointing at the old name/domain. -->
+  <meta name="description" content="Mapa interactivo de los Bienes de Interés Cultural (BIC) de Castilla y León: castillos, yacimientos arqueológicos, arte rupestre, conjuntos históricos, hórreos, rollos de justicia y más - cada uno enlazado con su ficha en Wikidata, su artículo en Wikipedia y sus fotos libres en Wikimedia Commons. Explora, con historia y fotografías, más de 2.400 monumentos protegidos según el catálogo oficial de la Junta de Castilla y León - datos abiertos, gratis, sin cuentas ni anuncios.">
+  <link rel="canonical" href="https://cylinked.holba.ch/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="CyLinked">
+  <meta property="og:title" content="CyLinked - Patrimonio cultural de Castilla y León en un mapa">
+  <meta property="og:description" content="Castillos, yacimientos arqueológicos, arte rupestre, conjuntos históricos y más de 2.400 monumentos protegidos de Castilla y León, enlazados con Wikidata, Wikipedia y Wikimedia Commons - con fotos, historia y datos abiertos de la Junta de Castilla y León.">
+  <meta property="og:image" content="https://cylinked.holba.ch/assets/logo-readme.png">
+  <meta property="og:url" content="https://cylinked.holba.ch/">
+  <meta property="og:locale" content="es_ES">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="CyLinked - Patrimonio cultural de Castilla y León en un mapa">
+  <meta name="twitter:description" content="Castillos, yacimientos arqueológicos, arte rupestre, conjuntos históricos y más de 2.400 monumentos protegidos de Castilla y León, enlazados con Wikidata, Wikipedia y Wikimedia Commons.">
+  <meta name="twitter:image" content="https://cylinked.holba.ch/assets/logo-readme.png">
+
+  <!-- Structured data (schema.org) for search engines - a Dataset (what
+       this project actually publishes: the merged BIC/Wikidata/Wikipedia/
+       Commons table) presented as part of a WebSite (how people reach it).
+       Doesn't change anything a visitor sees; only read by crawlers. -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@graph": [
+      {
+        "@type": "WebSite",
+        "name": "CyLinked",
+        "alternateName": "Patrimonio cultural de Castilla y León en un mapa",
+        "url": "https://cylinked.holba.ch/",
+        "description": "Mapa interactivo de los Bienes de Interés Cultural (BIC) de Castilla y León, enlazados con Wikidata, Wikipedia y Wikimedia Commons.",
+        "inLanguage": ["es", "en"],
+        "isAccessibleForFree": true
+      },
+      {
+        "@type": "Dataset",
+        "name": "CyLinked - Bienes de Interés Cultural de Castilla y León enlazados con Wikidata",
+        "description": "Catálogo oficial de Bienes de Interés Cultural (BIC) de la Junta de Castilla y León - castillos, yacimientos arqueológicos, arte rupestre, conjuntos históricos, hórreos, rollos de justicia y otras categorías - cruzado automáticamente con Wikidata (identificador P3177), Wikipedia y Wikimedia Commons para mostrar qué monumentos ya están documentados en el conocimiento libre y cuáles no.",
+        "url": "https://cylinked.holba.ch/",
+        "license": "https://creativecommons.org/publicdomain/zero/1.0/",
+        "creator": { "@type": "Organization", "name": "Junta de Castilla y León", "url": "https://datosabiertos.jcyl.es/" },
+        "spatialCoverage": { "@type": "Place", "name": "Castilla y León, España" },
+        "keywords": ["Bienes de Interés Cultural", "BIC", "patrimonio cultural", "Castilla y León", "Wikidata", "Wikipedia", "Wikimedia Commons", "datos abiertos", "castillos", "arte rupestre", "yacimientos arqueológicos"]
+      }
+    ]
+  }
+  </script>
+
   <!-- Same mark as #logo-mark/#loading-logo/#welcome-logo (assets/logo.png)
        - just square and on a solid brand-purple backing (same purple as
        logo-readme.png's own README treatment), since a browser tab is

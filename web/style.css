@@ -796,6 +796,10 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
 .stats-chart-tooltip .tt-delta.down { color: #f0c8c8; }
 
 .list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--border); }
+/* .list-row is a real <a href="?id=..."> now (see monumentListItemHtml()
+   in app.js), not a plain click-only <li> - reset the default link look
+   since visually it should still read as one plain row, same as before
+   this was a real link. */
 .list-row {
   display: flex;
   align-items: center;
@@ -804,9 +808,16 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
   border-bottom: 1px solid var(--border);
   cursor: pointer;
   font-size: 13.5px;
+  color: inherit;
+  text-decoration: none;
   transition: background 0.12s ease;
 }
 .list-row:hover { background: var(--bg); }
+/* Keyboard focus needs its own visible ring - browsers don't draw one on
+   an <a> the way they do on a <button>/<input> by default. -2px offset
+   (inset, not outset) so it doesn't get clipped by .panel-body's own
+   overflow or bleed into the next row. */
+.list-row:focus-visible { outline: 2px solid var(--cyl-purple); outline-offset: -2px; border-radius: 4px; }
 .list-row-icon {
   width: 22px; height: 22px;
   border-radius: 50%;

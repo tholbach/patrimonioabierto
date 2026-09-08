@@ -182,9 +182,9 @@ map.addLayer(markers);
 // robust than trying to catch every Leaflet/plugin event that might
 // trigger a re-render. Before this: Tab from the top of the page took 113
 // presses (one per marker/cluster icon on screen at the starting zoom) to
-// even reach the map's own buttons - unusable, not just imperfect. The
-// list view (showListPanel()) is the real, actually-labeled keyboard/
-// screen-reader path to a monument now, not these.
+// even reach the map's own buttons - unusable, not just imperfect. Search
+// (#search-input, arrow-key-navigable results) is the real, actually-
+// labeled keyboard/screen-reader path to a monument, not these.
 new MutationObserver((mutations) => {
   for (const mutation of mutations) {
     for (const node of mutation.addedNodes) {
@@ -485,7 +485,7 @@ const PAGE_PANEL_TYPES = new Set(['about', 'contribute', 'stats', 'privacy', 'im
 // all, or otherwise only after the same invalidateSize() below runs. Any
 // flyTo()/flyToBounds() paired with an openPanel() call MUST go through
 // this, not run right after it unconditionally - confirmed by testing
-// (mobile, page-mode list view -> tap a monument): calling flyTo()
+// (mobile, Stats page -> search selects a monument): calling flyTo()
 // synchronously left the map centered wrong, because at that exact
 // instant #map-wrap had just gone display:none -> block and #panel's
 // height was still mid-transition (100% -> 68vh takes 300ms) - Leaflet's
@@ -1857,22 +1857,31 @@ function monumentListItemHtml(record, subValue) {
   // Thumbnail when we already know the filename (from the bulk SPARQL
   // pull, not a per-row fetch) - falls back to the emoji dot for anything
   // without a photo, same as before. loading="lazy" so rows off-screen
-  // (e.g. a long municipality list) don't all fetch at once.
+  // (e.g. a long municipality list) don't all fetch at once. The emoji dot
+  // also carries a text aria-label (same linked/missing status a map
+  // marker for this record would show via color) - a screen reader has no
+  // way to read "green" or "terracotta" otherwise.
+  const statusLabel = t(record.already_linked ? 'filter.status_linked' : 'filter.status_unlinked');
   const icon = record.image_url
     ? `<img class="list-row-thumb" src="${record.image_url}?width=64" alt="" loading="lazy">`
-    : `<span class="list-row-icon ${statusClass}">${emoji}</span>`;
+    : `<span class="list-row-icon ${statusClass}" role="img" aria-label="${statusLabel}">${emoji}</span>`;
+  // A real <a href="?id=...">, not a plain click target - see
+  // wireMonumentListRows()/wireSpaLink(): Tab/Enter reaches it, a screen
+  // reader reads it as a link (not silent inert text), and right-click/
+  // copy-link/ctrl-click do a real navigation, matching every other "link"
+  // in this app.
   return `
-    <li class="list-row" data-jcyl-id="${record.jcyl_id}">
+    <li><a class="list-row" href="${shareUrl(record)}" data-jcyl-id="${record.jcyl_id}">
       ${icon}
       <span class="list-row-name">${record.name}</span>
       ${subValue ? `<span class="list-row-stat">${subValue}</span>` : ''}
-    </li>
+    </a></li>
   `;
 }
 
 function wireMonumentListRows(container) {
   container.querySelectorAll('.list-row[data-jcyl-id]').forEach((row) => {
-    row.addEventListener('click', () => {
+    wireSpaLink(row, () => {
       const record = recordsById.get(row.dataset.jcylId);
       if (record) selectMonument(record, { flyTo: true });
     });
@@ -2532,12 +2541,11 @@ Promise.all([
     // markerClusterGroup above), but none of them ever gets an accessible
     // name, and there are 2,479 of them. Measured before this fix: Tab from
     // the top of the page took 113 presses (one per marker/cluster icon
-    // rendered at the starting zoom) to even reach the map's own buttons,
-    // let alone #list-btn - unusable, not just imperfect. Turning marker
-    // keyboard focus off entirely, in favor of the real, actually-labeled
-    // list view (showListPanel()) as the one keyboard/screen-reader path to
-    // open a monument, fixed that outright (re-verified: 0 marker-related
-    // tab stops, #list-btn reached in a handful of presses).
+    // rendered at the starting zoom) to even reach the map's own buttons -
+    // unusable, not just imperfect. Turning marker keyboard focus off
+    // entirely, in favor of search (arrow-key-navigable, real accessible
+    // names) as the one keyboard/screen-reader path to open a monument,
+    // fixed that outright (re-verified: 0 marker-related tab stops).
     for (const record of records) {
       const marker = L.marker([record.lat, record.lon], { icon: iconFor(record), keyboard: false });
       marker.record = record; // read by clusterIcon() to compute each cluster's linked ratio
