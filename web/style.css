@@ -189,10 +189,15 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
   overflow-y: auto;
   background: var(--card);
   border-radius: 12px;
+  padding: 6px;
   box-shadow: 0 8px 28px rgba(0,0,0,0.25);
   z-index: 700;
 }
-#search-results.open { display: block; }
+#search-results.open { display: block; animation: search-results-in 0.14s ease; }
+@keyframes search-results-in {
+  from { opacity: 0; transform: translateY(-4px); }
+  to { opacity: 1; transform: translateY(0); }
+}
 
 .search-section-label {
   font-size: 11px;
@@ -200,27 +205,68 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
   letter-spacing: 0.4px;
   text-transform: uppercase;
   color: var(--ink-soft);
-  padding: 10px 14px 4px;
+  padding: 10px 10px 4px;
 }
+/* A rounded "card" per row, not an edge-to-edge banner - #search-results'
+   own 6px padding is what leaves room for this to read as a floating
+   highlight rather than butting against the dropdown's own corners. */
 .search-row {
   display: flex;
   align-items: center;
   gap: 10px;
-  padding: 8px 14px;
+  padding: 7px 8px;
+  border-radius: 9px;
   cursor: pointer;
   color: var(--ink);
   font-size: 13.5px;
 }
-.search-row-icon { font-size: 15px; flex-shrink: 0; }
-.search-row-thumb {
-  width: 24px; height: 24px;
-  border-radius: 50%;
-  object-fit: cover;
-  flex-shrink: 0;
-}
-.search-row-name { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
-.search-row-sub { color: var(--ink-soft); font-size: 12px; }
 .search-row:hover, .search-row.highlighted { background: var(--bg); }
+
+/* Thumbnail and emoji-fallback tile share this wrapper so both sit in the
+   exact same slot regardless of which one a given row uses - mixed
+   results (some monuments with a photo, some without, plus municipalities/
+   provinces that never have one) still line up into one clean grid. */
+.search-row-media { position: relative; flex-shrink: 0; }
+.search-row-thumb,
+.search-row-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.search-row-thumb { object-fit: cover; }
+.search-row-icon { font-size: 18px; }
+/* Tinted, not solid - a full-saturation background behind an emoji reads
+   as a warning badge, not a neutral "no photo yet" placeholder. Same
+   green/terracotta as the map's own marker colors and .list-row-icon,
+   just at low opacity as a tile background instead of a small solid dot -
+   consistent color language, calmer at this larger size. */
+.search-row-icon.linked { background: rgba(28,138,109,0.14); }
+.search-row-icon.missing { background: rgba(194,112,61,0.14); }
+.search-row-icon.neutral { background: rgba(116,44,100,0.1); }
+/* Small corner status dot on the media tile, monuments only (statusClass
+   is null for province/municipality rows - see searchRowHtml()) - same
+   colors as everywhere else this signal shows (map markers, list rows),
+   just echoed at a glance for anyone who already knows that color
+   language. A white ring (border, var(--card)) keeps it legible over a
+   busy photo, not just a flat colored circle merging into the thumbnail. */
+.search-row-dot {
+  position: absolute;
+  bottom: -2px;
+  right: -2px;
+  width: 13px;
+  height: 13px;
+  border-radius: 50%;
+  border: 2px solid var(--card);
+}
+.search-row-dot.linked { background: var(--color-linked); }
+.search-row-dot.missing { background: var(--color-missing); }
+
+.search-row-text { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
+.search-row-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500; }
+.search-row-sub { color: var(--ink-soft); font-size: 12px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; }
 .search-empty { padding: 14px; color: var(--ink-soft); font-size: 13px; }
 
 @media (max-width: 768px) {
@@ -1302,7 +1348,7 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
 
   #search-wrap { max-width: 540px; margin: 0 28px; }
   #search-input { font-size: 15px; padding: 10px 18px; }
-  .search-row { font-size: 14.5px; padding: 10px 16px; }
+  .search-row { font-size: 14.5px; padding: 9px 10px; }
   .search-section-label { font-size: 12px; }
 
   #panel.open { width: 500px; }
