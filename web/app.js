@@ -2235,19 +2235,35 @@ const searchInputEl = document.getElementById('search-input');
 const searchResultsEl = document.getElementById('search-results');
 let searchHighlightIndex = -1;
 
-function searchRowHtml(type, key, icon, label, sub, imageUrl, index) {
+// statusClass is 'linked'/'missing' for a monument row (same signal as its
+// map marker's own color - see iconFor()), or null for province/
+// municipality rows, which don't have one thing to be "linked" - they're
+// a whole area, not a single Wikidata-able entity.
+function searchRowHtml(type, key, icon, label, sub, imageUrl, statusClass, index) {
   // Same reasoning as the list-row thumbnails: URL already known from the
-  // bulk pull, no per-row fetch, falls back to the emoji for anything
+  // bulk pull, no per-row fetch, falls back to the emoji tile for anything
   // without a photo (and always for municipalities/provinces, which have
-  // no image_url at all).
-  const iconHtml = imageUrl
-    ? `<img class="search-row-thumb" src="${imageUrl}?width=64" alt="" loading="lazy">`
-    : `<span class="search-row-icon">${icon}</span>`;
+  // no image_url at all). Both a real photo and the emoji fallback sit in
+  // the same rounded-square slot so a mixed-result list (some monuments
+  // photographed, some not, plus municipalities/provinces) still lines up
+  // into one clean grid instead of thumbnails and bare icons of different
+  // sizes.
+  const media = imageUrl
+    ? `<img class="search-row-thumb" src="${imageUrl}?width=96" alt="" loading="lazy">`
+    : `<span class="search-row-icon ${statusClass || 'neutral'}">${icon}</span>`;
+  // Small corner dot, same green/terracotta as everywhere else this status
+  // shows (map markers, list rows) - only for monuments, and only a
+  // color-coded dot, not the only signal: filter.status_linked/unlinked's
+  // own text already describes it elsewhere, this is a quick visual
+  // echo for someone who already knows the color language from the map.
+  const dot = statusClass ? `<span class="search-row-dot ${statusClass}"></span>` : '';
   return `
     <div class="search-row" data-index="${index}" data-type="${type}" data-key="${key}">
-      ${iconHtml}
-      <span class="search-row-name">${label}</span>
-      ${sub ? `<span class="search-row-sub">${sub}</span>` : ''}
+      <span class="search-row-media">${media}${dot}</span>
+      <span class="search-row-text">
+        <span class="search-row-name">${label}</span>
+        ${sub ? `<span class="search-row-sub">${sub}</span>` : ''}
+      </span>
     </div>
   `;
 }
@@ -2265,12 +2281,13 @@ function renderSearchResults(query) {
   const provinceMatches = allProvinces.filter((p) => normalizeSearch(p.name).includes(nq)).slice(0, 5);
 
   const sections = [
-    { label: t('search.section.provinces'), rows: provinceMatches.map((p) => ['province', p.name, '🗺️', p.name, null, null]) },
-    { label: t('search.section.municipalities'), rows: municipalityMatches.map((m) => ['municipality', m.ine_code_p772, '📍', m.name, m.province, null]) },
+    { label: t('search.section.provinces'), rows: provinceMatches.map((p) => ['province', p.name, '🗺️', p.name, null, null, null]) },
+    { label: t('search.section.municipalities'), rows: municipalityMatches.map((m) => ['municipality', m.ine_code_p772, '📍', m.name, m.province, null, null]) },
     {
       label: t('search.section.monuments'),
       rows: monumentMatches.map((r) => [
         'monument', r.jcyl_id, CATEGORY_ICONS[r.category] || DEFAULT_ICON, r.name, r.municipality, r.image_url,
+        r.already_linked ? 'linked' : 'missing',
       ]),
     },
   ].filter((s) => s.rows.length);
