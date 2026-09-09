@@ -28,14 +28,14 @@ const STRINGS = {
     'panel.close': 'Cerrar',
     'loading.screen': 'Cargando el catálogo…',
     'loading.error': 'No se han podido cargar los datos. Recarga la página.',
-    'welcome.title': 'Bienvenido a CyLinked',
+    'welcome.title': 'Bienvenido a Patrimonio Abierto',
     'welcome.body':
       'Aquí encontrarás todos los Bienes de Interés Cultural (BIC) declarados oficialmente en Castilla y León, junto con información y material multimedia de Wikidata, Wikipedia y Wikimedia Commons. Un proyecto libre, sin cuentas ni anuncios.',
     'welcome.cta': 'Empezar a explorar',
     'welcome.about_link': 'Más sobre el proyecto',
-    'about.title': 'Acerca de CyLinked',
+    'about.title': 'Acerca de Patrimonio Abierto',
     'about.intro': (linked, total, pct) =>
-      `CyLinked combina el catálogo abierto de Bienes de Interés Cultural de la Junta de Castilla y León con Wikidata, Wikimedia Commons y Wikipedia, para mostrar cuáles de los ${total} monumentos protegidos de la región están documentados en el ecosistema de conocimiento libre - y cuáles todavía no. Ahora mismo: <strong>${linked} de ${total} (${pct}%)</strong> tienen un enlace a Wikidata.`,
+      `Patrimonio Abierto combina el catálogo abierto de Bienes de Interés Cultural de la Junta de Castilla y León con Wikidata, Wikimedia Commons y Wikipedia, para mostrar cuáles de los ${total} monumentos protegidos de la región están documentados en el ecosistema de conocimiento libre - y cuáles todavía no. Ahora mismo: <strong>${linked} de ${total} (${pct}%)</strong> tienen un enlace a Wikidata.`,
     'about.updated': (date) => `Datos actualizados por última vez: ${date}.`,
     'about.sources.title': 'Fuentes y licencias',
     'about.sources.jcyl':
@@ -49,16 +49,16 @@ const STRINGS = {
     'about.goals.accessible': 'Acercar la cultura y la historia de Castilla y León a cualquiera, sin necesidad de conocimientos previos.',
     'about.goals.free_knowledge':
       'Promover el conocimiento libre: cuanta más información y más fotos con licencia abierta existan, más rica es Wikipedia y más útil Wikidata para todo el mundo.',
-    'about.goals.participate': 'Animar a participar en ese ecosistema - no solo a consultar CyLinked, sino a mejorar lo que hay detrás.',
+    'about.goals.participate': 'Animar a participar en ese ecosistema - no solo a consultar Patrimonio Abierto, sino a mejorar lo que hay detrás.',
     'about.tech.title': 'Cómo funciona por dentro',
     'about.tech.data':
       'Los monumentos y sus municipios vienen directamente del catálogo oficial de la Junta de Castilla y León. Para saber cuáles ya están documentados en Wikidata, comprobamos automáticamente cuáles la citan. Todo ese proceso es un programa informático que se puede volver a ejecutar en cualquier momento - no es trabajo manual, así que los datos se pueden revisar y actualizar con frecuencia.',
     'about.tech.site':
-      'Esta web no guarda tus datos en ningún sitio: no hay base de datos ni cuentas de usuario. Los textos de Wikipedia, las fotos de Commons y los datos de Wikidata se piden en directo desde tu propio navegador cada vez que abres una ficha, no desde un servidor de CyLinked. Todo el código es además abierto y cualquiera puede revisarlo.',
+      'Esta web no guarda tus datos en ningún sitio: no hay base de datos ni cuentas de usuario. Los textos de Wikipedia, las fotos de Commons y los datos de Wikidata se piden en directo desde tu propio navegador cada vez que abres una ficha, no desde un servidor de Patrimonio Abierto. Todo el código es además abierto y cualquiera puede revisarlo.',
     'about.tech.github': '💻 Código en GitHub',
     'contribute.title': 'Cómo contribuir',
     'contribute.intro':
-      'Este proyecto no almacena ni gestiona sus propios datos de contribución - todo lo que añadas va directamente al ecosistema abierto de Wikimedia, no a una base de datos privada de CyLinked.',
+      'Este proyecto no almacena ni gestiona sus propios datos de contribución - todo lo que añadas va directamente al ecosistema abierto de Wikimedia, no a una base de datos privada de Patrimonio Abierto.',
     'contribute.photos.title': '1. Añadir fotos',
     'contribute.photos.body':
       'Para monumentos que ya están en Wikidata pero tienen pocas o ninguna foto: sube tú mismo una foto libre de derechos a Wikimedia Commons, indicando claramente a qué monumento pertenece, y aparecerá aquí automáticamente en la próxima actualización - no hace falta avisar a nadie.',
@@ -74,8 +74,8 @@ const STRINGS = {
     'contribute.wikipedia.see_missing_button': '📖 Ver monumentos sin artículo en Wikipedia',
     'contribute.website.title': '3. Mejorar esta web',
     'contribute.website.body':
-      'CyLinked es en sí mismo un proyecto de código abierto en GitHub: si encuentras un fallo, tienes una idea de mejora o quieres aportar código directamente, los issues y pull requests son bienvenidos.',
-    'contribute.website.button': '💻 CyLinked en GitHub',
+      'Patrimonio Abierto es en sí mismo un proyecto de código abierto en GitHub: si encuentras un fallo, tienes una idea de mejora o quieres aportar código directamente, los issues y pull requests son bienvenidos.',
+    'contribute.website.button': '💻 Patrimonio Abierto en GitHub',
     'gallery.see_more': 'Ver más fotos en Wikimedia Commons →',
     'potw.label': 'Foto de la semana',
     'potw.close_title': 'Cerrar',
@@ -122,7 +122,7 @@ const STRINGS = {
     'wikipedia.read_more': 'Leer más en Wikipedia →',
     'stats.title': 'Estadísticas',
     'stats.mission':
-      'CyLinked existe para enlazar más monumentos de Castilla y León con Wikidata y enriquecer Wikipedia y Wikimedia Commons con más fotos y contenido libre. No es solo un mapa - es una herramienta para cerrar activamente esa brecha. Estas cifras son cómo medimos si lo está consiguiendo.',
+      'Patrimonio Abierto existe para enlazar más monumentos de Castilla y León con Wikidata y enriquecer Wikipedia y Wikimedia Commons con más fotos y contenido libre. No es solo un mapa - es una herramienta para cerrar activamente esa brecha. Estas cifras son cómo medimos si lo está consiguiendo.',
     'stats.total': 'Monumentos BIC',
     'stats.linked': 'Enlazados a Wikidata',
     'stats.with_image': 'Con foto principal',
@@ -132,12 +132,12 @@ const STRINGS = {
     'stats.tooltip_first': 'primer punto',
     'stats.legend_linked': 'Enlazados',
     'stats.legend_image': 'Con foto',
-    'stats.photos_label': 'Fotos accesibles a través de CyLinked',
+    'stats.photos_label': 'Fotos accesibles a través de Patrimonio Abierto',
     'stats.photos_note': (n, date) =>
       `Suma de las fotos en las categorías de Wikimedia Commons de los ${n} monumentos que ya tienen una - cifra mínima, no cuenta las subcategorías donde muchas fotos adicionales suelen estar archivadas. Instantánea del ${date}, actualizada a mano de vez en cuando, no en cada actualización de datos.`,
     'privacy.title': 'Privacidad',
     'privacy.intro':
-      'Esta página explica, en términos sencillos, qué pasa con tus datos cuando usas CyLinked. Resumen rápido: no hay cuentas, no hay formularios y no se usa ningún tipo de cookie - lo poco que hay que contar cabe en esta página.',
+      'Esta página explica, en términos sencillos, qué pasa con tus datos cuando usas Patrimonio Abierto. Resumen rápido: no hay cuentas, no hay formularios y no se usa ningún tipo de cookie - lo poco que hay que contar cabe en esta página.',
     'privacy.controller.title': '¿Quién es responsable de esta web?',
     'privacy.controller.body':
       '⚠️ Pendiente: nombre y datos de contacto de la persona o entidad responsable del tratamiento (los mismos que en el aviso legal).',
@@ -147,9 +147,9 @@ const STRINGS = {
     'privacy.local_storage.title': 'Lo que se guarda en tu propio navegador',
     'privacy.local_storage.body':
       'Un par de detalles mínimos de la interfaz - si ya has visto el mensaje de bienvenida, si ya has descartado la "foto de la semana" en esta sesión - se guardan localmente en tu propio dispositivo (una técnica llamada localStorage/sessionStorage, distinta de las cookies). Esta información nunca llega a nuestros servidores ni a nadie más.',
-    'privacy.external.title': 'Servicios externos que se cargan al usar CyLinked',
+    'privacy.external.title': 'Servicios externos que se cargan al usar Patrimonio Abierto',
     'privacy.external.intro':
-      'CyLinked usa algunos servicios de otras empresas para funcionar. Al usar la web, tu navegador se conecta directamente con ellos - nosotros no vemos ni gestionamos esa conexión, pero sí ocurre, y varias de estas empresas tienen sede fuera de la Unión Europea, por lo que tus datos (normalmente solo la IP) pueden tratarse allí según sus propias políticas:',
+      'Patrimonio Abierto usa algunos servicios de otras empresas para funcionar. Al usar la web, tu navegador se conecta directamente con ellos - nosotros no vemos ni gestionamos esa conexión, pero sí ocurre, y varias de estas empresas tienen sede fuera de la Unión Europea, por lo que tus datos (normalmente solo la IP) pueden tratarse allí según sus propias políticas:',
     'privacy.external.tiles':
       '<strong>Mapa base</strong> - las imágenes que forman el mapa vienen de CARTO, construidas sobre datos de OpenStreetMap; tu navegador las descarga directamente de sus servidores según te mueves por el mapa. <a href="https://carto.com/privacy/" target="_blank" rel="noopener">Política de privacidad de CARTO</a>.',
     'privacy.external.fonts':
@@ -157,16 +157,16 @@ const STRINGS = {
     'privacy.external.wiki':
       '<strong>Wikidata, Wikipedia y Wikimedia Commons</strong> - el texto y las fotos de cada monumento se piden en directo a sus propias APIs, cada vez que abres su ficha. <a href="https://foundation.wikimedia.org/wiki/Policy:Privacy_policy" target="_blank" rel="noopener">Política de privacidad de la Fundación Wikimedia</a>.',
     'privacy.external.geolocation':
-      '<strong>Tu ubicación</strong> - solo si pulsas el botón 🎯, mediante la geolocalización de tu propio navegador; nunca se envía a CyLinked ni se guarda en ningún sitio.',
+      '<strong>Tu ubicación</strong> - solo si pulsas el botón 🎯, mediante la geolocalización de tu propio navegador; nunca se envía a Patrimonio Abierto ni se guarda en ningún sitio.',
     'privacy.retention.title': 'Cuánto tiempo se conservan los datos',
     'privacy.retention.body':
-      'CyLinked no tiene base de datos propia, así que no guarda tu dirección IP ni ningún otro dato de forma permanente. El servidor que aloja la web puede mantener registros técnicos muy básicos (los habituales de cualquier servidor web) durante un tiempo limitado, solo para detectar problemas de seguridad o mal uso - nunca con fines comerciales ni de seguimiento.',
+      'Patrimonio Abierto no tiene base de datos propia, así que no guarda tu dirección IP ni ningún otro dato de forma permanente. El servidor que aloja la web puede mantener registros técnicos muy básicos (los habituales de cualquier servidor web) durante un tiempo limitado, solo para detectar problemas de seguridad o mal uso - nunca con fines comerciales ni de seguimiento.',
     'privacy.rights.title': 'Tus derechos',
     'privacy.rights.body':
       'Si en algún momento se llegara a tratar algún dato personal tuyo de forma más significativa, el RGPD te reconoce una serie de derechos: acceder a tus datos, corregirlos, pedir que se borren, limitar u oponerte a su uso, y llevarte una copia (portabilidad). Puedes ejercerlos escribiendo a la persona responsable indicada en el aviso legal. Si no quedas satisfecho con la respuesta, también tienes derecho a presentar una reclamación ante la <a href="https://www.aepd.es/" target="_blank" rel="noopener">Agencia Española de Protección de Datos (AEPD)</a>, la autoridad de control en España.',
     'privacy.changes.title': 'Si esto cambia',
     'privacy.changes.body':
-      'Si en el futuro CyLinked empieza a usar estadísticas de uso agregadas y anónimas, o cualquier otro tratamiento nuevo, esta página se actualizará primero para explicarlo con el mismo detalle.',
+      'Si en el futuro Patrimonio Abierto empieza a usar estadísticas de uso agregadas y anónimas, o cualquier otro tratamiento nuevo, esta página se actualizará primero para explicarlo con el mismo detalle.',
     'imprint.title': 'Aviso legal',
     'imprint.body': '⚠️ Pendiente: añadir aquí los datos de contacto/responsable exigidos por la normativa aplicable.',
   },
@@ -191,14 +191,14 @@ const STRINGS = {
     'panel.close': 'Close',
     'loading.screen': 'Loading the catalog…',
     'loading.error': 'Could not load the data. Please reload the page.',
-    'welcome.title': 'Welcome to CyLinked',
+    'welcome.title': 'Welcome to Patrimonio Abierto',
     'welcome.body':
       "Here you'll find every officially declared Heritage Site (BIC) in Castile and León, along with information and media from Wikidata, Wikipedia and Wikimedia Commons. A free project - no accounts, no ads.",
     'welcome.cta': 'Start exploring',
     'welcome.about_link': 'More about the project',
-    'about.title': 'About CyLinked',
+    'about.title': 'About Patrimonio Abierto',
     'about.intro': (linked, total, pct) =>
-      `CyLinked combines the Junta de Castilla y León's open catalog of protected heritage sites (Bienes de Interés Cultural) with Wikidata, Wikimedia Commons and Wikipedia, to show which of the region's ${total} protected monuments are documented in the free-knowledge ecosystem - and which aren't yet. Right now: <strong>${linked} of ${total} (${pct}%)</strong> have a Wikidata link.`,
+      `Patrimonio Abierto combines the Junta de Castilla y León's open catalog of protected heritage sites (Bienes de Interés Cultural) with Wikidata, Wikimedia Commons and Wikipedia, to show which of the region's ${total} protected monuments are documented in the free-knowledge ecosystem - and which aren't yet. Right now: <strong>${linked} of ${total} (${pct}%)</strong> have a Wikidata link.`,
     'about.updated': (date) => `Data last refreshed: ${date}.`,
     'about.sources.title': 'Sources and licenses',
     'about.sources.jcyl':
@@ -212,16 +212,16 @@ const STRINGS = {
     'about.goals.accessible': "Make Castile and León's culture and history approachable to anyone, no prior knowledge required.",
     'about.goals.free_knowledge':
       'Promote free knowledge: the more information and openly-licensed photos exist, the richer Wikipedia gets and the more useful Wikidata becomes for everyone.',
-    'about.goals.participate': "Encourage participation in that ecosystem - not just browsing CyLinked, but improving what's behind it.",
+    'about.goals.participate': "Encourage participation in that ecosystem - not just browsing Patrimonio Abierto, but improving what's behind it.",
     'about.tech.title': 'How it works under the hood',
     'about.tech.data':
       "The monuments and their municipalities come straight from the Junta de Castilla y León's official catalog. To find out which ones are already documented in Wikidata, we automatically check which ones cite it. That whole process is a computer program that can be re-run at any time - not manual work, so the data can be checked and refreshed often.",
     'about.tech.site':
-      "This site doesn't store your data anywhere: no database, no user accounts. Wikipedia's text, Commons' photos and Wikidata's facts are all fetched live from your own browser each time you open a page, not from a CyLinked server. All of the code is open too, and anyone can look through it.",
+      "This site doesn't store your data anywhere: no database, no user accounts. Wikipedia's text, Commons' photos and Wikidata's facts are all fetched live from your own browser each time you open a page, not from a Patrimonio Abierto server. All of the code is open too, and anyone can look through it.",
     'about.tech.github': '💻 Code on GitHub',
     'contribute.title': 'How to contribute',
     'contribute.intro':
-      "This project doesn't store or manage its own contribution data - anything you add goes straight into the open Wikimedia ecosystem, not a private CyLinked database.",
+      "This project doesn't store or manage its own contribution data - anything you add goes straight into the open Wikimedia ecosystem, not a private Patrimonio Abierto database.",
     'contribute.photos.title': '1. Add photos',
     'contribute.photos.body':
       "For monuments that are already in Wikidata but have few or no photos: upload your own freely-licensed photo to Wikimedia Commons, making clear which monument it shows, and it'll show up here automatically next refresh - no need to tell anyone.",
@@ -237,8 +237,8 @@ const STRINGS = {
     'contribute.wikipedia.see_missing_button': '📖 See monuments without a Wikipedia article',
     'contribute.website.title': '3. Improve this website',
     'contribute.website.body':
-      "CyLinked is itself an open-source project on GitHub: if you find a bug, have an idea, or want to contribute code directly, issues and pull requests are welcome.",
-    'contribute.website.button': '💻 CyLinked on GitHub',
+      "Patrimonio Abierto is itself an open-source project on GitHub: if you find a bug, have an idea, or want to contribute code directly, issues and pull requests are welcome.",
+    'contribute.website.button': '💻 Patrimonio Abierto on GitHub',
     'gallery.see_more': 'See more photos on Wikimedia Commons →',
     'potw.label': 'Picture of the week',
     'potw.close_title': 'Close',
@@ -285,7 +285,7 @@ const STRINGS = {
     'wikipedia.read_more': 'Read more on Wikipedia →',
     'stats.title': 'Statistics',
     'stats.mission':
-      "CyLinked exists to link more of Castilla y León's monuments to Wikidata and enrich Wikipedia and Wikimedia Commons with more photos and free content. It's not just a map - it's a tool for actively closing that gap. These numbers are how we measure whether it's working.",
+      "Patrimonio Abierto exists to link more of Castilla y León's monuments to Wikidata and enrich Wikipedia and Wikimedia Commons with more photos and free content. It's not just a map - it's a tool for actively closing that gap. These numbers are how we measure whether it's working.",
     'stats.total': 'BIC monuments',
     'stats.linked': 'Linked to Wikidata',
     'stats.with_image': 'With a main photo',
@@ -295,12 +295,12 @@ const STRINGS = {
     'stats.tooltip_first': 'first point',
     'stats.legend_linked': 'Linked',
     'stats.legend_image': 'With photo',
-    'stats.photos_label': 'Photos made accessible through CyLinked',
+    'stats.photos_label': 'Photos made accessible through Patrimonio Abierto',
     'stats.photos_note': (n, date) =>
       `Sum of the photos in the Wikimedia Commons categories of the ${n} monuments that already have one - a floor, not counting subcategories, where a lot of additional photos are often filed. Snapshot from ${date}, refreshed by hand every now and then, not with every data update.`,
     'privacy.title': 'Privacy',
     'privacy.intro':
-      "This page explains, in plain terms, what happens to your data when you use CyLinked. Short version: there are no accounts, no forms, and no cookies of any kind - what little there is to explain fits on this one page.",
+      "This page explains, in plain terms, what happens to your data when you use Patrimonio Abierto. Short version: there are no accounts, no forms, and no cookies of any kind - what little there is to explain fits on this one page.",
     'privacy.controller.title': 'Who is responsible for this site?',
     'privacy.controller.body':
       '⚠️ Pending: name and contact details of the person or entity responsible for processing (the same as on the Imprint page).',
@@ -310,9 +310,9 @@ const STRINGS = {
     'privacy.local_storage.title': 'What gets stored in your own browser',
     'privacy.local_storage.body':
       "A couple of minimal interface details - whether you've already seen the welcome message, whether you've already dismissed this session's 'picture of the week' - are stored locally on your own device (a technique called localStorage/sessionStorage, different from cookies). This information never reaches our servers or anyone else.",
-    'privacy.external.title': 'External services loaded while using CyLinked',
+    'privacy.external.title': 'External services loaded while using Patrimonio Abierto',
     'privacy.external.intro':
-      "CyLinked relies on a few other companies' services to work. Using the site means your browser connects to them directly - we don't see or manage that connection, but it happens, and several of these companies are based outside the European Union, so your data (usually just your IP address) may be processed there under their own policies:",
+      "Patrimonio Abierto relies on a few other companies' services to work. Using the site means your browser connects to them directly - we don't see or manage that connection, but it happens, and several of these companies are based outside the European Union, so your data (usually just your IP address) may be processed there under their own policies:",
     'privacy.external.tiles':
       '<strong>Base map</strong> - the images that make up the map come from CARTO, built on OpenStreetMap data; your browser downloads them directly from their servers as you move around the map. <a href="https://carto.com/privacy/" target="_blank" rel="noopener">CARTO\'s privacy policy</a>.',
     'privacy.external.fonts':
@@ -320,16 +320,16 @@ const STRINGS = {
     'privacy.external.wiki':
       "<strong>Wikidata, Wikipedia and Wikimedia Commons</strong> - each monument's text and photos are fetched live from their own APIs, every time you open its page. <a href=\"https://foundation.wikimedia.org/wiki/Policy:Privacy_policy\" target=\"_blank\" rel=\"noopener\">Wikimedia Foundation privacy policy</a>.",
     'privacy.external.geolocation':
-      "<strong>Your location</strong> - only if you tap the 🎯 button, via your own browser's geolocation; never sent to CyLinked or stored anywhere.",
+      "<strong>Your location</strong> - only if you tap the 🎯 button, via your own browser's geolocation; never sent to Patrimonio Abierto or stored anywhere.",
     'privacy.retention.title': 'How long data is kept',
     'privacy.retention.body':
-      "CyLinked has no database of its own, so it doesn't permanently store your IP address or any other data. The server hosting the site may keep very basic technical logs (the kind any web server keeps) for a limited time, only to catch security problems or abuse - never for marketing or tracking purposes.",
+      "Patrimonio Abierto has no database of its own, so it doesn't permanently store your IP address or any other data. The server hosting the site may keep very basic technical logs (the kind any web server keeps) for a limited time, only to catch security problems or abuse - never for marketing or tracking purposes.",
     'privacy.rights.title': 'Your rights',
     'privacy.rights.body':
       'If any personal data of yours were ever processed in a more meaningful way, the GDPR gives you a set of rights: to access your data, correct it, request its deletion, restrict or object to its use, and take a copy with you (portability). You can exercise these by writing to the person responsible listed on the Imprint page. If you\'re not satisfied with the response, you also have the right to lodge a complaint with the <a href="https://www.aepd.es/" target="_blank" rel="noopener">Spanish Data Protection Agency (AEPD)</a>, the supervisory authority in Spain.',
     'privacy.changes.title': 'If this ever changes',
     'privacy.changes.body':
-      'If CyLinked ever starts using aggregated, anonymous usage statistics, or any other new kind of processing, this page will be updated first to explain it in the same detail.',
+      'If Patrimonio Abierto ever starts using aggregated, anonymous usage statistics, or any other new kind of processing, this page will be updated first to explain it in the same detail.',
     'imprint.title': 'Imprint',
     'imprint.body': '⚠️ Pending: add the contact/responsible-party details required by applicable law here.',
   },

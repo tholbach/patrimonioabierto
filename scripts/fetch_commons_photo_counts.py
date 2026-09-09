@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """How many actual photos does linking a monument to Wikidata make
 browsable? Not just "1" (the P18 main image) - most linked items also
-carry a P373 (Commons category), and CyLinked's own gallery walks that
+carry a P373 (Commons category), and Patrimonio Abierto's own gallery walks that
 whole category. This pulls the real count, the same way a human clicking
 through would see it: for every P3177-tagged item's Commons category, ask
 Commons directly how many files are in it (categoryinfo, not a manual
@@ -34,7 +34,7 @@ import urllib.request
 from datetime import datetime, timezone
 
 RAW_DIR = os.path.join(os.path.dirname(__file__), "..", "data", "raw")
-USER_AGENT = "cylinked/0.1 (https://github.com/tholbach/cylinked)"
+USER_AGENT = "patrimonioabierto/0.1 (https://github.com/tholbach/patrimonioabierto)"
 COMMONS_API = "https://commons.wikimedia.org/w/api.php"
 
 SPARQL_QUERY = """

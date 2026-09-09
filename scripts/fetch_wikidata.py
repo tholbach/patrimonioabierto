@@ -23,7 +23,7 @@ import urllib.parse
 import urllib.request
 
 RAW_DIR = os.path.join(os.path.dirname(__file__), "..", "data", "raw")
-USER_AGENT = "cylinked/0.1 (https://github.com/tholbach/cylinked)"
+USER_AGENT = "patrimonioabierto/0.1 (https://github.com/tholbach/patrimonioabierto)"
 
 # schema:/wikibase: aren't part of the query service's built-in prefixes the
 # way wdt:/wd: are (confirmed by testing - omitting these left

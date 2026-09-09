@@ -1,6 +1,6 @@
-# CyLinked
+# Patrimonio Abierto
 
-<img src="web/assets/logo-readme.png" alt="CyLinked logo" width="120">
+<img src="web/assets/logo-readme.png" alt="Patrimonio Abierto logo" width="120">
 
 Links Castilla y León's open heritage data (Bienes de Interés Cultural) with
 Wikidata, Wikimedia Commons, and Wikipedia - and shows the result on a map.
@@ -121,11 +121,16 @@ static files on internal port 80) with no exposed host ports or TLS of its
 own - it's meant to sit behind an existing reverse proxy that terminates
 TLS and routes a domain to it, rather than owning that itself. Wiring up
 that reverse-proxy side is intentionally external to this repo (a
-`reverse_proxy cylinked_web:80` site block wherever your ingress config
-lives, joined to the same Docker network `docker-compose.yml` declares).
+`reverse_proxy patrimonioabierto_web:80` site block wherever your ingress
+config lives, joined to the same Docker network `docker-compose.yml`
+declares).
 
 On the host: `docker compose up -d` starts the container; it's reachable
-once the reverse-proxy side above points at it.
+once the reverse-proxy side above points at it. The container was
+previously named `cylinked_web` (project rename) - if you're updating an
+existing deployment rather than starting fresh, update the external
+Caddyfile's `reverse_proxy` line to the new name in the same step, or the
+site goes down until both sides match.
 
 ## Not built yet
 

@@ -1,4 +1,4 @@
-// CyLinked map.
+// Patrimonio Abierto map.
 //
 // Architecture: the marker data (data/cyl_monuments_wikidata.json) is a
 // static "spine" file built offline by scripts/build_dataset.py from the
@@ -1752,7 +1752,7 @@ function showAboutPanel({ updateUrl = true } = {}) {
       <div class="extract">${t('about.tech.data')}</div>
       <div class="extract">${t('about.tech.site')}</div>
       <div class="link-badges">
-        <a class="badge" href="https://github.com/tholbach/cylinked" target="_blank" rel="noopener">${t('about.tech.github')}</a>
+        <a class="badge" href="https://github.com/tholbach/patrimonioabierto" target="_blank" rel="noopener">${t('about.tech.github')}</a>
       </div>
     </div>
   `;
@@ -1785,7 +1785,7 @@ function showContributePanel({ updateUrl = true } = {}) {
       <h3>${t('contribute.website.title')}</h3>
       <div class="extract">${t('contribute.website.body')}</div>
       <div class="link-badges">
-        <a class="badge" href="https://github.com/tholbach/cylinked" target="_blank" rel="noopener">${t('contribute.website.button')}</a>
+        <a class="badge" href="https://github.com/tholbach/patrimonioabierto" target="_blank" rel="noopener">${t('contribute.website.button')}</a>
       </div>
     </div>
   `;
@@ -2490,7 +2490,7 @@ function loadingScreenFailed() {
 // link (?id=/?muni=/?prov=/#stats etc.), since someone arriving at a
 // specific monument already knows what they're looking at.
 function maybeShowWelcome() {
-  const KEY = 'cylinked_welcome_seen';
+  const KEY = 'patrimonioabierto_welcome_seen';
   let alreadySeen = true;
   try {
     alreadySeen = !!localStorage.getItem(KEY);

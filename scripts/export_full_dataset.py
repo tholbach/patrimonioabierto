@@ -33,7 +33,7 @@ import urllib.request
 from collections import defaultdict
 
 WIKIDATA_API = "https://www.wikidata.org/w/api.php"
-UA = "cylinked-full-export/0.1 (thomas@holba.ch; one-off data export for offline use)"
+UA = "patrimonioabierto-full-export/0.1 (thomas@holba.ch; one-off data export for offline use)"
 IN_PATH = "web/data/cyl_monuments_wikidata.json"
 OUT_PATH = "data/raw/full_dataset_with_wikipedia.json"
 

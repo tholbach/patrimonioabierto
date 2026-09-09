@@ -169,7 +169,7 @@ def append_history_snapshot(records):
 
 
 def write_photo_stats(records):
-    """web/data/photo_stats.json - how many actual photos CyLinked makes
+    """web/data/photo_stats.json - how many actual photos Patrimonio Abierto makes
     browsable, not just how many monuments have "a" photo. Entirely
     optional: fetch_commons_photo_counts.py is a separate, manually-run
     script (several hundred Commons API calls - not something to re-pay on

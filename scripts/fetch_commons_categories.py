@@ -1,5 +1,5 @@
 """One-off research script: fetches the Commons category (P373) for every
-already-linked cylinked monument, batched via SPARQL VALUES (same pattern as
+already-linked monument, batched via SPARQL VALUES (same pattern as
 the earlier P808 crosswalk lookup).
 
 Feeds find_good_pictures.py, which cross-references these categories against
@@ -15,7 +15,7 @@ import urllib.parse
 import urllib.request
 
 SPARQL_URL = "https://query.wikidata.org/sparql"
-UA = "cylinked-research/1.0 (https://github.com/tholbach/cylinked; thomas@holba.ch)"
+UA = "patrimonioabierto-research/1.0 (https://github.com/tholbach/patrimonioabierto; thomas@holba.ch)"
 BATCH = 150
 
 
