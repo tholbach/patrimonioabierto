@@ -1,5 +1,5 @@
 """One-off research script for the "weekly featured gallery" idea: finds
-Commons files that are BOTH (a) within a cylinked monument's own Commons
+Commons files that are BOTH (a) within an already-linked monument's own Commons
 category tree (per its Wikidata P373, see fetch_commons_categories.py) and
 (b) recognised as a "good picture" - one of the three quality tiers that
 https://commons.wikimedia.org/wiki/Commons:Good_pictures points to:
@@ -40,7 +40,7 @@ import urllib.parse
 import urllib.request
 
 API_URL = "https://commons.wikimedia.org/w/api.php"
-UA = "cylinked-research/1.0 (https://github.com/tholbach/cylinked; thomas@holba.ch)"
+UA = "patrimonioabierto-research/1.0 (https://github.com/tholbach/patrimonioabierto; thomas@holba.ch)"
 
 GOOD_PICTURE_TIERS = [
     "Featured pictures on Wikimedia Commons",

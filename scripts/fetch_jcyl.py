@@ -15,7 +15,7 @@ import urllib.parse
 import urllib.request
 
 RAW_DIR = os.path.join(os.path.dirname(__file__), "..", "data", "raw")
-USER_AGENT = "cylinked/0.1 (https://github.com/tholbach/cylinked)"
+USER_AGENT = "patrimonioabierto/0.1 (https://github.com/tholbach/patrimonioabierto)"
 
 
 def wfs_get_feature(base_url, workspace, typename, extra=None):

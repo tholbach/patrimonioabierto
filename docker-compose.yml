@@ -1,10 +1,16 @@
-name: cylinked
+name: patrimonioabierto
 
 services:
   web:
     # Matches the ingress host's own Caddy image choice for consistency.
     image: caddy:2
-    container_name: cylinked_web
+    # Renamed from cylinked_web (project rename) - the external ingress
+    # Caddyfile (the ingress proxy's own repository, NOT this repo) references this
+    # exact container name in its own reverse_proxy line. Update that
+    # config to reverse_proxy patrimonioabierto_web:80 in the SAME deploy
+    # step as this rename, or the site goes down until it's fixed - see
+    # the README's "Deployment" section.
+    container_name: patrimonioabierto_web
     volumes:
       - ./web:/srv:ro
       - ./Caddyfile:/etc/caddy/Caddyfile:ro
