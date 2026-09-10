@@ -1266,6 +1266,27 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
 #potw-collab-links a { color: var(--cyl-purple); font-weight: 600; text-decoration: none; }
 #potw-collab-links a:hover { text-decoration: underline; }
 #potw-collab-links .sep { color: var(--ink-soft); margin: 0 3px; }
+
+/* Replaces #potw-collab-count/-text once geolocation resolves (see
+   renderPotwNearby() in app.js) - same slot, same label styling as
+   #potw-collab-label above, just a short list instead of a count+
+   sentence. */
+#potw-collab-nearby { max-width: 320px; }
+#potw-nearby-list { list-style: none; margin: 5px 0 0; padding: 0; }
+#potw-nearby-list li { border-top: 1px solid rgba(116,44,100,0.12); }
+#potw-nearby-list li:first-child { border-top: none; }
+#potw-nearby-list a {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+  padding: 3px 0;
+  color: var(--ink);
+  text-decoration: none;
+  font-size: 12px;
+}
+#potw-nearby-list a:hover .potw-nearby-name { text-decoration: underline; }
+.potw-nearby-name { flex: 1 1 auto; min-width: 0; overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500; }
+.potw-nearby-dist { flex-shrink: 0; color: var(--ink-soft); font-size: 11px; }
 @media (max-width: 960px) {
   #potw-collab { display: none; }
 }
