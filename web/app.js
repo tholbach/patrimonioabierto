@@ -1698,6 +1698,7 @@ async function showStatsPanel({ updateUrl = true } = {}) {
     <div class="panel-body">
       ${pageNavHtml('stats')}
       <div class="extract stats-mission">${t('stats.mission')}</div>
+      ${datasetMeta ? `<div class="meta">${t('about.updated', new Date(datasetMeta.generated_at).toLocaleDateString(currentLang))}</div>` : ''}
       <div class="stats-numbers">
         <div class="stat-box"><div class="stat-value">${total}</div><div class="stat-label">${t('stats.total')}</div></div>
         <div class="stat-box"><div class="stat-value">${linked} <span class="stat-pct">${linkedPct}%</span></div><div class="stat-label">${t('stats.linked')}</div></div>
@@ -2224,6 +2225,8 @@ function initPictureOfTheWeek() {
               <a id="potw-collab-map-link" href="?status=no_photo" data-i18n="potw.collab_map_link">${t('potw.collab_map_link')}</a>
               <span class="sep">·</span>
               <a id="potw-collab-help-link" href="#contribute" data-i18n="potw.collab_help_link">${t('potw.collab_help_link')}</a>
+              <span class="sep">·</span>
+              <a id="potw-collab-nearby-link" href="#" data-i18n="potw.collab_nearby_link">${t('potw.collab_nearby_link')}</a>
             </div>
           </div>
         </div>
@@ -2278,8 +2281,76 @@ function initPictureOfTheWeek() {
           showContributePanel();
         });
       }
+      const collabNearbyLink = document.getElementById('potw-collab-nearby-link');
+      if (collabNearbyLink) {
+        // Not wireSpaLink() - this one doesn't navigate anywhere itself,
+        // it triggers geolocation and re-renders #potw-collab in place, so
+        // it needs its own handler rather than the "real link" pattern.
+        collabNearbyLink.addEventListener('click', (e) => {
+          e.preventDefault();
+          collabNearbyLink.textContent = t('potw.collab_nearby_loading');
+          // .once(), not the persistent map.on('locationfound'/'locationerror')
+          // listeners further down (which still fire independently and draw
+          // the usual accuracy-circle/"you are here" dot - free bonus here,
+          // not duplicated) - this pair is just for this one request, so a
+          // second click later gets its own fresh pair rather than stacking
+          // listeners.
+          map.once('locationfound', (ev) => renderPotwNearby(ev.latlng));
+          map.once('locationerror', () => {
+            collabNearbyLink.textContent = t('potw.collab_nearby_link');
+          });
+          map.locate({ setView: true, maxZoom: 15, enableHighAccuracy: true });
+        });
+      }
     })
     .catch(() => {}); // no data file yet, or offline - just stay hidden
+}
+
+// Replaces the collab block's count+links with the closest few linked-but-
+// photoless monuments to wherever geolocation just found - same distance
+// math as renderNearby()'s "Cerca de aquí" section on a monument panel,
+// just sourced from the visitor's own location instead of another
+// monument's. #potw-collab may already be gone by the time this resolves
+// (card dismissed while the geolocation prompt was still pending) - bail
+// rather than throw.
+function renderPotwNearby(latlng) {
+  const collabEl = document.getElementById('potw-collab');
+  if (!collabEl) return;
+
+  const nearby = allRecords
+    .filter(isLinkedNoPhoto)
+    .map((r) => ({ r, dist: haversineDistanceKm(latlng.lat, latlng.lng, r.lat, r.lon) }))
+    .sort((a, b) => a.dist - b.dist)
+    .slice(0, 3);
+
+  if (!nearby.length) {
+    collabEl.innerHTML = `<div id="potw-collab-text">${t('potw.collab_nearby_empty')}</div>`;
+    return;
+  }
+
+  const rowsHtml = nearby
+    .map(
+      ({ r, dist }) => `
+        <li><a href="${shareUrl(r)}" data-jcyl-id="${r.jcyl_id}">
+          <span class="potw-nearby-name">${r.name}</span>
+          <span class="potw-nearby-dist">${formatDistance(dist)}</span>
+        </a></li>
+      `
+    )
+    .join('');
+  collabEl.innerHTML = `
+    <div id="potw-collab-nearby">
+      <div id="potw-collab-label">${t('potw.collab_nearby_title')}</div>
+      <ul id="potw-nearby-list">${rowsHtml}</ul>
+    </div>
+  `;
+  collabEl.querySelectorAll('#potw-nearby-list a[data-jcyl-id]').forEach((a) => {
+    wireSpaLink(a, () => {
+      dismissPotw();
+      const record = recordsById.get(a.dataset.jcylId);
+      if (record) selectMonument(record, { flyTo: true });
+    });
+  });
 }
 
 // Individual marker clicks bubble up to the map's own click event by
