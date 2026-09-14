@@ -1,0 +1,179 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <base href="/">
+  <title>Ruinas C. Nuestra Señora Angeles de la Hoz - Patrimonio Abierto</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- SEO/social preview. patrimonioabierto.es appears in four places
+       below (canonical, og:url, og:image, twitter:image) - if this domain
+       ever changes again, update all four together plus the <title>/
+       og:title/og:site_name text above, or a shared link preview will
+       keep pointing at the old name/domain. -->
+  <meta name="description" content="El Convento de Nuestra Señora de los Ángeles de la Hoz del Río Duratón fue un antiguo monasterio, hoy en ruinas. Se ubica en el fondo de la Hoz de Los…">
+  <link rel="canonical" href="https://patrimonioabierto.es/monumento/11663-ruinas-c-nuestra-senora-angeles-de-la-hoz/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Patrimonio Abierto">
+  <meta property="og:title" content="Ruinas C. Nuestra Señora Angeles de la Hoz - Patrimonio Abierto">
+  <meta property="og:description" content="El Convento de Nuestra Señora de los Ángeles de la Hoz del Río Duratón fue un antiguo monasterio, hoy en ruinas. Se ubica en el fondo de la Hoz de Los…">
+  <meta property="og:image" content="https://commons.wikimedia.org/wiki/Special:FilePath/20240606%20156209%20DSCN0785%20NS%20%C3%81ngeles%20Hoz.jpg?width=1200">
+  <meta property="og:url" content="https://patrimonioabierto.es/monumento/11663-ruinas-c-nuestra-senora-angeles-de-la-hoz/">
+  <meta property="og:locale" content="es_ES">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Ruinas C. Nuestra Señora Angeles de la Hoz - Patrimonio Abierto">
+  <meta name="twitter:description" content="El Convento de Nuestra Señora de los Ángeles de la Hoz del Río Duratón fue un antiguo monasterio, hoy en ruinas. Se ubica en el fondo de la Hoz de Los…">
+  <meta name="twitter:image" content="https://commons.wikimedia.org/wiki/Special:FilePath/20240606%20156209%20DSCN0785%20NS%20%C3%81ngeles%20Hoz.jpg?width=1200">
+
+  <!-- Structured data (schema.org) for search engines - a Dataset (what
+       this project actually publishes: the merged BIC/Wikidata/Wikipedia/
+       Commons table) presented as part of a WebSite (how people reach it).
+       Doesn't change anything a visitor sees; only read by crawlers. -->
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LandmarkOrHistoricalBuilding", "name": "Ruinas C. Nuestra Señora Angeles de la Hoz", "description": "El Convento de Nuestra Señora de los Ángeles de la Hoz del Río Duratón fue un antiguo monasterio, hoy en ruinas. Se ubica en el fondo de la Hoz de Los…", "url": "https://patrimonioabierto.es/monumento/11663-ruinas-c-nuestra-senora-angeles-de-la-hoz/", "address": {"@type": "PostalAddress", "addressLocality": "Sebúlcor", "addressRegion": "Segovia", "addressCountry": "ES"}, "geo": {"@type": "GeoCoordinates", "latitude": 41.315502, "longitude": -3.870241}, "isPartOf": {"@type": "WebSite", "name": "Patrimonio Abierto", "url": "https://patrimonioabierto.es/"}, "image": "https://commons.wikimedia.org/wiki/Special:FilePath/20240606%20156209%20DSCN0785%20NS%20%C3%81ngeles%20Hoz.jpg?width=1200", "sameAs": ["https://www.wikidata.org/wiki/Q6021287", "https://es.wikipedia.org/wiki/Convento_de_Nuestra_Se%C3%B1ora_de_los_%C3%81ngeles_(Seb%C3%BAlcor)"]}</script>
+
+  <!-- Same mark as #logo-mark/#loading-logo/#welcome-logo (assets/logo.png)
+       - just square and on a solid brand-purple backing (same purple as
+       logo-readme.png's own README treatment), since a browser tab is
+       usually light or dark, not the purple header bar this logo is
+       normally drawn against - its white linework would go near-invisible
+       on a plain white tab background otherwise. -->
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,400;9..144,500;9..144,600&family=Inter:wght@400;500;600&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+  <link rel="stylesheet" href="style.css" />
+</head>
+<body>
+  <!-- The very first focusable thing on the page, on purpose - a classic
+       "skip link", invisible until it actually receives keyboard focus (see
+       .skip-link CSS). The visible 📋 button/menu entry that used to sit
+       next to this got removed (redundant with search/map for anyone
+       clicking around) - this is now the only way into showListPanel(),
+       which is fine: it's aimed squarely at whoever can't/doesn't want to
+       drive the map, and reaches the same panel in a single Tab press from
+       anywhere, before the loading screen, the header, anything - no
+       fishing for a small icon first. -->
+  <a href="#" id="skip-to-list-link" class="skip-link" data-i18n="list.skip_link">Ir directamente a la lista de monumentos</a>
+
+  <!-- First paint, before app.js even runs: the dataset is ~2MB, worth
+       covering with something branded rather than a blank page while it
+       loads. Spanish text is hardcoded as the real initial content (not an
+       empty data-i18n placeholder) since the app always starts in 'es' -
+       applyStaticI18n() just re-confirms it once JS runs. -->
+  <div id="loading-screen">
+    <img src="assets/logo.png" alt="" id="loading-logo">
+    <div id="loading-spinner" aria-hidden="true"></div>
+    <p data-i18n="loading.screen">Cargando el catálogo…</p>
+  </div>
+
+  <!-- Shown once per browser (localStorage flag, see app.js), after the
+       data has loaded - not on top of a deep link (?id=/?muni=/?prov=/#...),
+       since someone arriving at a specific monument already knows what
+       they're looking at. -->
+  <div id="welcome-modal">
+    <div id="welcome-card">
+      <div id="welcome-logo-badge"><img src="assets/logo.png" alt="" id="welcome-logo"></div>
+      <h2 data-i18n="welcome.title">Bienvenido a Patrimonio Abierto</h2>
+      <p data-i18n="welcome.body">Aquí encontrarás todos los Bienes de Interés Cultural (BIC) declarados oficialmente en Castilla y León, junto con información y material multimedia de Wikidata, Wikipedia y Wikimedia Commons. Un proyecto libre, sin cuentas ni anuncios.</p>
+      <button type="button" id="welcome-close-btn" data-i18n="welcome.cta">Empezar a explorar</button>
+      <a href="#" id="welcome-about-link" data-i18n="welcome.about_link">Más sobre el proyecto</a>
+    </div>
+  </div>
+
+  <header id="topbar">
+    <!-- Real link (not a <span>/<button>) - see wireSpaLink() in app.js:
+         hovering shows the URL, right-click/ctrl-click/middle-click all do
+         a real navigation back to the plain map, and a normal click gets
+         the instant in-app close instead of a reload. -->
+    <a class="brand" href="." id="brand-link"><img src="assets/logo.png" alt="" id="logo-mark">Patrimonio Abierto</a>
+
+    <!-- Mobile only (see CSS) - collapses #search-wrap to just this icon
+         until tapped, so the default header stays one compact row instead
+         of permanently reserving a full second row for it. -->
+    <!-- Inline SVG, not the 🔍 emoji this used to be - emoji glyphs are
+         drawn by the OS's own emoji font, whose vertical metrics vary
+         enough between Apple/Noto/Samsung's color-emoji sets that it never
+         sat quite centered in this small round button on mobile. An SVG
+         with stroke="currentColor" sits exactly where the viewBox puts it,
+         on every platform, and inherits the button's own (white) color. -->
+    <button type="button" id="search-toggle-btn" data-i18n-title="search.placeholder" aria-label="Search">
+      <svg viewBox="0 0 24 24" width="25" height="25" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </button>
+
+    <div id="search-wrap">
+      <input type="text" id="search-input" autocomplete="off" data-i18n-placeholder="search.placeholder" />
+      <button type="button" id="search-close-btn" aria-label="Close search">✕</button>
+      <div id="search-results"></div>
+    </div>
+
+    <!-- Estadísticas/Acerca de/Cómo contribuir/language all live behind
+         this on every screen size now, not just mobile - see showMenuPanel()
+         in app.js. Keeps the header down to logo + search everywhere. -->
+    <button type="button" id="menu-btn" data-i18n-title="menu.button_title" aria-label="Menu">☰</button>
+  </header>
+
+  <div id="app">
+    <!-- map-wrap, not #app, is what #legend/#locate-btn anchor to - #app
+         spans the map AND the panel side-by-side, so anchoring to it means
+         "right: 16px" measures from the panel's edge once it's open, not
+         the map's. map-wrap always matches the map's own visible area. -->
+    <div id="map-wrap">
+      <div id="map"></div>
+
+      <button type="button" id="shuffle-btn" data-i18n-title="shuffle.button_title" aria-label="Random monument">🎲</button>
+      <button type="button" id="locate-btn" data-i18n-title="geolocation.button_title" aria-label="Locate me">🎯</button>
+
+      <!-- Filter button + its dropdown card, same anchor-to-map-wrap /
+           click-outside-closes pattern as #search-results. Row list itself
+           is built in app.js from whatever categories actually appear in
+           the dataset, not hardcoded here. -->
+      <button type="button" id="filter-btn" data-i18n-title="filter.button_title" aria-label="Filter">
+        🎚️<span id="filter-badge" class="filter-badge" hidden></span>
+      </button>
+      <div id="filter-panel">
+        <!-- "Estado" - orthogonal to category, AND-combined with it: a
+             record must match the selected categories AND (no status box
+             checked, or at least one checked status). Only 2 rows, so no
+             Todo/Ninguno shortcuts needed the way the longer category list
+             has. -->
+        <div class="filter-section-label" data-i18n="filter.status_title">Estado</div>
+        <div id="filter-status-list"></div>
+
+        <div id="filter-panel-header">
+          <span data-i18n="filter.title">Categorías</span>
+          <div id="filter-panel-actions">
+            <button type="button" id="filter-all-btn" data-i18n="filter.all">Todo</button>
+            <button type="button" id="filter-none-btn" data-i18n="filter.none">Ninguno</button>
+          </div>
+        </div>
+        <div id="filter-list"></div>
+      </div>
+
+      <!-- Desktop-only (hidden <=768px, see style.css) - a rotating
+           highlight card, one photo picked deterministically per ISO week
+           from web/data/picture_of_the_week.json (see find_good_pictures.py)
+           so it changes weekly with no server/build step involved, and
+           stays identical for every visitor that same week. Hidden
+           entirely (not just empty) whenever that pool is empty. -->
+      <div id="potw" hidden></div>
+    </div>
+
+    <aside id="panel" class="open">
+      <div id="panel-handle"></div>
+      <button id="panel-close" aria-label="Cerrar">✕</button>
+      <div id="panel-content"><div class="hero"><img class="hero-img-bg" src="https://commons.wikimedia.org/wiki/Special:FilePath/20240606%20156209%20DSCN0785%20NS%20%C3%81ngeles%20Hoz.jpg?width=800" alt="" aria-hidden="true"><img class="hero-img" src="https://commons.wikimedia.org/wiki/Special:FilePath/20240606%20156209%20DSCN0785%20NS%20%C3%81ngeles%20Hoz.jpg?width=800" alt=""><div class="hero-scrim"><div class="hero-kicker">🏛️ MONUMENTO</div><h2 class="hero-title">Ruinas C. Nuestra Señora Angeles de la Hoz</h2></div></div><div class="panel-body"><div class="meta">Sebúlcor · Segovia · BIC desde 2012-09-13</div><div class="extract">El Convento de Nuestra Señora de los Ángeles de la Hoz del Río Duratón fue un antiguo monasterio, hoy en ruinas. Se ubica en el fondo de la Hoz de Los Ángeles del cañón del río Duratón, en el término municipal de Sebúlcor, provincia de Segovia, Castilla y León. Declarado bien de interés cultural (BIC) por la Junta de Castilla y León el 13 de septiembre de 2012.</div><a class="badge read-more-btn" href="https://es.wikipedia.org/wiki/Convento_de_Nuestra_Se%C3%B1ora_de_los_%C3%81ngeles_(Seb%C3%BAlcor)" target="_blank" rel="noopener"><span class="wiki-w-icon">W</span>Leer más en Wikipedia →</a><div class="text-license">Texto de <a href="https://es.wikipedia.org/wiki/Convento_de_Nuestra_Se%C3%B1ora_de_los_%C3%81ngeles_(Seb%C3%BAlcor)" target="_blank" rel="noopener">Wikipedia</a>, disponible bajo la licencia <a href="https://creativecommons.org/licenses/by-sa/4.0/" target="_blank" rel="noopener">Creative Commons Atribución-CompartirIgual 4.0</a>.</div><div class="link-badges"><a class="badge jcyl" href="https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=11663" target="_blank" rel="noopener">📄 Ficha JCyL</a><a class="badge wikidata" href="https://www.wikidata.org/wiki/Q6021287" target="_blank" rel="noopener"><svg viewBox="0 0 1050 590" width="18" height="10" aria-hidden="true"><path d="m 120,545 h 30 V 45 H 120 V 545 z m 60,0 h 90 V 45 H 180 V 545 z M 300,45 V 545 h 90 V 45 h -90 z" fill="#990000"/><path d="m 840,545 h 30 V 45 H 840 V 545 z M 900,45 V 545 h 30 V 45 H 900 z M 420,545 h 30 V 45 H 420 V 545 z M 480,45 V 545 h 30 V 45 h -30 z" fill="#339966"/><path d="m 540,545 h 90 V 45 h -90 V 545 z m 120,0 h 30 V 45 H 660 V 545 z M 720,45 V 545 h 90 V 45 H 720 z" fill="#006699"/></svg>Wikidata</a><a class="badge wikipedia" href="https://es.wikipedia.org/wiki/Convento_de_Nuestra_Se%C3%B1ora_de_los_%C3%81ngeles_(Seb%C3%BAlcor)" target="_blank" rel="noopener"><span class="wiki-w-icon">W</span>Wikipedia</a></div></div></div>
+    </aside>
+  </div>
+
+  <div id="toast"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+  <script src="i18n.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

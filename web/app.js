@@ -2638,7 +2638,21 @@ Promise.all([
     // / #stats / #privacy / #imprint open those written pages (see
     // PAGE_PANEL_TYPES).
     const params = new URLSearchParams(location.search);
-    const requestedId = params.get('id');
+    let requestedId = params.get('id');
+    // /monumento/<jcyl_id>-<slug>/ - the crawlable static page for a
+    // monument (scripts/build_monument_pages.py) hands off to the SPA the
+    // same way a ?id= deep link does, once this far: normalize the
+    // address bar back to the canonical ?id= form first (not shareUrl(),
+    // which preserves whatever pathname is already current - exactly what
+    // must NOT happen here) so every other internal link/back-button/
+    // close-panel path keeps working unmodified. The slug is decorative
+    // only, never read - a monument renamed since its last build still
+    // resolves correctly off the id alone.
+    const monumentoPath = location.pathname.match(/^\/monumento\/(\d+)-/);
+    if (!requestedId && monumentoPath) {
+      requestedId = monumentoPath[1];
+      history.replaceState(null, '', `/?id=${encodeURIComponent(requestedId)}${location.hash}`);
+    }
     const requestedMuni = params.get('muni');
     const requestedProv = params.get('prov');
     const hasDeepLink = !!(requestedId || requestedMuni || requestedProv || location.hash);
