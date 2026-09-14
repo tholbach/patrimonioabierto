@@ -915,6 +915,9 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
 .gallery-more:hover { border-color: var(--cyl-purple); color: var(--cyl-purple); }
 
 .extract { font-size: 14.5px; line-height: 1.6; margin: 14px 0; color: var(--ink); }
+/* Contact email shipped as a PNG (imprint.body/privacy.controller.body), not
+   plain text or a mailto: link, so simple scrapers don't pick it up. */
+.contact-email-img { vertical-align: middle; }
 .text-license { font-size: 11px; color: var(--ink-soft); margin: -8px 0 14px; line-height: 1.4; }
 .text-license a { color: var(--ink-soft); }
 
