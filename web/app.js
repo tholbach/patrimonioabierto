@@ -408,15 +408,20 @@ function wireFilterLink(el, status) {
   wireSpaLink(el, () => showMapFilteredByStatus(status));
 }
 
+// Shared with nearbyMonuments() below - a record that fails this wouldn't
+// have a marker on the map right now (see applyFilters()), so it shouldn't
+// be suggested as "nearby" either: that dead-ended into a click that opened
+// the monument's own panel just fine, but nothing to actually see back on
+// the map once you closed it (issue #8).
+function recordPassesFilters(record) {
+  if (!selectedCategories.has(record.category)) return false;
+  if (!selectedStatuses.size) return true;
+  return [...selectedStatuses].some((status) => STATUS_MATCHERS[status](record));
+}
+
 function applyFilters() {
   markers.clearLayers();
-  markers.addLayers(
-    allMarkerLayers.filter((m) => {
-      if (!selectedCategories.has(m.record.category)) return false;
-      if (!selectedStatuses.size) return true;
-      return [...selectedStatuses].some((status) => STATUS_MATCHERS[status](m.record));
-    })
-  );
+  markers.addLayers(allMarkerLayers.filter((m) => recordPassesFilters(m.record)));
 
   const activeCategoryCount = selectedCategories.size;
   const totalCategoryCount = categoriesWithCounts.length;
@@ -1922,7 +1927,7 @@ function formatDistance(km) {
 
 function nearbyMonuments(record, count = 5) {
   return allRecords
-    .filter((r) => r.jcyl_id !== record.jcyl_id)
+    .filter((r) => r.jcyl_id !== record.jcyl_id && recordPassesFilters(r))
     .map((r) => ({ r, dist: haversineDistanceKm(record.lat, record.lon, r.lat, r.lon) }))
     .sort((a, b) => a.dist - b.dist)
     .slice(0, count);
