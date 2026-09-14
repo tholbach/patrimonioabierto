@@ -714,89 +714,6 @@ async function fetchGalleryFiles(categoryName, excludeFilename) {
   return files.slice(0, MAX_FILES);
 }
 
-// Batched label lookup for entity-valued properties (architect, style,
-// "part of", heritage designation all point at other Wikidata items by
-// QID, not a plain readable value) - one call for all of them together,
-// not one call per property.
-async function fetchLabels(qids) {
-  if (!qids.length) return {};
-  const url =
-    'https://www.wikidata.org/w/api.php?action=wbgetentities&props=labels' +
-    `&languages=${currentLang}|es|en&format=json&origin=*&ids=${qids.join('|')}`;
-  const resp = await fetch(url);
-  const data = await resp.json();
-  const out = {};
-  for (const [qid, e] of Object.entries(data.entities || {})) {
-    out[qid] = e.labels?.[currentLang]?.value || e.labels?.es?.value || e.labels?.en?.value || qid;
-  }
-  return out;
-}
-
-function ordinalSuffix(n) {
-  const j = n % 10, k = n % 100;
-  if (j === 1 && k !== 11) return 'st';
-  if (j === 2 && k !== 12) return 'nd';
-  if (j === 3 && k !== 13) return 'rd';
-  return 'th';
-}
-
-// Wikidata time values encode precision (7=century, 8=decade, 9=year,
-// 10=month, 11=day) - a monument "built in the 1200s" shouldn't be
-// rendered as a false-precision exact date.
-function formatWikidataDate(dv) {
-  const match = dv?.time?.match(/^([+-]\d+)-\d{2}-\d{2}/);
-  if (!match) return null;
-  const year = parseInt(match[1], 10);
-  if (dv.precision >= 9) return String(year);
-  if (dv.precision === 8) {
-    const decade = Math.floor(year / 10) * 10;
-    return currentLang === 'en' ? `${decade}s` : `década de ${decade}`;
-  }
-  if (dv.precision === 7) {
-    const century = Math.ceil(year / 100);
-    return currentLang === 'en' ? `${century}${ordinalSuffix(century)} century` : `siglo ${century}`;
-  }
-  return String(year);
-}
-
-// Extracts (icon, label key, value) rows for whichever of these commonly-
-// populated properties the item actually has - most items won't have all
-// of them, rows are just omitted rather than shown empty.
-function buildFacts(entity, labelsMap) {
-  const facts = [];
-  const architect = entity.claims?.P84?.[0]?.mainsnak?.datavalue?.value;
-  if (architect) facts.push({ icon: '✏️', labelKey: 'facts.architect', value: labelsMap[architect.id] });
-
-  const styles = (entity.claims?.P149 || [])
-    .map((c) => c.mainsnak?.datavalue?.value?.id)
-    .filter(Boolean)
-    .map((id) => labelsMap[id])
-    .filter(Boolean);
-  if (styles.length) facts.push({ icon: '🏛️', labelKey: 'facts.style', value: styles.join(', ') });
-
-  const inception = formatWikidataDate(entity.claims?.P571?.[0]?.mainsnak?.datavalue?.value);
-  if (inception) facts.push({ icon: '🕰️', labelKey: 'facts.inception', value: inception });
-
-  const designation = entity.claims?.P1435?.[0]?.mainsnak?.datavalue?.value;
-  if (designation && labelsMap[designation.id]) {
-    facts.push({ icon: '🛡️', labelKey: 'facts.heritage_designation', value: labelsMap[designation.id] });
-  }
-
-  const partOf = entity.claims?.P361?.[0]?.mainsnak?.datavalue?.value;
-  if (partOf && labelsMap[partOf.id]) {
-    facts.push({ icon: '🧩', labelKey: 'facts.part_of', value: labelsMap[partOf.id] });
-  }
-
-  return facts;
-}
-
-function renderFacts(facts) {
-  if (!facts.length) return '';
-  const rows = facts
-    .map((f) => `<div class="fact-row"><span class="fact-icon">${f.icon}</span><span class="fact-label">${t(f.labelKey)}</span><span class="fact-value">${f.value}</span></div>`)
-    .join('');
-  return `<div class="facts">${rows}</div>`;
-}
 
 // --- Rendering: monument panel ----------------------------------------------
 
@@ -1313,7 +1230,7 @@ function wireGalleryClicks() {
   });
 }
 
-async function selectMonument(record, { flyTo = false, updateUrl = true } = {}) {
+async function selectMonument(record, { flyTo = false, updateUrl = true, featuredFile = null } = {}) {
   currentPanelState = { type: 'monument', record };
 
   panelContentEl.innerHTML = `
@@ -1365,28 +1282,11 @@ async function selectMonument(record, { flyTo = false, updateUrl = true } = {}) 
     const p18 = entity.claims?.P18?.[0]?.mainsnak?.datavalue?.value;
     const commonsCategory = entity.claims?.P373?.[0]?.mainsnak?.datavalue?.value;
 
-    // Architect/style/heritage-designation/part-of all reference other
-    // Wikidata items by QID - collect them once so the label lookup below
-    // is a single batched call, not one request per property.
-    const referencedQids = new Set();
-    const architectId = entity.claims?.P84?.[0]?.mainsnak?.datavalue?.value?.id;
-    if (architectId) referencedQids.add(architectId);
-    (entity.claims?.P149 || []).forEach((c) => {
-      const id = c.mainsnak?.datavalue?.value?.id;
-      if (id) referencedQids.add(id);
-    });
-    const partOfId = entity.claims?.P361?.[0]?.mainsnak?.datavalue?.value?.id;
-    if (partOfId) referencedQids.add(partOfId);
-    const designationId = entity.claims?.P1435?.[0]?.mainsnak?.datavalue?.value?.id;
-    if (designationId) referencedQids.add(designationId);
-
-    let [summary, mainImageMeta, galleryFiles, labelsMap] = await Promise.all([
+    let [summary, mainImageMeta, galleryFiles] = await Promise.all([
       sitelink ? fetchWikipediaSummary(sitelinkLang, sitelink.title) : null,
       p18 ? fetchImageMeta(p18) : null,
       commonsCategory ? fetchGalleryFiles(commonsCategory, p18) : Promise.resolve([]),
-      fetchLabels([...referencedQids]),
     ]);
-    const facts = buildFacts(entity, labelsMap);
 
     // No P18 but the Commons category has photos anyway - promote the
     // first one to the main slot rather than showing an orphan gallery
@@ -1395,15 +1295,31 @@ async function selectMonument(record, { flyTo = false, updateUrl = true } = {}) 
       mainImageMeta = await fetchImageMeta(galleryFiles[0]);
       galleryFiles = galleryFiles.slice(1);
     }
+
+    // A caller can ask for a specific photo to lead with (picture-of-the-
+    // week: clicking through should open on the exact photo the card
+    // showed, not whatever P18/gallery order would otherwise put in the
+    // hero slot) - swap it into the main slot, pushing whatever was there
+    // back into the gallery grid instead of just dropping it.
+    if (featuredFile && mainImageMeta?.filename !== featuredFile) {
+      const displaced = mainImageMeta;
+      mainImageMeta = await fetchImageMeta(featuredFile);
+      galleryFiles = galleryFiles.filter((f) => f !== featuredFile);
+      if (displaced) galleryFiles = [displaced.filename, ...galleryFiles];
+    }
     const files = mainImageMeta ? [mainImageMeta.filename, ...galleryFiles] : [];
     currentGalleryState = { files, index: 0, commonsCategory };
     preloadNeighbors(files, 0); // get photo #2 (if any) in flight before the first swipe even happens
 
-    // Roughly "media, then the core facts, then each contribution CTA
-    // right next to the thing it's actually offering to fill in, then
-    // links, then the more secondary/technical facts, then nearby" - see
+    // Roughly "media, then each contribution CTA right next to the thing
+    // it's actually offering to fill in, then links, then nearby" - see
     // the reasoning behind this exact order (and why it changed from a
-    // flatter one) in the conversation that produced it.
+    // flatter one) in the conversation that produced it. (The Wikidata
+    // "facts" block - architect/style/inception/etc. - that used to sit
+    // between the CTAs and links was removed: real Wikidata coverage of
+    // those properties is patchy enough that it read as randomly present
+    // on some monuments and absent on most, rather than a reliable info
+    // block.)
     let bodyHtml = '';
     if (mainImageMeta) {
       bodyHtml += `<div class="image-caption" id="image-caption">${licenseLineHtml(mainImageMeta)}</div>`;
@@ -1428,7 +1344,7 @@ async function selectMonument(record, { flyTo = false, updateUrl = true } = {}) 
     }
     if (summary?.extract) {
       bodyHtml += `<div class="extract">${summary.extract}</div>`;
-      bodyHtml += `<a class="read-more-link" href="${sitelink.url}" target="_blank" rel="noopener">${t('wikipedia.read_more')}</a>`;
+      bodyHtml += `<a class="badge read-more-btn" href="${sitelink.url}" target="_blank" rel="noopener">${ICON_WIKIPEDIA}${t('wikipedia.read_more')}</a>`;
       // Wording mirrors Wikipedia's own article-footer attribution, not
       // invented phrasing - satisfies what CC BY-SA actually requires:
       // attribution, share-alike notice, and a link to the license itself.
@@ -1451,7 +1367,6 @@ async function selectMonument(record, { flyTo = false, updateUrl = true } = {}) 
       `;
     }
     bodyHtml += linkBadges(record, sitelink);
-    bodyHtml += renderFacts(facts);
     if (record.wikidata_conflict) {
       bodyHtml += `<div class="missing-note">⚠ jcyl_id: ${record.wikidata_qid.join(', ')}</div>`;
     }
@@ -2031,7 +1946,6 @@ function showListPanel() {
   openPanel();
 }
 
-document.getElementById('list-btn').addEventListener('click', () => showListPanel());
 wireSpaLink(document.getElementById('skip-to-list-link'), () => {
   dismissWelcomeModal(); // see its own comment - don't leave a keyboard user stuck behind it
   showListPanel();
@@ -2100,7 +2014,6 @@ function showMenuPanel() {
     ${heroBlock({ title: t('menu.title'), placeholderIcon: '☰' })}
     <div class="panel-body">
       <ul class="list">
-        <li class="list-row" data-menu="list"><span class="list-row-icon-plain">📋</span><span class="list-row-name">${t('nav.list')}</span></li>
         <li class="list-row" data-menu="stats"><span class="list-row-icon-plain">📊</span><span class="list-row-name">${t('nav.stats')}</span></li>
         <li class="list-row" data-menu="about"><span class="list-row-icon-plain">ℹ️</span><span class="list-row-name">${t('nav.about')}</span></li>
         <li class="list-row" data-menu="contribute"><span class="list-row-icon-plain">🤝</span><span class="list-row-name">${t('nav.contribute')}</span></li>
@@ -2114,8 +2027,7 @@ function showMenuPanel() {
   panelContentEl.querySelectorAll('.list-row[data-menu]').forEach((row) => {
     row.addEventListener('click', () => {
       const action = row.dataset.menu;
-      if (action === 'list') showListPanel();
-      else if (action === 'stats') showStatsPanel();
+      if (action === 'stats') showStatsPanel();
       else if (action === 'about') showAboutPanel();
       else if (action === 'contribute') showContributePanel();
       else if (action === 'privacy') showPrivacyPanel();
@@ -2266,7 +2178,13 @@ function initPictureOfTheWeek() {
       potwEl.addEventListener('click', (e) => {
         if (e.target.closest('a')) return;
         dismissPotw();
-        selectMonument(record, { flyTo: true });
+        // entry.file: the exact photo the card showed - without this,
+        // selectMonument() would open on whatever P18/gallery order
+        // naturally puts in the hero slot, which isn't necessarily this
+        // one (that's the whole reason build_potw_seed.py hand-picks a
+        // "good picture" tier photo rather than trusting P18 already
+        // points at the best shot).
+        selectMonument(record, { flyTo: true, featuredFile: entry.file });
       });
       document.getElementById('potw-close').addEventListener('click', (e) => {
         e.stopPropagation();

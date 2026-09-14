@@ -941,15 +941,14 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
 .text-license { font-size: 11px; color: var(--ink-soft); margin: -8px 0 14px; line-height: 1.4; }
 .text-license a { color: var(--ink-soft); }
 
-.read-more-link {
-  display: inline-block;
-  font-size: 13px;
-  font-weight: 500;
-  color: var(--cyl-purple);
-  text-decoration: none;
-  margin: -6px 0 12px;
-}
-.read-more-link:hover { text-decoration: underline; }
+/* Was a plain underlined text link, easy to miss right under a wall of
+   extract text - promoted to the same pill-button treatment as every
+   other actionable link on this panel (.badge), so "there's a whole
+   article, this is just the lead" actually reads as an action, not a
+   footnote. Still the neutral/outlined .badge, not the filled purple
+   .contribute-cta-btn variant - this isn't asking the visitor to do
+   anything for the project, just offering to keep reading. */
+.read-more-btn { margin: -2px 0 14px; }
 
 .link-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
 .badge {
@@ -997,23 +996,6 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
    every other element, so *something* here is still required). */
 .badge.share-btn { font-family: inherit; cursor: pointer; }
 
-.facts {
-  margin: 4px 0 10px;
-  border-top: 1px solid var(--border);
-  border-bottom: 1px solid var(--border);
-}
-.fact-row {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-  padding: 8px 0;
-  font-size: 13.5px;
-}
-.fact-row + .fact-row { border-top: 1px solid var(--border); }
-.fact-icon { flex-shrink: 0; font-size: 13px; }
-.fact-label { color: var(--ink-soft); flex: 0 0 auto; min-width: 90px; }
-.fact-value { color: var(--ink); font-weight: 500; }
-
 /* Generic "this monument is missing X, here's how to add it" callout -
    originally just the no-photo case (still .contribute-cta in the DOM,
    renamed from upload-cta since it's now shared), reused as-is for the
@@ -1044,7 +1026,7 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
 
 #locate-btn {
   position: absolute;
-  bottom: 78px;
+  bottom: 24px;
   right: 16px;
   z-index: 500;
   width: 44px;
@@ -1060,7 +1042,7 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
 }
 #shuffle-btn {
   position: absolute;
-  bottom: 132px;
+  bottom: 78px;
   right: 16px;
   z-index: 500;
   width: 44px;
@@ -1080,7 +1062,7 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
    already use. */
 #filter-btn {
   position: absolute;
-  bottom: 186px;
+  bottom: 132px;
   right: 16px;
   z-index: 500;
   width: 44px;
@@ -1096,45 +1078,6 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
 }
 #filter-btn:hover { transform: scale(1.08); background: white; }
 #filter-btn.active { background: var(--cyl-purple); color: white; }
-
-/* The base of the stack (bottom: 24px, the spot locate/shuffle/filter
-   shifted up out of to make room) - last, not first: it's reached last
-   both by Tab (already true, it's last in the HTML regardless of visual
-   position) and now by eye scanning the stack top-to-bottom too, rather
-   than looking like the most prominent one by sitting above everything
-   else. The accessible, keyboard-reachable alternative to clicking a map
-   marker (see showListPanel() in app.js) - #skip-to-list-link is the
-   faster, more direct way in, this is the discoverable one for anyone
-   scanning the map's own controls. Deliberately a labeled pill, not a
-   same-size circle like its icon-only neighbors - a bare 📋 doesn't read
-   as "list view" on its own the way a target/dice does for locate/
-   shuffle, so this one gets real text instead of relying on the emoji
-   alone (see the HTML comment). Right-anchored like the rest of the
-   stack, but its own width instead of the fixed 44px circle - same
-   "wider than its neighbors, same right edge" layout #filter-panel
-   already uses next to #filter-btn. */
-#list-btn {
-  position: absolute;
-  bottom: 24px;
-  right: 16px;
-  z-index: 500;
-  height: 40px;
-  padding: 0 16px 0 12px;
-  border-radius: 20px;
-  border: none;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  background: rgba(255,255,255,0.92);
-  backdrop-filter: blur(8px);
-  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-  font-size: 13.5px;
-  font-weight: 600;
-  color: var(--ink);
-  cursor: pointer;
-  transition: transform 0.12s ease;
-}
-#list-btn:hover { transform: scale(1.04); background: white; }
 
 .filter-badge {
   position: absolute;
@@ -1155,7 +1098,7 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
 #filter-panel {
   display: none;
   position: absolute;
-  bottom: 186px;
+  bottom: 132px;
   right: 68px; /* clears #filter-btn to its left, rather than overlapping it */
   width: 260px;
   max-height: 60vh;
@@ -1381,11 +1324,10 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
    so the class is never added) needs no override either way. */
 @media (min-width: 769px) {
   #map-wrap.potw-visible .leaflet-bottom { bottom: 116px; }
-  #map-wrap.potw-visible #list-btn { bottom: 140px; }
-  #map-wrap.potw-visible #locate-btn { bottom: 194px; }
-  #map-wrap.potw-visible #shuffle-btn { bottom: 248px; }
+  #map-wrap.potw-visible #locate-btn { bottom: 140px; }
+  #map-wrap.potw-visible #shuffle-btn { bottom: 194px; }
   #map-wrap.potw-visible #filter-btn,
-  #map-wrap.potw-visible #filter-panel { bottom: 302px; }
+  #map-wrap.potw-visible #filter-panel { bottom: 248px; }
 }
 
 #locate-btn:hover { transform: scale(1.08); background: white; }
