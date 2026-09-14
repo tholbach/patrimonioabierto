@@ -280,13 +280,19 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
   #topbar { height: 52px; padding: 0 12px; }
   #logo-mark { height: 32px; }
   #topbar .brand { font-size: 17px; }
-  #menu-btn { width: 36px; height: 36px; font-size: 15px; }
+  /* 44px, not the 36px these used to be - the usual mobile touch-target
+     floor (Apple HIG/Material both land on ~44-48px), and #search-toggle-
+     btn is the one tap that gets you into search at all on this
+     breakpoint, worth getting right. #menu-btn matches it, not left at
+     the old size, since the two sit right next to each other in the same
+     row - one bigger than the other would read as a mistake, not a fix. */
+  #menu-btn { width: 44px; height: 44px; font-size: 18px; }
   #search-toggle-btn {
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    width: 36px;
-    height: 36px;
+    width: 44px;
+    height: 44px;
     padding: 0;
   }
 
