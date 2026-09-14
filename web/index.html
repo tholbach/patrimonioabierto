@@ -74,11 +74,13 @@
 <body>
   <!-- The very first focusable thing on the page, on purpose - a classic
        "skip link", invisible until it actually receives keyboard focus (see
-       .skip-link CSS). Whoever needs the list view most (can't/doesn't want
-       to drive the map) shouldn't have to already know a small map-corner
-       icon exists and tab/click their way to it first - this reaches the
-       same panel (showListPanel() in app.js) in a single Tab press from
-       anywhere, before the loading screen, the header, anything. -->
+       .skip-link CSS). The visible 📋 button/menu entry that used to sit
+       next to this got removed (redundant with search/map for anyone
+       clicking around) - this is now the only way into showListPanel(),
+       which is fine: it's aimed squarely at whoever can't/doesn't want to
+       drive the map, and reaches the same panel in a single Tab press from
+       anywhere, before the loading screen, the header, anything - no
+       fishing for a small icon first. -->
   <a href="#" id="skip-to-list-link" class="skip-link" data-i18n="list.skip_link">Ir directamente a la lista de monumentos</a>
 
   <!-- First paint, before app.js even runs: the dataset is ~2MB, worth
@@ -174,18 +176,6 @@
         </div>
         <div id="filter-list"></div>
       </div>
-
-      <!-- The accessible way into the map's data with no map involved (see
-           showListPanel() in app.js) - deliberately a labeled pill, not a
-           bare icon like its shuffle/locate/filter neighbors above it. A
-           clipboard emoji alone doesn't read as "list view" the way a
-           target or dice does for its own action - real visible text says
-           so outright, and (since it's real text content, not just an
-           aria-label bolted onto an icon-only button) that same text *is*
-           its accessible name, no mismatch between what's seen and what's
-           announced. #skip-to-list-link above is the other, faster way in
-           for anyone who'd rather not even reach the map corner first. -->
-      <button type="button" id="list-btn" data-i18n-title="list.button_title">📋 <span data-i18n="list.button">Ver lista</span></button>
 
       <!-- Desktop-only (hidden <=768px, see style.css) - a rotating
            highlight card, one photo picked deterministically per ISO week
