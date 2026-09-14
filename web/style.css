@@ -26,6 +26,26 @@
 html, body { height: 100%; margin: 0; }
 body { display: flex; flex-direction: column; font-family: var(--font-body); background: var(--bg); color: var(--ink); }
 
+/* Standard "skip link" pattern - see the HTML comment on
+   #skip-to-list-link. Off-screen (not display:none/visibility:hidden,
+   which would also pull it out of the tab order) until it actually
+   receives keyboard focus, at which point it snaps into view as the very
+   first thing on the page. */
+.skip-link {
+  position: absolute;
+  top: 0;
+  left: -9999px;
+  z-index: 2000;
+  padding: 14px 20px;
+  background: var(--cyl-purple);
+  color: white;
+  font-weight: 600;
+  font-size: 14px;
+  text-decoration: none;
+  border-radius: 0 0 8px 0;
+}
+.skip-link:focus { left: 0; }
+
 #topbar {
   flex: 0 0 auto;
   height: 56px;
@@ -802,10 +822,10 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
 .stats-chart-tooltip .tt-delta.down { color: #f0c8c8; }
 
 .list { list-style: none; margin: 0; padding: 0; border-top: 1px solid var(--border); }
-/* .list-row is a real <a href="?id=..."> now (see monumentListItemHtml()
-   in app.js), not a plain click-only <li> - reset the default link look
-   since visually it should still read as one plain row, same as before
-   this was a real link. */
+/* .list-row is a real <a href="?id=..."> now (see monumentListItemHtml() /
+   showListPanel() in app.js), not a plain click-only <li> - reset the
+   default link look since visually it should still read as one plain row,
+   same as before this was a real link. */
 .list-row {
   display: flex;
   align-items: center;
@@ -1024,7 +1044,7 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
 
 #locate-btn {
   position: absolute;
-  bottom: 24px;
+  bottom: 78px;
   right: 16px;
   z-index: 500;
   width: 44px;
@@ -1040,7 +1060,7 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
 }
 #shuffle-btn {
   position: absolute;
-  bottom: 78px;
+  bottom: 132px;
   right: 16px;
   z-index: 500;
   width: 44px;
@@ -1060,7 +1080,7 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
    already use. */
 #filter-btn {
   position: absolute;
-  bottom: 132px;
+  bottom: 186px;
   right: 16px;
   z-index: 500;
   width: 44px;
@@ -1076,6 +1096,45 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
 }
 #filter-btn:hover { transform: scale(1.08); background: white; }
 #filter-btn.active { background: var(--cyl-purple); color: white; }
+
+/* The base of the stack (bottom: 24px, the spot locate/shuffle/filter
+   shifted up out of to make room) - last, not first: it's reached last
+   both by Tab (already true, it's last in the HTML regardless of visual
+   position) and now by eye scanning the stack top-to-bottom too, rather
+   than looking like the most prominent one by sitting above everything
+   else. The accessible, keyboard-reachable alternative to clicking a map
+   marker (see showListPanel() in app.js) - #skip-to-list-link is the
+   faster, more direct way in, this is the discoverable one for anyone
+   scanning the map's own controls. Deliberately a labeled pill, not a
+   same-size circle like its icon-only neighbors - a bare 📋 doesn't read
+   as "list view" on its own the way a target/dice does for locate/
+   shuffle, so this one gets real text instead of relying on the emoji
+   alone (see the HTML comment). Right-anchored like the rest of the
+   stack, but its own width instead of the fixed 44px circle - same
+   "wider than its neighbors, same right edge" layout #filter-panel
+   already uses next to #filter-btn. */
+#list-btn {
+  position: absolute;
+  bottom: 24px;
+  right: 16px;
+  z-index: 500;
+  height: 40px;
+  padding: 0 16px 0 12px;
+  border-radius: 20px;
+  border: none;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(255,255,255,0.92);
+  backdrop-filter: blur(8px);
+  box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--ink);
+  cursor: pointer;
+  transition: transform 0.12s ease;
+}
+#list-btn:hover { transform: scale(1.04); background: white; }
 
 .filter-badge {
   position: absolute;
@@ -1096,7 +1155,7 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
 #filter-panel {
   display: none;
   position: absolute;
-  bottom: 132px;
+  bottom: 186px;
   right: 68px; /* clears #filter-btn to its left, rather than overlapping it */
   width: 260px;
   max-height: 60vh;
@@ -1301,10 +1360,11 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
    so the class is never added) needs no override either way. */
 @media (min-width: 769px) {
   #map-wrap.potw-visible .leaflet-bottom { bottom: 116px; }
-  #map-wrap.potw-visible #locate-btn { bottom: 140px; }
-  #map-wrap.potw-visible #shuffle-btn { bottom: 194px; }
+  #map-wrap.potw-visible #list-btn { bottom: 140px; }
+  #map-wrap.potw-visible #locate-btn { bottom: 194px; }
+  #map-wrap.potw-visible #shuffle-btn { bottom: 248px; }
   #map-wrap.potw-visible #filter-btn,
-  #map-wrap.potw-visible #filter-panel { bottom: 248px; }
+  #map-wrap.potw-visible #filter-panel { bottom: 302px; }
 }
 
 #locate-btn:hover { transform: scale(1.08); background: white; }
