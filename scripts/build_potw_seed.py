@@ -12,6 +12,15 @@ frontend needs:
     hero image instead of a clean showcase, which defeats the point of a
     "picture of the week" highlight.
 
+Sorted by monument name before writing, not left in whatever order
+find_good_pictures.py's API calls happened to return - the frontend picks
+`pool[isoWeekNumber(today) % pool.length]` (see initPictureOfTheWeek() in
+app.js), so an undocumented, incidental order would make the rotation as
+hard to reason about as the API response order it came from, for no
+benefit; alphabetical at least means re-running this script only reshuffles
+which week a given monument falls on, not which monuments are even in the
+pool.
+
 Run: python3 scripts/build_potw_seed.py
 Needs: data/raw/good_pictures_candidates.json (find_good_pictures.py)
 Writes: web/data/picture_of_the_week.json
@@ -30,7 +39,7 @@ def main():
 
     with open(CANDIDATES_FILE, encoding="utf-8") as f:
         candidates = json.load(f)
-    hits = [r for r in candidates if not r.get("_no_hits")]
+    hits = sorted((r for r in candidates if not r.get("_no_hits")), key=lambda r: r["name"])
 
     seen_qids = set()
     out = []
