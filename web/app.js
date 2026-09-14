@@ -526,6 +526,17 @@ function openPanel(onMapReady) {
   } else {
     onMapReady?.();
   }
+  if (isPage) {
+    // Page-mode panels behave like a route change (own URL fragment, own
+    // back-button entry, replace the map entirely) - move focus onto the
+    // new content so a keyboard/screen-reader user actually lands there.
+    // Without this, e.g. activating #skip-to-list-link left focus sitting
+    // on the skip link itself: the list rendered, but the very next Tab
+    // continued from the skip link's own DOM position (into the topbar),
+    // not into the list it supposedly jumped to - confirmed with Playwright.
+    panelContentEl.setAttribute('tabindex', '-1');
+    panelContentEl.focus();
+  }
 }
 
 function closePanel() {
