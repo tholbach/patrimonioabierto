@@ -8697,7 +8697,7 @@
       41.934266
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "El Arco",
@@ -8742,7 +8742,7 @@
       40.371572
     ],
     "monument_count": 4,
-    "linked_count": 2
+    "linked_count": 3
   },
   {
     "name": "El Barraco",
@@ -8877,7 +8877,7 @@
       40.948061
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "El Cubo de Tierra del Vino",
@@ -9672,7 +9672,7 @@
       43.179875
     ],
     "monument_count": 11,
-    "linked_count": 7
+    "linked_count": 11
   },
   {
     "name": "Espinosa del Camino",
@@ -10182,7 +10182,7 @@
       41.417812
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Fresno de Caracena",
@@ -10377,7 +10377,7 @@
       42.78388
     ],
     "monument_count": 5,
-    "linked_count": 3
+    "linked_count": 4
   },
   {
     "name": "Frómista",
@@ -10722,7 +10722,7 @@
       41.562717
     ],
     "monument_count": 2,
-    "linked_count": 1
+    "linked_count": 2
   },
   {
     "name": "Fuentepelayo",
@@ -11112,7 +11112,7 @@
       40.696499
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Galisancho",
@@ -11637,7 +11637,7 @@
       42.757255
     ],
     "monument_count": 5,
-    "linked_count": 4
+    "linked_count": 5
   },
   {
     "name": "Grajal de Campos",
@@ -11757,7 +11757,7 @@
       42.615732
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Guadramiro",
@@ -11877,7 +11877,7 @@
       41.826745
     ],
     "monument_count": 3,
-    "linked_count": 1
+    "linked_count": 2
   },
   {
     "name": "Gumiel de Mercado",
@@ -11892,7 +11892,7 @@
       41.801594
     ],
     "monument_count": 2,
-    "linked_count": 0
+    "linked_count": 2
   },
   {
     "name": "Gusendos de los Oteros",
@@ -12237,7 +12237,7 @@
       42.325529
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Hontangas",
@@ -12642,7 +12642,7 @@
       42.586714
     ],
     "monument_count": 2,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Hérmedes de Cerrato",
@@ -12762,7 +12762,7 @@
       42.454509
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Itero de la Vega",
@@ -12972,7 +12972,7 @@
       43.013069
     ],
     "monument_count": 2,
-    "linked_count": 1
+    "linked_count": 2
   },
   {
     "name": "Jurisdicción de Lara",
@@ -13647,7 +13647,7 @@
       42.79627
     ],
     "monument_count": 3,
-    "linked_count": 2
+    "linked_count": 3
   },
   {
     "name": "La Puebla de Valdavia",
@@ -14292,7 +14292,7 @@
       42.557213
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Las Navas del Marqués",
@@ -14322,7 +14322,7 @@
       42.719005
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Las Quintanillas",
@@ -14877,7 +14877,7 @@
       41.580742
     ],
     "monument_count": 4,
-    "linked_count": 2
+    "linked_count": 3
   },
   {
     "name": "Madridanos",
@@ -15027,7 +15027,7 @@
       42.171192
     ],
     "monument_count": 3,
-    "linked_count": 2
+    "linked_count": 3
   },
   {
     "name": "Mahide",
@@ -15927,7 +15927,7 @@
       43.029889
     ],
     "monument_count": 4,
-    "linked_count": 3
+    "linked_count": 4
   },
   {
     "name": "Medina de Rioseco",
@@ -15957,7 +15957,7 @@
       41.438956
     ],
     "monument_count": 11,
-    "linked_count": 10
+    "linked_count": 11
   },
   {
     "name": "Medinaceli",
@@ -15972,7 +15972,7 @@
       41.268989
     ],
     "monument_count": 7,
-    "linked_count": 6
+    "linked_count": 7
   },
   {
     "name": "Medinilla",
@@ -16047,7 +16047,7 @@
       42.516795
     ],
     "monument_count": 2,
-    "linked_count": 1
+    "linked_count": 2
   },
   {
     "name": "Melgar de Tera",
@@ -16167,7 +16167,7 @@
       42.915134
     ],
     "monument_count": 2,
-    "linked_count": 1
+    "linked_count": 2
   },
   {
     "name": "Merindad de Montija",
@@ -16182,7 +16182,7 @@
       43.136409
     ],
     "monument_count": 2,
-    "linked_count": 0
+    "linked_count": 2
   },
   {
     "name": "Merindad de Río Ubierna",
@@ -16212,7 +16212,7 @@
       43.10835
     ],
     "monument_count": 6,
-    "linked_count": 5
+    "linked_count": 6
   },
   {
     "name": "Merindad de Valdeporres",
@@ -16227,7 +16227,7 @@
       43.086571
     ],
     "monument_count": 2,
-    "linked_count": 1
+    "linked_count": 2
   },
   {
     "name": "Merindad de Valdivielso",
@@ -16242,7 +16242,7 @@
       42.877736
     ],
     "monument_count": 12,
-    "linked_count": 6
+    "linked_count": 12
   },
   {
     "name": "Mesegar de Corneja",
@@ -16407,7 +16407,7 @@
       42.741148
     ],
     "monument_count": 8,
-    "linked_count": 6
+    "linked_count": 8
   },
   {
     "name": "Miranda del Castañar",
@@ -16482,7 +16482,7 @@
       41.22312
     ],
     "monument_count": 4,
-    "linked_count": 3
+    "linked_count": 4
   },
   {
     "name": "Miño de San Esteban",
@@ -16782,7 +16782,7 @@
       40.608835
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Monsagro",
@@ -18687,7 +18687,7 @@
       42.591985
     ],
     "monument_count": 2,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Ojos-Albos",
@@ -18762,7 +18762,7 @@
       41.375436
     ],
     "monument_count": 4,
-    "linked_count": 3
+    "linked_count": 4
   },
   {
     "name": "Olmedo de Camaces",
@@ -19077,7 +19077,7 @@
       42.79383
     ],
     "monument_count": 7,
-    "linked_count": 3
+    "linked_count": 7
   },
   {
     "name": "Padiernos",
@@ -19422,7 +19422,7 @@
       42.071213
     ],
     "monument_count": 16,
-    "linked_count": 15
+    "linked_count": 16
   },
   {
     "name": "Palencia de Negrilla",
@@ -19467,7 +19467,7 @@
       42.255925
     ],
     "monument_count": 4,
-    "linked_count": 2
+    "linked_count": 4
   },
   {
     "name": "Pancorbo",
@@ -19482,7 +19482,7 @@
       42.733944
     ],
     "monument_count": 3,
-    "linked_count": 2
+    "linked_count": 3
   },
   {
     "name": "Papatrigo",
@@ -20322,7 +20322,7 @@
       40.497419
     ],
     "monument_count": 5,
-    "linked_count": 4
+    "linked_count": 5
   },
   {
     "name": "Piedralaves",
@@ -20487,7 +20487,7 @@
       41.727882
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Pino del Oro",
@@ -20757,7 +20757,7 @@
       42.827702
     ],
     "monument_count": 6,
-    "linked_count": 5
+    "linked_count": 6
   },
   {
     "name": "Ponferrada",
@@ -20892,7 +20892,7 @@
       42.70583
     ],
     "monument_count": 5,
-    "linked_count": 4
+    "linked_count": 5
   },
   {
     "name": "Poza de la Vega",
@@ -21132,7 +21132,7 @@
       42.214694
     ],
     "monument_count": 5,
-    "linked_count": 3
+    "linked_count": 4
   },
   {
     "name": "Priaranza del Bierzo",
@@ -21222,7 +21222,7 @@
       40.476344
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Puebla de Lillo",
@@ -21237,7 +21237,7 @@
       43.095306
     ],
     "monument_count": 2,
-    "linked_count": 1
+    "linked_count": 2
   },
   {
     "name": "Puebla de Pedraza",
@@ -21282,7 +21282,7 @@
       42.079169
     ],
     "monument_count": 6,
-    "linked_count": 5
+    "linked_count": 6
   },
   {
     "name": "Puebla de Yeltes",
@@ -21342,7 +21342,7 @@
       40.548795
     ],
     "monument_count": 2,
-    "linked_count": 1
+    "linked_count": 2
   },
   {
     "name": "Puentedura",
@@ -21522,7 +21522,7 @@
       42.716113
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Quintana del Marco",
@@ -22317,7 +22317,7 @@
       41.397
     ],
     "monument_count": 49,
-    "linked_count": 1
+    "linked_count": 2
   },
   {
     "name": "Retuerta",
@@ -22377,7 +22377,7 @@
       42.187916
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Revilla de Collazos",
@@ -22512,7 +22512,7 @@
       43.032277
     ],
     "monument_count": 4,
-    "linked_count": 3
+    "linked_count": 4
   },
   {
     "name": "Ribas de Campos",
@@ -22737,7 +22737,7 @@
       41.798209
     ],
     "monument_count": 3,
-    "linked_count": 2
+    "linked_count": 3
   },
   {
     "name": "Roales",
@@ -22872,7 +22872,7 @@
       42.612701
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Rollamienta",
@@ -22992,7 +22992,7 @@
       42.57669
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Rubí de Bracamonte",
@@ -23022,7 +23022,7 @@
       42.787158
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Rueda",
@@ -23217,7 +23217,7 @@
       42.101424
     ],
     "monument_count": 2,
-    "linked_count": 1
+    "linked_count": 2
   },
   {
     "name": "Salce",
@@ -23322,7 +23322,7 @@
       42.580717
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Salmoral",
@@ -23712,7 +23712,7 @@
       43.075896
     ],
     "monument_count": 21,
-    "linked_count": 19
+    "linked_count": 21
   },
   {
     "name": "San Esteban de Gormaz",
@@ -24132,7 +24132,7 @@
       40.544619
     ],
     "monument_count": 3,
-    "linked_count": 2
+    "linked_count": 3
   },
   {
     "name": "San Martín del Pimpollar",
@@ -24882,7 +24882,7 @@
       42.816853
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Santa Colomba de Somoza",
@@ -25107,7 +25107,7 @@
       42.765585
     ],
     "monument_count": 4,
-    "linked_count": 3
+    "linked_count": 4
   },
   {
     "name": "Santa Inés",
@@ -25347,7 +25347,7 @@
       42.168813
     ],
     "monument_count": 2,
-    "linked_count": 1
+    "linked_count": 2
   },
   {
     "name": "Santa María del Cubillo",
@@ -25587,7 +25587,7 @@
       40.522388
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Santibáñez de Ecla",
@@ -25977,7 +25977,7 @@
       42.262636
     ],
     "monument_count": 2,
-    "linked_count": 1
+    "linked_count": 2
   },
   {
     "name": "Sasamón",
@@ -25992,7 +25992,7 @@
       42.462978
     ],
     "monument_count": 5,
-    "linked_count": 3
+    "linked_count": 4
   },
   {
     "name": "Saucelle",
@@ -26217,7 +26217,7 @@
       41.429141
     ],
     "monument_count": 2,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Sieteiglesias de Tormes",
@@ -26622,7 +26622,7 @@
       42.674108
     ],
     "monument_count": 2,
-    "linked_count": 1
+    "linked_count": 2
   },
   {
     "name": "Suellacabras",
@@ -26772,7 +26772,7 @@
       40.696674
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Tamariz de Campos",
@@ -26952,7 +26952,7 @@
       40.687803
     ],
     "monument_count": 2,
-    "linked_count": 1
+    "linked_count": 2
   },
   {
     "name": "Tenebrón",
@@ -27057,7 +27057,7 @@
       42.508179
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Tolbaños",
@@ -27267,7 +27267,7 @@
       41.579796
     ],
     "monument_count": 15,
-    "linked_count": 13
+    "linked_count": 15
   },
   {
     "name": "Torquemada",
@@ -27477,7 +27477,7 @@
       41.599286
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Torregamones",
@@ -27777,7 +27777,7 @@
       42.855642
     ],
     "monument_count": 2,
-    "linked_count": 1
+    "linked_count": 2
   },
   {
     "name": "Trigueros del Valle",
@@ -27852,7 +27852,7 @@
       42.774254
     ],
     "monument_count": 2,
-    "linked_count": 1
+    "linked_count": 2
   },
   {
     "name": "Tubilla del Lago",
@@ -27972,7 +27972,7 @@
       41.877117
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Ucero",
@@ -28137,7 +28137,7 @@
       41.659459
     ],
     "monument_count": 3,
-    "linked_count": 2
+    "linked_count": 3
   },
   {
     "name": "Val de San Lorenzo",
@@ -28152,7 +28152,7 @@
       42.452459
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Valbuena de Duero",
@@ -28557,7 +28557,7 @@
       42.92049
     ],
     "monument_count": 3,
-    "linked_count": 2
+    "linked_count": 3
   },
   {
     "name": "Valdepolo",
@@ -28797,7 +28797,7 @@
       41.624838
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Valdorros",
@@ -28947,7 +28947,7 @@
       43.08954
     ],
     "monument_count": 8,
-    "linked_count": 2
+    "linked_count": 8
   },
   {
     "name": "Valle de Manzanedo",
@@ -28962,7 +28962,7 @@
       42.942405
     ],
     "monument_count": 3,
-    "linked_count": 1
+    "linked_count": 3
   },
   {
     "name": "Valle de Mena",
@@ -28977,7 +28977,7 @@
       43.198747
     ],
     "monument_count": 21,
-    "linked_count": 6
+    "linked_count": 21
   },
   {
     "name": "Valle de Oca",
@@ -29022,7 +29022,7 @@
       42.875173
     ],
     "monument_count": 11,
-    "linked_count": 6
+    "linked_count": 10
   },
   {
     "name": "Valle de Tabladillo",
@@ -29052,7 +29052,7 @@
       42.885149
     ],
     "monument_count": 4,
-    "linked_count": 1
+    "linked_count": 3
   },
   {
     "name": "Valle de Valdebezana",
@@ -29112,7 +29112,7 @@
       42.881054
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Valle de las Navas",
@@ -29127,7 +29127,7 @@
       42.555408
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Valle del Retortillo",
@@ -30162,7 +30162,7 @@
       42.106742
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Villacidaler",
@@ -30297,7 +30297,7 @@
       42.636448
     ],
     "monument_count": 5,
-    "linked_count": 2
+    "linked_count": 5
   },
   {
     "name": "Villaeles de Valdavia",
@@ -30642,7 +30642,7 @@
       40.962953
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Villagómez la Nueva",
@@ -30687,7 +30687,7 @@
       42.113845
     ],
     "monument_count": 4,
-    "linked_count": 3
+    "linked_count": 4
   },
   {
     "name": "Villahán",
@@ -31017,7 +31017,7 @@
       41.899518
     ],
     "monument_count": 4,
-    "linked_count": 3
+    "linked_count": 4
   },
   {
     "name": "Villalube",
@@ -31107,7 +31107,7 @@
       43.056866
     ],
     "monument_count": 4,
-    "linked_count": 3
+    "linked_count": 4
   },
   {
     "name": "Villamartín de Campos",
@@ -31857,7 +31857,7 @@
       42.168973
     ],
     "monument_count": 2,
-    "linked_count": 1
+    "linked_count": 2
   },
   {
     "name": "Villaquilambre",
@@ -32112,7 +32112,7 @@
       43.008039
     ],
     "monument_count": 13,
-    "linked_count": 4
+    "linked_count": 13
   },
   {
     "name": "Villardeciervos",
@@ -32217,7 +32217,7 @@
       40.926626
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Villares de la Reina",
@@ -32757,7 +32757,7 @@
       41.367788
     ],
     "monument_count": 2,
-    "linked_count": 1
+    "linked_count": 2
   },
   {
     "name": "Villaverde de Montejo",
@@ -33462,7 +33462,7 @@
       41.573789
     ],
     "monument_count": 32,
-    "linked_count": 31
+    "linked_count": 32
   },
   {
     "name": "Zapardiel de la Cañada",
@@ -33627,7 +33627,7 @@
       42.620028
     ],
     "monument_count": 1,
-    "linked_count": 0
+    "linked_count": 1
   },
   {
     "name": "Ágreda",
