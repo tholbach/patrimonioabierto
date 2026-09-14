@@ -1695,6 +1695,22 @@ async function showStatsPanel({ updateUrl = true } = {}) {
   if (updateUrl) history.pushState(null, '', '#stats');
 
   const [historyData, photoStats] = await Promise.all([fetchHistory(), fetchPhotoStats()]);
+  // history.json is fetched fresh here, every time Stats opens - but
+  // allRecords (total/linked/withImage above) was loaded once, at initial
+  // page load, and held in memory for the rest of the session. On a
+  // long-lived tab that's been open across a data refresh (or just any
+  // caching skew between the two separately-fetched files), history.json's
+  // own last entry can end up reporting a different "linked" figure than
+  // the stat-boxes on this same page do - confirmed live (1918 vs 2162).
+  // Both are meant to describe the exact same "right now", so force the
+  // chart's rightmost point to match the stat-boxes exactly rather than
+  // trusting two independently-fetched sources to agree on their own.
+  if (historyData.length) {
+    const last = historyData[historyData.length - 1];
+    last.total = total;
+    last.linked = linked;
+    last.with_image = withImage;
+  }
   const loadingEl = panelContentEl.querySelector('.loading');
   if (loadingEl) loadingEl.outerHTML = renderHistoryChart(historyData, total);
   const chartWrap = panelContentEl.querySelector('.stats-chart-wrap');
