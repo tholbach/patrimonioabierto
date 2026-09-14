@@ -58,7 +58,13 @@ def main():
     rows.sort(key=lambda r: (r["municipality"], r["name"]))
 
     os.makedirs(RAW_DIR, exist_ok=True)
-    with open(OUT_PATH, "w", encoding="utf-8", newline="") as f:
+    # utf-8-sig, not plain utf-8: without the BOM it adds, Excel (and some
+    # other spreadsheet tools) assume the system's local codepage instead
+    # of UTF-8 and mangle every accented name on open ("León" -> "LeÃ³n")
+    # even though the file's bytes were correct UTF-8 all along - a BOM
+    # makes that unambiguous. OpenRefine/most text tools handle the BOM
+    # transparently either way.
+    with open(OUT_PATH, "w", encoding="utf-8-sig", newline="") as f:
         writer = csv.DictWriter(f, fieldnames=FIELDNAMES)
         writer.writeheader()
         for r in rows:
