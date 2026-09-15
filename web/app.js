@@ -1151,8 +1151,14 @@ async function goToIndex(index) {
 
   const galleryEl = panelContentEl.querySelector('.gallery');
   if (galleryEl) {
+    // outerHTML swaps in a brand-new node, which would otherwise reset the
+    // mobile filmstrip's horizontal scroll back to 0 - jarring when the
+    // thumbnail that was just tapped sits at the right edge.
+    const galleryScrollLeft = galleryEl.scrollLeft;
     galleryEl.outerHTML = renderGallery(files, index, currentGalleryState.commonsCategory);
     wireGalleryClicks();
+    const newGalleryEl = panelContentEl.querySelector('.gallery');
+    if (newGalleryEl) newGalleryEl.scrollLeft = galleryScrollLeft;
   }
 
   // License/author + the File: page link still need the API call - fetch
