@@ -1,0 +1,13 @@
+[Unit]
+Description=Patrimonio Abierto - daily data refresh (make fetch && make build)
+Wants=network-online.target
+After=network-online.target
+
+[Service]
+Type=oneshot
+# Adjust User= and the repo path below to match the server's actual
+# checkout location and the user that owns it (needs write access to
+# the repo for git add/commit/push).
+User=thomas
+WorkingDirectory=/opt/patrimonioabierto
+ExecStart=/opt/patrimonioabierto/scripts/daily_refresh.sh
