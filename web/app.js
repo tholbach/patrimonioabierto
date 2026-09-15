@@ -960,13 +960,43 @@ function linkBadges(record, sitelink) {
 // placeholder as "this monument genuinely has no photo", so the panel looks
 // finished and then a photo drops into it out of nowhere. Callers that
 // already know the answer (every other panel type, and the error path)
-// leave it off. Cleared by clearHeroLoading() on the one path that resolves
+// leave it off. Cleared by clearLoadingState() on the one path that resolves
 // without re-rendering the hero.
-function clearHeroLoading() {
+// Placeholder shaped like what's actually on the way - a row of gallery
+// thumbnails, a few lines of Wikipedia extract, the link badges - instead
+// of leaving most of the panel blank under a lone "Cargando…" line while
+// the Wikidata/Commons round-trip finishes. Deliberately approximate: it
+// mirrors the *shape* of a loaded monument, not any particular one (a
+// monument with no photo or no article still gets the full skeleton, then
+// its own CTA where that block would have been), which is the usual
+// trade-off for skeletons and much better than the panel looking finished
+// and empty. aria-hidden: the .loading line right above it is the real,
+// announced status - this is decoration on top of it.
+function loadingSkeletonHtml() {
+  const thumbs = Array.from({ length: 4 }, () => '<div class="skeleton skeleton-thumb"></div>').join('');
+  // Ragged widths, not four identical bars - a paragraph doesn't end flush,
+  // and the last short line is most of what makes this read as text.
+  const lines = [100, 97, 99, 62].map((w) => `<div class="skeleton skeleton-line" style="width:${w}%"></div>`).join('');
+  const badges = [104, 88, 120].map((w) => `<div class="skeleton skeleton-badge" style="width:${w}px"></div>`).join('');
+  return `
+    <div class="skeleton-block" aria-hidden="true">
+      <div class="skeleton-gallery">${thumbs}</div>
+      <div class="skeleton-lines">${lines}</div>
+      <div class="skeleton-badges">${badges}</div>
+    </div>
+  `;
+}
+
+// Takes down every part of the loading treatment at once - hero spinner
+// and body skeleton - so the one path that resolves without re-rendering
+// the panel can't take half of it down and leave the other half running.
+function clearLoadingState() {
   const hero = panelContentEl.querySelector('.hero-loading');
-  if (!hero) return;
-  hero.classList.remove('hero-loading');
-  hero.querySelector('.hero-spinner')?.remove();
+  if (hero) {
+    hero.classList.remove('hero-loading');
+    hero.querySelector('.hero-spinner')?.remove();
+  }
+  panelContentEl.querySelector('.skeleton-block')?.remove();
 }
 
 function heroBlock({ imageUrl, linkUrl, kicker, title, placeholderIcon, loading = false }) {
@@ -1431,7 +1461,8 @@ async function selectMonument(record, { flyTo = false, updateUrl = true, feature
     ${heroBlock({ kicker: heroKicker(record), title: record.name, placeholderIcon: CATEGORY_ICONS[record.category] || DEFAULT_ICON, loading: true })}
     <div class="panel-body">
       <div class="meta">${bodyMetaLine(record)}</div>
-      <div class="loading">${t('loading')}</div>
+      <div class="loading" role="status">${t('loading')}</div>
+      ${loadingSkeletonHtml()}
     </div>
   `;
   openPanel(() => {
@@ -1449,12 +1480,12 @@ async function selectMonument(record, { flyTo = false, updateUrl = true, feature
     // what a visitor clicking around actually lands on (633 unlinked vs.
     // ~860 linked-but-no-article), so gating the suggestion on "already
     // linked" would miss most of its actual audience.
-    // Only path that finishes without re-rendering the hero (the two
+    // Only path that finishes without re-rendering the panel (the two
     // below both replace panelContentEl wholesale), so it's the only one
-    // that has to take the spinner down itself - an unlinked monument has
-    // no photo to wait for, and leaving it spinning would promise one
-    // that's never coming.
-    clearHeroLoading();
+    // that has to take the loading treatment down itself - an unlinked
+    // monument has no photo or article to wait for, and leaving it
+    // spinning would promise content that's never coming.
+    clearLoadingState();
     panelContentEl.querySelector('.loading').outerHTML = `
       <div class="missing-note">${t('missing.note')}</div>
       <div class="contribute-cta">

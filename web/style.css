@@ -1189,6 +1189,30 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
 
 .loading { color: var(--ink-soft); font-size: 13px; margin-top: 12px; }
 
+/* Skeleton placeholder for a monument panel that's still waiting on
+   Wikidata/Commons - see loadingSkeletonHtml(). Shapes deliberately match
+   the real thing they stand in for (.gallery img is 68px square, .extract
+   lines are 14.5px/1.6, .badge pills are ~32px tall with an 18px radius),
+   so the swap to real content doesn't visibly re-flow the panel. */
+.skeleton {
+  /* The sweep is a wide gradient moved across an oversized background box,
+     not an extra overlay element - one painted layer per shape. */
+  background: linear-gradient(90deg, var(--border) 25%, #f4efe9 37%, var(--border) 63%);
+  background-size: 300% 100%;
+  animation: skeleton-shimmer 1.5s ease-in-out infinite;
+}
+@keyframes skeleton-shimmer {
+  from { background-position: 100% 50%; }
+  to { background-position: 0 50%; }
+}
+.skeleton-block { margin-top: 14px; }
+.skeleton-gallery { display: flex; gap: 8px; margin: 12px 0 4px; }
+.skeleton-thumb { width: 68px; height: 68px; border-radius: 8px; flex-shrink: 0; }
+.skeleton-lines { margin: 18px 0; display: flex; flex-direction: column; gap: 9px; }
+.skeleton-line { height: 11px; border-radius: 4px; }
+.skeleton-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 20px; }
+.skeleton-badge { height: 32px; border-radius: 18px; }
+
 #locate-btn {
   position: absolute;
   bottom: 24px;
