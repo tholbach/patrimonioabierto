@@ -490,6 +490,13 @@ const appEl = document.getElementById('app');
 // whole point is not needing the map at all.
 const PAGE_PANEL_TYPES = new Set(['about', 'contribute', 'stats', 'privacy', 'imprint', 'list']);
 
+// Same 5 - 'list' excluded, it has no URL of its own - as clean paths
+// (/stats/, /about/, ...), 1:1 with each type. Old #stats-style hash
+// links still open the right page too (see the deep-link parsing below),
+// this only changes what new links look like going forward, same as
+// /monumento/<id>-<slug>/ for monuments.
+const WRITTEN_PAGE_TYPES = ['about', 'contribute', 'stats', 'privacy', 'imprint'];
+
 // onMapReady (optional): called once the map's own size is actually
 // correct - immediately, if this call isn't resizing/revealing #map at
 // all, or otherwise only after the same invalidateSize() below runs. Any
@@ -549,11 +556,14 @@ function closePanel() {
   appEl.classList.remove('page-mode');
   setTimeout(() => map.invalidateSize(), 260);
   // Always back to root, not location.pathname - since shareUrl() can now
-  // leave the address bar on /monumento/<id>-<slug>/ while a monument
-  // panel is open, pushing the current pathname unchanged would strand
-  // the visitor there with the panel closed instead of back on the plain
-  // map. Query string/hash (active filters, #about, ...) still carry over.
-  history.pushState(null, '', '/' + location.search + location.hash);
+  // leave the address bar on /monumento/<id>-<slug>/ (or /stats/, /about/,
+  // ...) while a panel is open, pushing the current pathname unchanged
+  // would strand the visitor there with the panel closed instead of back
+  // on the plain map. Query string (active filters) carries over; hash
+  // does not - location.hash is only ever a #stats-style legacy deep
+  // link into one of these same panels (see WRITTEN_PAGE_TYPES), never
+  // anything to preserve past a close.
+  history.pushState(null, '', '/' + location.search);
   currentPanelState = null;
 }
 
@@ -1661,7 +1671,7 @@ async function showStatsPanel({ updateUrl = true } = {}) {
   `;
   openPanel();
   wirePageNav();
-  if (updateUrl) history.pushState(null, '', '#stats');
+  if (updateUrl) history.pushState(null, '', '/stats/');
 
   const [historyData, photoStats] = await Promise.all([fetchHistory(), fetchPhotoStats()]);
   // history.json is fetched fresh here, every time Stats opens - but
@@ -1743,7 +1753,7 @@ function showAboutPanel({ updateUrl = true } = {}) {
   `;
   openPanel();
   wirePageNav();
-  if (updateUrl) history.pushState(null, '', '#about');
+  if (updateUrl) history.pushState(null, '', '/about/');
 }
 
 function showContributePanel({ updateUrl = true } = {}) {
@@ -1778,7 +1788,7 @@ function showContributePanel({ updateUrl = true } = {}) {
   wirePageNav();
   wireFilterLink(document.getElementById('contribute-see-no-photo'), 'no_photo');
   wireFilterLink(document.getElementById('contribute-see-no-wikipedia'), 'no_wikipedia');
-  if (updateUrl) history.pushState(null, '', '#contribute');
+  if (updateUrl) history.pushState(null, '', '/contribute/');
 }
 
 function showPrivacyPanel({ updateUrl = true } = {}) {
@@ -1812,7 +1822,7 @@ function showPrivacyPanel({ updateUrl = true } = {}) {
   `;
   openPanel();
   wirePageNav();
-  if (updateUrl) history.pushState(null, '', '#privacy');
+  if (updateUrl) history.pushState(null, '', '/privacy/');
 }
 
 // TODO content placeholder - imprint.body is a stand-in until real
@@ -1830,7 +1840,7 @@ function showImprintPanel({ updateUrl = true } = {}) {
   `;
   openPanel();
   wirePageNav();
-  if (updateUrl) history.pushState(null, '', '#imprint');
+  if (updateUrl) history.pushState(null, '', '/imprint/');
 }
 
 // --- Rendering: Municipality / Province panels ------------------------------
@@ -2669,9 +2679,9 @@ Promise.all([
     initCategoryFilter();
 
     // Deep links: ?id=<jcyl_id> / ?muni=<ine_code> / ?prov=<name> open
-    // straight to that monument/municipality/province; #about / #contribute
-    // / #stats / #privacy / #imprint open those written pages (see
-    // PAGE_PANEL_TYPES).
+    // straight to that monument/municipality/province; /about/,
+    // /contribute/, /stats/, /privacy/, /imprint/ (or the old #about-style
+    // hash equivalents - see WRITTEN_PAGE_TYPES) open those written pages.
     const params = new URLSearchParams(location.search);
     let requestedId = params.get('id');
     // /monumento/<jcyl_id>-<slug>/ - the crawlable static page for a
@@ -2688,7 +2698,14 @@ Promise.all([
     }
     const requestedMuni = params.get('muni');
     const requestedProv = params.get('prov');
-    const hasDeepLink = !!(requestedId || requestedMuni || requestedProv || location.hash);
+    // /stats/ etc. read the same way /monumento/<id>-<slug>/ is above - not
+    // rewritten away, left as the address bar shows it. A bare #stats hash
+    // (no matching path) still resolves too, for anyone with an old link.
+    const hashPage = location.hash.replace(/^#/, '');
+    const requestedPage =
+      WRITTEN_PAGE_TYPES.find((type) => location.pathname === `/${type}/`) ||
+      (WRITTEN_PAGE_TYPES.includes(hashPage) ? hashPage : null);
+    const hasDeepLink = !!(requestedId || requestedMuni || requestedProv || requestedPage);
     // Same reasoning as maybeShowWelcome() below: someone landing on a
     // specific monument/municipality/province/static page came for that
     // page, not the map's own landing view - a card advertising an
@@ -2703,15 +2720,15 @@ Promise.all([
     } else if (requestedProv) {
       const prov = allProvinces.find((p) => p.name === requestedProv);
       if (prov) showProvincePanel(prov, { flyTo: true, updateUrl: false });
-    } else if (location.hash === '#stats') {
+    } else if (requestedPage === 'stats') {
       showStatsPanel({ updateUrl: false });
-    } else if (location.hash === '#about') {
+    } else if (requestedPage === 'about') {
       showAboutPanel({ updateUrl: false });
-    } else if (location.hash === '#contribute') {
+    } else if (requestedPage === 'contribute') {
       showContributePanel({ updateUrl: false });
-    } else if (location.hash === '#privacy') {
+    } else if (requestedPage === 'privacy') {
       showPrivacyPanel({ updateUrl: false });
-    } else if (location.hash === '#imprint') {
+    } else if (requestedPage === 'imprint') {
       showImprintPanel({ updateUrl: false });
     }
 

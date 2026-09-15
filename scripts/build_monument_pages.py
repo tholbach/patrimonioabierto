@@ -318,7 +318,16 @@ def main():
     with_extract = sum(1 for r in records if str(r["jcyl_id"]) in extracts)
     print(f"wrote {len(written)} monument pages ({with_extract} with a Wikipedia extract) to {OUT_ROOT}")
 
-    sitemap_urls = [f"{SITE_URL}/"] + [f"{SITE_URL}/monumento/{slug}/" for slug in written]
+    # Mirrors WRITTEN_PAGE_TYPES in web/app.js - these 5 have no static file
+    # of their own (Caddyfile's try_files fallback hands them the SPA shell,
+    # which then renders client-side), but they're real, crawlable URLs now
+    # too, so they belong in the sitemap same as every monument page.
+    written_pages = ["about", "contribute", "stats", "privacy", "imprint"]
+    sitemap_urls = (
+        [f"{SITE_URL}/"]
+        + [f"{SITE_URL}/{page}/" for page in written_pages]
+        + [f"{SITE_URL}/monumento/{slug}/" for slug in written]
+    )
     sitemap = ['<?xml version="1.0" encoding="UTF-8"?>', '<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">']
     for url in sitemap_urls:
         sitemap.append(f"  <url><loc>{html.escape(url)}</loc></url>")

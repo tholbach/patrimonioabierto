@@ -10,5 +10,21 @@
 	# repetition gzip crushes (measured ~89% smaller compressed). Without
 	# this, file_server was serving everything uncompressed.
 	encode zstd gzip
+	# SPA fallback: /monumento/<id>-<slug>/ resolves to a real file on disk
+	# (scripts/build_monument_pages.py generates one per monument) and is
+	# served as-is - {path}/index.html as its own explicit candidate, not
+	# just {path}, since try_files doesn't resolve a matched directory's
+	# own index.html the way file_server alone does (confirmed: {path}
+	# alone fell through to the third candidate for every /monumento/...
+	# request, serving the generic homepage instead of that monument's own
+	# page). Everything else that doesn't match a real file - most
+	# importantly /stats/, /about/, /contribute/, /privacy/, /imprint/,
+	# which app.js pushState()s to but which have no static file of their
+	# own - falls back to index.html instead of a hard 404, so app.js's own
+	# bootstrap can read the path and open the right panel client-side. A
+	# genuinely bad URL (typo, stale link) still resolves the SPA shell
+	# rather than a real 404 - the standard, accepted tradeoff for
+	# client-side routing.
+	try_files {path} {path}/index.html /index.html
 	file_server
 }
