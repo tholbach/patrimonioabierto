@@ -2,6 +2,15 @@
 <html lang="es">
 <head>
   <meta charset="utf-8">
+  <!-- Root-relative, not absolute - resolves against whatever origin
+       actually served the page (production or make serve/localhost) and
+       keeps every relative reference (style.css, assets/*, app.js's own
+       fetch('data/...') calls) pinned to site root even once app.js starts
+       pushState-ing the address bar to /monumento/<id>-<slug>/ during live
+       browsing - without this, those fetches would resolve one directory
+       too deep and 404. Same tag scripts/build_monument_pages.py's static
+       per-monument pages already carry, for the same reason. -->
+  <base href="/">
   <title>Patrimonio Abierto - Castilla y León en un mapa</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 

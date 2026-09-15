@@ -548,7 +548,12 @@ function closePanel() {
   panelEl.classList.remove('open');
   appEl.classList.remove('page-mode');
   setTimeout(() => map.invalidateSize(), 260);
-  history.pushState(null, '', location.pathname);
+  // Always back to root, not location.pathname - since shareUrl() can now
+  // leave the address bar on /monumento/<id>-<slug>/ while a monument
+  // panel is open, pushing the current pathname unchanged would strand
+  // the visitor there with the panel closed instead of back on the plain
+  // map. Query string/hash (active filters, #about, ...) still carry over.
+  history.pushState(null, '', '/' + location.search + location.hash);
   currentPanelState = null;
 }
 
@@ -733,10 +738,30 @@ function bodyMetaLine(record) {
   return line;
 }
 
+// Mirrors scripts/build_monument_pages.py's slugify() exactly (NFKD-fold
+// diacritics, drop anything left outside a-z0-9, hyphen-join, trim) - same
+// record.name in, same slug out, so a live-browsed URL matches that
+// monument's own pre-built static page. Purely cosmetic if it ever drifts
+// (the id prefix alone is what bootstrap actually reads back), but worth
+// keeping in sync so a copied/shared link looks identical either way.
+function slugify(name) {
+  const ascii = name
+    .normalize('NFKD')
+    .replace(/[̀-ͯ]/g, '') // strip combining diacritics (á -> a)
+    .replace(/[^\x00-\x7f]/g, ''); // drop anything left outside ASCII
+  const slug = ascii.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-+|-+$/g, '');
+  return slug || 'monumento';
+}
+
+// Same /monumento/<id>-<slug>/ path as the crawlable static page
+// (scripts/build_monument_pages.py) - used for both the share button and
+// every internal pushState() when opening a monument, so a copied address
+// bar link and a bot-shared link are the same URL, and the live app is
+// never left showing a raw ?id= while browsing. Old ?id= links keep
+// resolving (see the bootstrap deep-link parsing below) - this only
+// changes what new links look like going forward.
 function shareUrl(record) {
-  const url = new URL(location.href);
-  url.search = new URLSearchParams({ id: record.jcyl_id }).toString();
-  return url.toString();
+  return new URL(`/monumento/${record.jcyl_id}-${slugify(record.name)}/`, location.origin).toString();
 }
 
 // Small inline SVG (currentColor, so each badge's own text color applies
@@ -1882,7 +1907,11 @@ function renderNearby(record) {
 }
 
 function municipalityShareUrl(muni) {
-  const url = new URL(location.href);
+  // pathname forced to '/', not left as location.pathname - unlike
+  // monuments, municipalities have no pretty static page of their own, so
+  // this must never inherit a /monumento/<id>-<slug>/ path left over from
+  // shareUrl() above.
+  const url = new URL('/', location.origin);
   url.search = new URLSearchParams({ muni: muni.ine_code_p772 }).toString();
   return url.toString();
 }
@@ -1957,7 +1986,8 @@ wireSpaLink(document.getElementById('skip-to-list-link'), () => {
 });
 
 function provinceShareUrl(prov) {
-  const url = new URL(location.href);
+  // pathname forced to '/' - same reasoning as municipalityShareUrl() above.
+  const url = new URL('/', location.origin);
   url.search = new URLSearchParams({ prov: prov.name }).toString();
   return url.toString();
 }
@@ -2645,18 +2675,16 @@ Promise.all([
     const params = new URLSearchParams(location.search);
     let requestedId = params.get('id');
     // /monumento/<jcyl_id>-<slug>/ - the crawlable static page for a
-    // monument (scripts/build_monument_pages.py) hands off to the SPA the
-    // same way a ?id= deep link does, once this far: normalize the
-    // address bar back to the canonical ?id= form first (not shareUrl(),
-    // which preserves whatever pathname is already current - exactly what
-    // must NOT happen here) so every other internal link/back-button/
-    // close-panel path keeps working unmodified. The slug is decorative
-    // only, never read - a monument renamed since its last build still
-    // resolves correctly off the id alone.
+    // monument (scripts/build_monument_pages.py), and also what
+    // shareUrl()/selectMonument() now push to during live browsing (see
+    // shareUrl()) - so this is read, not rewritten away: whichever form a
+    // visitor landed on (an old ?id= bookmark or a pretty path) is left as
+    // the address bar shows it. The slug is decorative only, never read -
+    // a monument renamed since its last build still resolves correctly off
+    // the id alone.
     const monumentoPath = location.pathname.match(/^\/monumento\/(\d+)-/);
     if (!requestedId && monumentoPath) {
       requestedId = monumentoPath[1];
-      history.replaceState(null, '', `/?id=${encodeURIComponent(requestedId)}${location.hash}`);
     }
     const requestedMuni = params.get('muni');
     const requestedProv = params.get('prov');
