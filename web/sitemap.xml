@@ -1,6 +1,11 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
   <url><loc>https://patrimonioabierto.es/</loc></url>
+  <url><loc>https://patrimonioabierto.es/about/</loc></url>
+  <url><loc>https://patrimonioabierto.es/contribute/</loc></url>
+  <url><loc>https://patrimonioabierto.es/stats/</loc></url>
+  <url><loc>https://patrimonioabierto.es/privacy/</loc></url>
+  <url><loc>https://patrimonioabierto.es/imprint/</loc></url>
   <url><loc>https://patrimonioabierto.es/monumento/1-camino-de-santiago-en-castilla-y-leon-camino-frances/</loc></url>
   <url><loc>https://patrimonioabierto.es/monumento/5-canal-de-castilla/</loc></url>
   <url><loc>https://patrimonioabierto.es/monumento/14-iglesia-de-nuestra-senora-de-la-asuncion/</loc></url>
