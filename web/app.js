@@ -953,7 +953,23 @@ function linkBadges(record, sitelink) {
 // with no photo (About/Contribute, or a monument with genuinely no image
 // anywhere) fall back to a plain gradient in the same spot, so every panel
 // still opens with the same visual rhythm.
-function heroBlock({ imageUrl, linkUrl, kicker, title, placeholderIcon }) {
+// loading (default false): the photo isn't known to be absent yet, it just
+// hasn't arrived - selectMonument() renders the panel immediately and only
+// then goes off to Wikidata/Wikipedia/Commons for the image, which can take
+// a visible moment. Without this the wait is drawn with the exact same
+// placeholder as "this monument genuinely has no photo", so the panel looks
+// finished and then a photo drops into it out of nowhere. Callers that
+// already know the answer (every other panel type, and the error path)
+// leave it off. Cleared by clearHeroLoading() on the one path that resolves
+// without re-rendering the hero.
+function clearHeroLoading() {
+  const hero = panelContentEl.querySelector('.hero-loading');
+  if (!hero) return;
+  hero.classList.remove('hero-loading');
+  hero.querySelector('.hero-spinner')?.remove();
+}
+
+function heroBlock({ imageUrl, linkUrl, kicker, title, placeholderIcon, loading = false }) {
   const scrim = `
     <div class="hero-scrim">
       ${kicker ? `<div class="hero-kicker">${kicker}</div>` : ''}
@@ -972,7 +988,8 @@ function heroBlock({ imageUrl, linkUrl, kicker, title, placeholderIcon }) {
     // no photo still visually reads as "castle" rather than looking like a
     // generic empty/broken state.
     const icon = placeholderIcon ? `<div class="hero-placeholder-icon">${placeholderIcon}</div>` : '';
-    return `<div class="hero hero-fallback">${icon}${scrim}${dots}</div>`;
+    const spinner = loading ? '<div class="hero-spinner" aria-hidden="true"></div>' : '';
+    return `<div class="hero hero-fallback${loading ? ' hero-loading' : ''}">${icon}${spinner}${scrim}${dots}</div>`;
   }
   // main-image-bg is the blurred backdrop for portrait photos/videos - see
   // the CSS comment on .hero-img-bg. Same src as the real photo, just
@@ -1411,7 +1428,7 @@ async function selectMonument(record, { flyTo = false, updateUrl = true, feature
   currentPanelState = { type: 'monument', record };
 
   panelContentEl.innerHTML = `
-    ${heroBlock({ kicker: heroKicker(record), title: record.name, placeholderIcon: CATEGORY_ICONS[record.category] || DEFAULT_ICON })}
+    ${heroBlock({ kicker: heroKicker(record), title: record.name, placeholderIcon: CATEGORY_ICONS[record.category] || DEFAULT_ICON, loading: true })}
     <div class="panel-body">
       <div class="meta">${bodyMetaLine(record)}</div>
       <div class="loading">${t('loading')}</div>
@@ -1432,6 +1449,12 @@ async function selectMonument(record, { flyTo = false, updateUrl = true, feature
     // what a visitor clicking around actually lands on (633 unlinked vs.
     // ~860 linked-but-no-article), so gating the suggestion on "already
     // linked" would miss most of its actual audience.
+    // Only path that finishes without re-rendering the hero (the two
+    // below both replace panelContentEl wholesale), so it's the only one
+    // that has to take the spinner down itself - an unlinked monument has
+    // no photo to wait for, and leaving it spinning would promise one
+    // that's never coming.
+    clearHeroLoading();
     panelContentEl.querySelector('.loading').outerHTML = `
       <div class="missing-note">${t('missing.note')}</div>
       <div class="contribute-cta">
@@ -2380,11 +2403,17 @@ function initPictureOfTheWeek() {
       // "done with this suggestion" rather than something to leave sitting
       // there stale over whatever's now on screen.
       //
-      // Ignore clicks on any of the strip's own <a> links though (credit
-      // line's artist/license links, and now #potw-collab's own two) -
-      // each handles its own destination, not this monument.
+      // Two exemptions. Any of the strip's own <a> links (the credit
+      // line's artist/license links, #potw-collab's three) each handle
+      // their own destination, not this monument. And #potw-collab as a
+      // whole, links or not: it's a message about the ~900 monuments that
+      // have NO photo, sitting inside a card advertising one that does -
+      // so a stray click on that count or its label used to open the
+      // featured monument, which is the one monument it definitively
+      // isn't about. Nothing but its own links is clickable there (see
+      // its cursor in style.css).
       potwEl.addEventListener('click', (e) => {
-        if (e.target.closest('a')) return;
+        if (e.target.closest('a, #potw-collab')) return;
         dismissPotw();
         // entry.file: the exact photo the card showed - without this,
         // selectMonument() would open on whatever P18/gallery order

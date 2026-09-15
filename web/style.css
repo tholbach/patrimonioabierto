@@ -678,6 +678,29 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
    .hero so it needs to come after it in source order to win. */
 .hero-fallback { height: 180px; }
 .hero-fallback .hero-placeholder-icon { font-size: 78px; }
+
+/* The hero while the photo is still being fetched (see heroBlock()'s
+   `loading`). Without this the wait renders identically to "this monument
+   has no photo at all" - the panel looks settled, then a photo appears in
+   it a second later. Two cues: the category placeholder drops to a faint
+   watermark rather than sitting there at its normal strength as if it were
+   the final answer, and a spinner says the panel is still working. */
+.hero-loading .hero-placeholder-icon { opacity: 0.14; }
+.hero-spinner {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 28px;
+  height: 28px;
+  margin: -14px 0 0 -14px;
+  border: 3px solid rgba(255,255,255,0.35);
+  border-top-color: white;
+  border-radius: 50%;
+  /* Same keyframe the first-paint loading screen spins on - one spinner
+     idiom across the app rather than a second, subtly different one. */
+  animation: loading-spin 0.8s linear infinite;
+  pointer-events: none;
+}
 .hero a { display: block; height: 100%; position: relative; }
 /* goToIndex() now hides #main-image-link (the <a> above) while a video is
    showing instead - same reasoning as .hero-video[hidden] just below: the
@@ -1479,6 +1502,12 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
   margin-left: 28px;
   padding: 8px 24px;
   background: linear-gradient(135deg, rgba(116,44,100,0.09), rgba(116,44,100,0.03));
+  /* #potw sets cursor: pointer for the card as a whole (clicking it opens
+     the featured monument) - but this block is about the monuments that
+     have no photo at all, so its click is deliberately ignored there.
+     Undo the inherited pointer so it doesn't advertise a click that does
+     nothing; its own links opt back in just below. */
+  cursor: default;
 }
 /* Same "big bold number" language as .stat-value/.stats-photos-value on
    the Stats page - a familiar visual cue for "here's a figure worth
@@ -1503,7 +1532,10 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
    heavier weight starts reading as shouty rather than just noticeable. */
 #potw-collab-label { font-size: 12.5px; font-weight: 500; color: var(--ink); line-height: 1.4; }
 #potw-collab-links { font-size: 11.5px; margin-top: 5px; }
-#potw-collab-links a { color: var(--cyl-purple); font-weight: 600; text-decoration: none; }
+/* cursor spelled out rather than left to the UA stylesheet: #potw-collab
+   above sets `default`, and cursor inherits - these are the one thing in
+   that block that IS clickable. */
+#potw-collab-links a { color: var(--cyl-purple); font-weight: 600; text-decoration: none; cursor: pointer; }
 #potw-collab-links a:hover { text-decoration: underline; }
 #potw-collab-links .sep { color: var(--ink-soft); margin: 0 3px; }
 
