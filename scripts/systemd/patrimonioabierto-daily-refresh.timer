@@ -1,0 +1,14 @@
+[Unit]
+Description=Run Patrimonio Abierto's daily data refresh
+
+[Timer]
+# 05:00 server time - after JCyL/Wikidata data has settled for the day,
+# well before typical daytime traffic. RandomizedDelaySec spreads the
+# actual run so it isn't hammering the JCyL/Wikidata/Commons APIs at
+# exactly the same second as every other cron/timer job out there.
+OnCalendar=*-*-* 05:00:00
+RandomizedDelaySec=15m
+Persistent=true
+
+[Install]
+WantedBy=timers.target
