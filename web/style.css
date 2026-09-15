@@ -1151,6 +1151,11 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
   font-size: 18px;
   cursor: pointer;
   transition: transform 0.12s ease;
+  /* Centers the blue-dot SVG the way emoji text never needed - see
+     #search-toggle-btn for the same pattern. */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 #shuffle-btn {
   position: absolute;
@@ -1187,6 +1192,12 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
   font-size: 18px;
   cursor: pointer;
   transition: transform 0.12s ease;
+  /* Centers the funnel SVG the way emoji text never needed - see
+     #search-toggle-btn for the same pattern. #filter-badge stays
+     position: absolute, unaffected by the flex centering. */
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
 }
 #filter-btn:hover { transform: scale(1.08); background: white; }
 #filter-btn.active { background: var(--cyl-purple); color: white; }
