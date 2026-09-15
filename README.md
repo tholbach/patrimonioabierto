@@ -47,8 +47,10 @@ source is attributed distinctly rather than blended into one vague credit.
 ## Pipeline
 
 ```
-make fetch   # scripts/fetch_jcyl.py + fetch_wikidata.py -> data/raw/*.json
-make build   # scripts/build_dataset.py -> web/data/cyl_monuments_wikidata.json
+make fetch           # scripts/fetch_jcyl.py + fetch_wikidata.py -> data/raw/*.json
+make build           # scripts/build_dataset.py -> web/data/cyl_monuments_wikidata.json
+make wiki-extracts    # scripts/fetch_wikipedia_extracts.py -> data/raw/wikipedia_extracts.json (optional, feeds monument-pages)
+make monument-pages   # scripts/build_monument_pages.py -> web/monumento/*/index.html + sitemap.xml/robots.txt
 ```
 
 `build_dataset.py` does three things beyond a straight merge:
@@ -113,6 +115,64 @@ loading, that key is the first thing to check.
 ```
 make serve   # http://localhost:8000, for local development
 ```
+
+## SEO: static per-monument pages (`web/monumento/`)
+
+The live map is a pure client-side SPA - a monument's Wikipedia extract only
+exists in the DOM after `app.js` fetches it at runtime, and every URL
+(`?id=1`, `?id=2`, ...) served the exact same `<title>`/meta description/
+`og:*` tags regardless. A crawler that doesn't wait out that fetch, or a
+link-preview bot (WhatsApp/Twitter/Facebook - none of them run JS at all),
+saw 2,479 identical, textless pages.
+
+`scripts/build_monument_pages.py` fixes that by generating one real static
+page per monument, `web/monumento/<jcyl_id>-<slug>/index.html` - not a
+separate hand-maintained template, but `web/index.html`'s own shell with a
+handful of literal, asserted find/replaces: a monument-specific `<title>`/
+description/canonical/`og:*`/`twitter:*`/JSON-LD (`LandmarkOrHistoricalBuilding`)
+in `<head>`, and `#panel-content` pre-filled with real markup (hero photo,
+name, category/municipality/date, the Wikipedia extract if
+`fetch_wikipedia_extracts.py` found one, JCyL/Wikidata/Wikipedia badges) -
+close enough to `selectMonument()`'s own HTML shape in `app.js` that once JS
+boots and re-fetches everything live, the swap is invisible. Any future edit
+to `index.html`'s shell (new button, changed script src, ...) is picked up
+here automatically on the next build; the asserts just mean a change that
+actually breaks one of these substitutions fails the build loudly instead of
+silently shipping a broken page.
+
+URL shape is `/monumento/<jcyl_id>-<slug>/` - the numeric id is
+load-bearing, the slug is not. `app.js`'s own bootstrap parses the id back
+out of that path and rewrites the address bar to the canonical `?id=` form
+before doing anything else, so every other internal routing path
+(`shareUrl()`, the popstate handler, closing the panel, ...) keeps working
+completely unmodified - the static page's `<link rel="canonical">` is what
+tells search engines the "real" URL regardless of what the address bar
+shows once JS takes over. A monument renamed between builds gets a new slug
+next time with the old URL's id prefix still resolving correctly - nothing
+needs a redirect map.
+
+**Gotcha already solved, worth not repeating**: the first version used
+`<base href="https://patrimonioabierto.es/">` to fix every relative
+URL breaking two path segments down from site root (`style.css`, `app.js`,
+`assets/*`, and `app.js`'s own `fetch('data/...')` calls all assume the
+document lives at `/`). That's correct in production but silently sends
+every one of those requests to the real live domain instead of wherever
+you're actually testing from (confirmed: `make serve`/localhost included) -
+a same-origin `fetch()` turns cross-origin and fails, and since
+`loadingScreenFailed()` deliberately never hides the loading screen (see its
+own comment in `app.js`), the whole page just hangs behind a spinner with no
+visible error. Root-relative `<base href="/">` fixes the exact same problem
+without ever leaving whatever origin the page is actually served from.
+
+```
+make wiki-extracts && make monument-pages
+```
+
+Re-run both after any `make build` that changes linked-item coverage, or
+`monument-pages` alone after editing `index.html`'s own shell/copy - neither
+is wired into `make build` automatically (the extract fetch alone is
+several hundred Wikipedia API calls, not something to re-pay on every
+routine data refresh, matching `photo-stats`'s own reasoning).
 
 ## Deployment
 
