@@ -140,24 +140,10 @@ def build_head(shell, record, extract):
     page_url = f"{SITE_URL}/monumento/{record['jcyl_id']}-{slugify(record['name'])}/"
     image = commons_file_path(record.get("image_url"), 1200) or f"{SITE_URL}/assets/logo-readme.png"
 
-    # Every relative URL in index.html (style.css, app.js, assets/*, and
-    # app.js's own fetch('data/...') calls at runtime) assumes the document
-    # lives at site root - true for / itself, false two segments down at
-    # /monumento/<id>-<slug>/. <base> fixes every one of those at once
-    # (browsers resolve *all* relative URLs, markup and script-issued
-    # alike, against it) rather than rewriting each reference by hand.
-    # Root-relative ("/"), NOT the full SITE_URL - an absolute cross-origin
-    # base would keep resolving to the real production domain even when
-    # this is served from `make serve`/localhost for testing, sending every
-    # fetch('data/...') cross-origin into a silent CORS failure (confirmed:
-    # that's exactly what happened first, hideLoadingScreen() never ran).
-    # "/" resolves against whatever origin the page actually loaded from,
-    # correct in both places.
-    shell = _sub(
-        shell,
-        '<meta charset="utf-8">',
-        '<meta charset="utf-8">\n  <base href="/">',
-    )
+    # index.html itself now carries <base href="/"> directly (needed once
+    # app.js also pushState()s the address bar to /monumento/<id>-<slug>/
+    # during live browsing, not just here) - nothing to insert, the shell
+    # already has it.
     shell = _sub(
         shell,
         "<title>Patrimonio Abierto - Castilla y León en un mapa</title>",
