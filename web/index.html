@@ -160,14 +160,28 @@
       <div id="map"></div>
 
       <button type="button" id="shuffle-btn" data-i18n-title="shuffle.button_title" aria-label="Random monument">🎲</button>
-      <button type="button" id="locate-btn" data-i18n-title="geolocation.button_title" aria-label="Locate me">🎯</button>
+      <!-- Same blue dot/white ring as .you-are-here-dot below (the marker
+           this button actually places on the map once located) - fixed
+           blue fill, not currentColor, so the button itself previews what
+           pressing it does, the way Google Maps' own locate control does.
+           Replaces the 🎯 target emoji, which read as "aim/select a spot"
+           rather than "find me". -->
+      <button type="button" id="locate-btn" data-i18n-title="geolocation.button_title" aria-label="Locate me">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true"><circle cx="12" cy="12" r="7" fill="#2a6fbb" stroke="white" stroke-width="2.5"/></svg>
+      </button>
 
       <!-- Filter button + its dropdown card, same anchor-to-map-wrap /
            click-outside-closes pattern as #search-results. Row list itself
            is built in app.js from whatever categories actually appear in
            the dataset, not hardcoded here. -->
+      <!-- Real funnel icon, not the 🎚️ slider/mixing-console emoji - that
+           read as "adjust levels", not "filter". stroke="currentColor" (not
+           a fixed color, unlike the locate dot above) so #filter-btn.active
+           turning the button purple-with-white-text recolors the icon along
+           with it, same as it already did for the emoji. -->
       <button type="button" id="filter-btn" data-i18n-title="filter.button_title" aria-label="Filter">
-        🎚️<span id="filter-badge" class="filter-badge" hidden></span>
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 5h16l-6 8v5l-4 2v-7z"/></svg>
+        <span id="filter-badge" class="filter-badge" hidden></span>
       </button>
       <div id="filter-panel">
         <!-- "Estado" - orthogonal to category, AND-combined with it: a
