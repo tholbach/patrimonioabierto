@@ -113,6 +113,10 @@ const STRINGS = {
     'filter.status_no_photo': 'Enlazado, sin foto',
     'filter.status_has_photo': 'Con foto',
     'filter.status_no_wikipedia': 'Enlazado, sin artículo en Wikipedia',
+    // Toast shown when a filter is applied from outside the filter panel
+    // (see showMapFilteredByStatus()) - `label` is one of the
+    // filter.status_* strings just above.
+    'filter.applied': (label, count) => `Filtro activo · ${label}: ${count} monumentos`,
     'filter.title': 'Categorías',
     'filter.all': 'Todo',
     'filter.none': 'Ninguno',
@@ -279,6 +283,7 @@ const STRINGS = {
     'filter.status_no_photo': 'Linked, no photo',
     'filter.status_has_photo': 'Has a photo',
     'filter.status_no_wikipedia': 'Linked, no Wikipedia article',
+    'filter.applied': (label, count) => `Filter on · ${label}: ${count} monuments`,
     'filter.title': 'Categories',
     'filter.all': 'All',
     'filter.none': 'None',
@@ -357,6 +362,16 @@ function applyStaticI18n() {
   });
   document.querySelectorAll('[data-i18n-title]').forEach((el) => {
     el.title = t(el.dataset.i18nTitle);
+  });
+  // Same idea as data-i18n-title, but into data-tooltip instead of the real
+  // title attribute - style.css's [data-i18n-tooltip]::after renders it as a
+  // custom, styled, instant-appearing tooltip (desktop only) for the
+  // floating map buttons, instead of the browser's own small, slow-to-appear
+  // native one. Kept as a separate attribute/mechanism rather than reusing
+  // title (which those buttons deliberately don't set at all) so the two
+  // can never both fire on the same element and show duplicate tooltips.
+  document.querySelectorAll('[data-i18n-tooltip]').forEach((el) => {
+    el.dataset.tooltip = t(el.dataset.i18nTooltip);
   });
   document.documentElement.lang = currentLang;
 }

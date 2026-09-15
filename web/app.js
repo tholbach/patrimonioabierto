@@ -82,6 +82,10 @@ let datasetMeta = null;
 // filter can cheaply clear+re-add just the matching ones instead of
 // recreating markers every time a checkbox is toggled.
 let allMarkerLayers = [];
+// jcyl_id -> its L.marker, so highlightMonument()/selectMonument() can look
+// up a specific marker layer (for markers.getVisibleParent()/
+// zoomToShowLayer() - see selectMonument()) without a linear scan.
+const markerByJcylId = new Map();
 let selectedCategories = new Set(); // filled with every category once data loads = no filter applied
 let selectedStatuses = new Set(); // 'unlinked' | 'no_photo' - empty = no status filter applied
 
@@ -119,15 +123,40 @@ L.tileLayer(`https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key=
   subdomains: 'abcd',
 }).addTo(map);
 
-function iconFor(record) {
+// 26, matching .monument-icon's own width/height in style.css. The two
+// have to agree: Leaflet positions the icon element from iconSize/
+// iconAnchor, but what a visitor actually sees is the .monument-icon div
+// inside it, at whatever size the CSS says. They didn't agree before (22
+// here vs 26 there), which sat every marker's visible circle 2px
+// down-right of its real coordinate - unnoticeable on its own, but the
+// selected state used to swap in a bigger iconSize too, flipping that to
+// 2px up-left and making the marker visibly jump ~4px the moment it was
+// clicked.
+const MONUMENT_ICON_SIZE = 26;
+
+// selected (default false): the one marker a click/search/"Cerca de aquí"
+// tap just opened - see highlightMonument() below. It recolors this
+// marker's own icon rather than drawing a separate ring on top of it: a
+// separate ring is only ever as correct as its guess about whether this
+// exact marker is currently rendered unclustered, which depends on zoom
+// and can change again later (a pan/zoom while the panel stays open) -
+// leaving a ring visibly floating over nothing. Recoloring the real marker
+// can't go stale that way: if the marker is clustered, its highlight is
+// simply invisible too, exactly like the marker itself. What makes it
+// *bigger* is .monument-icon.selected's transform, not a bigger iconSize -
+// transforms are paint-only, so they can't drag the anchor off the
+// coordinate (see MONUMENT_ICON_SIZE above). Getting zoomed in far enough
+// to see any of this in the first place is flyToMonument()'s job.
+function iconFor(record, selected = false) {
   const emoji = CATEGORY_ICONS[record.category] || DEFAULT_ICON;
   const statusClass = record.already_linked ? 'linked' : 'missing';
+  const half = MONUMENT_ICON_SIZE / 2;
   return L.divIcon({
-    html: `<div class="monument-icon ${statusClass}">${emoji}</div>`,
+    html: `<div class="monument-icon ${statusClass}${selected ? ' selected' : ''}">${emoji}</div>`,
     className: '', // suppress Leaflet's default icon styling/box
-    iconSize: [22, 22],
-    iconAnchor: [11, 11],
-    popupAnchor: [0, -11],
+    iconSize: [MONUMENT_ICON_SIZE, MONUMENT_ICON_SIZE],
+    iconAnchor: [half, half],
+    popupAnchor: [0, -half],
   });
 }
 
@@ -378,13 +407,48 @@ function setAllCategoryCheckboxes(checked) {
 // panel's own checkboxes, same as setAllCategoryCheckboxes() already does
 // for categories - otherwise they'd show stale checked state the next time
 // someone actually opens the filter panel.
+//
+// The change is staged rather than just happening, because it used to
+// swap the markers under a camera that never moved - unreadable in
+// practice: a map full of dots still looks like a map full of dots, and
+// the only control saying otherwise is #filter-btn's 16px badge at the
+// far edge of the screen. So: markers fade out, the camera flies to frame
+// exactly what's left, the filter button pulses, and a toast names the
+// filter and what it matched.
+//
+// The fade doubles as cover for closePanel()'s own 260ms map resize - see
+// openPanel()'s comment on why a flyTo issued before that settles aims at
+// stale geometry. By the time the camera moves here, #map is final-sized
+// either way (panel was open or not).
+const FILTER_MOTION_FADE_MS = 280;
+
 function showMapFilteredByStatus(status) {
   selectedStatuses = new Set([status]);
   filterStatusListEl.querySelectorAll('.filter-row').forEach((row) => {
     row.querySelector('input').checked = row.dataset.status === status;
   });
-  setAllCategoryCheckboxes(true); // clears any category filter; its own applyFilters() call picks up the status change above too
   closePanel();
+
+  const mapWrapEl = document.getElementById('map-wrap');
+  mapWrapEl.classList.add('filter-changing');
+  setTimeout(() => {
+    setAllCategoryCheckboxes(true); // clears any category filter; its own applyFilters() call picks up the status change above too
+    mapWrapEl.classList.remove('filter-changing');
+
+    const matching = allRecords.filter(recordPassesFilters);
+    if (matching.length) {
+      map.flyToBounds(L.latLngBounds(matching.map((r) => [r.lat, r.lon])), { padding: [50, 50], duration: 0.9 });
+    }
+    // Remove-reflow-add, not a plain add: without it a second call while
+    // the first animation is still running is a no-op (the class is
+    // already there), so the button would sit still exactly when the
+    // filter just changed again.
+    filterBtnEl.classList.remove('just-filtered');
+    void filterBtnEl.offsetWidth;
+    filterBtnEl.classList.add('just-filtered');
+
+    showToast(t('filter.applied', t(`filter.status_${status}`), matching.length.toLocaleString(currentLang)));
+  }, FILTER_MOTION_FADE_MS);
 }
 
 // Wires a real <a href="..."> so it behaves like an actual link - hovering
@@ -497,6 +561,36 @@ const PAGE_PANEL_TYPES = new Set(['about', 'contribute', 'stats', 'privacy', 'im
 // /monumento/<id>-<slug>/ for monuments.
 const WRITTEN_PAGE_TYPES = ['about', 'contribute', 'stats', 'privacy', 'imprint'];
 
+// Marks which marker is "the one" a click/search/nearby-list tap just
+// opened - by recoloring/enlarging that exact marker's own icon (see
+// iconFor()'s `selected` param), not a separate ring layered on top of
+// it. A first pass used a separate ring, added straight to the map at the
+// record's raw coordinate so it would never itself be absorbed into a
+// cluster - but that only fixed half the problem: the ring stayed put at
+// a fixed screen position while whether the *actual* marker underneath it
+// was clustered could still change (a pan/zoom while the panel stayed
+// open), leaving the ring visibly floating over nothing. Recoloring the
+// real marker instead means the highlight is only ever exactly as visible
+// as that marker already is - never separately wrong.
+let selectedMonumentMarker = null; // the actual L.marker currently highlighted, if any
+
+function clearMonumentHighlight() {
+  if (selectedMonumentMarker) {
+    selectedMonumentMarker.setIcon(iconFor(selectedMonumentMarker.record));
+    selectedMonumentMarker.setZIndexOffset(0);
+    selectedMonumentMarker = null;
+  }
+}
+
+function highlightMonument(record) {
+  clearMonumentHighlight();
+  const target = markerByJcylId.get(String(record.jcyl_id));
+  if (!target) return; // shouldn't happen, but a missing highlight is harmless
+  target.setIcon(iconFor(record, true));
+  target.setZIndexOffset(900); // above regular markers/clusters, below the you-are-here dot (1000)
+  selectedMonumentMarker = target;
+}
+
 // onMapReady (optional): called once the map's own size is actually
 // correct - immediately, if this call isn't resizing/revealing #map at
 // all, or otherwise only after the same invalidateSize() below runs. Any
@@ -522,6 +616,22 @@ function openPanel(onMapReady) {
   const wasPage = appEl.classList.contains('page-mode');
   appEl.classList.toggle('page-mode', isPage);
   panelEl.classList.add('open');
+  // Any panel opening steps the picture-of-the-week strip aside for as
+  // long as it's open (see hidePotwForPanel()) - not a real dismissal,
+  // just out of the way; closePanel() below brings it back unless the
+  // user separately, actually dismissed it (its own close button, or
+  // following one of its own links) while a panel happened to be open.
+  hidePotwForPanel();
+  // Every panel type routes through here, so this is the one place that
+  // needs to know "is a specific monument marker meant to be highlighted
+  // right now" - set it fresh for 'monument', clear it for everything else
+  // (municipality/province/stats/...), rather than threading this through
+  // every individual show*Panel() function.
+  if (currentPanelState?.type === 'monument') {
+    highlightMonument(currentPanelState.record);
+  } else {
+    clearMonumentHighlight();
+  }
   // The map's container is display:none in page mode, not just resized, so
   // besides the normal closed->open transition, switching between a page
   // and a regular map-side panel while the panel stays open the whole time
@@ -555,6 +665,8 @@ function closePanel() {
   panelEl.classList.remove('open');
   appEl.classList.remove('page-mode');
   setTimeout(() => map.invalidateSize(), 260);
+  clearMonumentHighlight();
+  restorePotwAfterPanel();
   // Always back to root, not location.pathname - since shareUrl() can now
   // leave the address bar on /monumento/<id>-<slug>/ (or /stats/, /about/,
   // ...) while a panel is open, pushing the current pathname unchanged
@@ -1271,6 +1383,30 @@ function wireGalleryClicks() {
   });
 }
 
+// flyTo alone can land on a view where the target marker is still inside
+// a cluster bubble - clustering only fully stops at zoom 18
+// (markerClusterGroup's disableClusteringAtZoom), well past the zoom 14
+// this settles on. A clustered marker isn't drawn at all, so
+// highlightMonument() has nothing to show: you follow a "Cerca de aquí"
+// row (whose whole premise is that the monuments are close together, i.e.
+// exactly the ones most likely to still be clustered) and arrive at a map
+// with no highlighted marker anywhere - confirmed before this existed.
+// markers.zoomToShowLayer() is Leaflet.markercluster's own answer to
+// "reveal this one marker": it zooms/spiderfies only as far as actually
+// needed, rather than jumping to some fixed deep zoom whether or not the
+// marker was already visible. Either branch finishes on the same
+// Math.max(zoom, 14) + exact-coordinate view, so where you end up doesn't
+// depend on which one ran.
+function flyToMonument(record) {
+  const target = markerByJcylId.get(String(record.jcyl_id));
+  const settle = () => map.setView([record.lat, record.lon], Math.max(map.getZoom(), 14));
+  if (target && markers.getVisibleParent(target) !== target) {
+    markers.zoomToShowLayer(target, settle);
+  } else {
+    map.flyTo([record.lat, record.lon], Math.max(map.getZoom(), 14));
+  }
+}
+
 async function selectMonument(record, { flyTo = false, updateUrl = true, featuredFile = null } = {}) {
   currentPanelState = { type: 'monument', record };
 
@@ -1282,7 +1418,7 @@ async function selectMonument(record, { flyTo = false, updateUrl = true, feature
     </div>
   `;
   openPanel(() => {
-    if (flyTo) map.flyTo([record.lat, record.lon], Math.max(map.getZoom(), 14));
+    if (flyTo) flyToMonument(record);
   });
 
   if (updateUrl) {
@@ -2150,6 +2286,33 @@ function dismissPotw() {
   document.getElementById('map-wrap').classList.remove('potw-visible');
 }
 
+// Whether #potw is currently hidden ONLY because a panel is open, not
+// because of a real dismissal (dismissPotw() above) - openPanel()/
+// closePanel() use this pair to step the strip aside for as long as the
+// sidebar (desktop) / bottom sheet (mobile) is open without losing it for
+// the rest of the session the way any panel-opening click used to
+// (marker clicks bubble to the map's own click handler, which used to
+// call dismissPotw() unconditionally - opening a monument's details and
+// closing right back out shouldn't cost you the suggestion any more than
+// glancing at the Stats page should).
+let potwHiddenByPanel = false;
+
+function hidePotwForPanel() {
+  const potwEl = document.getElementById('potw');
+  if (potwEl.hidden) return; // already gone (real dismissal, or never shown yet) - nothing to track
+  potwEl.hidden = true;
+  document.getElementById('map-wrap').classList.remove('potw-visible');
+  potwHiddenByPanel = true;
+}
+
+function restorePotwAfterPanel() {
+  if (!potwHiddenByPanel) return; // wasn't hidden for this reason - nothing to undo
+  potwHiddenByPanel = false;
+  if (sessionStorage.getItem('potw-dismissed')) return; // actually dismissed since - stay gone
+  document.getElementById('potw').hidden = false;
+  document.getElementById('map-wrap').classList.add('potw-visible');
+}
+
 function initPictureOfTheWeek() {
   const potwEl = document.getElementById('potw');
   if (sessionStorage.getItem('potw-dismissed')) return;
@@ -2186,7 +2349,7 @@ function initPictureOfTheWeek() {
             <div id="potw-collab-links">
               <a id="potw-collab-map-link" href="?status=no_photo" data-i18n="potw.collab_map_link">${t('potw.collab_map_link')}</a>
               <span class="sep">·</span>
-              <a id="potw-collab-help-link" href="#contribute" data-i18n="potw.collab_help_link">${t('potw.collab_help_link')}</a>
+              <a id="potw-collab-help-link" href="/contribute/" data-i18n="potw.collab_help_link">${t('potw.collab_help_link')}</a>
               <span class="sep">·</span>
               <a id="potw-collab-nearby-link" href="#" data-i18n="potw.collab_nearby_link">${t('potw.collab_nearby_link')}</a>
             </div>
@@ -2237,8 +2400,16 @@ function initPictureOfTheWeek() {
       });
       const collabMapLink = document.getElementById('potw-collab-map-link');
       if (collabMapLink) {
+        // No dismissPotw() here, unlike the other two collab links - this
+        // one doesn't navigate away from the map at all, just filters what
+        // it shows (and #potw is display:none below 768px regardless, so
+        // this only ever matters on desktop, where there's room for both
+        // the filtered map and the strip at once). showMapFilteredByStatus()
+        // does call closePanel(), but that's a harmless no-op here since
+        // clicking this link is only ever possible while no panel is open
+        // (any open panel already hides #potw itself - see openPanel()'s
+        // hidePotwForPanel()).
         wireSpaLink(collabMapLink, () => {
-          dismissPotw(); // showMapFilteredByStatus() only closes the panel - the strip itself is a separate element
           showMapFilteredByStatus('no_photo');
         });
       }
@@ -2323,12 +2494,22 @@ function renderPotwNearby(latlng) {
 
 // Individual marker clicks bubble up to the map's own click event by
 // default in Leaflet (Marker's bubblingMouseEvents defaults to true), so
-// map.on('click', ...) alone covers those plus clicking empty map space.
-// It does NOT cover clicking a cluster icon, though (Leaflet.markercluster
-// handles that click on the cluster group layer itself, spiderfying/zooming
-// rather than bubbling a plain map click) - confirmed by testing, so that
-// needs its own listener on `markers`, the cluster group.
-map.on('click', dismissPotw);
+// map.on('click', ...) alone would also cover those - deliberately
+// excluded here (see the .leaflet-marker-icon guard) since opening a
+// monument's panel now steps the strip aside via openPanel()'s own
+// hidePotwForPanel() instead, restored on close rather than dismissed for
+// the rest of the session; a real click on blank map space still counts
+// as "moved on" and dismisses it outright, same as it always did.
+// Cluster icon clicks are NOT covered by map.on('click', ...) at all
+// (Leaflet.markercluster handles those on the cluster group layer itself,
+// spiderfying/zooming rather than bubbling a plain map click - confirmed
+// by testing), so that keeps its own listener on `markers`, unchanged:
+// drilling into a cluster doesn't open a panel to later restore this
+// from, so it stays a real dismissal.
+map.on('click', (e) => {
+  if (e.originalEvent.target.closest('.leaflet-marker-icon')) return;
+  dismissPotw();
+});
 markers.on('click', dismissPotw);
 
 // Mobile only: the panel is a bottom sheet that leaves the map visible
@@ -2675,6 +2856,7 @@ Promise.all([
       marker.record = record; // read by clusterIcon() to compute each cluster's linked ratio
       marker.on('click', () => selectMonument(record, { flyTo: false }));
       allMarkerLayers.push(marker);
+      markerByJcylId.set(String(record.jcyl_id), marker);
     }
     initCategoryFilter();
 

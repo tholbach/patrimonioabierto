@@ -581,6 +581,36 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
 .monument-icon.linked { background: var(--color-linked); border-style: solid; }
 .monument-icon.missing { background: var(--color-missing); border-style: dashed; }
 
+/* Whichever monument a click/search/"Cerca de aquí" tap just opened (see
+   highlightMonument() in app.js) - after .linked/.missing so it wins on
+   specificity regardless of which of those is also present. Purple, not
+   blue/teal/terracotta - those already mean you-are-here/linked/missing,
+   this is a distinct "this one, right now" signal, reusing the brand
+   color already meaning "selected/active" elsewhere (.page-nav-link.active,
+   #filter-btn.active, ...). A slow, gentle size+opacity pulse (own
+   keyframe, not a reuse of #locate-btn.locating's plain opacity-only
+   `pulse` - growing/shrinking a small button by the same amount its icon
+   grows/shrinks here would look off), not a hard on/off blink -
+   continuous, but subtle (max +15% size) enough to sit on screen for as
+   long as the panel is open without turning into a WCAG flashing concern
+   or becoming annoying background noise. */
+.monument-icon.selected {
+  background: var(--cyl-purple);
+  border-color: white;
+  border-style: solid;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.45);
+  animation: monument-pulse 1.4s ease-in-out infinite;
+}
+/* Never scale(1): the selected marker should read as bigger than its
+   neighbours at every point in the cycle, not just at the peak. Kept as a
+   transform rather than a bigger iconSize so the marker's anchor - and so
+   its position on the map - can't move when it's selected (see
+   MONUMENT_ICON_SIZE in app.js). */
+@keyframes monument-pulse {
+  0%, 100% { transform: scale(1.1); opacity: 1; }
+  50% { transform: scale(1.28); opacity: 0.75; }
+}
+
 /* Cluster bubbles: color communicates the linked/missing ratio of the
    monuments inside, computed per-cluster in app.js - so the map still
    tells the "coverage gap" story even zoomed out. */
@@ -1202,6 +1232,91 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
 #filter-btn:hover { transform: scale(1.08); background: white; }
 #filter-btn.active { background: var(--cyl-purple); color: white; }
 
+/* One-shot "the filter just changed" cue, added by
+   showMapFilteredByStatus() when the filter comes from somewhere other
+   than this button's own panel (the picture-of-the-week strip, the
+   Contribute page) - otherwise nothing at this end of the screen moves and
+   the new #filter-btn.active/badge state is easy to miss entirely. The
+   expanding ring is a ::before so it can't disturb #filter-badge (::after
+   is free either way, but the badge is a real child element - a ring drawn
+   on the button itself would have to sit under it). */
+#filter-btn.just-filtered::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  border: 2px solid var(--cyl-purple);
+  /* `forwards` matters here, it isn't boilerplate: the class stays on the
+     button after the animation ends (it's only ever cleared to re-trigger
+     the next one), and without a fill mode the ::before would snap back to
+     the rule above - a fully opaque purple ring drawn around the button,
+     permanently. Holding the last keyframe leaves it at opacity 0 instead. */
+  animation: filter-ping 0.75s ease-out 2 forwards;
+  pointer-events: none;
+}
+#filter-btn.just-filtered { animation: filter-bump 0.75s ease-out 2; }
+@keyframes filter-ping {
+  0% { transform: scale(1); opacity: 0.85; }
+  100% { transform: scale(1.9); opacity: 0; }
+}
+@keyframes filter-bump {
+  0%, 100% { transform: scale(1); }
+  35% { transform: scale(1.18); }
+}
+
+/* Markers fade out while the filter swaps underneath them, then back in
+   on the new set - see showMapFilteredByStatus(). Covers the swap itself
+   AND closePanel()'s map resize, so neither shows as a jump. One selector
+   covers cluster bubbles too: Leaflet.markercluster's clusterPane defaults
+   to the plain marker pane, so both individual markers and clusters are
+   children of .leaflet-marker-pane (verified in the running page - there
+   is no separate cluster pane to fade). */
+#map-wrap .leaflet-marker-pane {
+  transition: opacity 0.22s ease;
+}
+#map-wrap.filter-changing .leaflet-marker-pane {
+  opacity: 0;
+}
+
+/* Desktop-only explanatory label for the floating map buttons -
+   shuffle/locate/filter sit at the map's edge as bare icons, and the
+   browser's own native title tooltip is tiny, slow to appear, and easy to
+   miss. Reads data-tooltip (see the data-i18n-tooltip handling in
+   applyStaticI18n(), i18n.js - kept in sync with the current language)
+   via a pure-CSS ::after, positioned to the button's left since these
+   buttons all sit at the map's right edge. No position:relative added
+   here - #shuffle-btn/#locate-btn/#filter-btn are already
+   position:absolute, which is its own valid containing block for an
+   absolutely-positioned ::after; adding relative here would override
+   that and break their actual on-page position. Desktop only
+   (min-width: 769px, same breakpoint used elsewhere) - mobile has no
+   meaningful hover and no room to spare for a label popping out
+   sideways. */
+@media (min-width: 769px) {
+  [data-i18n-tooltip]::after {
+    content: attr(data-tooltip);
+    position: absolute;
+    right: calc(100% + 10px);
+    top: 50%;
+    transform: translateY(-50%) translateX(6px);
+    background: var(--cyl-purple-dark);
+    color: white;
+    padding: 6px 10px;
+    border-radius: 6px;
+    font-size: 12px;
+    white-space: nowrap;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.12s ease, transform 0.12s ease;
+    z-index: 600;
+  }
+  [data-i18n-tooltip]:hover::after,
+  [data-i18n-tooltip]:focus-visible::after {
+    opacity: 1;
+    transform: translateY(-50%) translateX(0);
+  }
+}
+
 .filter-badge {
   position: absolute;
   top: -2px;
@@ -1501,6 +1616,15 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
   z-index: 2000;
 }
 #toast.visible { opacity: 1; transform: translateX(-50%) translateY(0); }
+/* Clear the picture-of-the-week strip (116px, desktop only) when it's up -
+   the toast is bottom-anchored to the viewport and would otherwise land
+   right on top of it. Barely mattered while the only toast was a
+   geolocation error; showMapFilteredByStatus() now toasts on a path that
+   runs *from* that strip, so the two are on screen together routinely.
+   :has() rather than a second class toggled from JS: #map-wrap.potw-visible
+   is already maintained in four places (see dismissPotw() and friends), and
+   a fifth to keep in sync is exactly how those drift apart. */
+body:has(#map-wrap.potw-visible) #toast { bottom: 140px; }
 
 /* On big screens the map has plenty of room to spare - scale up the chrome
    around it (topbar, legend, panel) rather than leaving it looking thin
