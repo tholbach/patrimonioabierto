@@ -1774,7 +1774,6 @@ function showPrivacyPanel({ updateUrl = true } = {}) {
       <div class="extract">${t('privacy.external.intro')}</div>
       <ul class="source-list">
         <li>${t('privacy.external.tiles')}</li>
-        <li>${t('privacy.external.fonts')}</li>
         <li>${t('privacy.external.wiki')}</li>
         <li>${t('privacy.external.geolocation')}</li>
       </ul>
