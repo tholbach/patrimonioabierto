@@ -959,25 +959,36 @@ function linkBadges(record, sitelink) {
   const qid = Array.isArray(record.wikidata_qid) ? record.wikidata_qid[0] : record.wikidata_qid;
   // JCyL first - they're the ones judging this, their own record deserves
   // top billing over our own share button and the other sources.
+  // Two rows, because these are two different kinds of thing and mixing
+  // them made the row read as an undifferentiated pile of pills. First:
+  // where this information comes from - the sources, JCyL first (they're
+  // the ones judging this, their own record deserves top billing).
+  // Second: what you can do with the monument itself rather than with its
+  // data. Separate containers rather than one wrapping flex row, so the
+  // split holds at every width instead of depending on where the line
+  // happens to break.
   let html = '<div class="link-badges">';
   html += `<a class="badge jcyl" href="${record.reference_url}" target="_blank" rel="noopener">${t('badge.jcyl')}</a>`;
-  // Every record here is a real place someone can stand in front of, and
-  // the panel right above this one is often asking them to go photograph
-  // it - so "how do I actually get there" is the obvious missing step.
-  // Just a link: nothing is requested from Google until it's clicked, so
-  // this adds no third-party contact to a page load and nothing to the
-  // Privacidad page's list of services the site itself loads.
-  // dir/?api=1&destination= is Google's documented, stable URL form; on a
-  // phone it hands off to the installed Maps app rather than the web
-  // page. Swap in https://www.openstreetmap.org/directions?to=lat,lon to
-  // keep it inside the free-knowledge ecosystem - same one line.
-  html += `<a class="badge directions" href="https://www.google.com/maps/dir/?api=1&destination=${record.lat},${record.lon}" target="_blank" rel="noopener">${t('badge.directions')}</a>`;
   if (qid) {
     html += `<a class="badge wikidata" href="https://www.wikidata.org/wiki/${qid}" target="_blank" rel="noopener">${ICON_WIKIDATA}${t('badge.wikidata')}</a>`;
   }
   if (sitelink) {
     html += `<a class="badge wikipedia" href="${sitelink.url}" target="_blank" rel="noopener">${ICON_WIKIPEDIA}${t('badge.wikipedia')}</a>`;
   }
+  html += '</div>';
+
+  // Every record here is a real place someone can stand in front of, and
+  // the panel above often asks them to go photograph it - so "how do I
+  // actually get there" is the obvious missing step. Just a link: nothing
+  // is requested from Google until it's clicked, so this adds no
+  // third-party contact to a page load and nothing to the Privacidad
+  // page's list of services the site itself loads. dir/?api=1&destination=
+  // is Google's documented, stable URL form; on a phone it hands off to
+  // the installed Maps app. Swap in
+  // https://www.openstreetmap.org/directions?to=lat,lon to keep it inside
+  // the free-knowledge ecosystem - same one line.
+  html += '<div class="link-badges link-actions">';
+  html += `<a class="badge directions" href="https://www.google.com/maps/dir/?api=1&destination=${record.lat},${record.lon}" target="_blank" rel="noopener">${t('badge.directions')}</a>`;
   html += shareButtonHtml();
   html += '</div>';
   return html;

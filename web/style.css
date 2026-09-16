@@ -1130,6 +1130,11 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
 }
 
 .link-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
+/* The actions row (Cómo llegar / Compartir) sits closer to the sources
+   row above it than that row does to the text above *it* - otherwise two
+   equal 16px gaps read as two unrelated blocks rather than one group of
+   links split in two. */
+.link-badges + .link-badges { margin-top: 8px; }
 .badge {
   display: inline-flex;
   align-items: center;
