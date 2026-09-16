@@ -961,6 +961,17 @@ function linkBadges(record, sitelink) {
   // top billing over our own share button and the other sources.
   let html = '<div class="link-badges">';
   html += `<a class="badge jcyl" href="${record.reference_url}" target="_blank" rel="noopener">${t('badge.jcyl')}</a>`;
+  // Every record here is a real place someone can stand in front of, and
+  // the panel right above this one is often asking them to go photograph
+  // it - so "how do I actually get there" is the obvious missing step.
+  // Just a link: nothing is requested from Google until it's clicked, so
+  // this adds no third-party contact to a page load and nothing to the
+  // Privacidad page's list of services the site itself loads.
+  // dir/?api=1&destination= is Google's documented, stable URL form; on a
+  // phone it hands off to the installed Maps app rather than the web
+  // page. Swap in https://www.openstreetmap.org/directions?to=lat,lon to
+  // keep it inside the free-knowledge ecosystem - same one line.
+  html += `<a class="badge directions" href="https://www.google.com/maps/dir/?api=1&destination=${record.lat},${record.lon}" target="_blank" rel="noopener">${t('badge.directions')}</a>`;
   if (qid) {
     html += `<a class="badge wikidata" href="https://www.wikidata.org/wiki/${qid}" target="_blank" rel="noopener">${ICON_WIKIDATA}${t('badge.wikidata')}</a>`;
   }
@@ -1527,7 +1538,7 @@ async function selectMonument(record, { flyTo = false, updateUrl = true, feature
     panelContentEl.querySelector('.loading').outerHTML = `
       <div class="missing-note">${t('missing.note')}</div>
       <div class="contribute-cta">
-        <div class="contribute-cta-text">${t('wikipedia_cta.text', record.jcyl_id)}</div>
+        <div class="contribute-cta-text">${t('wikipedia_cta.text')}</div>
         <a class="badge contribute-cta-btn" href="${wikipediaCreateUrl(record, currentLang)}" target="_blank" rel="noopener nofollow">${t('wikipedia_cta.button')}</a>
       </div>
       <div class="link-badges"><a class="badge jcyl" href="${record.reference_url}" target="_blank" rel="noopener">${t('badge.jcyl')}</a>${shareButtonHtml()}</div>
@@ -1606,7 +1617,7 @@ async function selectMonument(record, { flyTo = false, updateUrl = true, feature
       // scope here) - so the CTA text says so rather than implying it's automatic.
       bodyHtml += `
         <div class="contribute-cta">
-          <div class="contribute-cta-text">${t('upload_cta.text', record.jcyl_id)}</div>
+          <div class="contribute-cta-text">${t('upload_cta.text')}</div>
           <a class="badge contribute-cta-btn" href="${uploadWizardUrl(record, commonsCategory)}" target="_blank" rel="noopener nofollow">${t('contribute.upload.button')}</a>
         </div>
       `;
@@ -1630,7 +1641,7 @@ async function selectMonument(record, { flyTo = false, updateUrl = true, feature
       // there's nothing left to figure out except the actual writing.
       bodyHtml += `
         <div class="contribute-cta">
-          <div class="contribute-cta-text">${t('wikipedia_cta.text', record.jcyl_id)}</div>
+          <div class="contribute-cta-text">${t('wikipedia_cta.text')}</div>
           <a class="badge contribute-cta-btn" href="${wikipediaCreateUrl(record, currentLang)}" target="_blank" rel="noopener nofollow">${t('wikipedia_cta.button')}</a>
         </div>
       `;

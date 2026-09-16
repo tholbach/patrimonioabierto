@@ -19,6 +19,7 @@ const STRINGS = {
     'badge.share': 'Compartir',
     'badge.share.copied': '✓ Copiado',
     'badge.jcyl': '📄 Ficha JCyL',
+    'badge.directions': '🧭 Cómo llegar',
     'badge.wikidata': 'Wikidata',
     'badge.wikipedia': 'Wikipedia',
     'missing.note': 'Sin enlazar a Wikidata todavía.',
@@ -100,16 +101,15 @@ const STRINGS = {
     'province.municipality_count': (n) => `${n} municipios`,
     // Varias formulaciones en vez de una sola: quien recorre veinte fichas
     // se encuentra veinte veces el mismo texto, y a la tercera deja de
-    // leerlo. La elección depende del id del monumento (ver variantFor),
-    // así que cada ficha conserva siempre la suya.
-    'upload_cta.text': (id) => variantFor(id, [
+    // leerlo. Se elige una al azar (ver variant()).
+    'upload_cta.text': () => variant([
       'Este monumento ya está en Wikidata pero todavía no tiene ninguna foto. ¿Tienes una?',
       'Nadie ha subido todavía una foto libre de este monumento. ¿Te animas a ser quien lo haga?',
       'Está en Wikidata, pero sigue sin cara: ni una sola fotografía libre. ¿Le pones una?',
       'Si algún día pasas por delante con la cámara —o con el móvil—, esta ficha sigue esperando su primera foto.',
       'Catalogado, enlazado, documentado… y todavía sin una sola foto libre. ¿Tienes alguna?',
     ]),
-    'wikipedia_cta.text': (id) => variantFor(id, [
+    'wikipedia_cta.text': () => variant([
       'Este monumento todavía no tiene artículo en Wikipedia. ¿Te animas a escribirlo?',
       'Nadie ha escrito aún su artículo en Wikipedia. Podrías ser tú.',
       'En Wikipedia, este monumento todavía no existe. ¿Lo cuentas tú?',
@@ -208,6 +208,7 @@ const STRINGS = {
     'badge.share': 'Share',
     'badge.share.copied': '✓ Copied',
     'badge.jcyl': '📄 JCyL record',
+    'badge.directions': '🧭 How to get there',
     'badge.wikidata': 'Wikidata',
     'badge.wikipedia': 'Wikipedia',
     'missing.note': 'Not linked to Wikidata yet.',
@@ -287,14 +288,14 @@ const STRINGS = {
     'municipality.no_monuments': 'No protected heritage sites registered in this municipality.',
     'province.municipalities_title': 'Municipalities with the most unlinked monuments',
     'province.municipality_count': (n) => `${n} municipalities`,
-    'upload_cta.text': (id) => variantFor(id, [
+    'upload_cta.text': () => variant([
       'This monument already has a Wikidata item but no photo yet. Have one?',
       'Nobody has uploaded a free photo of this one yet. Fancy being the first?',
       "It's on Wikidata, but still faceless - not a single free photograph. Got one?",
       'If you ever walk past it with a camera - or a phone - this entry is still waiting for its first picture.',
       'Catalogued, linked, documented... and still without a single free photo. Do you have one?',
     ]),
-    'wikipedia_cta.text': (id) => variantFor(id, [
+    'wikipedia_cta.text': () => variant([
       "This monument doesn't have a Wikipedia article yet. Feel like writing it?",
       'Nobody has written its Wikipedia article yet. That could be you.',
       "On Wikipedia, this monument doesn't exist yet. Care to tell its story?",
@@ -387,24 +388,12 @@ function t(key, ...args) {
   return typeof entry === 'function' ? entry(...args) : entry;
 }
 
-// Picks one of several wordings by monument id, NOT at random. Two
-// different things would go wrong with Math.random() here: the same panel
-// re-renders several times (language toggle, gallery swap, hero
-// orientation), so the sentence would visibly change while someone is
-// reading it - and a monument would say something different every time
-// you came back to it. Keyed on the id, each monument keeps its own
-// wording forever, while browsing a handful of them still reads as
-// varied rather than as one sentence stamped 2,479 times.
-// Hashed rather than `id % options.length`: JCyL ids are nowhere near
-// uniform modulo a small number, so the plain version clumped badly -
-// four of eight consecutive no-article monuments drew the same sentence,
-// which defeats the entire point of having several. Knuth's
-// multiplicative constant scrambles the low bits that the ids happen to
-// share; >>> 0 keeps it an unsigned 32-bit value so the modulo can't come
-// out negative.
-function variantFor(seed, options) {
-  const n = Math.abs(Number(seed) || 0);
-  return options[((n * 2654435761) >>> 0) % options.length];
+// One of several wordings for the same prompt, so that working through a
+// list of monuments doesn't mean reading the identical sentence twenty
+// times over. Which one is genuinely unimportant, so: random, and no
+// bookkeeping to keep it stable per monument.
+function variant(options) {
+  return options[Math.floor(Math.random() * options.length)];
 }
 
 function applyStaticI18n() {

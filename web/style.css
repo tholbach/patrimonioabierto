@@ -1113,7 +1113,21 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
    footnote. Still the neutral/outlined .badge, not the filled purple
    .contribute-cta-btn variant - this isn't asking the visitor to do
    anything for the project, just offering to keep reading. */
-.read-more-btn { margin: -2px 0 14px; }
+/* Right-aligned: it sits directly under the extract and reads as "…and it
+   continues over there", which is where the eye already is at the end of
+   a paragraph. display:flex + fit-content rather than the inherited
+   inline-flex, because margin-left:auto only pushes a block-level box. */
+/* .badge.read-more-btn, not .read-more-btn: .badge sits *below* this in
+   the file and sets display:inline-flex at the same specificity, so a
+   single-class selector here silently loses the cascade and margin-left:
+   auto has no block-level box to push (measured: 22px from the left edge,
+   i.e. no effect at all). Two classes win regardless of source order,
+   which also means neither rule has to stay put to keep this working. */
+.badge.read-more-btn {
+  display: flex;
+  width: fit-content;
+  margin: -2px 0 14px auto;
+}
 
 .link-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
 .badge {
