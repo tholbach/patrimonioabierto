@@ -1129,12 +1129,41 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
   margin: -2px 0 14px auto;
 }
 
-.link-badges { display: flex; flex-wrap: wrap; gap: 8px; margin-top: 16px; }
-/* The actions row (Cómo llegar / Compartir) sits closer to the sources
-   row above it than that row does to the text above *it* - otherwise two
-   equal 16px gaps read as two unrelated blocks rather than one group of
-   links split in two. */
-.link-badges + .link-badges { margin-top: 8px; }
+/* The two rows sat as thin outlined pills directly on the panel's white,
+   between a 11px grey license line and the next heading - nothing for
+   them to belong to, so they read as leftovers rather than as the
+   monument's link section. Every other block here is anchored by a
+   heading or a filled callout; this gives them the same footing: one
+   tinted surface both rows sit on.
+   Deliberately NOT solved by giving each source its own color - that was
+   tried before and reverted for good reason (see the shared-neutral rule
+   further down). The chips stay neutral; what changed is that they now
+   sit on something instead of floating. Against --bg they read as solid
+   white chips rather than outlines on outlines. */
+.monument-links {
+  margin-top: 18px;
+  padding: 12px 14px;
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 12px;
+}
+/* Slightly tighter than a free-standing .badge: at the panel's real width
+   the default 14px padding pushed "Wikipedia" onto its own line, which
+   turned the deliberate two rows back into three and undid the grouping.
+   Scoped to this block so badges elsewhere keep their normal size. */
+.monument-links .badge { padding: 6px 11px; font-size: 12.5px; }
+.link-badges { display: flex; flex-wrap: wrap; gap: 6px; }
+/* A hairline, not just a bigger gap, between the sources row and the
+   actions row. A gap alone works only as long as neither row wraps: on a
+   phone the three source chips break onto two lines, and then "one group
+   of two rows" and "two groups" are separated by 2px of margin
+   difference, which is no separation at all. The rule holds at every
+   width. */
+.link-badges + .link-badges {
+  margin-top: 9px;
+  padding-top: 9px;
+  border-top: 1px solid var(--border);
+}
 .badge {
   display: inline-flex;
   align-items: center;

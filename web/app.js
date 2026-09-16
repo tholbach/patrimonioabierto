@@ -967,7 +967,8 @@ function linkBadges(record, sitelink) {
   // data. Separate containers rather than one wrapping flex row, so the
   // split holds at every width instead of depending on where the line
   // happens to break.
-  let html = '<div class="link-badges">';
+  let html = '<div class="monument-links">';
+  html += '<div class="link-badges">';
   html += `<a class="badge jcyl" href="${record.reference_url}" target="_blank" rel="noopener">${t('badge.jcyl')}</a>`;
   if (qid) {
     html += `<a class="badge wikidata" href="https://www.wikidata.org/wiki/${qid}" target="_blank" rel="noopener">${ICON_WIKIDATA}${t('badge.wikidata')}</a>`;
@@ -990,6 +991,7 @@ function linkBadges(record, sitelink) {
   html += '<div class="link-badges link-actions">';
   html += `<a class="badge directions" href="https://www.google.com/maps/dir/?api=1&destination=${record.lat},${record.lon}" target="_blank" rel="noopener">${t('badge.directions')}</a>`;
   html += shareButtonHtml();
+  html += '</div>';
   html += '</div>';
   return html;
 }
