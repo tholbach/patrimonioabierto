@@ -1264,6 +1264,13 @@ function applyHeroOrientation(isVideo) {
 // registered campaign (a real Commons permissions process). lat/lon here
 // are legitimate: they're the monument's own coordinates, i.e. genuinely
 // where the photo would be taken.
+// Points at this site's own /go/upload-photo rather than straight at
+// Commons: the Caddyfile redirects it there unchanged (fixed host, raw
+// query), and the hop leaves a line in the access log. "Someone went to
+// upload a photo" is one of only two real success signals this project
+// can observe at all - every other number it has is a page view. The
+// trade-off is that hovering the link shows this domain instead of
+// commons.wikimedia.org, which is why the path says where it goes.
 function uploadWizardUrl(record, commonsCategory) {
   const params = new URLSearchParams({
     descriptionlang: currentLang,
@@ -1272,7 +1279,7 @@ function uploadWizardUrl(record, commonsCategory) {
     lon: record.lon,
   });
   if (commonsCategory) params.set('categories', commonsCategory);
-  return `https://commons.wikimedia.org/wiki/Special:UploadWizard?${params.toString()}`;
+  return `/go/upload-photo?${params.toString()}`;
 }
 
 // action=edit on a title that doesn't exist yet lands on Wikipedia's own
@@ -1280,8 +1287,13 @@ function uploadWizardUrl(record, commonsCategory) {
 // Article Wizard alongside a raw edit box (verified by hand), so this is
 // the one link that covers both "just let me start typing" and "actually
 // walk me through it" without picking one for the visitor.
+// Via /go/wikipedia-article/<lang>, for the same reason as
+// uploadWizardUrl() above - the Caddyfile has one branch per language
+// with the host hardcoded, so anything it doesn't know falls through to
+// the SPA instead of redirecting. Keep those two in step if a third UI
+// language is ever added.
 function wikipediaCreateUrl(record, lang) {
-  return `https://${lang}.wikipedia.org/w/index.php?${new URLSearchParams({ title: record.name, action: 'edit' })}`;
+  return `/go/wikipedia-article/${lang}?${new URLSearchParams({ title: record.name, action: 'edit' })}`;
 }
 
 function licenseLineHtml(meta) {
@@ -1490,7 +1502,7 @@ async function selectMonument(record, { flyTo = false, updateUrl = true, feature
       <div class="missing-note">${t('missing.note')}</div>
       <div class="contribute-cta">
         <div class="contribute-cta-text">${t('wikipedia_cta.text')}</div>
-        <a class="badge contribute-cta-btn" href="${wikipediaCreateUrl(record, currentLang)}" target="_blank" rel="noopener">${t('wikipedia_cta.button')}</a>
+        <a class="badge contribute-cta-btn" href="${wikipediaCreateUrl(record, currentLang)}" target="_blank" rel="noopener nofollow">${t('wikipedia_cta.button')}</a>
       </div>
       <div class="link-badges"><a class="badge jcyl" href="${record.reference_url}" target="_blank" rel="noopener">${t('badge.jcyl')}</a>${shareButtonHtml()}</div>
       ${renderNearby(record)}
@@ -1569,7 +1581,7 @@ async function selectMonument(record, { flyTo = false, updateUrl = true, feature
       bodyHtml += `
         <div class="contribute-cta">
           <div class="contribute-cta-text">${t('upload_cta.text')}</div>
-          <a class="badge contribute-cta-btn" href="${uploadWizardUrl(record, commonsCategory)}" target="_blank" rel="noopener">${t('contribute.upload.button')}</a>
+          <a class="badge contribute-cta-btn" href="${uploadWizardUrl(record, commonsCategory)}" target="_blank" rel="noopener nofollow">${t('contribute.upload.button')}</a>
         </div>
       `;
     }
@@ -1593,7 +1605,7 @@ async function selectMonument(record, { flyTo = false, updateUrl = true, feature
       bodyHtml += `
         <div class="contribute-cta">
           <div class="contribute-cta-text">${t('wikipedia_cta.text')}</div>
-          <a class="badge contribute-cta-btn" href="${wikipediaCreateUrl(record, currentLang)}" target="_blank" rel="noopener">${t('wikipedia_cta.button')}</a>
+          <a class="badge contribute-cta-btn" href="${wikipediaCreateUrl(record, currentLang)}" target="_blank" rel="noopener nofollow">${t('wikipedia_cta.button')}</a>
         </div>
       `;
     }
