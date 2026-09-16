@@ -899,6 +899,136 @@ function slugify(name) {
 // Fire-and-forget by design: a failed count must never affect the panel,
 // so every error path is swallowed. keepalive lets it survive the page
 // being closed immediately after.
+// The guides the interstitial links to, per language. Deliberately the
+// specific first-steps pages rather than a help front page - "here's the
+// help portal, good luck" is exactly the kind of link people bounce off.
+// Every URL here was checked to resolve (the Spanish upload-form page is
+// NOT the obvious translation of the English one: Commons:First steps/
+// Upload form is Commons:Primeros pasos/Formulario de subida, and the
+// literal guess 404s).
+const CONTRIBUTION_GUIDES = {
+  wikipedia: {
+    es: {
+      intro: 'https://es.wikipedia.org/wiki/Ayuda:Introducci%C3%B3n',
+      wizard: 'https://es.wikipedia.org/wiki/Wikipedia:Asistente_para_la_creaci%C3%B3n_de_art%C3%ADculos',
+      sources: 'https://es.wikipedia.org/wiki/Wikipedia:Referencias',
+    },
+    en: {
+      intro: 'https://en.wikipedia.org/wiki/Help:Introduction',
+      wizard: 'https://en.wikipedia.org/wiki/Wikipedia:Article_wizard',
+      sources: 'https://en.wikipedia.org/wiki/Wikipedia:Citing_sources',
+    },
+  },
+  commons: {
+    es: {
+      first: 'https://commons.wikimedia.org/wiki/Commons:Primeros_pasos',
+      form: 'https://commons.wikimedia.org/wiki/Commons:Primeros_pasos/Formulario_de_subida',
+      license: 'https://commons.wikimedia.org/wiki/Commons:Primeros_pasos/Selecci%C3%B3n_de_licencia',
+    },
+    en: {
+      first: 'https://commons.wikimedia.org/wiki/Commons:First_steps',
+      form: 'https://commons.wikimedia.org/wiki/Commons:First_steps/Upload_form',
+      license: 'https://commons.wikimedia.org/wiki/Commons:First_steps/License_selection',
+    },
+  },
+};
+
+const INTRO_SEEN_KEY = 'patrimonioabierto_intro_seen';
+
+function introAlreadySeen(kind) {
+  try {
+    return (localStorage.getItem(INTRO_SEEN_KEY) || '').split(',').includes(kind);
+  } catch (e) {
+    return false; // private mode / storage blocked - showing it again is the harmless failure
+  }
+}
+
+function rememberIntroSeen(kind) {
+  try {
+    const seen = new Set((localStorage.getItem(INTRO_SEEN_KEY) || '').split(',').filter(Boolean));
+    seen.add(kind);
+    localStorage.setItem(INTRO_SEEN_KEY, [...seen].join(','));
+  } catch (e) {
+    /* nothing to do - worst case they see it once more */
+  }
+}
+
+// Shown once per kind before the first hand-off to Wikipedia/Commons, then
+// never again: someone who already contributes shouldn't have to dismiss a
+// primer on every monument, and the whole point of these buttons is that
+// people press them.
+//
+// `destination` is the finished /go/ URL the caller already built, passed
+// through untouched - the prefilled title/description/coordinates/category
+// parameters are what make the hand-off worth anything, and rebuilding
+// them here would be a second place to get them wrong.
+function showContributionIntro(kind, destination) {
+  const lang = CONTRIBUTION_GUIDES[kind][currentLang] ? currentLang : 'es';
+  const g = CONTRIBUTION_GUIDES[kind][lang];
+  const links =
+    kind === 'wikipedia'
+      ? [[g.intro, 'intro.wikipedia.link_intro'], [g.wizard, 'intro.wikipedia.link_wizard'], [g.sources, 'intro.wikipedia.link_sources']]
+      : [[g.first, 'intro.commons.link_first'], [g.form, 'intro.commons.link_form'], [g.license, 'intro.commons.link_license']];
+
+  const modal = document.createElement('div');
+  modal.className = 'intro-modal';
+  modal.innerHTML = `
+    <div class="intro-card" role="dialog" aria-modal="true" aria-labelledby="intro-title">
+      <h2 id="intro-title">${t(`intro.${kind}.title`)}</h2>
+      <p class="intro-body">${t(`intro.${kind}.body`)}</p>
+      <ul class="intro-links">
+        ${links.map(([href, key]) => `<li><a href="${href}" target="_blank" rel="noopener">${t(key)}</a></li>`).join('')}
+      </ul>
+      <a class="badge contribute-cta-btn intro-continue" href="${destination}" target="_blank" rel="noopener nofollow">${t(`intro.${kind}.continue`)}</a>
+      <button type="button" class="intro-cancel">${t('intro.cancel')}</button>
+    </div>
+  `;
+  document.body.appendChild(modal);
+
+  const close = () => {
+    document.removeEventListener('keydown', onKey);
+    modal.remove();
+  };
+  const onKey = (e) => {
+    if (e.key === 'Escape') close();
+  };
+  document.addEventListener('keydown', onKey);
+
+  // Only continuing is remembered. An earlier version also remembered a
+  // second "I already know how this works" button, which was the same
+  // action as continuing minus the destination - someone who just pressed
+  // the CTA wants to get there, so offering them a way to agree and go
+  // nowhere was only ever a way to lose them. Cancelling now means what it
+  // says: no hand-off, and the primer is still there next time.
+  modal.querySelector('.intro-continue').addEventListener('click', () => {
+    rememberIntroSeen(kind);
+    close();
+  });
+  modal.querySelector('.intro-cancel').addEventListener('click', close);
+  modal.addEventListener('click', (e) => {
+    if (e.target === modal) close(); // backdrop
+  });
+  modal.querySelector('.intro-continue').focus();
+}
+
+// Wires a CTA so a plain left click shows the primer first, while
+// ctrl/cmd/middle-click keep doing what they do on any other link - the
+// href is already the real destination, so those paths need no help and
+// must not be hijacked (same reasoning as wireSpaLink()).
+function wireContributionCtas(container) {
+  container.querySelectorAll('a[data-cta]').forEach((el) => wireContributionCta(el, el.dataset.cta));
+}
+
+function wireContributionCta(el, kind) {
+  if (!el) return;
+  el.addEventListener('click', (e) => {
+    if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+    if (introAlreadySeen(kind)) return;
+    e.preventDefault();
+    showContributionIntro(kind, el.getAttribute('href'));
+  });
+}
+
 function countMonumentView(record) {
   try {
     fetch(`${shareUrl(record)}?v=app`, { method: 'HEAD', cache: 'no-store', keepalive: true }).catch(() => {});
@@ -1552,12 +1682,13 @@ async function selectMonument(record, { flyTo = false, updateUrl = true, feature
       <div class="missing-note">${t('missing.note')}</div>
       <div class="contribute-cta">
         <div class="contribute-cta-text">${t('wikipedia_cta.text')}</div>
-        <a class="badge contribute-cta-btn" href="${wikipediaCreateUrl(record, currentLang)}" target="_blank" rel="noopener nofollow">${t('wikipedia_cta.button')}</a>
+        <a class="badge contribute-cta-btn" data-cta="wikipedia" href="${wikipediaCreateUrl(record, currentLang)}" target="_blank" rel="noopener nofollow">${t('wikipedia_cta.button')}</a>
       </div>
       <div class="link-badges"><a class="badge jcyl" href="${record.reference_url}" target="_blank" rel="noopener">${t('badge.jcyl')}</a>${shareButtonHtml()}</div>
       ${renderNearby(record)}
     `;
     wireShareButton(record);
+    wireContributionCtas(panelContentEl);
     wireMonumentListRows(panelContentEl);
     return;
   }
@@ -1631,7 +1762,7 @@ async function selectMonument(record, { flyTo = false, updateUrl = true, feature
       bodyHtml += `
         <div class="contribute-cta">
           <div class="contribute-cta-text">${t('upload_cta.text')}</div>
-          <a class="badge contribute-cta-btn" href="${uploadWizardUrl(record, commonsCategory)}" target="_blank" rel="noopener nofollow">${t('contribute.upload.button')}</a>
+          <a class="badge contribute-cta-btn" data-cta="commons" href="${uploadWizardUrl(record, commonsCategory)}" target="_blank" rel="noopener nofollow">${t('contribute.upload.button')}</a>
         </div>
       `;
     }
@@ -1655,7 +1786,7 @@ async function selectMonument(record, { flyTo = false, updateUrl = true, feature
       bodyHtml += `
         <div class="contribute-cta">
           <div class="contribute-cta-text">${t('wikipedia_cta.text')}</div>
-          <a class="badge contribute-cta-btn" href="${wikipediaCreateUrl(record, currentLang)}" target="_blank" rel="noopener nofollow">${t('wikipedia_cta.button')}</a>
+          <a class="badge contribute-cta-btn" data-cta="wikipedia" href="${wikipediaCreateUrl(record, currentLang)}" target="_blank" rel="noopener nofollow">${t('wikipedia_cta.button')}</a>
         </div>
       `;
     }
@@ -1681,6 +1812,7 @@ async function selectMonument(record, { flyTo = false, updateUrl = true, feature
     wireHeroSwipe();
     updateHeroDots(0, files.length);
     wireShareButton(record);
+    wireContributionCtas(panelContentEl);
     wireMonumentListRows(panelContentEl);
   } catch (err) {
     console.error(err);
@@ -1694,6 +1826,7 @@ async function selectMonument(record, { flyTo = false, updateUrl = true, feature
       </div>
     `;
     wireShareButton(record);
+    wireContributionCtas(panelContentEl);
     wireMonumentListRows(panelContentEl);
   }
 }

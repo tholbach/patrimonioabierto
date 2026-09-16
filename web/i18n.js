@@ -18,6 +18,26 @@ const STRINGS = {
     'stats.template': (linked, total, pct) => `${linked} / ${total} enlazados (${pct}%)`,
     'badge.share': 'Compartir',
     'badge.share.copied': '✓ Copiado',
+    // Antesala antes de mandar a alguien a Wikipedia/Commons: los enlaces
+    // apuntan a las guías concretas de primeros pasos en su idioma, no a
+    // la portada de ayuda. Solo se muestra hasta que se continúa una vez
+    // (ver INTRO_SEEN_KEY en app.js) - a quien ya sabe cómo va no hay que
+    // repetírselo en cada monumento.
+    'intro.wikipedia.title': '¿Es tu primera vez escribiendo en Wikipedia?',
+    'intro.wikipedia.body':
+      'Wikipedia es una enciclopedia: un artículo no describe lo que uno sabe o recuerda, sino lo que ya han publicado <strong>fuentes fiables</strong> - libros, catálogos, prensa, el propio expediente de declaración BIC. Si es tu primer artículo, el asistente te lleva paso a paso y puedes guardarlo como borrador antes de publicarlo.',
+    'intro.wikipedia.link_intro': '📘 Introducción a Wikipedia',
+    'intro.wikipedia.link_wizard': '🧭 Asistente para crear un artículo',
+    'intro.wikipedia.link_sources': '🔎 Cómo citar fuentes',
+    'intro.wikipedia.continue': 'Continuar a Wikipedia →',
+    'intro.commons.title': '¿Es tu primera vez subiendo a Wikimedia Commons?',
+    'intro.commons.body':
+      'Commons solo acepta imágenes <strong>que hayas hecho tú</strong> (o que ya tengan una licencia libre): no valen fotos sacadas de otras webs, aunque no tengan marca de agua. Al subirla eliges una licencia que permite a cualquiera reutilizarla citando tu autoría, y una buena descripción hace que se encuentre.',
+    'intro.commons.link_first': '📘 Primeros pasos en Commons',
+    'intro.commons.link_form': '⬆️ Cómo funciona el formulario de subida',
+    'intro.commons.link_license': '⚖️ Qué licencia elegir',
+    'intro.commons.continue': 'Continuar a Commons →',
+    'intro.cancel': 'Ahora no',
     'badge.jcyl': '📄 Ficha JCyL',
     'badge.directions': '🧭 Cómo llegar',
     'badge.wikidata': 'Wikidata',
@@ -207,6 +227,21 @@ const STRINGS = {
     'stats.template': (linked, total, pct) => `${linked} / ${total} linked (${pct}%)`,
     'badge.share': 'Share',
     'badge.share.copied': '✓ Copied',
+    'intro.wikipedia.title': 'First time writing on Wikipedia?',
+    'intro.wikipedia.body':
+      "Wikipedia is an encyclopedia: an article isn't what you know or remember, it's what <strong>reliable sources</strong> have already published - books, catalogues, press, the BIC listing document itself. If it's your first article, the wizard walks you through it, and you can keep it as a draft before publishing.",
+    'intro.wikipedia.link_intro': '📘 Introduction to Wikipedia',
+    'intro.wikipedia.link_wizard': '🧭 Article creation wizard',
+    'intro.wikipedia.link_sources': '🔎 How to cite sources',
+    'intro.wikipedia.continue': 'Continue to Wikipedia →',
+    'intro.commons.title': 'First time uploading to Wikimedia Commons?',
+    'intro.commons.body':
+      'Commons only accepts images <strong>you took yourself</strong> (or that already carry a free licence): photos taken from other websites are not allowed, watermark or no watermark. You pick a licence that lets anyone reuse it with credit to you, and a good description is what makes it findable.',
+    'intro.commons.link_first': '📘 First steps on Commons',
+    'intro.commons.link_form': '⬆️ How the upload form works',
+    'intro.commons.link_license': '⚖️ Which licence to choose',
+    'intro.commons.continue': 'Continue to Commons →',
+    'intro.cancel': 'Not now',
     'badge.jcyl': '📄 JCyL record',
     'badge.directions': '🧭 How to get there',
     'badge.wikidata': 'Wikidata',
