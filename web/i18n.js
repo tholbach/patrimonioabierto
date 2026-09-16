@@ -29,10 +29,6 @@ const STRINGS = {
     'intro.wikipedia.link_intro': '📘 Introducción a Wikipedia',
     'intro.wikipedia.link_wizard': '🧭 Asistente para crear un artículo',
     'intro.wikipedia.link_sources': '🔎 Cómo citar fuentes',
-    'intro.wikipedia.after_title': 'Cuando lo hayas publicado',
-    'intro.wikipedia.after_body':
-      'Un artículo nuevo no queda conectado a Wikidata por sí solo, y esa conexión es la que hace que aparezca aquí. Este enlace abre la ficha de Wikidata de este monumento con el idioma ya elegido: solo queda escribir el título del artículo.',
-    'intro.wikipedia.link_connect': '🔗 Conectar el artículo con Wikidata',
     'intro.wikipedia.continue': 'Continuar a Wikipedia →',
     'intro.commons.title': '¿Es tu primera vez subiendo a Wikimedia Commons?',
     'intro.commons.body':
@@ -237,10 +233,6 @@ const STRINGS = {
     'intro.wikipedia.link_intro': '📘 Introduction to Wikipedia',
     'intro.wikipedia.link_wizard': '🧭 Article creation wizard',
     'intro.wikipedia.link_sources': '🔎 How to cite sources',
-    'intro.wikipedia.after_title': 'Once you have published it',
-    'intro.wikipedia.after_body':
-      "A new article isn't connected to Wikidata by itself, and that connection is what makes it show up here. This link opens this monument's Wikidata item with the language already chosen - all that's left is typing the article title.",
-    'intro.wikipedia.link_connect': '🔗 Connect the article to Wikidata',
     'intro.wikipedia.continue': 'Continue to Wikipedia →',
     'intro.commons.title': 'First time uploading to Wikimedia Commons?',
     'intro.commons.body':
