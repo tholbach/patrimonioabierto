@@ -962,13 +962,42 @@ function rememberIntroSeen(kind) {
 // through untouched - the prefilled title/description/coordinates/category
 // parameters are what make the hand-off worth anything, and rebuilding
 // them here would be a second place to get them wrong.
-function showContributionIntro(kind, destination) {
+// Wikidata's own prefilled form for attaching an article to an item -
+// item and target wiki both come straight out of the path, so only the
+// article title is left to type (verified: both fields come back
+// prefilled in the page's HTML).
+//
+// This exists because the answer to "can the QID ride along as a URL
+// parameter when creating the article" is no: a sitelink lives on
+// Wikidata's side, and nothing in action=edit can set one. (&preload= and
+// &summary= do work and were tested - neither helps here, and prefilling
+// thousands of strangers' edit summaries with this project's name is not
+// something to do to a Wikipedia community.) So the connection becomes a
+// named second step instead of a thing that silently never happens - and
+// it matters: an unconnected article never shows up in this site either.
+function wikidataSitelinkUrl(qid, lang) {
+  return `https://www.wikidata.org/wiki/Special:SetSiteLink/${qid}/${lang}wiki`;
+}
+
+function showContributionIntro(kind, destination, qid) {
   const lang = CONTRIBUTION_GUIDES[kind][currentLang] ? currentLang : 'es';
   const g = CONTRIBUTION_GUIDES[kind][lang];
   const links =
     kind === 'wikipedia'
       ? [[g.intro, 'intro.wikipedia.link_intro'], [g.wizard, 'intro.wikipedia.link_wizard'], [g.sources, 'intro.wikipedia.link_sources']]
       : [[g.first, 'intro.commons.link_first'], [g.form, 'intro.commons.link_form'], [g.license, 'intro.commons.link_license']];
+
+  // Only for Wikipedia, and only when there's an item to connect to: an
+  // unlinked monument has no QID, and telling someone to attach their
+  // article to nothing would be worse than saying nothing.
+  const after =
+    kind === 'wikipedia' && qid
+      ? `<div class="intro-after">
+           <h3>${t('intro.wikipedia.after_title')}</h3>
+           <p>${t('intro.wikipedia.after_body')}</p>
+           <a href="${wikidataSitelinkUrl(qid, lang)}" target="_blank" rel="noopener">${t('intro.wikipedia.link_connect')}</a>
+         </div>`
+      : '';
 
   const modal = document.createElement('div');
   modal.className = 'intro-modal';
@@ -979,6 +1008,7 @@ function showContributionIntro(kind, destination) {
       <ul class="intro-links">
         ${links.map(([href, key]) => `<li><a href="${href}" target="_blank" rel="noopener">${t(key)}</a></li>`).join('')}
       </ul>
+      ${after}
       <a class="badge contribute-cta-btn intro-continue" href="${destination}" target="_blank" rel="noopener nofollow">${t(`intro.${kind}.continue`)}</a>
       <button type="button" class="intro-cancel">${t('intro.cancel')}</button>
     </div>
@@ -1025,7 +1055,7 @@ function wireContributionCta(el, kind) {
     if (e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
     if (introAlreadySeen(kind)) return;
     e.preventDefault();
-    showContributionIntro(kind, el.getAttribute('href'));
+    showContributionIntro(kind, el.getAttribute('href'), el.dataset.qid || '');
   });
 }
 
@@ -1682,7 +1712,7 @@ async function selectMonument(record, { flyTo = false, updateUrl = true, feature
       <div class="missing-note">${t('missing.note')}</div>
       <div class="contribute-cta">
         <div class="contribute-cta-text">${t('wikipedia_cta.text')}</div>
-        <a class="badge contribute-cta-btn" data-cta="wikipedia" href="${wikipediaCreateUrl(record, currentLang)}" target="_blank" rel="noopener nofollow">${t('wikipedia_cta.button')}</a>
+        <a class="badge contribute-cta-btn" data-cta="wikipedia" data-qid="" href="${wikipediaCreateUrl(record, currentLang)}" target="_blank" rel="noopener nofollow">${t('wikipedia_cta.button')}</a>
       </div>
       <div class="link-badges"><a class="badge jcyl" href="${record.reference_url}" target="_blank" rel="noopener">${t('badge.jcyl')}</a>${shareButtonHtml()}</div>
       ${renderNearby(record)}
@@ -1786,7 +1816,7 @@ async function selectMonument(record, { flyTo = false, updateUrl = true, feature
       bodyHtml += `
         <div class="contribute-cta">
           <div class="contribute-cta-text">${t('wikipedia_cta.text')}</div>
-          <a class="badge contribute-cta-btn" data-cta="wikipedia" href="${wikipediaCreateUrl(record, currentLang)}" target="_blank" rel="noopener nofollow">${t('wikipedia_cta.button')}</a>
+          <a class="badge contribute-cta-btn" data-cta="wikipedia" data-qid="${qid || ''}" href="${wikipediaCreateUrl(record, currentLang)}" target="_blank" rel="noopener nofollow">${t('wikipedia_cta.button')}</a>
         </div>
       `;
     }

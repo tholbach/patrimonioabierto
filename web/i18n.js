@@ -29,10 +29,14 @@ const STRINGS = {
     'intro.wikipedia.link_intro': '📘 Introducción a Wikipedia',
     'intro.wikipedia.link_wizard': '🧭 Asistente para crear un artículo',
     'intro.wikipedia.link_sources': '🔎 Cómo citar fuentes',
+    'intro.wikipedia.after_title': 'Cuando lo hayas publicado',
+    'intro.wikipedia.after_body':
+      'Un artículo nuevo no queda conectado a Wikidata por sí solo, y esa conexión es la que hace que aparezca aquí. Este enlace abre la ficha de Wikidata de este monumento con el idioma ya elegido: solo queda escribir el título del artículo.',
+    'intro.wikipedia.link_connect': '🔗 Conectar el artículo con Wikidata',
     'intro.wikipedia.continue': 'Continuar a Wikipedia →',
     'intro.commons.title': '¿Es tu primera vez subiendo a Wikimedia Commons?',
     'intro.commons.body':
-      'Commons solo acepta imágenes <strong>que hayas hecho tú</strong> (o que ya tengan una licencia libre): no valen fotos sacadas de otras webs, aunque no tengan marca de agua. Al subirla eliges una licencia que permite a cualquiera reutilizarla citando tu autoría, y una buena descripción hace que se encuentre.',
+      'Commons solo acepta imágenes <strong>que hayas hecho tú</strong> (o que ya tengan una licencia libre): no valen fotos sacadas de otras webs, aunque no tengan marca de agua. Al subirla eliges una <strong>licencia libre</strong>, y esa elección es permanente: con <strong>CC BY-SA 4.0</strong> (la más habitual) cualquiera puede reutilizar tu foto, incluso comercialmente, siempre que te cite y comparta el resultado con la misma licencia; con <strong>CC0</strong> renuncias incluso a que te citen. Seguirás siendo la autora o el autor en todo caso.',
     'intro.commons.link_first': '📘 Primeros pasos en Commons',
     'intro.commons.link_form': '⬆️ Cómo funciona el formulario de subida',
     'intro.commons.link_license': '⚖️ Qué licencia elegir',
@@ -233,10 +237,14 @@ const STRINGS = {
     'intro.wikipedia.link_intro': '📘 Introduction to Wikipedia',
     'intro.wikipedia.link_wizard': '🧭 Article creation wizard',
     'intro.wikipedia.link_sources': '🔎 How to cite sources',
+    'intro.wikipedia.after_title': 'Once you have published it',
+    'intro.wikipedia.after_body':
+      "A new article isn't connected to Wikidata by itself, and that connection is what makes it show up here. This link opens this monument's Wikidata item with the language already chosen - all that's left is typing the article title.",
+    'intro.wikipedia.link_connect': '🔗 Connect the article to Wikidata',
     'intro.wikipedia.continue': 'Continue to Wikipedia →',
     'intro.commons.title': 'First time uploading to Wikimedia Commons?',
     'intro.commons.body':
-      'Commons only accepts images <strong>you took yourself</strong> (or that already carry a free licence): photos taken from other websites are not allowed, watermark or no watermark. You pick a licence that lets anyone reuse it with credit to you, and a good description is what makes it findable.',
+      'Commons only accepts images <strong>you took yourself</strong> (or that already carry a free licence): photos taken from other websites are not allowed, watermark or no watermark. You choose a <strong>free licence</strong> as you upload, and that choice is permanent: under <strong>CC BY-SA 4.0</strong> (the usual one) anyone may reuse your photo, commercially too, as long as they credit you and share the result under the same licence; under <strong>CC0</strong> you waive even the credit. You remain the author either way.',
     'intro.commons.link_first': '📘 First steps on Commons',
     'intro.commons.link_form': '⬆️ How the upload form works',
     'intro.commons.link_license': '⚖️ Which licence to choose',

@@ -1254,6 +1254,28 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
   background: var(--bg);
 }
 .intro-links a:hover { background: #f3edf1; text-decoration: underline; }
+/* The "once you've published it" step. Visually set apart rather than
+   made a fourth reading link, because it isn't one: it's the step after
+   the hand-off, and it's the one that decides whether the new article
+   ever shows up here at all. */
+.intro-after {
+  background: var(--bg);
+  border: 1px solid var(--border);
+  border-radius: 10px;
+  padding: 11px 13px;
+  margin: 0 0 16px;
+}
+.intro-after h3 {
+  font-family: var(--font-display);
+  font-size: 13.5px;
+  font-weight: 600;
+  color: var(--cyl-purple-dark);
+  margin: 0 0 5px;
+}
+.intro-after p { font-size: 12.5px; line-height: 1.5; margin: 0 0 8px; color: var(--ink-soft); }
+.intro-after a { font-size: 13px; color: var(--cyl-purple); text-decoration: none; font-weight: 500; }
+.intro-after a:hover { text-decoration: underline; }
+
 /* Full width and centred: this is the one thing the card is asking for,
    and it shouldn't have to be hunted for among the reading links. */
 .intro-continue { display: flex; justify-content: center; width: 100%; box-sizing: border-box; }
