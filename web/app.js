@@ -882,6 +882,31 @@ function slugify(name) {
 // never left showing a raw ?id= while browsing. Old ?id= links keep
 // resolving (see the bootstrap deep-link parsing below) - this only
 // changes what new links look like going forward.
+// Opening a monument from the map is a pushState, which makes no request,
+// so the server otherwise only ever hears about monuments someone landed
+// on directly (a search result, a shared link). This fires one HEAD at
+// that monument's own static page so the visit lands in the access log
+// too - HEAD because only the log line is wanted, not the 180 lines of
+// HTML, and ?v=app so an in-app open stays distinguishable from a real
+// direct landing rather than quietly inflating the SEO numbers.
+//
+// Only called when updateUrl is set, which is precisely the "this is a
+// new view someone navigated to" case: the bootstrap deep link already
+// made a real request for the same page (counting it here would double
+// it), and rerenderPanel()'s language-toggle redraw isn't a new view at
+// all.
+//
+// Fire-and-forget by design: a failed count must never affect the panel,
+// so every error path is swallowed. keepalive lets it survive the page
+// being closed immediately after.
+function countMonumentView(record) {
+  try {
+    fetch(`${shareUrl(record)}?v=app`, { method: 'HEAD', cache: 'no-store', keepalive: true }).catch(() => {});
+  } catch (e) {
+    /* never let counting break browsing */
+  }
+}
+
 function shareUrl(record) {
   return new URL(`/monumento/${record.jcyl_id}-${slugify(record.name)}/`, location.origin).toString();
 }
@@ -1483,6 +1508,7 @@ async function selectMonument(record, { flyTo = false, updateUrl = true, feature
 
   if (updateUrl) {
     history.pushState(null, '', shareUrl(record));
+    countMonumentView(record);
   }
 
   if (!record.already_linked) {
@@ -2005,6 +2031,8 @@ function showPrivacyPanel({ updateUrl = true } = {}) {
       <div class="extract">${t('privacy.controller.body')}</div>
       <h3>${t('privacy.data_processed.title')}</h3>
       <div class="extract">${t('privacy.data_processed.body')}</div>
+      <h3>${t('privacy.stats.title')}</h3>
+      <div class="extract">${t('privacy.stats.body')}</div>
       <h3>${t('privacy.local_storage.title')}</h3>
       <div class="extract">${t('privacy.local_storage.body')}</div>
       <h3>${t('privacy.external.title')}</h3>
