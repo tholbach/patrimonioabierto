@@ -18,7 +18,28 @@ const STRINGS = {
     'stats.template': (linked, total, pct) => `${linked} / ${total} enlazados (${pct}%)`,
     'badge.share': 'Compartir',
     'badge.share.copied': '✓ Copiado',
+    // Antesala antes de mandar a alguien a Wikipedia/Commons: los enlaces
+    // apuntan a las guías concretas de primeros pasos en su idioma, no a
+    // la portada de ayuda. Solo se muestra hasta que se continúa una vez
+    // (ver INTRO_SEEN_KEY en app.js) - a quien ya sabe cómo va no hay que
+    // repetírselo en cada monumento.
+    'intro.wikipedia.title': '¿Es tu primera vez escribiendo en Wikipedia?',
+    'intro.wikipedia.body':
+      'Wikipedia es una enciclopedia: un artículo no describe lo que uno sabe o recuerda, sino lo que ya han publicado <strong>fuentes fiables</strong> - libros, catálogos, prensa, el propio expediente de declaración BIC. Si es tu primer artículo, el asistente te lleva paso a paso y puedes guardarlo como borrador antes de publicarlo.',
+    'intro.wikipedia.link_intro': '📘 Introducción a Wikipedia',
+    'intro.wikipedia.link_wizard': '🧭 Asistente para crear un artículo',
+    'intro.wikipedia.link_sources': '🔎 Cómo citar fuentes',
+    'intro.wikipedia.continue': 'Continuar a Wikipedia →',
+    'intro.commons.title': '¿Es tu primera vez subiendo a Wikimedia Commons?',
+    'intro.commons.body':
+      'Commons solo acepta imágenes <strong>que hayas hecho tú</strong> (o que ya tengan una licencia libre): no valen fotos sacadas de otras webs, aunque no tengan marca de agua. Al subirla eliges una <strong>licencia libre</strong>, y esa elección es permanente: con <strong>CC BY-SA 4.0</strong> (la más habitual) cualquiera puede reutilizar tu foto, incluso comercialmente, siempre que te cite y comparta el resultado con la misma licencia; con <strong>CC0</strong> renuncias incluso a que te citen. Seguirás siendo la autora o el autor en todo caso.',
+    'intro.commons.link_first': '📘 Primeros pasos en Commons',
+    'intro.commons.link_form': '⬆️ Cómo funciona el formulario de subida',
+    'intro.commons.link_license': '⚖️ Qué licencia elegir',
+    'intro.commons.continue': 'Continuar a Commons →',
+    'intro.cancel': 'Ahora no',
     'badge.jcyl': '📄 Ficha JCyL',
+    'badge.directions': '🧭 Cómo llegar',
     'badge.wikidata': 'Wikidata',
     'badge.wikipedia': 'Wikipedia',
     'missing.note': 'Sin enlazar a Wikidata todavía.',
@@ -98,8 +119,23 @@ const STRINGS = {
     'municipality.no_monuments': 'Ningún BIC registrado en este municipio.',
     'province.municipalities_title': 'Municipios con más monumentos sin enlazar',
     'province.municipality_count': (n) => `${n} municipios`,
-    'upload_cta.text': 'Este monumento ya está en Wikidata pero todavía no tiene ninguna foto. ¿Tienes una?',
-    'wikipedia_cta.text': 'Este monumento todavía no tiene artículo en Wikipedia. ¿Te animas a escribirlo?',
+    // Varias formulaciones en vez de una sola: quien recorre veinte fichas
+    // se encuentra veinte veces el mismo texto, y a la tercera deja de
+    // leerlo. Se elige una al azar (ver variant()).
+    'upload_cta.text': () => variant([
+      'Este monumento ya está en Wikidata pero todavía no tiene ninguna foto. ¿Tienes una?',
+      'Nadie ha subido todavía una foto libre de este monumento. ¿Te animas a ser quien lo haga?',
+      'Está en Wikidata, pero sigue sin cara: ni una sola fotografía libre. ¿Le pones una?',
+      'Si algún día pasas por delante con la cámara —o con el móvil—, esta ficha sigue esperando su primera foto.',
+      'Catalogado, enlazado, documentado… y todavía sin una sola foto libre. ¿Tienes alguna?',
+    ]),
+    'wikipedia_cta.text': () => variant([
+      'Este monumento todavía no tiene artículo en Wikipedia. ¿Te animas a escribirlo?',
+      'Nadie ha escrito aún su artículo en Wikipedia. Podrías ser tú.',
+      'En Wikipedia, este monumento todavía no existe. ¿Lo cuentas tú?',
+      'Siglos de historia y ni una línea en Wikipedia. ¿Te animas?',
+      'Su artículo en Wikipedia está por escribir. ¿Empiezas tú?',
+    ]),
     'wikipedia_cta.button': '✍️ Crear el artículo en Wikipedia',
     'geolocation.button_title': 'Mostrar mi ubicación',
     'geolocation.you_are_here': 'Estás aquí',
@@ -191,7 +227,23 @@ const STRINGS = {
     'stats.template': (linked, total, pct) => `${linked} / ${total} linked (${pct}%)`,
     'badge.share': 'Share',
     'badge.share.copied': '✓ Copied',
+    'intro.wikipedia.title': 'First time writing on Wikipedia?',
+    'intro.wikipedia.body':
+      "Wikipedia is an encyclopedia: an article isn't what you know or remember, it's what <strong>reliable sources</strong> have already published - books, catalogues, press, the BIC listing document itself. If it's your first article, the wizard walks you through it, and you can keep it as a draft before publishing.",
+    'intro.wikipedia.link_intro': '📘 Introduction to Wikipedia',
+    'intro.wikipedia.link_wizard': '🧭 Article creation wizard',
+    'intro.wikipedia.link_sources': '🔎 How to cite sources',
+    'intro.wikipedia.continue': 'Continue to Wikipedia →',
+    'intro.commons.title': 'First time uploading to Wikimedia Commons?',
+    'intro.commons.body':
+      'Commons only accepts images <strong>you took yourself</strong> (or that already carry a free licence): photos taken from other websites are not allowed, watermark or no watermark. You choose a <strong>free licence</strong> as you upload, and that choice is permanent: under <strong>CC BY-SA 4.0</strong> (the usual one) anyone may reuse your photo, commercially too, as long as they credit you and share the result under the same licence; under <strong>CC0</strong> you waive even the credit. You remain the author either way.',
+    'intro.commons.link_first': '📘 First steps on Commons',
+    'intro.commons.link_form': '⬆️ How the upload form works',
+    'intro.commons.link_license': '⚖️ Which licence to choose',
+    'intro.commons.continue': 'Continue to Commons →',
+    'intro.cancel': 'Not now',
     'badge.jcyl': '📄 JCyL record',
+    'badge.directions': '🧭 How to get there',
     'badge.wikidata': 'Wikidata',
     'badge.wikipedia': 'Wikipedia',
     'missing.note': 'Not linked to Wikidata yet.',
@@ -271,8 +323,20 @@ const STRINGS = {
     'municipality.no_monuments': 'No protected heritage sites registered in this municipality.',
     'province.municipalities_title': 'Municipalities with the most unlinked monuments',
     'province.municipality_count': (n) => `${n} municipalities`,
-    'upload_cta.text': "This monument already has a Wikidata item but no photo yet. Have one?",
-    'wikipedia_cta.text': "This monument doesn't have a Wikipedia article yet. Feel like writing it?",
+    'upload_cta.text': () => variant([
+      'This monument already has a Wikidata item but no photo yet. Have one?',
+      'Nobody has uploaded a free photo of this one yet. Fancy being the first?',
+      "It's on Wikidata, but still faceless - not a single free photograph. Got one?",
+      'If you ever walk past it with a camera - or a phone - this entry is still waiting for its first picture.',
+      'Catalogued, linked, documented... and still without a single free photo. Do you have one?',
+    ]),
+    'wikipedia_cta.text': () => variant([
+      "This monument doesn't have a Wikipedia article yet. Feel like writing it?",
+      'Nobody has written its Wikipedia article yet. That could be you.',
+      "On Wikipedia, this monument doesn't exist yet. Care to tell its story?",
+      'Centuries of history, and not one line on Wikipedia. Fancy a go?',
+      'Its Wikipedia article is still unwritten. Want to be the one to start it?',
+    ]),
     'wikipedia_cta.button': '✍️ Create the Wikipedia article',
     'geolocation.button_title': 'Show my location',
     'geolocation.you_are_here': 'You are here',
@@ -357,6 +421,14 @@ let currentLang = 'es';
 function t(key, ...args) {
   const entry = STRINGS[currentLang][key];
   return typeof entry === 'function' ? entry(...args) : entry;
+}
+
+// One of several wordings for the same prompt, so that working through a
+// list of monuments doesn't mean reading the identical sentence twenty
+// times over. Which one is genuinely unimportant, so: random, and no
+// bookkeeping to keep it stable per monument.
+function variant(options) {
+  return options[Math.floor(Math.random() * options.length)];
 }
 
 function applyStaticI18n() {
