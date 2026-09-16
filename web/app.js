@@ -1527,7 +1527,7 @@ async function selectMonument(record, { flyTo = false, updateUrl = true, feature
     panelContentEl.querySelector('.loading').outerHTML = `
       <div class="missing-note">${t('missing.note')}</div>
       <div class="contribute-cta">
-        <div class="contribute-cta-text">${t('wikipedia_cta.text')}</div>
+        <div class="contribute-cta-text">${t('wikipedia_cta.text', record.jcyl_id)}</div>
         <a class="badge contribute-cta-btn" href="${wikipediaCreateUrl(record, currentLang)}" target="_blank" rel="noopener nofollow">${t('wikipedia_cta.button')}</a>
       </div>
       <div class="link-badges"><a class="badge jcyl" href="${record.reference_url}" target="_blank" rel="noopener">${t('badge.jcyl')}</a>${shareButtonHtml()}</div>
@@ -1606,7 +1606,7 @@ async function selectMonument(record, { flyTo = false, updateUrl = true, feature
       // scope here) - so the CTA text says so rather than implying it's automatic.
       bodyHtml += `
         <div class="contribute-cta">
-          <div class="contribute-cta-text">${t('upload_cta.text')}</div>
+          <div class="contribute-cta-text">${t('upload_cta.text', record.jcyl_id)}</div>
           <a class="badge contribute-cta-btn" href="${uploadWizardUrl(record, commonsCategory)}" target="_blank" rel="noopener nofollow">${t('contribute.upload.button')}</a>
         </div>
       `;
@@ -1630,7 +1630,7 @@ async function selectMonument(record, { flyTo = false, updateUrl = true, feature
       // there's nothing left to figure out except the actual writing.
       bodyHtml += `
         <div class="contribute-cta">
-          <div class="contribute-cta-text">${t('wikipedia_cta.text')}</div>
+          <div class="contribute-cta-text">${t('wikipedia_cta.text', record.jcyl_id)}</div>
           <a class="badge contribute-cta-btn" href="${wikipediaCreateUrl(record, currentLang)}" target="_blank" rel="noopener nofollow">${t('wikipedia_cta.button')}</a>
         </div>
       `;

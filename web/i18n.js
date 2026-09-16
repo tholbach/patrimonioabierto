@@ -98,8 +98,24 @@ const STRINGS = {
     'municipality.no_monuments': 'Ningún BIC registrado en este municipio.',
     'province.municipalities_title': 'Municipios con más monumentos sin enlazar',
     'province.municipality_count': (n) => `${n} municipios`,
-    'upload_cta.text': 'Este monumento ya está en Wikidata pero todavía no tiene ninguna foto. ¿Tienes una?',
-    'wikipedia_cta.text': 'Este monumento todavía no tiene artículo en Wikipedia. ¿Te animas a escribirlo?',
+    // Varias formulaciones en vez de una sola: quien recorre veinte fichas
+    // se encuentra veinte veces el mismo texto, y a la tercera deja de
+    // leerlo. La elección depende del id del monumento (ver variantFor),
+    // así que cada ficha conserva siempre la suya.
+    'upload_cta.text': (id) => variantFor(id, [
+      'Este monumento ya está en Wikidata pero todavía no tiene ninguna foto. ¿Tienes una?',
+      'Nadie ha subido todavía una foto libre de este monumento. ¿Te animas a ser quien lo haga?',
+      'Está en Wikidata, pero sigue sin cara: ni una sola fotografía libre. ¿Le pones una?',
+      'Si algún día pasas por delante con la cámara —o con el móvil—, esta ficha sigue esperando su primera foto.',
+      'Catalogado, enlazado, documentado… y todavía sin una sola foto libre. ¿Tienes alguna?',
+    ]),
+    'wikipedia_cta.text': (id) => variantFor(id, [
+      'Este monumento todavía no tiene artículo en Wikipedia. ¿Te animas a escribirlo?',
+      'Nadie ha escrito aún su artículo en Wikipedia. Podrías ser tú.',
+      'En Wikipedia, este monumento todavía no existe. ¿Lo cuentas tú?',
+      'Siglos de historia y ni una línea en Wikipedia. ¿Te animas?',
+      'Su artículo en Wikipedia está por escribir. ¿Empiezas tú?',
+    ]),
     'wikipedia_cta.button': '✍️ Crear el artículo en Wikipedia',
     'geolocation.button_title': 'Mostrar mi ubicación',
     'geolocation.you_are_here': 'Estás aquí',
@@ -271,8 +287,20 @@ const STRINGS = {
     'municipality.no_monuments': 'No protected heritage sites registered in this municipality.',
     'province.municipalities_title': 'Municipalities with the most unlinked monuments',
     'province.municipality_count': (n) => `${n} municipalities`,
-    'upload_cta.text': "This monument already has a Wikidata item but no photo yet. Have one?",
-    'wikipedia_cta.text': "This monument doesn't have a Wikipedia article yet. Feel like writing it?",
+    'upload_cta.text': (id) => variantFor(id, [
+      'This monument already has a Wikidata item but no photo yet. Have one?',
+      'Nobody has uploaded a free photo of this one yet. Fancy being the first?',
+      "It's on Wikidata, but still faceless - not a single free photograph. Got one?",
+      'If you ever walk past it with a camera - or a phone - this entry is still waiting for its first picture.',
+      'Catalogued, linked, documented... and still without a single free photo. Do you have one?',
+    ]),
+    'wikipedia_cta.text': (id) => variantFor(id, [
+      "This monument doesn't have a Wikipedia article yet. Feel like writing it?",
+      'Nobody has written its Wikipedia article yet. That could be you.',
+      "On Wikipedia, this monument doesn't exist yet. Care to tell its story?",
+      'Centuries of history, and not one line on Wikipedia. Fancy a go?',
+      'Its Wikipedia article is still unwritten. Want to be the one to start it?',
+    ]),
     'wikipedia_cta.button': '✍️ Create the Wikipedia article',
     'geolocation.button_title': 'Show my location',
     'geolocation.you_are_here': 'You are here',
@@ -357,6 +385,26 @@ let currentLang = 'es';
 function t(key, ...args) {
   const entry = STRINGS[currentLang][key];
   return typeof entry === 'function' ? entry(...args) : entry;
+}
+
+// Picks one of several wordings by monument id, NOT at random. Two
+// different things would go wrong with Math.random() here: the same panel
+// re-renders several times (language toggle, gallery swap, hero
+// orientation), so the sentence would visibly change while someone is
+// reading it - and a monument would say something different every time
+// you came back to it. Keyed on the id, each monument keeps its own
+// wording forever, while browsing a handful of them still reads as
+// varied rather than as one sentence stamped 2,479 times.
+// Hashed rather than `id % options.length`: JCyL ids are nowhere near
+// uniform modulo a small number, so the plain version clumped badly -
+// four of eight consecutive no-article monuments drew the same sentence,
+// which defeats the entire point of having several. Knuth's
+// multiplicative constant scrambles the low bits that the ids happen to
+// share; >>> 0 keeps it an unsigned 32-bit value so the modulo can't come
+// out negative.
+function variantFor(seed, options) {
+  const n = Math.abs(Number(seed) || 0);
+  return options[((n * 2654435761) >>> 0) % options.length];
 }
 
 function applyStaticI18n() {
