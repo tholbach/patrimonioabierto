@@ -2,8 +2,67 @@
 ## the ingress proxy's own repository terminates TLS for this site's domain and reverse_proxies
 ## to this container by its Docker network alias. See README for the exact
 ## site block to add there.
+# Without this, every log line's client is the outer the ingress host Caddy
+# and the real visitor only exists inside X-Forwarded-For. Trusting that
+# proxy makes Caddy resolve the visitor into request.client_ip, which is
+# the canonical field (and the one standard log tooling reads). Scoped to
+# private ranges - this container is only ever reachable over the internal
+# Docker network, so nothing routable can claim to be the proxy.
+{
+	servers {
+		trusted_proxies static private_ranges
+	}
+}
+
 :80 {
 	root * /srv
+
+	# Access log, JSON lines. Writing it is all this repo does with it -
+	# whatever reads or aggregates it lives outside, on the host, so the
+	# project itself stays a static site with no analytics of its own.
+	#
+	# IPs are masked before anything is written, not after: an access log
+	# is personal data under GDPR while it carries full addresses, and the
+	# whole point here is counting visits, which a /24 counts just as well
+	# as a /32. Both are masked because both matter - remote_ip is the
+	# outer the ingress host Caddy (useless, but masked anyway so a config
+	# change there can't silently start logging real addresses), and
+	# X-Forwarded-For is where the actual visitor's address arrives, set
+	# by that proxy's own reverse_proxy.
+	#
+	# roll_* keeps this from growing without bound on a small server, and
+	# caps retention at something defensible rather than "forever":
+	# 90 days is a common, boring choice for technical logs.
+	log {
+		output file /var/log/caddy/access.log {
+			roll_size 10MiB
+			roll_keep 5
+			roll_keep_for 2160h
+			# Caddy runs as root in the official image and defaults to
+			# 0600, which leaves the file unreadable to the host user the
+			# stats job runs as (confirmed: PermissionError on the very
+			# first local test). 0644 on a log that carries no full IP
+			# addresses by the time it's written.
+			mode 644
+		}
+		format filter {
+			wrap json
+			fields {
+				request>client_ip ip_mask {
+					ipv4 24
+					ipv6 48
+				}
+				request>remote_ip ip_mask {
+					ipv4 24
+					ipv6 48
+				}
+				request>headers>X-Forwarded-For ip_mask {
+					ipv4 24
+					ipv6 48
+				}
+			}
+		}
+	}
 	# web/data/*.json is the bulk of what a first visit downloads
 	# (~2.1MB combined for cyl_monuments_wikidata.json/municipalities.json/
 	# provinces.json/meta.json) - almost all of that is whitespace/
@@ -25,6 +84,37 @@
 	# genuinely bad URL (typo, stale link) still resolves the SPA shell
 	# rather than a real 404 - the standard, accepted tradeoff for
 	# client-side routing.
-	try_files {path} {path}/index.html /index.html
-	file_server
+	# Outbound links to the two contribution call-to-actions go through
+	# here instead of straight to Wikipedia/Commons, so that clicking
+	# "write the article" or "upload a photo" leaves a line in the access
+	# log. Those two clicks are the only real success signal this project
+	# has - everything else it can measure is a page view.
+	#
+	# The destination host is hardcoded in each branch, and the query
+	# string is passed through RAW ({query}, i.e. still percent-encoded).
+	# Both parts matter: a /go/?to=<anything> endpoint would turn this
+	# domain into an open redirector for phishing, and interpolating a
+	# *decoded* value would let a crafted link inject extra parameters
+	# (%26action%3Ddelete decoding into a second &action=). Passing the
+	# raw query to a fixed host can do neither.
+	#
+	# One branch per language rather than putting {lang} in the hostname,
+	# for the same reason - a placeholder there would be an open redirect
+	# wearing a wikipedia.org costume. es/en are the two the app has; a
+	# third would need its own branch here, and until then falls through
+	# to the SPA below rather than redirecting anywhere.
+	handle /go/wikipedia-article/es* {
+		redir https://es.wikipedia.org/w/index.php?{query} 302
+	}
+	handle /go/wikipedia-article/en* {
+		redir https://en.wikipedia.org/w/index.php?{query} 302
+	}
+	handle /go/upload-photo* {
+		redir https://commons.wikimedia.org/wiki/Special:UploadWizard?{query} 302
+	}
+
+	handle {
+		try_files {path} {path}/index.html /index.html
+		file_server
+	}
 }

@@ -4,5 +4,11 @@ data/raw/
 
 scratchpad/
 
+# Caddy's access log, bind-mounted from the container (docker-compose.yml).
+# The host's own logs, not repo content - and even masked (see the
+# Caddyfile's ip_mask filter), visitor request data has no business in a
+# public git history.
+logs/
+
 __pycache__/
 *.pyc
