@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := help
 
-.PHONY: help fetch build photo-stats wiki-extracts monument-pages serve up down logs
+.PHONY: help fetch build photo-stats wiki-extracts monument-pages serve deploy up down logs
 
 help:
 	@echo "Available targets:"
@@ -15,6 +15,8 @@ help:
 	@echo "                   monument + web/sitemap.xml + web/robots.txt - run after"
 	@echo "                   build/wiki-extracts so both are picked up"
 	@echo "  serve            Serve web/ on :8000 via the real Caddy config (needs docker)"
+	@echo "  deploy           On the host: pull, apply, and restart so a changed"
+	@echo "                   Caddyfile actually takes effect"
 	@echo "  up               Start the container (joins the ingress proxy's network)"
 	@echo "  down             Stop the container"
 	@echo "  logs             Tail container stdout/stderr"
@@ -57,6 +59,23 @@ serve:
 		-v "$(CURDIR)/web:/srv:ro" \
 		-v "$(CURDIR)/Caddyfile:/etc/caddy/Caddyfile:ro" \
 		caddy:2
+
+# The restart is not redundant. git replaces files via atomic rename rather
+# than editing them in place, and Caddyfile is bind-mounted as a single
+# file, so the running container stays attached to the old, now-unlinked
+# inode. "up -d" does not fix that on its own: it only recreates a
+# container when the compose *config* changed, and a bind-mounted file's
+# contents are not part of that config. Without the restart, a
+# Caddyfile-only change lands on disk and is silently ignored by the
+# container serving the site - the worst kind of deploy, one that reports
+# success and changes nothing.
+#
+# --ff-only: a deploy should fast-forward to exactly what was reviewed and
+# stop if it can't, rather than invent a merge commit on the host.
+deploy:
+	@git pull --ff-only
+	@docker compose up -d
+	@docker compose restart web
 
 up:
 	@docker compose up -d

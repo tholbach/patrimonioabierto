@@ -205,6 +205,25 @@ are updating an existing deployment rather than starting fresh, update the
 external Caddyfile's `reverse_proxy` line to the new name in the same
 step, or the site goes down until both sides match.
 
+### Updating a running deployment
+
+On the host, `make deploy`: `git pull --ff-only`, `docker compose up -d`,
+then `docker compose restart web`.
+
+Use it rather than pulling by hand. The restart is the part that is easy
+to leave out and hard to notice missing: git replaces files via atomic
+rename rather than editing them in place, and `Caddyfile` is bind-mounted
+as a single file, so the running container stays attached to the old,
+now-unlinked inode. `up -d` does not fix that by itself - it only
+recreates a container when the compose *config* changed, and a
+bind-mounted file's contents are not part of that. A change that only
+touches `Caddyfile` would land on disk and be silently ignored by the
+container actually serving the site.
+
+Note that nothing here is pulled by the reverse proxy's own deploy, even
+when both live on the same host: that side is a separate repo with a
+separate checkout, and updating it does not update this.
+
 ## Not built yet
 
 - Category → Wikidata `P31` (instance of) mapping table - deliberately not
