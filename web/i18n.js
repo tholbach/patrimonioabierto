@@ -128,7 +128,7 @@ const STRINGS = {
       'Este monumento ya está en Wikidata pero todavía no tiene ninguna foto. ¿Tienes una?',
       'Nadie ha subido todavía una foto libre de este monumento. ¿Te animas a ser quien lo haga?',
       'Está en Wikidata, pero sigue sin cara: ni una sola fotografía libre. ¿Le pones una?',
-      'Si algún día pasas por delante con la cámara —o con el móvil—, esta ficha sigue esperando su primera foto.',
+      'Si algún día pasas por delante con la cámara (o con el móvil), esta ficha sigue esperando su primera foto.',
       'Catalogado, enlazado, documentado… y todavía sin una sola foto libre. ¿Tienes alguna?',
     ]),
     'wikipedia_cta.text': () => variant([
