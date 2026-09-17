@@ -2,14 +2,14 @@ name: patrimonioabierto
 
 services:
   web:
-    # Matches the ingress host's own Caddy image choice for consistency.
+    # Matches the ingress proxy's own Caddy image choice for consistency.
     image: caddy:2
-    # Renamed from cylinked_web (project rename) - the external ingress
-    # Caddyfile (the ingress proxy's own repository, NOT this repo) references this
-    # exact container name in its own reverse_proxy line. Update that
-    # config to reverse_proxy patrimonioabierto_web:80 in the SAME deploy
-    # step as this rename, or the site goes down until it's fixed - see
-    # the README's "Deployment" section.
+    # Renamed from cylinked_web (project rename) - the ingress proxy's own
+    # Caddyfile (kept in its own repo, NOT this one) references this exact
+    # container name in its reverse_proxy line. Update that config to
+    # reverse_proxy patrimonioabierto_web:80 in the SAME deploy step as
+    # this rename, or the site goes down until it's fixed - see the
+    # README's "Deployment" section.
     container_name: patrimonioabierto_web
     volumes:
       - ./web:/srv:ro
@@ -27,18 +27,24 @@ services:
 
 networks:
   # No TLS/domain here on purpose - this container only serves static files
-  # internally. The shared Caddy in the ingress proxy's own repository already owns
-  # port 80/443 on the host and TLS certs for this site's domain; this joins its
-  # network so that Caddy can reverse_proxy to it, the same way another service and
-  # another service already do (see the ingress proxy's own repository). See this
-  # repo's README for the one-line Caddyfile addition that wires it up.
+  # internally. A shared Caddy on the same host already owns ports 80/443
+  # and the TLS certificates; this joins its network so that Caddy can
+  # reverse_proxy to it, the same way the other services behind that proxy
+  # already do. See this repo's README for the one-line Caddyfile addition
+  # that wires it up.
   #
-  # name: ingress, not just "ingress" -
-  # that stack pins its Compose project name to "the ingress stack" but never
-  # names this network explicitly, so Compose auto-prefixes it with the
-  # project name. Verified against another stack's compose file, which joins
-  # the same network and uses this exact full name (its own local alias is
-  # called nc_connect, name differs, but the "name:" value matches).
+  # Overridable because the name is host-specific: whichever network the
+  # proxy already sits on is whatever that host happens to call it. Set
+  # INGRESS_NETWORK in a gitignored .env (see .env.example) to point this
+  # somewhere else; the default below is the name to create if you are
+  # setting this up fresh.
+  #
+  # A default rather than a required variable (${VAR:?...}): external
+  # means Compose only ever looks the network up and never creates it, so
+  # a name that does not exist fails the deploy outright with "declared
+  # as external, but could not be found" - verified. There is no silent
+  # failure mode to guard against here, and a repo that runs as cloned
+  # beats one that needs a setup step first.
   ingress:
-    name: ingress
+    name: ${INGRESS_NETWORK:-ingress}
     external: true
