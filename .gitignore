@@ -12,3 +12,9 @@ logs/
 
 __pycache__/
 *.pyc
+
+# Host-specific deployment settings (currently just the name of the
+# external Docker network the ingress proxy is on). Names private
+# infrastructure and differs per host, so it stays out of the repo -
+# .env.example is the committed template.
+.env

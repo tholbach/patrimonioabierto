@@ -1,13 +1,16 @@
-## Internal-only - no domain/TLS here. The shared Caddy in
-## the ingress proxy's own repository terminates TLS for this site's domain and reverse_proxies
-## to this container by its Docker network alias. See README for the exact
-## site block to add there.
-# Without this, every log line's client is the outer the ingress host Caddy
-# and the real visitor only exists inside X-Forwarded-For. Trusting that
-# proxy makes Caddy resolve the visitor into request.client_ip, which is
-# the canonical field (and the one standard log tooling reads). Scoped to
-# private ranges - this container is only ever reachable over the internal
-# Docker network, so nothing routable can claim to be the proxy.
+## Internal-only - no domain/TLS here. A shared reverse proxy in front of
+## this (configured in its own repo, not here) terminates TLS and
+## reverse_proxies to this container by its Docker network alias. See
+## README for the exact site block to add there.
+
+# trusted_proxies: without it, every log line's client is the reverse
+# proxy in front of this container, and the real visitor exists only
+# inside X-Forwarded-For.
+# Trusting that proxy makes Caddy resolve the visitor into
+# request.client_ip, which is the canonical field (and the one standard log
+# tooling reads). Scoped to private ranges - this container is only ever
+# reachable over the internal Docker network, so nothing routable can
+# claim to be the proxy.
 {
 	servers {
 		trusted_proxies static private_ranges
@@ -25,7 +28,7 @@
 	# is personal data under GDPR while it carries full addresses, and the
 	# whole point here is counting visits, which a /24 counts just as well
 	# as a /32. Both are masked because both matter - remote_ip is the
-	# outer the ingress host Caddy (useless, but masked anyway so a config
+	# reverse proxy in front (useless, but masked anyway so a config
 	# change there can't silently start logging real addresses), and
 	# X-Forwarded-For is where the actual visitor's address arrives, set
 	# by that proxy's own reverse_proxy.

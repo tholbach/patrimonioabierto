@@ -15,7 +15,7 @@ help:
 	@echo "                   monument + web/sitemap.xml + web/robots.txt - run after"
 	@echo "                   build/wiki-extracts so both are picked up"
 	@echo "  serve            Serve web/ on :8000 via the real Caddy config (needs docker)"
-	@echo "  up               Start the container (joins the ingress host's ingress)"
+	@echo "  up               Start the container (joins the ingress proxy's network)"
 	@echo "  down             Stop the container"
 	@echo "  logs             Tail container stdout/stderr"
 
