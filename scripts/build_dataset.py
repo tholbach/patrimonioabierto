@@ -27,6 +27,14 @@ PHOTO_STATS_PATH = os.path.join(WEB_DATA_DIR, "photo_stats.json")
 SMALL_WORDS = {"de", "del", "la", "las", "el", "los", "y", "a", "en"}
 
 
+# Only the languages the site itself offers get into the shipped dataset.
+# Wikidata knows about 300+ editions and some monuments have dozens; every
+# one of them would be bytes in a file each visitor downloads, to answer a
+# question the UI cannot ask. The raw query result in data/raw/ keeps all
+# of them, so widening this later is a rebuild, not a re-fetch.
+SHIPPED_WIKIPEDIA_LANGS = ("es", "en")
+
+
 def titlecase_es(name):
     """Naive title-case, keeping short connector words lowercase (typical
     Spanish heritage-name style). Still needs a human pass for edge cases
@@ -217,6 +225,7 @@ def main():
     wd_has_image_by_jcyl = {}
     wd_image_url_by_jcyl = {}
     wd_has_wikipedia_by_jcyl = {}
+    wd_wikipedia_langs_by_jcyl = {}
     for row in wd_raw:
         jcyl_id = row["jcylID"]["value"].strip()
         qid = row["item"]["value"].rsplit("/", 1)[-1]
@@ -237,6 +246,13 @@ def main():
         # the Contribute page's "see items lacking a Wikipedia article" link.
         has_wikipedia = row.get("hasWikipediaArticle", {}).get("value") == "true"
         wd_has_wikipedia_by_jcyl[jcyl_id] = wd_has_wikipedia_by_jcyl.get(jcyl_id, False) or has_wikipedia
+        # Which editions, not just whether there are any. "Has an article"
+        # reads as a success only if it is an article the reader can read:
+        # for someone on the Spanish site, an item with nothing but a
+        # Latvian article is a gap, and the Stats page says so.
+        lang = row.get("lang", {}).get("value")
+        if lang in SHIPPED_WIKIPEDIA_LANGS:
+            wd_wikipedia_langs_by_jcyl.setdefault(jcyl_id, set()).add(lang)
         # First image URL wins if there are several - just needs to be *a*
         # representative thumbnail for list views, not necessarily the same
         # one the per-monument panel picks (that re-fetches the item's own
@@ -273,6 +289,7 @@ def main():
                 "wikidata_conflict": len(wd_qids) > 1,
                 "has_wikidata_image": wd_has_image_by_jcyl.get(cid, False),
                 "has_wikipedia_article": wd_has_wikipedia_by_jcyl.get(cid, False),
+                "wikipedia_langs": sorted(wd_wikipedia_langs_by_jcyl.get(cid, ())),
                 "image_url": wd_image_url_by_jcyl.get(cid),  # ready-made Special:FilePath URL, or None
             }
         )
