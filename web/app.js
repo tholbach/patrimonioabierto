@@ -909,11 +909,13 @@ function slugify(name) {
 const CONTRIBUTION_GUIDES = {
   wikipedia: {
     es: {
+      account: 'https://es.wikipedia.org/wiki/Special:CrearCuenta',
       intro: 'https://es.wikipedia.org/wiki/Ayuda:Introducci%C3%B3n',
       wizard: 'https://es.wikipedia.org/wiki/Wikipedia:Asistente_para_la_creaci%C3%B3n_de_art%C3%ADculos',
       sources: 'https://es.wikipedia.org/wiki/Wikipedia:Referencias',
     },
     en: {
+      account: 'https://en.wikipedia.org/wiki/Special:CreateAccount',
       intro: 'https://en.wikipedia.org/wiki/Help:Introduction',
       wizard: 'https://en.wikipedia.org/wiki/Wikipedia:Article_wizard',
       sources: 'https://en.wikipedia.org/wiki/Wikipedia:Citing_sources',
@@ -921,11 +923,13 @@ const CONTRIBUTION_GUIDES = {
   },
   commons: {
     es: {
+      account: 'https://commons.wikimedia.org/wiki/Special:CreateAccount',
       first: 'https://commons.wikimedia.org/wiki/Commons:Primeros_pasos',
       form: 'https://commons.wikimedia.org/wiki/Commons:Primeros_pasos/Formulario_de_subida',
       license: 'https://commons.wikimedia.org/wiki/Commons:Primeros_pasos/Selecci%C3%B3n_de_licencia',
     },
     en: {
+      account: 'https://commons.wikimedia.org/wiki/Special:CreateAccount',
       first: 'https://commons.wikimedia.org/wiki/Commons:First_steps',
       form: 'https://commons.wikimedia.org/wiki/Commons:First_steps/Upload_form',
       license: 'https://commons.wikimedia.org/wiki/Commons:First_steps/License_selection',
@@ -967,8 +971,10 @@ function showContributionIntro(kind, destination) {
   const g = CONTRIBUTION_GUIDES[kind][lang];
   const links =
     kind === 'wikipedia'
-      ? [[g.intro, 'intro.wikipedia.link_intro'], [g.wizard, 'intro.wikipedia.link_wizard'], [g.sources, 'intro.wikipedia.link_sources']]
-      : [[g.first, 'intro.commons.link_first'], [g.form, 'intro.commons.link_form'], [g.license, 'intro.commons.link_license']];
+      ? [[g.intro, 'intro.wikipedia.link_intro'], [g.wizard, 'intro.wikipedia.link_wizard'], [g.sources, 'intro.wikipedia.link_sources'], [g.account, 'intro.wikipedia.link_account']]
+      // Account first for Commons: there it isn't further reading, it's the
+      // precondition - an upload without one simply cannot happen.
+      : [[g.account, 'intro.commons.link_account'], [g.first, 'intro.commons.link_first'], [g.form, 'intro.commons.link_form'], [g.license, 'intro.commons.link_license']];
 
   const modal = document.createElement('div');
   modal.className = 'intro-modal';
