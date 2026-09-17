@@ -29,11 +29,13 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
+from project import user_agent
+
 RAW_DIR = os.path.join(os.path.dirname(__file__), "..", "data", "raw")
 DATASET_FILE = os.path.join(os.path.dirname(__file__), "..", "web", "data", "cyl_monuments_wikidata.json")
 OUT_FILE = os.path.join(RAW_DIR, "wikipedia_extracts.json")
 WIKIDATA_API = "https://www.wikidata.org/w/api.php"
-UA = "patrimonioabierto-seo/1.0 (https://github.com/tholbach/patrimonioabierto; thomas@holba.ch)"
+UA = user_agent("patrimonioabierto-seo")
 
 
 def api_get(url, retries=4):

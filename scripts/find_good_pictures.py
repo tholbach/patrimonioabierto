@@ -39,8 +39,10 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
+from project import user_agent
+
 API_URL = "https://commons.wikimedia.org/w/api.php"
-UA = "patrimonioabierto-research/1.0 (https://github.com/tholbach/patrimonioabierto; thomas@holba.ch)"
+UA = user_agent("patrimonioabierto-research")
 
 GOOD_PICTURE_TIERS = [
     "Featured pictures on Wikimedia Commons",

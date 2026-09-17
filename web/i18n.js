@@ -6,6 +6,17 @@
 // article - see fetchWikidataEntity's sitelink preference in app.js, which
 // does shift with the language toggle).
 
+// The contact address is published as an image rather than as text, to make
+// it less trivially collectable by address harvesters. The alt text still
+// carries it in full, so a screen reader reads it out like any other
+// address - keeping it from scrapers must not keep it from people.
+//
+// Defined once because the same markup appears on the About and the Aviso
+// legal page in both languages. Four copies of an address drift; one does
+// not, and changing it should be a one-line edit.
+const CONTACT_EMAIL_IMG =
+  '<img class="contact-email-img" src="assets/contact-email.png" alt="patrimonioabierto@holba.ch" width="217" height="22">';
+
 const STRINGS = {
   es: {
     'nav.stats': 'Estadísticas',
@@ -186,7 +197,7 @@ const STRINGS = {
       'Esta página explica, en términos sencillos, qué pasa con tus datos cuando usas Patrimonio Abierto. Resumen rápido: no hay cuentas, no hay formularios y no se usa ningún tipo de cookie - lo poco que hay que contar cabe en esta página.',
     'privacy.controller.title': '¿Quién es responsable de esta web?',
     'privacy.controller.body':
-      'Patrimonio Abierto lo mantiene una sola persona, <strong>Thomas Holbach</strong>, a título personal, sin ánimo de lucro y sin publicidad. Contacto (como imagen, para dificultar el spam automatizado): <img class="contact-email-img" src="assets/contact-email.png" alt="patrimonioabierto@holba.ch" width="217" height="22">.',
+      `Patrimonio Abierto lo mantiene una sola persona, <strong>Thomas Holbach</strong>, a título personal, sin ánimo de lucro y sin publicidad. Contacto (como imagen, para dificultar el spam automatizado): ${CONTACT_EMAIL_IMG}.`,
     'privacy.data_processed.title': 'Qué datos tratamos, y con qué base legal',
     'privacy.data_processed.body':
       'Al no haber cuentas ni formularios, no te pedimos ningún dato personal directamente. Cuando tu navegador se comunica con el servidor de esta web, este anota la petición en un registro de acceso: qué página se ha pedido, cuándo, con qué navegador y desde qué página se ha llegado. Tu dirección IP - el número que identifica tu conexión a internet - se <strong>recorta antes de escribirla</strong>: de una dirección IPv4 solo se conservan los tres primeros grupos (por ejemplo 88.1.2.0) y de una IPv6 los tres primeros. No queda en ningún momento una copia completa, así que ese registro no permite identificarte. La base legal es el "interés legítimo" (artículo 6.1.f del RGPD): mantener la web segura y saber, de forma agregada, si sirve para algo. No hay cookies, ni identificadores, ni seguimiento entre webs, y no se elabora ningún perfil sobre ti ni se toma ninguna decisión automatizada.',
@@ -216,7 +227,7 @@ const STRINGS = {
       'Esta página se actualiza antes de cualquier cambio en cómo se tratan los datos, no después: así se hizo al empezar a contar las estadísticas agregadas descritas arriba, y así se hará con cualquier tratamiento nuevo.',
     'imprint.title': 'Aviso legal',
     'imprint.body':
-      'Patrimonio Abierto es un proyecto personal e independiente, sin ánimo de lucro, sin publicidad y sin ningún tipo de patrocinio - no genera ingresos de ninguna forma. Responsable del sitio: <strong>Thomas Holbach</strong>. Contacto (como imagen, para dificultar el spam automatizado): <img class="contact-email-img" src="assets/contact-email.png" alt="patrimonioabierto@holba.ch" width="217" height="22">.',
+      `Patrimonio Abierto es un proyecto personal e independiente, sin ánimo de lucro, sin publicidad y sin ningún tipo de patrocinio - no genera ingresos de ninguna forma. Responsable del sitio: <strong>Thomas Holbach</strong>. Contacto (como imagen, para dificultar el spam automatizado): ${CONTACT_EMAIL_IMG}.`,
   },
   en: {
     'nav.stats': 'Statistics',
@@ -386,7 +397,7 @@ const STRINGS = {
       "This page explains, in plain terms, what happens to your data when you use Patrimonio Abierto. Short version: there are no accounts, no forms, and no cookies of any kind - what little there is to explain fits on this one page.",
     'privacy.controller.title': 'Who is responsible for this site?',
     'privacy.controller.body':
-      'Patrimonio Abierto is maintained by one person, <strong>Thomas Holbach</strong>, in a personal capacity, not-for-profit and without advertising. Contact (as an image, to make automated spam harvesting harder): <img class="contact-email-img" src="assets/contact-email.png" alt="patrimonioabierto@holba.ch" width="217" height="22">.',
+      `Patrimonio Abierto is maintained by one person, <strong>Thomas Holbach</strong>, in a personal capacity, not-for-profit and without advertising. Contact (as an image, to make automated spam harvesting harder): ${CONTACT_EMAIL_IMG}.`,
     'privacy.data_processed.title': 'What data we process, and on what legal basis',
     'privacy.data_processed.body':
       'Since there are no accounts or forms, we don\'t ask you for any personal data directly. When your browser talks to this site\'s server, that server notes the request in an access log: which page was asked for, when, with which browser, and which page you arrived from. Your IP address - the number that identifies your internet connection - is <strong>truncated before it is written down</strong>: only the first three groups of an IPv4 address are kept (88.1.2.0, say), and the first three of an IPv6 one. A complete copy never exists at any point, so that log cannot identify you. The legal basis is "legitimate interest" (GDPR Article 6(1)(f)): keeping the site secure, and knowing in aggregate whether it is of any use. There are no cookies, no identifiers and no cross-site tracking; no profile is built about you and no automated decisions are made.',
@@ -416,7 +427,7 @@ const STRINGS = {
       'This page is updated before any change to how data is handled, not after: that is how the aggregate statistics described above were introduced, and how any new kind of processing will be.',
     'imprint.title': 'Imprint',
     'imprint.body':
-      'Patrimonio Abierto is a personal, independent, not-for-profit project - no advertising, no sponsorship, no revenue of any kind. Responsible for this site: <strong>Thomas Holbach</strong>. Contact (as an image, to make automated spam harvesting harder): <img class="contact-email-img" src="assets/contact-email.png" alt="patrimonioabierto@holba.ch" width="217" height="22">.',
+      `Patrimonio Abierto is a personal, independent, not-for-profit project - no advertising, no sponsorship, no revenue of any kind. Responsible for this site: <strong>Thomas Holbach</strong>. Contact (as an image, to make automated spam harvesting harder): ${CONTACT_EMAIL_IMG}.`,
   },
 };
 

@@ -14,8 +14,10 @@ import os
 import urllib.parse
 import urllib.request
 
+from project import user_agent
+
 RAW_DIR = os.path.join(os.path.dirname(__file__), "..", "data", "raw")
-USER_AGENT = "patrimonioabierto/0.1 (https://github.com/tholbach/patrimonioabierto)"
+USER_AGENT = user_agent("patrimonioabierto", "0.1")
 
 
 def wfs_get_feature(base_url, workspace, typename, extra=None):

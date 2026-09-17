@@ -33,8 +33,10 @@ import urllib.parse
 import urllib.request
 from datetime import datetime, timezone
 
+from project import user_agent
+
 RAW_DIR = os.path.join(os.path.dirname(__file__), "..", "data", "raw")
-USER_AGENT = "patrimonioabierto/0.1 (https://github.com/tholbach/patrimonioabierto)"
+USER_AGENT = user_agent("patrimonioabierto", "0.1")
 COMMONS_API = "https://commons.wikimedia.org/w/api.php"
 
 SPARQL_QUERY = """
