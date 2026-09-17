@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := help
 
-.PHONY: help fetch build photo-stats wiki-extracts monument-pages serve deploy up down logs
+.PHONY: help fetch build photo-stats wiki-extracts monument-pages potw serve deploy up down logs
 
 help:
 	@echo "Available targets:"
@@ -14,6 +14,9 @@ help:
 	@echo "  monument-pages   (Re)generate web/monumento/<id>-<slug>/index.html for every"
 	@echo "                   monument + web/sitemap.xml + web/robots.txt - run after"
 	@echo "                   build/wiki-extracts so both are picked up"
+	@echo "  potw             Top up the picture-of-the-week pool (Commons search per"
+	@echo "                   monument - long, resumable, manual/occasional like"
+	@echo "                   photo-stats; writes web/data/ directly, no 'build' after)"
 	@echo "  serve            Serve web/ on :8000 via the real Caddy config (needs docker)"
 	@echo "  deploy           On the host: pull, apply, and restart so a changed"
 	@echo "                   Caddyfile actually takes effect"
@@ -36,6 +39,26 @@ wiki-extracts:
 
 monument-pages:
 	@python3 scripts/build_monument_pages.py
+
+# The picture-of-the-week pool, all three stages. Manual and occasional like
+# photo-stats, deliberately NOT part of fetch/build: the middle stage runs a
+# Commons search per monument per quality tier, which is a long job and not
+# one to re-pay on every routine data refresh.
+#
+# Safe to interrupt. fetch_commons_categories is a handful of batched SPARQL
+# queries and simply rewrites its file; find_good_pictures writes a sentinel
+# row for every monument it has checked, hit or not, so Ctrl-C costs only the
+# monument in flight and a rerun covers just what is left plus whatever got
+# linked to Wikidata since.
+#
+# Why you would run it: the pool IS the rotation. app.js picks
+# pool[isoWeekNumber(today) % pool.length], so the number of entries is how
+# many weeks pass before a monument comes round again. Run this when that
+# starts feeling short.
+potw:
+	@python3 scripts/fetch_commons_categories.py
+	@python3 scripts/find_good_pictures.py
+	@python3 scripts/build_potw_seed.py
 
 # The real Caddy with the real Caddyfile, not python -m http.server, so
 # that what you see locally is what the server does. http.server serves

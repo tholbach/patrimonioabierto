@@ -17,11 +17,11 @@ Wikidata items) worth resolving by hand.
 Coverage is still uneven by category, but far less so than early on -
 `HÓRREOS Y PALLOZAS` (traditional granaries) and `ROLLOS DE JUSTICIA`
 (pillories) went from essentially untouched to 95% and 98% linked
-respectively, driven by manual OpenRefine reconciliation/item-creation work
-(see "Related, but not part of this repo" below for the tooling that came
-out of that). The one
-category still genuinely stuck is `ARTE RUPESTRE` (rock art, 347
-monuments) at just **1% linked** - now the clearest remaining gap by far.
+respectively, once their Wikidata items had been reconciled and created by
+hand. That work happens in Wikidata itself rather than here - this project
+reads the result, it does not do the editing. The one category still
+genuinely stuck is `ARTE RUPESTRE` (rock art, 347 monuments) at just
+**1% linked** - now the clearest remaining gap by far.
 `CASTILLOS` (434 castles) is next at 53% linked, still real work left
 despite being probably the single most visually compelling category for
 this project's map.
@@ -76,7 +76,7 @@ make monument-pages   # scripts/build_monument_pages.py -> web/monumento/*/index
 Each output record also carries `already_linked` / `wikidata_qid` /
 `wikidata_conflict` / `has_wikidata_image` (whether the linked item has a
 `P18` main image - linked and "has a photo" are genuinely different things,
-tracked separately) - this file doubles as the source dataset for OpenRefine
+tracked separately) - this file doubles as the source dataset for that
 reconciliation work, not just map data. It intentionally does *not* carry
 `name_raw` (JCyL's raw uppercase denomination - only `titlecase_es()`'s
 cleaned-up `name` ships) or `category_code` (the numeric category, only its
@@ -232,13 +232,3 @@ separate checkout, and updating it does not update this.
 - "Add a photo" contribution flow - planned to deep-link into Commons'
   UploadWizard (with a pre-filled category) rather than build a custom
   upload/storage system, matching how Wiki Loves Monuments itself works.
-
-## Related, but not part of this repo
-
-Reconciling/creating the actual Wikidata items (the OpenRefine work behind
-the `HÓRREOS Y PALLOZAS`/`ROLLOS DE JUSTICIA` numbers above) lives outside
-this project: a sibling local-only tool, `wikidata-commons-map`, overlays a
-Wikidata SPARQL query's results against a Commons category's geotagged
-photos, to spot reusable photos for items that don't have one yet.
-Deliberately not committed here or wired into any build/deploy - see its
-own README if reused for another category.

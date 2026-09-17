@@ -14,8 +14,10 @@ import time
 import urllib.parse
 import urllib.request
 
+from project import user_agent
+
 SPARQL_URL = "https://query.wikidata.org/sparql"
-UA = "patrimonioabierto-research/1.0 (https://github.com/tholbach/patrimonioabierto; thomas@holba.ch)"
+UA = user_agent("patrimonioabierto-research")
 BATCH = 150
 
 
