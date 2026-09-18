@@ -1907,6 +1907,12 @@ function renderHistoryChart(historyData, total) {
 // pixel space (converting the viewBox's fixed units via the SVG's actual
 // on-screen size) so the tooltip sits right above the hovered point
 // regardless of how wide the panel currently is.
+// Thousands separators per locale: "2.479" in Spanish, "2,479" in English.
+// Module scope because the Stats page's own figures and the history
+// chart's tooltip both want it and must agree - they describe the same
+// numbers a few pixels apart.
+const fmtNum = (n) => n.toLocaleString(currentLang);
+
 function wireHistoryChart(wrapEl, historyData, total) {
   const svg = wrapEl.querySelector('.stats-chart');
   const tooltip = wrapEl.querySelector('.stats-chart-tooltip');
@@ -1916,7 +1922,6 @@ function wireHistoryChart(wrapEl, historyData, total) {
   const { xFor, yFor } = chartGeometry(historyData, total);
 
   const pctOf = (value, entry) => (entry.total ? (value / entry.total) * 100 : 0);
-  const fmtNum = (n) => n.toLocaleString(currentLang);
   const fmtPct = (n) => n.toLocaleString(currentLang, { maximumFractionDigits: 1, minimumFractionDigits: 1 });
 
   function deltaHtml(i, key) {
@@ -2042,8 +2047,16 @@ async function showStatsPanel({ updateUrl = true } = {}) {
   const total = allRecords.length;
   const linked = allRecords.filter((r) => r.already_linked).length;
   const withImage = allRecords.filter((r) => r.has_wikidata_image).length;
+  // Deliberately the current language, not "has an article anywhere". An
+  // item whose only article is in Latvian is a gap for the reader looking
+  // at this page, not an achievement, and saying otherwise would flatter
+  // the numbers. It also means this figure moves when the language toggle
+  // does - 979 in Spanish, 175 in English - which is the honest picture of
+  // where the work still is.
+  const withArticle = allRecords.filter((r) => (r.wikipedia_langs || []).includes(currentLang)).length;
   const linkedPct = total ? Math.round((linked / total) * 100) : 0;
   const imagePct = total ? Math.round((withImage / total) * 100) : 0;
+  const articlePct = total ? Math.round((withArticle / total) * 100) : 0;
 
   panelContentEl.innerHTML = `
     ${heroBlock({ title: t('stats.title'), placeholderIcon: '📊' })}
@@ -2052,10 +2065,12 @@ async function showStatsPanel({ updateUrl = true } = {}) {
       <div class="extract stats-mission">${t('stats.mission')}</div>
       ${datasetMeta ? `<div class="meta">${t('about.updated', new Date(datasetMeta.generated_at).toLocaleDateString(currentLang))}</div>` : ''}
       <div class="stats-numbers">
-        <div class="stat-box"><div class="stat-value">${total}</div><div class="stat-label">${t('stats.total')}</div></div>
-        <div class="stat-box"><div class="stat-value">${linked} <span class="stat-pct">${linkedPct}%</span></div><div class="stat-label">${t('stats.linked')}</div></div>
-        <div class="stat-box"><div class="stat-value">${withImage} <span class="stat-pct">${imagePct}%</span></div><div class="stat-label">${t('stats.with_image')}</div></div>
+        <div class="stat-box"><div class="stat-value">${fmtNum(total)}</div><div class="stat-label">${t('stats.total')}</div></div>
+        <div class="stat-box"><div class="stat-value">${fmtNum(withImage)} <span class="stat-pct">${imagePct}%</span></div><div class="stat-label">${t('stats.with_image')}</div></div>
+        <div class="stat-box"><div class="stat-value">${fmtNum(withArticle)} <span class="stat-pct">${articlePct}%</span></div><div class="stat-label">${t('stats.with_article')}</div></div>
+        <div class="stat-box stat-box-photos"><div class="stat-value">&nbsp;</div><div class="stat-label">${t('stats.photos_label')}</div></div>
       </div>
+      <div class="stats-record">${t('stats.linked_record', fmtNum(linked), fmtNum(total), linkedPct)}</div>
       <h3>${t('stats.history_title')}</h3>
       <div class="loading">${t('loading')}</div>
     </div>
@@ -2087,26 +2102,34 @@ async function showStatsPanel({ updateUrl = true } = {}) {
   if (chartWrap) wireHistoryChart(chartWrap, historyData, total);
 
   // Absent entirely (not just empty) until someone's manually run `make
-  // photo-stats` at least once - see fetchPhotoStats()'s own comment.
-  if (photoStats) {
-    const statsNumbersEl = panelContentEl.querySelector('.stats-numbers');
-    if (statsNumbersEl) statsNumbersEl.insertAdjacentHTML('afterend', renderPhotoStats(photoStats));
+  // photo-stats` at least once - see fetchPhotoStats()'s own comment. Its
+  // box is rendered empty above and filled here rather than waiting for
+  // the fetch, so the three figures that are already in memory appear
+  // immediately; if the file isn't there, the box is dropped and the grid
+  // closes up to three.
+  const photoBox = panelContentEl.querySelector('.stat-box-photos');
+  if (photoBox && photoStats) {
+    photoBox.querySelector('.stat-value').innerHTML =
+      t('stats.photos_value', photoStats.total_photos.toLocaleString(currentLang));
+    // After the grid, not after the box: .stats-numbers is a grid, so a
+    // sibling inserted next to a box becomes a grid cell itself and the
+    // note renders as a narrow column under the left-hand figure.
+    photoBox.closest('.stats-numbers').insertAdjacentHTML('afterend', renderPhotoNote(photoStats));
+  } else if (photoBox) {
+    photoBox.remove();
   }
 }
 
-// The Stats page's three .stat-box figures all come from every `make
-// build` - this one doesn't (see fetch_commons_photo_counts.py), so it
-// gets its own separate, clearly-dated callout rather than blending in as
-// a fourth equal .stat-box that implies the same freshness/rigor.
-function renderPhotoStats(photoStats) {
+// The other three figures come from every `make build`; this one doesn't
+// (see fetch_commons_photo_counts.py), and it is a floor rather than a
+// count - the script only walks one level of subcategories, so the real
+// number is always higher. Both facts are carried in the figure itself
+// ("more than N") and in this note, which is why it can now sit as a
+// fourth box without implying the same freshness or precision as its
+// neighbours.
+function renderPhotoNote(photoStats) {
   const asOfDate = new Date(photoStats.generated_at).toLocaleDateString(currentLang);
-  return `
-    <div class="stats-photos">
-      <div class="stats-photos-value">${photoStats.total_photos.toLocaleString(currentLang)}</div>
-      <div class="stats-photos-label">${t('stats.photos_label')}</div>
-      <div class="stats-photos-note">${t('stats.photos_note', photoStats.monuments_with_gallery.toLocaleString(currentLang), asOfDate)}</div>
-    </div>
-  `;
+  return `<div class="stats-photos-note">${t('stats.photos_note', photoStats.monuments_with_gallery.toLocaleString(currentLang), asOfDate)}</div>`;
 }
 
 function showAboutPanel({ updateUrl = true } = {}) {

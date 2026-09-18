@@ -1,15 +1,21 @@
 #!/usr/bin/env python3
 """Pull every Wikidata item carrying a P3177 (Patrimonio Web JCyL ID) -
 i.e. everything already linked to CyL's heritage catalog - plus whether
-each one has a P18 (main image) and whether it has a sitelink to any
-Wikipedia edition, and if it has an image, its ready-made Special:FilePath
-URL. Both flags feed the coverage-history snapshot in build_dataset.py and
+each one has a P18 (main image), which Wikipedia editions it has a
+sitelink to, and if it has an image, its ready-made Special:FilePath
+URL. The edition languages matter because "has an article" is not one
+question: a reader on the Spanish site wants to know whether there is a
+Spanish article, and an item with only a Latvian one is a gap for them,
+not a success. Both flags feed the coverage-history snapshot in build_dataset.py and
 the map's own status filter/Contribute page links: linkage alone doesn't
 tell the whole story, an item can be "linked" and still have no photo, or
 no Wikipedia article. The image URL itself feeds thumbnails in list views
 (nearby/search) - fetched here, once, in the same bulk query, rather than
 one Commons request per monument. Writes raw results to data/raw/ -
 regenerate anytime.
+
+Selecting ?lang costs nothing extra: the sitelink join already produced
+one row per edition, that language was simply not being projected.
 
 The image and sitelink OPTIONALs are two independent joins on ?item, so an
 item with e.g. 2 photos and 3 Wikipedia-language articles produces 2*3=6
@@ -34,12 +40,13 @@ USER_AGENT = user_agent("patrimonioabierto", "0.1")
 QUERY = """
 PREFIX schema: <http://schema.org/>
 PREFIX wikibase: <http://wikiba.se/ontology#>
-SELECT ?item ?jcylID ?image (BOUND(?image) AS ?hasImage) (BOUND(?article) AS ?hasWikipediaArticle) WHERE {
+SELECT ?item ?jcylID ?image (BOUND(?image) AS ?hasImage) (BOUND(?article) AS ?hasWikipediaArticle) ?lang WHERE {
   ?item wdt:P3177 ?jcylID .
   OPTIONAL { ?item wdt:P18 ?image }
   OPTIONAL {
     ?article schema:about ?item ;
-             schema:isPartOf ?site .
+             schema:isPartOf ?site ;
+             schema:inLanguage ?lang .
     ?site wikibase:wikiGroup "wikipedia" .
   }
 }
