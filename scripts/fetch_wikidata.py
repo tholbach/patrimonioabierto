@@ -28,7 +28,7 @@ import os
 import urllib.parse
 import urllib.request
 
-from project import user_agent
+from project import urlopen_with_retry, user_agent
 
 RAW_DIR = os.path.join(os.path.dirname(__file__), "..", "data", "raw")
 USER_AGENT = user_agent("patrimonioabierto", "0.1")
@@ -60,7 +60,7 @@ def main():
         url,
         headers={"Accept": "application/sparql-results+json", "User-Agent": USER_AGENT},
     )
-    with urllib.request.urlopen(req, timeout=60) as resp:
+    with urlopen_with_retry(req, timeout=60) as resp:
         data = json.load(resp)
 
     rows = data["results"]["bindings"]
