@@ -23,3 +23,36 @@ def user_agent(tool, version="1.0"):
     from this project is.
     """
     return f"{tool}/{version} ({PROJECT_URL})"
+
+
+def urlopen_with_retry(req, timeout=60, attempts=5):
+    """urlopen that survives the rate limiting these APIs actually apply.
+
+    WDQS answers a heavy query with 429 when it is busy, and a single
+    unretried request turns that into a failed build: `make fetch` dies
+    after the JCyL half already succeeded, and the nightly timer does the
+    same at 05:00 with nobody watching. The query is not wrong when this
+    happens and the service is not down - it is asking us to wait.
+
+    Honours Retry-After when the server sends one (it knows better than a
+    guess), otherwise backs off exponentially from 5s. Retries 429 and 5xx
+    only: a 400 means the query itself is broken and no amount of waiting
+    fixes it.
+    """
+    import time
+    import urllib.error
+    import urllib.request
+
+    for attempt in range(1, attempts + 1):
+        try:
+            return urllib.request.urlopen(req, timeout=timeout)
+        except urllib.error.HTTPError as e:
+            if e.code != 429 and e.code < 500:
+                raise
+            if attempt == attempts:
+                raise
+            wait = e.headers.get("Retry-After")
+            wait = int(wait) if (wait or "").isdigit() else 5 * 2 ** (attempt - 1)
+            print(f"  HTTP {e.code} from {req.full_url.split('?')[0]} - waiting {wait}s "
+                  f"(attempt {attempt}/{attempts})", flush=True)
+            time.sleep(wait)
