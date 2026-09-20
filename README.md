@@ -147,29 +147,17 @@ does not update this, and the other way round.
 
 **Code: [AGPL-3.0-or-later](LICENSE).** Copyright (C) 2026 Thomas Holbach.
 
-Use it, change it, run it, build another region's version from it. The one
-condition is that it stays open: if you distribute a modified version, or
-run one as a website, the people using it must be able to get your source.
-That is the point of the AGPL rather than a permissive licence here - a
-project called *Patrimonio Abierto*, whose whole argument is that results
-should flow back into the commons, would sit badly with a licence that lets
-a derivative close itself off.
-
-Section 13 is why the site links to this repository from its own "Acerca
-de" page: anyone using the deployed site can reach the source from it.
-
-**The data is not ours to licence, and is not covered by the above.**
-`web/data/*.json` is derived from three sources, each with its own terms:
+**The data is not ours to licence and is not covered by that.**
+`web/data/*.json` is derived from three sources with their own terms:
 
 | Source | Terms |
 |---|---|
-| JCyL BIC catalogue and municipal boundaries | *"Uso libre y gratuito. Cita obligada a la propiedad de la fuente: 'Junta de Castilla y León'."* - free use, attribution to the Junta required |
+| JCyL BIC catalogue and municipal boundaries | *"Uso libre y gratuito. Cita obligada a la propiedad de la fuente: 'Junta de Castilla y León'."* |
 | Wikidata | CC0 |
-| Wikimedia Commons photos | per file, mostly CC BY-SA - each photo's author and licence are shown beside it |
+| Wikimedia Commons photos | per file, mostly CC BY-SA |
 
-Attribute each of them distinctly rather than folding them into one vague
-credit; that is what the JCyL terms ask for and what the Commons licences
-require.
+Credit them separately rather than as one blended line - that is what the
+JCyL terms ask for and what the Commons licences require.
 
 ## Not built yet
 
