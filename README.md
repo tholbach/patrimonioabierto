@@ -69,8 +69,9 @@ not yet on Wikidata show their JCyL record instead, with an invitation to
 add one.
 
 Basemap tiles come from OpenStreetMap directly - no key, no account, and
-nothing that can be broken by a browser or proxy withholding a header. See
-"The basemap" under Deployment for why that mattered.
+nothing a browser or proxy can withhold to break them. Their [tile usage
+policy](https://operations.osmfoundation.org/policies/tiles/) covers this
+kind of use.
 
 ```
 make serve   # http://localhost:8000, for local development
@@ -78,9 +79,9 @@ make serve   # http://localhost:8000, for local development
 
 ## A real page per monument (`web/monumento/`)
 
-The map is a client-side app, so for a crawler or a link-preview bot - none
-of which run JavaScript - all 2,479 URLs used to look like the same empty
-page. `make monument-pages` generates one real static page per monument
+The map is a client-side app, so to a crawler or a link-preview bot - none
+of which run JavaScript - all 2,479 URLs would otherwise look like the same
+empty page. `make monument-pages` generates one real static page per monument
 instead, at `/monumento/<jcyl_id>-<slug>/`, with its own title,
 description, social preview and the Wikipedia extract already in the HTML.
 
@@ -118,17 +119,6 @@ If your proxy already sits on a network with another name, set
 `INGRESS_NETWORK` in a `.env` instead of moving it - see `.env.example`.
 
 The site is reachable once the reverse-proxy side points at it.
-
-### The basemap
-
-OpenStreetMap's own tiles, no key and no account, within their [tile usage
-policy](https://operations.osmfoundation.org/policies/tiles/). They
-replaced CARTO's, which refuse to serve unless the browser sends a
-`Referer` - so anyone whose browser or proxy strips that header saw a blank
-map, and several did.
-
-A self-hosted vector basemap was built, measured and rejected before
-settling here; `web/app.js` says why, so nobody repeats the experiment.
 
 ### Updating a running deployment
 
