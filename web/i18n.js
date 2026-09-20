@@ -26,7 +26,7 @@ const STRINGS = {
     'nav.imprint': 'Aviso legal',
     'menu.title': 'Menú',
     'menu.button_title': 'Menú',
-    'stats.template': (linked, total, pct) => `${linked} / ${total} enlazados (${pct}%)`,
+    'stats.monument_count': (n) => `${n} monumentos`,
     'badge.share': 'Compartir',
     'badge.share.copied': '✓ Copiado',
     // Antesala antes de mandar a alguien a Wikipedia/Commons: los enlaces
@@ -131,7 +131,7 @@ const STRINGS = {
     'province.kicker': '🗺️ Provincia',
     'municipality.monuments_title': 'Monumentos',
     'municipality.no_monuments': 'Ningún BIC registrado en este municipio.',
-    'province.municipalities_title': 'Municipios con más monumentos sin enlazar',
+    'province.municipalities_title': 'Municipios con más monumentos',
     'province.municipality_count': (n) => `${n} municipios`,
     // Varias formulaciones en vez de una sola: quien recorre veinte fichas
     // se encuentra veinte veces el mismo texto, y a la tercera deja de
@@ -242,7 +242,7 @@ const STRINGS = {
     'nav.imprint': 'Imprint',
     'menu.title': 'Menu',
     'menu.button_title': 'Menu',
-    'stats.template': (linked, total, pct) => `${linked} / ${total} linked (${pct}%)`,
+    'stats.monument_count': (n) => `${n} monuments`,
     'badge.share': 'Share',
     'badge.share.copied': '✓ Copied',
     'intro.wikipedia.title': 'First time writing on Wikipedia?',
@@ -342,7 +342,7 @@ const STRINGS = {
     'province.kicker': '🗺️ Province',
     'municipality.monuments_title': 'Monuments',
     'municipality.no_monuments': 'No protected heritage sites registered in this municipality.',
-    'province.municipalities_title': 'Municipalities with the most unlinked monuments',
+    'province.municipalities_title': 'Municipalities with the most monuments',
     'province.municipality_count': (n) => `${n} municipalities`,
     'upload_cta.text': () => variant([
       'This monument already has a Wikidata item but no photo yet. Have one?',

@@ -2406,12 +2406,11 @@ function showMunicipalityPanel(muni, { flyTo = false, updateUrl = true } = {}) {
   const monuments = allRecords
     .filter((r) => r.municipality_ine_code_p772 === muni.ine_code_p772)
     .sort((a, b) => Number(a.already_linked) - Number(b.already_linked) || a.name.localeCompare(b.name));
-  const pct = muni.monument_count ? Math.round((muni.linked_count / muni.monument_count) * 100) : 0;
 
   panelContentEl.innerHTML = `
     ${heroBlock({ kicker: t('municipality.kicker'), title: muni.name, placeholderIcon: '📍' })}
     <div class="panel-body">
-      <div class="meta">${muni.province} · ${t('stats.template', muni.linked_count, muni.monument_count, pct)}</div>
+      <div class="meta">${muni.province} · ${t('stats.monument_count', muni.monument_count)}</div>
       <h3>${t('municipality.monuments_title')}</h3>
       ${
         monuments.length
@@ -2475,32 +2474,30 @@ function provinceShareUrl(prov) {
 
 function showProvincePanel(prov, { flyTo = false, updateUrl = true } = {}) {
   currentPanelState = { type: 'province', prov };
-  const pct = prov.monument_count ? Math.round((prov.linked_count / prov.monument_count) * 100) : 0;
 
-  // Prioritized by absolute number of undocumented monuments, not by
-  // percentage - a municipality with 50 missing out of 100 is a bigger
-  // practical opportunity than one with 2 missing out of 2.
-  const topMissing = allMunicipalities
+  // Biggest municipalities by BIC count, not by documentation gap - the
+  // list shows a plain total per row, so it is sorted by the number that
+  // is actually visible rather than one that only used to be.
+  const topMunicipalities = allMunicipalities
     .filter((m) => m.province === prov.name && m.monument_count > 0)
-    .sort((a, b) => (b.monument_count - b.linked_count) - (a.monument_count - a.linked_count))
+    .sort((a, b) => b.monument_count - a.monument_count)
     .slice(0, 15);
 
-  const rowsHtml = topMissing
-    .map((m) => {
-      const mpct = m.monument_count ? Math.round((m.linked_count / m.monument_count) * 100) : 0;
-      return `
+  const rowsHtml = topMunicipalities
+    .map(
+      (m) => `
         <li class="list-row" data-ine="${m.ine_code_p772}">
           <span class="list-row-name">${m.name}</span>
-          <span class="list-row-stat">${m.linked_count}/${m.monument_count} (${mpct}%)</span>
+          <span class="list-row-stat">${m.monument_count}</span>
         </li>
-      `;
-    })
+      `
+    )
     .join('');
 
   panelContentEl.innerHTML = `
     ${heroBlock({ kicker: t('province.kicker'), title: prov.name, placeholderIcon: '🗺️' })}
     <div class="panel-body">
-      <div class="meta">${t('province.municipality_count', prov.municipality_count)} · ${t('stats.template', prov.linked_count, prov.monument_count, pct)}</div>
+      <div class="meta">${t('province.municipality_count', prov.municipality_count)} · ${t('stats.monument_count', prov.monument_count)}</div>
       <h3>${t('province.municipalities_title')}</h3>
       <ul class="list">${rowsHtml}</ul>
     </div>
