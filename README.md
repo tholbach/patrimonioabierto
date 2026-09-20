@@ -7,24 +7,24 @@ Wikidata, Wikimedia Commons, and Wikipedia - and shows the result on a map.
 
 ## The gap this project tracks
 
-As of the last `make build` run (2026-08-26): **2,479** officially
-protected monuments in Castilla y León, of which **1,785 (72%)** have a
-matching Wikidata item and **694 (28%)** don't. See
-`web/data/cyl_monuments_wikidata.json` for the full per-monument breakdown,
-including 4 identifier conflicts (one JCyL ID claimed by two different
-Wikidata items) worth resolving by hand.
+**2,479** officially protected monuments in Castilla y León. As of
+2026-09-20, **2,247 (91%)** have a matching Wikidata item, **1,305 (53%)**
+have a freely licensed photo, and **996 (40%)** have a Spanish Wikipedia
+article.
 
-Coverage is still uneven by category, but far less so than early on -
-`HÓRREOS Y PALLOZAS` (traditional granaries) and `ROLLOS DE JUSTICIA`
-(pillories) went from essentially untouched to 95% and 98% linked
-respectively, once their Wikidata items had been reconciled and created by
-hand. That work happens in Wikidata itself rather than here - this project
-reads the result, it does not do the editing. The one category still
-genuinely stuck is `ARTE RUPESTRE` (rock art, 347 monuments) at just
-**1% linked** - now the clearest remaining gap by far.
-`CASTILLOS` (434 castles) is next at 53% linked, still real work left
-despite being probably the single most visually compelling category for
-this project's map.
+Those figures move, so the site publishes them rather than this file:
+[patrimonioabierto.es/stats/](https://patrimonioabierto.es/stats/) shows
+the current numbers and a history chart, and
+`web/data/cyl_monuments_wikidata.json` has the full per-monument
+breakdown - including the 4 identifier conflicts (one JCyL ID claimed by
+two different Wikidata items) still worth resolving by hand.
+
+**Every category except one is now fully linked.** All 232 remaining
+unlinked monuments are `ARTE RUPESTRE` (rock art, 347 entries, 33%
+linked) - a category that is genuinely hard, since the sites are often
+unnamed, unphotographed and known only by a cadastral reference. The
+linking itself happens in Wikidata, not here: this project reads the
+result and shows where the result is still missing.
 
 ## Data sources
 
@@ -70,14 +70,13 @@ make monument-pages   # scripts/build_monument_pages.py -> web/monumento/*/index
    the 5-digit `c_prov_mun` form - verified against a real item
    (`Q15699`/León, `P772 = "24089"`) before trusting it. Only the P772 form
    (`municipality_ine_code_p772`) makes it into the output; the raw 11-digit
-   code is used internally for the join and then dropped, so there's no
-   ambiguity about which one to actually use for reconciliation.
+   code is used internally for the join and then dropped, so there is no
+   ambiguity about which form matches Wikidata.
 
 Each output record also carries `already_linked` / `wikidata_qid` /
 `wikidata_conflict` / `has_wikidata_image` (whether the linked item has a
 `P18` main image - linked and "has a photo" are genuinely different things,
-tracked separately) - this file doubles as the source dataset for that
-reconciliation work, not just map data. It intentionally does *not* carry
+tracked separately). It intentionally does *not* carry
 `name_raw` (JCyL's raw uppercase denomination - only `titlecase_es()`'s
 cleaned-up `name` ships) or `category_code` (the numeric category, only its
 `category` label) - neither is read anywhere in `web/app.js`, so both are
@@ -94,12 +93,14 @@ one-off snapshot for a submission deadline.
 
 Plain Leaflet + vanilla JS, no build step. Loads
 `web/data/cyl_monuments_wikidata.json` once in full (2,479 records is small
-enough to load eagerly rather than paginate/tile), plots every monument as a
-marker colored by linkage status, clustered via `leaflet.markercluster`
-(clusters themselves colored by their own linked/missing ratio, not raw
-count, so even zoomed out the map reads as "where the documentation gaps
-are"). A filter button lets you toggle markers on/off by category, with a
-live count per category. Clicking a marker fetches Wikidata's
+enough to load eagerly rather than paginate/tile) and plots every monument
+as a marker, clustered via `leaflet.markercluster`. Markers are one colour;
+whether a freely licensed photo exists is carried by the border - solid
+when there is one, dashed when there is not - and clusters use the same
+rule, so even zoomed out the map reads as "where the photo gaps are"
+without running a second colour against the basemap's own. A filter button
+toggles markers by category or by status, with a live count each. Clicking
+a marker fetches Wikidata's
 `Special:EntityData` for that item (sitelinks + the `P18` image claim), then
 the Wikipedia REST summary and a Commons thumbnail via `Special:FilePath` -
 live, per click, not baked into the static dataset. Unlinked monuments show
@@ -138,15 +139,13 @@ actually breaks one of these substitutions fails the build loudly instead of
 silently shipping a broken page.
 
 URL shape is `/monumento/<jcyl_id>-<slug>/` - the numeric id is
-load-bearing, the slug is not. `app.js`'s own bootstrap parses the id back
-out of that path and rewrites the address bar to the canonical `?id=` form
-before doing anything else, so every other internal routing path
-(`shareUrl()`, the popstate handler, closing the panel, ...) keeps working
-completely unmodified - the static page's `<link rel="canonical">` is what
-tells search engines the "real" URL regardless of what the address bar
-shows once JS takes over. A monument renamed between builds gets a new slug
-next time with the old URL's id prefix still resolving correctly - nothing
-needs a redirect map.
+load-bearing, the slug is not. The same shape is used while browsing, not
+only by crawlers: `app.js` pushes it on every monument it opens, so a copied
+address bar and a shared link are the same URL, and that URL has a real
+static page behind it if JavaScript never runs. `app.js`'s bootstrap parses
+the id back out of the path on load. A monument renamed between builds gets
+a new slug next time with the old URL's id prefix still resolving correctly
+- nothing needs a redirect map.
 
 **Gotcha already solved, worth not repeating**: the first version used
 `<base href="https://patrimonioabierto.es/">` to fix every relative
@@ -251,6 +250,3 @@ separate checkout, and updating it does not update this.
 - Category → Wikidata `P31` (instance of) mapping table - deliberately not
   guessed here, needs a careful pass since some categories (`MONUMENTO`) are
   too generic for a 1:1 mapping.
-- "Add a photo" contribution flow - planned to deep-link into Commons'
-  UploadWizard (with a pre-filled category) rather than build a custom
-  upload/storage system, matching how Wiki Loves Monuments itself works.

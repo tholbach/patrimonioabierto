@@ -1793,15 +1793,16 @@ async function selectMonument(record, { flyTo = false, updateUrl = true, feature
     currentGalleryState = { files, index: 0, commonsCategory };
     preloadNeighbors(files, 0); // get photo #2 (if any) in flight before the first swipe even happens
 
-    // Roughly "media, then each contribution CTA right next to the thing
-    // it's actually offering to fill in, then links, then nearby" - see
-    // the reasoning behind this exact order (and why it changed from a
-    // flatter one) in the conversation that produced it. (The Wikidata
-    // "facts" block - architect/style/inception/etc. - that used to sit
-    // between the CTAs and links was removed: real Wikidata coverage of
-    // those properties is patchy enough that it read as randomly present
-    // on some monuments and absent on most, rather than a reliable info
-    // block.)
+    // Media, then each contribution call-to-action right beside the thing
+    // it offers to fill in, then links, then nearby. The order is the
+    // point: an invitation to add a photo means something directly under
+    // the empty space where a photo would be, and much less at the bottom
+    // of the panel among the links.
+    //
+    // A Wikidata "facts" block - architect, style, inception - used to sit
+    // between the CTAs and the links, and was removed: coverage of those
+    // properties is patchy enough that it read as randomly present on some
+    // monuments and absent on most, rather than as a reliable block.
     let bodyHtml = '';
     if (mainImageMeta) {
       bodyHtml += `<div class="image-caption" id="image-caption">${licenseLineHtml(mainImageMeta)}</div>`;
@@ -2298,9 +2299,6 @@ function showPrivacyPanel({ updateUrl = true } = {}) {
   if (updateUrl) history.pushState(null, '', '/privacy/');
 }
 
-// TODO content placeholder - imprint.body is a stand-in until real
-// name/contact/address details are supplied; not meant to ship as-is (see
-// PR/commit description).
 function showImprintPanel({ updateUrl = true } = {}) {
   currentPanelState = { type: 'imprint' };
 

@@ -4,8 +4,6 @@ fetch_wikidata.py) into the one dataset the map app actually loads:
 data/cyl_monuments_wikidata.json - one flat record per official monument,
 with its centroid, municipality, and Wikidata linkage status already
 resolved.
-
-Also the source dataset for the Wikidata reconciliation work - see README.
 """
 import json
 import os
