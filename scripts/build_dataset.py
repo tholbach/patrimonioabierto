@@ -4,8 +4,6 @@ fetch_wikidata.py) into the one dataset the map app actually loads:
 data/cyl_monuments_wikidata.json - one flat record per official monument,
 with its centroid, municipality, and Wikidata linkage status already
 resolved.
-
-Also the source dataset for the Wikidata reconciliation work - see README.
 """
 import json
 import os
@@ -281,7 +279,15 @@ def main():
                 "lat": round(lat, 6),
                 "lon": round(lon, 6),
                 "municipality": muni_props["n_mun"],
-                "municipality_ine_code_p772": muni_props["c_prov_mun"],  # matches Wikidata P772 format exactly, e.g. "24089"
+                # c_prov_mun, not the layer's own c_ine. JCyL ships both: an
+                # 11-digit extended code and this 5-digit one, and Wikidata's
+                # P772 ("INE municipality code") uses the 5-digit form -
+                # checked against a real item before trusting it (Q15699,
+                # Leon, P772 = "24089"). Only this form is written out; the
+                # 11-digit code is used for the join above and then dropped,
+                # so nothing downstream has to work out which of the two to
+                # match on.
+                "municipality_ine_code_p772": muni_props["c_prov_mun"],
                 "province": muni_props["n_prov"],
                 "reference_url": p["l_url_pweb"],
                 "wikidata_qid": wd_qids[0] if len(wd_qids) == 1 else (wd_qids if wd_qids else None),
