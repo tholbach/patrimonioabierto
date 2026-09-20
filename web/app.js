@@ -578,6 +578,39 @@ const appEl = document.getElementById('app');
 // whole point is not needing the map at all.
 const PAGE_PANEL_TYPES = new Set(['about', 'contribute', 'stats', 'privacy', 'imprint', 'list']);
 
+// Same string index.html's own <title> and build_monument_pages.py's
+// fallback both already use for the plain map - not run through t() and
+// not re-localized on language toggle, matching that existing baseline
+// exactly rather than introducing a second, differently-behaved default.
+const DEFAULT_TITLE = 'Patrimonio Abierto - Castilla y León en un mapa';
+
+// The browser tab title never followed pushState - every panel type
+// updates the address bar (see each show*Panel() below) but document.title
+// stayed whatever the page loaded with, so switching monuments by clicking
+// markers left the tab reading the first one indefinitely. One place,
+// driven by the state openPanel() already has after every show*Panel()
+// call, rather than a duplicate `document.title = ...` line in each of
+// them: a call site that adds a new panel type could not forget this the
+// way it could forget an inline assignment.
+function updateDocumentTitle() {
+  const state = currentPanelState;
+  const suffix = ' - Patrimonio Abierto';
+  document.title = !state
+    ? DEFAULT_TITLE
+    : {
+        monument: () => state.record.name + suffix,
+        municipality: () => state.muni.name + suffix,
+        province: () => state.prov.name + suffix,
+        stats: () => t('nav.stats') + suffix,
+        about: () => t('nav.about') + suffix,
+        contribute: () => t('nav.contribute') + suffix,
+        privacy: () => t('nav.privacy') + suffix,
+        imprint: () => t('nav.imprint') + suffix,
+        list: () => t('list.title') + suffix,
+        menu: () => t('menu.title') + suffix,
+      }[state.type]?.() ?? DEFAULT_TITLE;
+}
+
 // Same 5 - 'list' excluded, it has no URL of its own - as clean paths
 // (/stats/, /about/, ...), 1:1 with each type. Old #stats-style hash
 // links still open the right page too (see the deep-link parsing below),
@@ -683,6 +716,7 @@ function openPanel(onMapReady) {
     panelContentEl.setAttribute('tabindex', '-1');
     panelContentEl.focus();
   }
+  updateDocumentTitle();
 }
 
 function closePanel() {
@@ -701,6 +735,7 @@ function closePanel() {
   // anything to preserve past a close.
   history.pushState(null, '', '/' + location.search);
   currentPanelState = null;
+  updateDocumentTitle();
 }
 
 document.getElementById('panel-close').addEventListener('click', closePanel);
