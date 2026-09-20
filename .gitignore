@@ -18,12 +18,3 @@ __pycache__/
 # infrastructure and differs per host, so it stays out of the repo -
 # .env.example is the committed template.
 .env
-
-# The self-hosted basemap (web/tiles/*.pmtiles). A third of a gigabyte of
-# vector tiles extracted from OpenStreetMap - regenerable in minutes with
-# `make basemap`, and nothing git should ever be asked to store next to a
-# 2MB repository. It reaches the server via that target, not via a pull.
-web/tiles/
-
-# The pmtiles CLI, downloaded by scripts/fetch_basemap.sh when missing.
-scripts/bin/

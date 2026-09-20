@@ -105,12 +105,9 @@ the Wikipedia REST summary and a Commons thumbnail via `Special:FilePath` -
 live, per click, not baked into the static dataset. Unlinked monuments show
 their JCyL reference instead, with a "not yet on Wikidata" note.
 
-Basemap tiles are CARTO's "Positron" style (light, muted, so markers/photos
-stay the focus) - CARTO retired anonymous keyless access to this raster
-service, so `web/app.js` carries a free, domain-restricted API key (request
-one at [carto.com/basemaps/apikey](https://carto.com/basemaps/apikey/); it's
-a public/client-side key by design, safe to commit). If tiles ever stop
-loading, that key is the first thing to check.
+Basemap tiles come from OpenStreetMap directly - no key, no account, and
+nothing that can be broken by a browser or proxy withholding a header. See
+"The basemap" under Deployment for why that mattered.
 
 ```
 make serve   # http://localhost:8000, for local development
@@ -211,35 +208,24 @@ OpenStreetMap's own raster tiles, no key and no account. They replaced
 CARTO's, which gate on the HTTP `Referer` and answer 403 without one -
 anyone whose browser, extension or proxy strips that header saw a blank
 map, and users in several countries reported exactly that. OSM's tiles need
-neither key nor `Referer`, so that failure is gone.
-
-The cost is that they are busier than the muted basemap this site used to
-have, and the markers work harder to stand out. OSM's [tile usage
+neither key nor `Referer`, so that failure is gone. Their [tile usage
 policy](https://operations.osmfoundation.org/policies/tiles/) covers normal
-interactive viewing by people, which is what this is - not bulk fetching or
-an app.
+interactive viewing by people, which is what this is.
 
-**There is also a self-hosted vector basemap**, built but not the default:
+The cost is that they are busier than the muted basemap this site had, and
+the markers work harder against coloured roads and landcover - which is why
+every marker is now one teal with the photo state on the border rather than
+two colours competing with the map's own.
 
-```sh
-make basemap              # builds web/tiles/cyl.pmtiles, ~350MB, a few minutes
-# then open the site with ?basemap=self
-```
-
-It is quiet, has no third party in it at all, and nothing about it can be
-broken by a stripped header or a provider's quota. It is not the default
-because `protomaps-leaflet` renders to canvas and Leaflet redraws it after
-each zoom animation rather than during it, so the map judders every time
-you zoom. That library is in maintenance mode upstream and will not improve;
+A self-hosted vector basemap was built and measured before settling here:
+Protomaps' archive of this region is 350MB, Caddy serves it over range
+requests with no extra software, and it looks considerably quieter. It was
+abandoned because `protomaps-leaflet` renders to canvas and Leaflet redraws
+it after each zoom animation rather than during it, so the map judders on
+every zoom, at every flavour. That library is in maintenance mode upstream;
 rendering vector tiles smoothly means MapLibre GL, which means rewriting
 the marker, cluster, highlight and geolocation layers Leaflet carries
-today.
-
-If it is ever switched on by default, two numbers have to agree in two
-files - `MAXZOOM` in `scripts/fetch_basemap.sh` and
-`BASEMAP_MAX_DATA_ZOOM` in `web/app.js` - and the server needs HTTP range
-support. Caddy has it; `python -m http.server` does not, and fails by
-rendering a blank map with nothing in the console to explain why.
+today. Worth knowing before anyone spends an afternoon rediscovering it.
 
 ### Updating a running deployment
 

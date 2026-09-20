@@ -116,18 +116,6 @@
 		redir https://commons.wikimedia.org/wiki/Special:UploadWizard?{query} 302
 	}
 
-	# The basemap archive is served before the SPA fallback below, and
-	# deliberately without it: a missing web/tiles/*.pmtiles must answer
-	# 404, not index.html. It is gitignored and absent after a fresh clone,
-	# and the fallback would hand the map renderer an HTML page for a
-	# vector tile - which it accepts as a 206 and then fails to parse,
-	# turning "the basemap was never built" into a silent, puzzling blank.
-	# app.js checks the PMTiles magic number for the same reason; this is
-	# the server half of the same fix.
-	handle /tiles/* {
-		file_server
-	}
-
 	handle {
 		try_files {path} {path}/index.html /index.html
 		file_server

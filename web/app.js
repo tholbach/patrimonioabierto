@@ -118,8 +118,9 @@ L.control.zoom({ position: 'bottomleft' }).addTo(map);
 
 // OpenStreetMap's own raster tiles. Busier than the muted basemap this
 // site used to have, and that is a real cost - the markers have to work
-// harder to stand out against coloured roads and landcover. It is the
-// trade that was available.
+// harder against coloured roads and landcover, which is why they are one
+// teal now instead of two competing hues (see .monument-icon in
+// style.css).
 //
 // It replaced CARTO, which gates on the HTTP Referer and answers 403
 // without one (measured: 403 bare, 200 with a Referer for this domain -
@@ -128,72 +129,22 @@ L.control.zoom({ position: 'bottomleft' }).addTo(map);
 // map, and users in several countries reported exactly that. OSM's tiles
 // need neither key nor Referer, so that failure is gone. Their usage
 // policy covers normal interactive viewing by people, which is what this
-// is; it would not cover bulk or app use.
+// is; it would not cover bulk fetching or an app.
 //
-// A self-hosted vector basemap is built and works - `make basemap`, then
-// ?basemap=self - and it is genuinely nicer to look at: quiet, no third
-// party at all, no header to strip. It is not the default because
-// protomaps-leaflet renders to canvas and Leaflet redraws it after each
-// zoom animation rather than during, which reads as the map juddering
-// every time you zoom. The library is in maintenance mode upstream and
-// that will not improve. Rendering it smoothly means MapLibre GL, which
-// means rewriting the marker, cluster, highlight and geolocation layers
-// that Leaflet carries today. Worth doing one day; not worth doing to fix
-// a basemap.
-const BASEMAP_ARCHIVE = 'tiles/cyl.pmtiles';
-
-// Must equal MAXZOOM in scripts/fetch_basemap.sh, which builds the
-// archive. The library defaults this to 15; point it past what the archive
-// holds and tiles come back empty, so the map goes blank exactly when
-// someone zooms in to find the building they are standing next to.
-const BASEMAP_MAX_DATA_ZOOM = 14;
-
-function osmBasemap() {
-  return L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
-    maxZoom: 19,
-  });
-}
-
-function selfHostedBasemap() {
-  return protomapsL.leafletLayer({
-    url: BASEMAP_ARCHIVE,
-    flavor: 'white',
-    lang: currentLang,
-    maxDataZoom: BASEMAP_MAX_DATA_ZOOM,
-    maxZoom: 19,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &middot; <a href="https://protomaps.com">Protomaps</a>',
-  });
-}
-
-async function addBasemap() {
-  if (new URLSearchParams(location.search).get('basemap') !== 'self') {
-    osmBasemap().addTo(map);
-    return;
-  }
-  // Only asked for explicitly, so verify rather than assume: the archive is
-  // gitignored and absent after a clone. Read its first seven bytes and
-  // check they spell PMTiles. Weaker tests pass when they should not - a
-  // 404 check fails because a SPA fallback can answer a missing file with
-  // index.html, and a *206* for a range request at that, so the status
-  // alone proves nothing. The magic number is the one answer no fallback
-  // page can fake. A range request rather than a HEAD because it asks the
-  // same question the renderer will: can this server serve ranges out of
-  // this file (python -m http.server cannot - it returns 200 and the whole
-  // 350MB).
-  try {
-    const probe = await fetch(BASEMAP_ARCHIVE, { headers: { Range: 'bytes=0-6' } });
-    if (probe.status === 206 && (await probe.text()) === 'PMTiles') {
-      selfHostedBasemap().addTo(map);
-      return;
-    }
-    console.warn('basemap: no usable archive at ' + BASEMAP_ARCHIVE + ' - run `make basemap`');
-  } catch {
-    console.warn('basemap: archive unreachable - run `make basemap`');
-  }
-  osmBasemap().addTo(map);
-}
-addBasemap();
+// A self-hosted vector basemap was built and measured before settling
+// here: Protomaps' archive of this region is 350MB, Caddy serves it over
+// range requests without extra software, and it looks considerably
+// quieter. It was abandoned for one reason - protomaps-leaflet renders to
+// canvas and Leaflet redraws it after each zoom animation rather than
+// during it, so the map judders on every zoom, at every flavour. That
+// library is in maintenance mode upstream, and rendering vector tiles
+// smoothly means MapLibre GL, which means rewriting the marker, cluster,
+// highlight and geolocation layers Leaflet carries today. Worth knowing
+// before anyone spends the afternoon rediscovering it.
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+  maxZoom: 19,
+}).addTo(map);
 
 // 26, matching .monument-icon's own width/height in style.css. The two
 // have to agree: Leaflet positions the icon element from iconSize/
