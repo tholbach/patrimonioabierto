@@ -2054,6 +2054,11 @@ async function showStatsPanel({ updateUrl = true } = {}) {
   // does - 979 in Spanish, 175 in English - which is the honest picture of
   // where the work still is.
   const withArticle = allRecords.filter((r) => (r.wikipedia_langs || []).includes(currentLang)).length;
+  // The photo and article boxes show the share alone, no count beside it.
+  // "1,305" and "996" are not figures anyone can place - they only mean
+  // something measured against the 2,479 in the box next to them, whereas
+  // "53%" is the whole statement at a glance. The counts stay in the
+  // history chart's tooltip for anyone who wants them.
   const linkedPct = total ? Math.round((linked / total) * 100) : 0;
   const imagePct = total ? Math.round((withImage / total) * 100) : 0;
   const articlePct = total ? Math.round((withArticle / total) * 100) : 0;
@@ -2066,8 +2071,8 @@ async function showStatsPanel({ updateUrl = true } = {}) {
       ${datasetMeta ? `<div class="meta">${t('about.updated', new Date(datasetMeta.generated_at).toLocaleDateString(currentLang))}</div>` : ''}
       <div class="stats-numbers">
         <div class="stat-box"><div class="stat-value">${fmtNum(total)}</div><div class="stat-label">${t('stats.total')}</div></div>
-        <div class="stat-box"><div class="stat-value">${fmtNum(withImage)} <span class="stat-pct">${imagePct}%</span></div><div class="stat-label">${t('stats.with_image')}</div></div>
-        <div class="stat-box"><div class="stat-value">${fmtNum(withArticle)} <span class="stat-pct">${articlePct}%</span></div><div class="stat-label">${t('stats.with_article')}</div></div>
+        <div class="stat-box"><div class="stat-value">${imagePct}%</div><div class="stat-label">${t('stats.with_image')}</div></div>
+        <div class="stat-box"><div class="stat-value">${articlePct}%</div><div class="stat-label">${t('stats.with_article')}</div></div>
         <div class="stat-box stat-box-photos"><div class="stat-value">&nbsp;</div><div class="stat-label">${t('stats.photos_label')}</div></div>
       </div>
       <div class="stats-record">${t('stats.linked_record', fmtNum(linked), fmtNum(total), linkedPct)}</div>
