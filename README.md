@@ -2,29 +2,12 @@
 
 <img src="web/assets/logo-readme.png" alt="Patrimonio Abierto logo" width="120">
 
-Links Castilla y León's open heritage data (Bienes de Interés Cultural) with
-Wikidata, Wikimedia Commons, and Wikipedia - and shows the result on a map.
-
-## The gap this project tracks
-
-**2,479** officially protected monuments in Castilla y León. As of
-2026-09-20, **2,247 (91%)** have a matching Wikidata item, **1,305 (53%)**
-have a freely licensed photo, and **996 (40%)** have a Spanish Wikipedia
-article.
-
-Those figures move, so the site publishes them rather than this file:
-[patrimonioabierto.es/stats/](https://patrimonioabierto.es/stats/) shows
-the current numbers and a history chart, and
-`web/data/cyl_monuments_wikidata.json` has the full per-monument
-breakdown - including the 4 identifier conflicts (one JCyL ID claimed by
-two different Wikidata items) still worth resolving by hand.
-
-**Every category except one is now fully linked.** All 232 remaining
-unlinked monuments are `ARTE RUPESTRE` (rock art, 347 entries, 33%
-linked) - a category that is genuinely hard, since the sites are often
-unnamed, unphotographed and known only by a cadastral reference. The
-linking itself happens in Wikidata, not here: this project reads the
-result and shows where the result is still missing.
+Castilla y León publishes an open catalogue of every officially protected
+monument in the region - a name, a category, a protection date and a point
+on a map, and nothing more. Patrimonio Abierto makes those monuments
+approachable, bringing each one together with the best that free knowledge
+and free media have to offer: the photographs on Wikimedia Commons, the
+articles on Wikipedia, and the Wikidata record that ties them together.
 
 ## Data sources
 
@@ -148,9 +131,3 @@ does not update this, and the other way round.
 
 Credit them separately rather than as one blended line - that is what the
 JCyL terms ask for and what the Commons licences require.
-
-## Not built yet
-
-- Category → Wikidata `P31` (instance of) mapping table - deliberately not
-  guessed here, needs a careful pass since some categories (`MONUMENTO`) are
-  too generic for a 1:1 mapping.
