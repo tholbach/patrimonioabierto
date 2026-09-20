@@ -215,7 +215,7 @@ const STRINGS = {
     'privacy.external.intro':
       'Patrimonio Abierto usa algunos servicios de otras empresas para funcionar. Al usar la web, tu navegador se conecta directamente con ellos - nosotros no vemos ni gestionamos esa conexión, pero sí ocurre, y varias de estas empresas tienen sede fuera de la Unión Europea, por lo que tus datos (normalmente solo la IP) pueden tratarse allí según sus propias políticas:',
     'privacy.external.tiles':
-      '<strong>Mapa base</strong> - las imágenes que forman el mapa vienen de CARTO, construidas sobre datos de OpenStreetMap; tu navegador las descarga directamente de sus servidores según te mueves por el mapa. <a href="https://carto.com/privacy/" target="_blank" rel="noopener">Política de privacidad de CARTO</a>.',
+      '<strong>Mapa base</strong> - las imágenes que forman el mapa vienen de OpenStreetMap; tu navegador las descarga directamente de sus servidores según te mueves por el mapa. <a href="https://osmfoundation.org/wiki/Privacy_Policy" target="_blank" rel="noopener">Política de privacidad de la OpenStreetMap Foundation</a>.',
     'privacy.external.wiki':
       '<strong>Wikidata, Wikipedia y Wikimedia Commons</strong> - el texto y las fotos de cada monumento se piden en directo a sus propias APIs, cada vez que abres su ficha. <a href="https://foundation.wikimedia.org/wiki/Policy:Privacy_policy" target="_blank" rel="noopener">Política de privacidad de la Fundación Wikimedia</a>.',
     'privacy.external.geolocation':
@@ -419,7 +419,7 @@ const STRINGS = {
     'privacy.external.intro':
       "Patrimonio Abierto relies on a few other companies' services to work. Using the site means your browser connects to them directly - we don't see or manage that connection, but it happens, and several of these companies are based outside the European Union, so your data (usually just your IP address) may be processed there under their own policies:",
     'privacy.external.tiles':
-      '<strong>Base map</strong> - the images that make up the map come from CARTO, built on OpenStreetMap data; your browser downloads them directly from their servers as you move around the map. <a href="https://carto.com/privacy/" target="_blank" rel="noopener">CARTO\'s privacy policy</a>.',
+      '<strong>Base map</strong> - the images that make up the map come from OpenStreetMap; your browser downloads them directly from their servers as you move around the map. <a href="https://osmfoundation.org/wiki/Privacy_Policy" target="_blank" rel="noopener">The OpenStreetMap Foundation\'s privacy policy</a>.',
     'privacy.external.wiki':
       "<strong>Wikidata, Wikipedia and Wikimedia Commons</strong> - each monument's text and photos are fetched live from their own APIs, every time you open its page. <a href=\"https://foundation.wikimedia.org/wiki/Policy:Privacy_policy\" target=\"_blank\" rel=\"noopener\">Wikimedia Foundation privacy policy</a>.",
     'privacy.external.geolocation':

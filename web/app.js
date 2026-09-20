@@ -106,21 +106,44 @@ let currentGalleryState = { files: [], index: 0, commonsCategory: null };
 
 // zoomControl: false + added separately at bottomleft, out of the way of
 // the shuffle/locate buttons stacked at bottomright.
-const map = L.map('map', { zoomControl: false }).setView([41.65, -4.7], 8); // roughly centered on Castilla y León
+// maxZoom on the map itself, not left to whichever basemap layer loads.
+// The basemap is now added asynchronously (it probes for the local
+// archive first), and Leaflet takes its zoom range from the first layer
+// that declares one - so markercluster initialised against a map with no
+// maxZoom at all and threw "Map has no maxZoom specified". The map's zoom
+// range is a property of the map, and tying it to a layer's arrival was
+// always incidental.
+const map = L.map('map', { zoomControl: false, maxZoom: 19 }).setView([41.65, -4.7], 8); // roughly centered on Castilla y León
 L.control.zoom({ position: 'bottomleft' }).addTo(map);
 
-// CARTO's light "Positron" style, not raw OSM tiles - a minimal basemap
-// with muted labels/roads so our own markers and (eventually) photos are
-// what actually draws the eye, rather than competing with a busy default
-// OSM render. CARTO retired anonymous keyless access to this raster
-// service, so a free key (5M tiles/month, no billing) is now required -
-// request one at https://carto.com/basemaps/apikey/ and paste it below.
-// It's a public/client-side key by design, safe to ship in this file.
-const CARTO_API_KEY = 'cb1_25p3_1_d252937bdd3f17ed69ef1a14';
-L.tileLayer(`https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key=${CARTO_API_KEY}`, {
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
+// OpenStreetMap's own raster tiles. Busier than the muted basemap this
+// site used to have, and that is a real cost - the markers have to work
+// harder against coloured roads and landcover, which is why they are one
+// teal now instead of two competing hues (see .monument-icon in
+// style.css).
+//
+// It replaced CARTO, which gates on the HTTP Referer and answers 403
+// without one (measured: 403 bare, 200 with a Referer for this domain -
+// and the API key the code also carried turned out to be irrelevant).
+// Anyone whose browser, extension or proxy strips that header saw a blank
+// map, and users in several countries reported exactly that. OSM's tiles
+// need neither key nor Referer, so that failure is gone. Their usage
+// policy covers normal interactive viewing by people, which is what this
+// is; it would not cover bulk fetching or an app.
+//
+// A self-hosted vector basemap was built and measured before settling
+// here: Protomaps' archive of this region is 350MB, Caddy serves it over
+// range requests without extra software, and it looks considerably
+// quieter. It was abandoned for one reason - protomaps-leaflet renders to
+// canvas and Leaflet redraws it after each zoom animation rather than
+// during it, so the map judders on every zoom, at every flavour. That
+// library is in maintenance mode upstream, and rendering vector tiles
+// smoothly means MapLibre GL, which means rewriting the marker, cluster,
+// highlight and geolocation layers Leaflet carries today. Worth knowing
+// before anyone spends the afternoon rediscovering it.
+L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
   maxZoom: 19,
-  subdomains: 'abcd',
 }).addTo(map);
 
 // 26, matching .monument-icon's own width/height in style.css. The two
@@ -172,16 +195,15 @@ function clusterIcon(cluster) {
   const children = cluster.getAllChildMarkers();
   const missing = children.filter((m) => !m.record.has_wikidata_image).length;
   const ratio = missing / children.length; // 0 = all have a photo, 1 = none do
-  // teal (#1c8a6d, linked) -> terracotta (#c2703d, missing) - not the usual
-  // red/green: "missing" isn't an error, it's an invitation to help, so an
-  // alarm-red reads wrong here even before considering how dated it looks.
-  const r = Math.round(0x1c + (0xc2 - 0x1c) * ratio);
-  const g = Math.round(0x8a + (0x70 - 0x8a) * ratio);
-  const b = Math.round(0x6d + (0x3d - 0x6d) * ratio);
+  // One color, like the individual markers: the ratio speaks through the
+  // border instead. A gradient here would put a second color language on a
+  // basemap that already carries its own, and the dashed ring reads at
+  // cluster size perfectly well - which is the size most of the region is
+  // seen at.
   const size = children.length < 10 ? 34 : children.length < 100 ? 42 : 52;
   const borderStyle = ratio > 0.5 ? 'dashed' : 'solid'; // same non-color signal as individual markers
   return L.divIcon({
-    html: `<div style="background: rgb(${r},${g},${b}); border-style: ${borderStyle}">${children.length}</div>`,
+    html: `<div style="border-style: ${borderStyle}">${children.length}</div>`,
     className: 'cluster-icon',
     iconSize: [size, size],
   });
@@ -1887,7 +1909,7 @@ function renderHistoryChart(historyData, total) {
   return `
     <div class="stats-chart-wrap">
       <svg class="stats-chart" viewBox="0 0 ${CHART_W} ${CHART_H}" preserveAspectRatio="none">
-        <polyline points="${linkedPoints}" fill="none" stroke="#1c8a6d" stroke-width="2.5" />
+        <polyline points="${linkedPoints}" fill="none" stroke="#0e7490" stroke-width="2.5" />
         <polyline points="${imagePoints}" fill="none" stroke="#742c64" stroke-width="2.5" />
         <line class="stats-chart-guide" x1="0" x2="0" y1="${CHART_PAD}" y2="${CHART_H - CHART_PAD}" />
         <circle class="stats-chart-dot linked" cx="0" cy="0"></circle>

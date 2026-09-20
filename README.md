@@ -105,12 +105,9 @@ the Wikipedia REST summary and a Commons thumbnail via `Special:FilePath` -
 live, per click, not baked into the static dataset. Unlinked monuments show
 their JCyL reference instead, with a "not yet on Wikidata" note.
 
-Basemap tiles are CARTO's "Positron" style (light, muted, so markers/photos
-stay the focus) - CARTO retired anonymous keyless access to this raster
-service, so `web/app.js` carries a free, domain-restricted API key (request
-one at [carto.com/basemaps/apikey](https://carto.com/basemaps/apikey/); it's
-a public/client-side key by design, safe to commit). If tiles ever stop
-loading, that key is the first thing to check.
+Basemap tiles come from OpenStreetMap directly - no key, no account, and
+nothing that can be broken by a browser or proxy withholding a header. See
+"The basemap" under Deployment for why that mattered.
 
 ```
 make serve   # http://localhost:8000, for local development
@@ -204,6 +201,31 @@ container was previously named `cylinked_web` (project rename) - if you
 are updating an existing deployment rather than starting fresh, update the
 external Caddyfile's `reverse_proxy` line to the new name in the same
 step, or the site goes down until both sides match.
+
+### The basemap
+
+OpenStreetMap's own raster tiles, no key and no account. They replaced
+CARTO's, which gate on the HTTP `Referer` and answer 403 without one -
+anyone whose browser, extension or proxy strips that header saw a blank
+map, and users in several countries reported exactly that. OSM's tiles need
+neither key nor `Referer`, so that failure is gone. Their [tile usage
+policy](https://operations.osmfoundation.org/policies/tiles/) covers normal
+interactive viewing by people, which is what this is.
+
+The cost is that they are busier than the muted basemap this site had, and
+the markers work harder against coloured roads and landcover - which is why
+every marker is now one teal with the photo state on the border rather than
+two colours competing with the map's own.
+
+A self-hosted vector basemap was built and measured before settling here:
+Protomaps' archive of this region is 350MB, Caddy serves it over range
+requests with no extra software, and it looks considerably quieter. It was
+abandoned because `protomaps-leaflet` renders to canvas and Leaflet redraws
+it after each zoom animation rather than during it, so the map judders on
+every zoom, at every flavour. That library is in maintenance mode upstream;
+rendering vector tiles smoothly means MapLibre GL, which means rewriting
+the marker, cluster, highlight and geolocation layers Leaflet carries
+today. Worth knowing before anyone spends an afternoon rediscovering it.
 
 ### Updating a running deployment
 
