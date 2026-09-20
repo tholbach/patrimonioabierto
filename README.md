@@ -38,8 +38,8 @@ The reasoning behind the fiddlier parts is in the code, next to the code.
 ## The map (`web/`)
 
 Plain Leaflet and vanilla JavaScript, no build step and no framework. The
-whole catalogue loads at once - 2,479 records is small - and every monument
-is a marker, grouped into clusters as you zoom out.
+whole catalogue is small enough to load at once, so it does, and every
+monument is a marker, grouped into clusters as you zoom out.
 
 Markers are all one colour. Whether a freely licensed photo exists is shown
 by the border instead: solid if there is one, dashed if there is not, and
@@ -63,8 +63,8 @@ make serve   # http://localhost:8000, for local development
 ## A real page per monument (`web/monumento/`)
 
 The map is a client-side app, so to a crawler or a link-preview bot - none
-of which run JavaScript - all 2,479 URLs would otherwise look like the same
-empty page. `make monument-pages` generates one real static page per monument
+of which run JavaScript - every monument URL would otherwise look like the
+same empty page. `make monument-pages` generates one real static page per monument
 instead, at `/monumento/<jcyl_id>-<slug>/`, with its own title,
 description, social preview and the Wikipedia extract already in the HTML.
 
