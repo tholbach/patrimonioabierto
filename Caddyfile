@@ -116,6 +116,17 @@
 		redir https://commons.wikimedia.org/wiki/Special:UploadWizard?{query} 302
 	}
 
+	# For container healthchecks (docker-compose.yml) and any external
+	# uptime monitor - a fixed, fast "yes, this Caddy instance is answering
+	# requests" endpoint. Deliberately not a real file under web/: a
+	# healthcheck that depended on the bind mount actually being populated
+	# would fail the same way whether Caddy is broken or the volume just
+	# isn't mounted yet, and conflating those two makes the check less
+	# useful, not more.
+	handle /healthz {
+		respond "ok" 200
+	}
+
 	handle {
 		try_files {path} {path}/index.html /index.html
 		file_server
