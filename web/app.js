@@ -1115,7 +1115,23 @@ function wireShareButton(record) {
   });
 }
 
-function linkBadges(record, sitelink) {
+// P856 comes from Wikidata, which anyone can edit, and it goes straight
+// into an href - so it is the one URL on this page that cannot be trusted
+// on sight. Anything that is not http(s) is dropped (javascript: and data:
+// URLs are the reason), and the value is returned normalised by the URL
+// parser, which percent-encodes the quotes an attribute-escape would need.
+// Verified against both.
+function safeExternalUrl(value) {
+  if (typeof value !== 'string') return null;
+  try {
+    const url = new URL(value);
+    return url.protocol === 'http:' || url.protocol === 'https:' ? url.href : null;
+  } catch {
+    return null;
+  }
+}
+
+function linkBadges(record, sitelink, officialWebsite) {
   const qid = Array.isArray(record.wikidata_qid) ? record.wikidata_qid[0] : record.wikidata_qid;
   // JCyL first - they're the ones judging this, their own record deserves
   // top billing over our own share button and the other sources.
@@ -1149,6 +1165,15 @@ function linkBadges(record, sitelink) {
   // https://www.openstreetmap.org/directions?to=lat,lon to keep it inside
   // the free-knowledge ecosystem - same one line.
   html += '<div class="link-badges link-actions">';
+  // In this row, not up with the sources: an official site is where
+  // opening hours and tickets live, which is something you do with the
+  // monument rather than something you read about its data. Only ~90 of
+  // the linked monuments have one, so the row stays two items wide for
+  // almost everything.
+  const website = safeExternalUrl(officialWebsite);
+  if (website) {
+    html += `<a class="badge website" href="${website}" target="_blank" rel="noopener">${t('badge.website')}</a>`;
+  }
   html += `<a class="badge directions" href="https://www.google.com/maps/dir/?api=1&destination=${record.lat},${record.lon}" target="_blank" rel="noopener">${t('badge.directions')}</a>`;
   html += shareButtonHtml();
   html += '</div>';
@@ -1735,6 +1760,9 @@ async function selectMonument(record, { flyTo = false, updateUrl = true, feature
     const sitelinkLang = sitelink === entity.sitelinks?.enwiki ? 'en' : 'es';
     const p18 = entity.claims?.P18?.[0]?.mainsnak?.datavalue?.value;
     const commonsCategory = entity.claims?.P373?.[0]?.mainsnak?.datavalue?.value;
+    // Free: the entity is already fetched for P18 and P373, so the
+    // official website costs no extra request and nothing in the dataset.
+    const officialWebsite = entity.claims?.P856?.[0]?.mainsnak?.datavalue?.value;
 
     let [summary, mainImageMeta, galleryFiles] = await Promise.all([
       sitelink ? fetchWikipediaSummary(sitelinkLang, sitelink.title) : null,
@@ -1820,7 +1848,7 @@ async function selectMonument(record, { flyTo = false, updateUrl = true, feature
         </div>
       `;
     }
-    bodyHtml += linkBadges(record, sitelink);
+    bodyHtml += linkBadges(record, sitelink, officialWebsite);
     if (record.wikidata_conflict) {
       bodyHtml += `<div class="missing-note">⚠ jcyl_id: ${record.wikidata_qid.join(', ')}</div>`;
     }
