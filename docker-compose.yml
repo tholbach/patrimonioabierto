@@ -24,6 +24,17 @@ services:
     networks:
       - ingress
     restart: unless-stopped
+    # Hits the /healthz route added in the Caddyfile - curl is present in
+    # the official image, no extra tooling needed. interval/timeout/
+    # retries are Docker's own defaults spelled out rather than left
+    # implicit, since the default start_period (0s) would otherwise mark a
+    # container unhealthy for the brief moment Caddy takes to start.
+    healthcheck:
+      test: ["CMD", "curl", "-sf", "http://localhost/healthz"]
+      interval: 30s
+      timeout: 5s
+      retries: 3
+      start_period: 5s
 
 networks:
   # No TLS/domain here on purpose - this container only serves static files

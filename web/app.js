@@ -2530,6 +2530,7 @@ function showMenuPanel() {
         <li class="list-row" data-menu="stats"><span class="list-row-icon-plain">📊</span><span class="list-row-name">${t('nav.stats')}</span></li>
         <li class="list-row" data-menu="about"><span class="list-row-icon-plain">ℹ️</span><span class="list-row-name">${t('nav.about')}</span></li>
         <li class="list-row" data-menu="contribute"><span class="list-row-icon-plain">🤝</span><span class="list-row-name">${t('nav.contribute')}</span></li>
+        <li class="list-row" data-menu="github"><span class="list-row-icon-plain">💻</span><span class="list-row-name">${t('nav.github')}</span></li>
         <li class="list-row" data-menu="privacy"><span class="list-row-icon-plain">🔒</span><span class="list-row-name">${t('nav.privacy')}</span></li>
         <li class="list-row" data-menu="imprint"><span class="list-row-icon-plain">📜</span><span class="list-row-name">${t('nav.imprint')}</span></li>
         <li class="list-row" data-menu="lang"><span class="list-row-icon-plain">🌐</span><span class="list-row-name">${currentLang === 'es' ? 'English' : 'Español'}</span></li>
@@ -2545,6 +2546,7 @@ function showMenuPanel() {
       else if (action === 'contribute') showContributePanel();
       else if (action === 'privacy') showPrivacyPanel();
       else if (action === 'imprint') showImprintPanel();
+      else if (action === 'github') window.open('https://github.com/tholbach/patrimonioabierto', '_blank', 'noopener');
       else if (action === 'lang') {
         currentLang = currentLang === 'es' ? 'en' : 'es';
         applyStaticI18n();
