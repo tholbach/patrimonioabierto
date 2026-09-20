@@ -244,16 +244,15 @@ function clusterIcon(cluster) {
   const children = cluster.getAllChildMarkers();
   const missing = children.filter((m) => !m.record.has_wikidata_image).length;
   const ratio = missing / children.length; // 0 = all have a photo, 1 = none do
-  // teal (#1c8a6d, linked) -> terracotta (#c2703d, missing) - not the usual
-  // red/green: "missing" isn't an error, it's an invitation to help, so an
-  // alarm-red reads wrong here even before considering how dated it looks.
-  const r = Math.round(0x1c + (0xc2 - 0x1c) * ratio);
-  const g = Math.round(0x8a + (0x70 - 0x8a) * ratio);
-  const b = Math.round(0x6d + (0x3d - 0x6d) * ratio);
+  // One color, like the individual markers: the ratio speaks through the
+  // border instead. A gradient here would put a second color language on a
+  // basemap that already carries its own, and the dashed ring reads at
+  // cluster size perfectly well - which is the size most of the region is
+  // seen at.
   const size = children.length < 10 ? 34 : children.length < 100 ? 42 : 52;
   const borderStyle = ratio > 0.5 ? 'dashed' : 'solid'; // same non-color signal as individual markers
   return L.divIcon({
-    html: `<div style="background: rgb(${r},${g},${b}); border-style: ${borderStyle}">${children.length}</div>`,
+    html: `<div style="border-style: ${borderStyle}">${children.length}</div>`,
     className: 'cluster-icon',
     iconSize: [size, size],
   });
@@ -1959,7 +1958,7 @@ function renderHistoryChart(historyData, total) {
   return `
     <div class="stats-chart-wrap">
       <svg class="stats-chart" viewBox="0 0 ${CHART_W} ${CHART_H}" preserveAspectRatio="none">
-        <polyline points="${linkedPoints}" fill="none" stroke="#1c8a6d" stroke-width="2.5" />
+        <polyline points="${linkedPoints}" fill="none" stroke="#0e7490" stroke-width="2.5" />
         <polyline points="${imagePoints}" fill="none" stroke="#742c64" stroke-width="2.5" />
         <line class="stats-chart-guide" x1="0" x2="0" y1="${CHART_PAD}" y2="${CHART_H - CHART_PAD}" />
         <circle class="stats-chart-dot linked" cx="0" cy="0"></circle>
