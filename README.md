@@ -189,7 +189,6 @@ exist yet:
 
 ```sh
 docker network create ingress   # then attach your reverse proxy to it too
-make basemap                    # see "The basemap" below - not in git
 docker compose up -d
 ```
 
@@ -208,33 +207,39 @@ step, or the site goes down until both sides match.
 
 ### The basemap
 
-The map's background is served from this site, not from a tile provider.
-`make basemap` builds `web/tiles/cyl.pmtiles` - one file holding Castilla y
-León at zoom 0-14, extracted from OpenStreetMap via Protomaps. Caddy serves
-it with HTTP range requests out of the box, so a visitor's browser fetches
-only the tiles in view rather than the 350MB archive.
+OpenStreetMap's own raster tiles, no key and no account. They replaced
+CARTO's, which gate on the HTTP `Referer` and answer 403 without one -
+anyone whose browser, extension or proxy strips that header saw a blank
+map, and users in several countries reported exactly that. OSM's tiles need
+neither key nor `Referer`, so that failure is gone.
 
-It replaced CARTO's raster tiles, which gate on the HTTP `Referer` and
-answer 403 without one. Anyone whose browser, extension or proxy strips
-that header saw a blank map, and users in several countries reported
-exactly that. Serving it ourselves removes the whole class of problem: no
-key, no referer, no quota, no country.
+The cost is that they are busier than the muted basemap this site used to
+have, and the markers work harder to stand out. OSM's [tile usage
+policy](https://operations.osmfoundation.org/policies/tiles/) covers normal
+interactive viewing by people, which is what this is - not bulk fetching or
+an app.
 
-The archive is gitignored, so **it is not there after a clone**. The map
-falls back to OpenStreetMap's own tiles when it is missing, which keeps a
-fresh checkout working; `?basemap=osm` forces that path and `?basemap=self`
-forces the local archive, for comparing them. A deployment should run `make
-basemap` rather than rely on the fallback - OSM's tile usage policy covers
-small sites, not a service leaning on it.
+**There is also a self-hosted vector basemap**, built but not the default:
 
-Two things have to agree, in two files: `MAXZOOM` in
-`scripts/fetch_basemap.sh` and `BASEMAP_MAX_DATA_ZOOM` in `web/app.js`.
-Point the renderer past what the archive holds and the map goes blank
-exactly when someone zooms in to find a building.
+```sh
+make basemap              # builds web/tiles/cyl.pmtiles, ~350MB, a few minutes
+# then open the site with ?basemap=self
+```
 
-Serving it needs HTTP range support. Caddy has it; `python -m http.server`
-does not - it ignores the header, returns 200 with the whole file, and the
-map renders blank with nothing in the console to explain why.
+It is quiet, has no third party in it at all, and nothing about it can be
+broken by a stripped header or a provider's quota. It is not the default
+because `protomaps-leaflet` renders to canvas and Leaflet redraws it after
+each zoom animation rather than during it, so the map judders every time
+you zoom. That library is in maintenance mode upstream and will not improve;
+rendering vector tiles smoothly means MapLibre GL, which means rewriting
+the marker, cluster, highlight and geolocation layers Leaflet carries
+today.
+
+If it is ever switched on by default, two numbers have to agree in two
+files - `MAXZOOM` in `scripts/fetch_basemap.sh` and
+`BASEMAP_MAX_DATA_ZOOM` in `web/app.js` - and the server needs HTTP range
+support. Caddy has it; `python -m http.server` does not, and fails by
+rendering a blank map with nothing in the console to explain why.
 
 ### Updating a running deployment
 

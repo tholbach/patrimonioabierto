@@ -116,54 +116,37 @@ let currentGalleryState = { files: [], index: 0, commonsCategory: null };
 const map = L.map('map', { zoomControl: false, maxZoom: 19 }).setView([41.65, -4.7], 8); // roughly centered on Castilla y León
 L.control.zoom({ position: 'bottomleft' }).addTo(map);
 
-// A deliberately quiet basemap - muted roads and labels, so our own
-// markers are what draws the eye rather than competing with a busy
-// default render.
+// OpenStreetMap's own raster tiles. Busier than the muted basemap this
+// site used to have, and that is a real cost - the markers have to work
+// harder to stand out against coloured roads and landcover. It is the
+// trade that was available.
 //
-// Two sources, because they solve different problems:
+// It replaced CARTO, which gates on the HTTP Referer and answers 403
+// without one (measured: 403 bare, 200 with a Referer for this domain -
+// and the API key the code also carried turned out to be irrelevant).
+// Anyone whose browser, extension or proxy strips that header saw a blank
+// map, and users in several countries reported exactly that. OSM's tiles
+// need neither key nor Referer, so that failure is gone. Their usage
+// policy covers normal interactive viewing by people, which is what this
+// is; it would not cover bulk or app use.
 //
-// "self" is web/tiles/cyl.pmtiles, one file holding Castilla y Leon at
-// zoom 0-14, built by `make basemap` and served straight off this site.
-// It exists because the basemap used to come from CARTO, which gates on
-// the HTTP Referer and answers 403 without one (measured: 403 bare, 200
-// with a Referer for this domain - the API key it also wanted turned out
-// to be irrelevant). Anyone whose browser, extension or proxy strips that
-// header got a blank map, and users in several countries reported exactly
-// that. Serving it ourselves ends the whole class of problem: no key, no
-// referer, no quota, no country.
-//
-// "osm" is OpenStreetMap's own raster tiles, and it is what makes a fresh
-// clone work. The pmtiles archive is 350MB and gitignored, so it simply is
-// not there after `git clone` - without a fallback the map would be blank
-// and the cause invisible. Fine for development and small sites under
-// OSM's tile usage policy; not what a deployment should rely on.
-//
-// "auto" picks self when the archive is actually reachable and falls back
-// otherwise. ?basemap=osm or ?basemap=self forces either, for comparing
-// them without editing this file.
+// A self-hosted vector basemap is built and works - `make basemap`, then
+// ?basemap=self - and it is genuinely nicer to look at: quiet, no third
+// party at all, no header to strip. It is not the default because
+// protomaps-leaflet renders to canvas and Leaflet redraws it after each
+// zoom animation rather than during, which reads as the map juddering
+// every time you zoom. The library is in maintenance mode upstream and
+// that will not improve. Rendering it smoothly means MapLibre GL, which
+// means rewriting the marker, cluster, highlight and geolocation layers
+// that Leaflet carries today. Worth doing one day; not worth doing to fix
+// a basemap.
 const BASEMAP_ARCHIVE = 'tiles/cyl.pmtiles';
 
 // Must equal MAXZOOM in scripts/fetch_basemap.sh, which builds the
 // archive. The library defaults this to 15; point it past what the archive
-// holds and the tiles come back empty, so the map goes blank exactly when
-// someone zooms in to find the building they are standing next to. Set
-// correctly, nothing above the data is requested at all - the renderer
-// overzooms the last real level instead, and vector tiles stay sharp doing
-// it where an upscaled raster tile would blur. maxZoom 19 is a different
-// number answering a different question: how far someone on foot keeps
-// zooming.
+// holds and tiles come back empty, so the map goes blank exactly when
+// someone zooms in to find the building they are standing next to.
 const BASEMAP_MAX_DATA_ZOOM = 14;
-
-function selfHostedBasemap() {
-  return protomapsL.leafletLayer({
-    url: BASEMAP_ARCHIVE,
-    flavor: 'grayscale',
-    lang: currentLang,
-    maxDataZoom: BASEMAP_MAX_DATA_ZOOM,
-    maxZoom: 19,
-    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &middot; <a href="https://protomaps.com">Protomaps</a>',
-  });
-}
 
 function osmBasemap() {
   return L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
@@ -172,33 +155,43 @@ function osmBasemap() {
   });
 }
 
+function selfHostedBasemap() {
+  return protomapsL.leafletLayer({
+    url: BASEMAP_ARCHIVE,
+    flavor: 'white',
+    lang: currentLang,
+    maxDataZoom: BASEMAP_MAX_DATA_ZOOM,
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &middot; <a href="https://protomaps.com">Protomaps</a>',
+  });
+}
+
 async function addBasemap() {
-  const forced = new URLSearchParams(location.search).get('basemap');
-  let useSelf = forced !== 'osm';
-  if (!forced) {
-    // Read the archive's first seven bytes and check they spell PMTiles.
-    // Weaker tests all pass when they should not. A 200/404 check fails
-    // because this site's Caddy answers anything it cannot find with
-    // index.html, so a missing archive arrives as HTML - and a *206*, for
-    // a range request, which is why checking the status alone is not
-    // enough either (confirmed: bytes "<!docty", Content-Type text/html).
-    // The magic number is the only answer that cannot be faked by a
-    // fallback page.
-    //
-    // A range request rather than a HEAD, because it asks the same
-    // question the renderer asks a moment later - can this server serve
-    // ranges out of this file - for the same cost. A server without range
-    // support answers 200 with the entire 350MB attached, so that case is
-    // rejected too rather than left to download.
-    try {
-      const probe = await fetch(BASEMAP_ARCHIVE, { headers: { Range: 'bytes=0-6' } });
-      useSelf = probe.status === 206 && (await probe.text()) === 'PMTiles';
-      if (!useSelf) console.info('basemap: no usable local archive, using OpenStreetMap tiles');
-    } catch {
-      useSelf = false;
-    }
+  if (new URLSearchParams(location.search).get('basemap') !== 'self') {
+    osmBasemap().addTo(map);
+    return;
   }
-  (useSelf ? selfHostedBasemap() : osmBasemap()).addTo(map);
+  // Only asked for explicitly, so verify rather than assume: the archive is
+  // gitignored and absent after a clone. Read its first seven bytes and
+  // check they spell PMTiles. Weaker tests pass when they should not - a
+  // 404 check fails because a SPA fallback can answer a missing file with
+  // index.html, and a *206* for a range request at that, so the status
+  // alone proves nothing. The magic number is the one answer no fallback
+  // page can fake. A range request rather than a HEAD because it asks the
+  // same question the renderer will: can this server serve ranges out of
+  // this file (python -m http.server cannot - it returns 200 and the whole
+  // 350MB).
+  try {
+    const probe = await fetch(BASEMAP_ARCHIVE, { headers: { Range: 'bytes=0-6' } });
+    if (probe.status === 206 && (await probe.text()) === 'PMTiles') {
+      selfHostedBasemap().addTo(map);
+      return;
+    }
+    console.warn('basemap: no usable archive at ' + BASEMAP_ARCHIVE + ' - run `make basemap`');
+  } catch {
+    console.warn('basemap: archive unreachable - run `make basemap`');
+  }
+  osmBasemap().addTo(map);
 }
 addBasemap();
 
