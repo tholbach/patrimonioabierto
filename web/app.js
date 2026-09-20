@@ -106,22 +106,101 @@ let currentGalleryState = { files: [], index: 0, commonsCategory: null };
 
 // zoomControl: false + added separately at bottomleft, out of the way of
 // the shuffle/locate buttons stacked at bottomright.
-const map = L.map('map', { zoomControl: false }).setView([41.65, -4.7], 8); // roughly centered on Castilla y León
+// maxZoom on the map itself, not left to whichever basemap layer loads.
+// The basemap is now added asynchronously (it probes for the local
+// archive first), and Leaflet takes its zoom range from the first layer
+// that declares one - so markercluster initialised against a map with no
+// maxZoom at all and threw "Map has no maxZoom specified". The map's zoom
+// range is a property of the map, and tying it to a layer's arrival was
+// always incidental.
+const map = L.map('map', { zoomControl: false, maxZoom: 19 }).setView([41.65, -4.7], 8); // roughly centered on Castilla y León
 L.control.zoom({ position: 'bottomleft' }).addTo(map);
 
-// CARTO's light "Positron" style, not raw OSM tiles - a minimal basemap
-// with muted labels/roads so our own markers and (eventually) photos are
-// what actually draws the eye, rather than competing with a busy default
-// OSM render. CARTO retired anonymous keyless access to this raster
-// service, so a free key (5M tiles/month, no billing) is now required -
-// request one at https://carto.com/basemaps/apikey/ and paste it below.
-// It's a public/client-side key by design, safe to ship in this file.
-const CARTO_API_KEY = 'cb1_25p3_1_d252937bdd3f17ed69ef1a14';
-L.tileLayer(`https://{s}.basemaps.cartocdn.com/light_all/{z}/{x}/{y}{r}.png?key=${CARTO_API_KEY}`, {
-  attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &copy; <a href="https://carto.com/attributions">CARTO</a>',
-  maxZoom: 19,
-  subdomains: 'abcd',
-}).addTo(map);
+// A deliberately quiet basemap - muted roads and labels, so our own
+// markers are what draws the eye rather than competing with a busy
+// default render.
+//
+// Two sources, because they solve different problems:
+//
+// "self" is web/tiles/cyl.pmtiles, one file holding Castilla y Leon at
+// zoom 0-14, built by `make basemap` and served straight off this site.
+// It exists because the basemap used to come from CARTO, which gates on
+// the HTTP Referer and answers 403 without one (measured: 403 bare, 200
+// with a Referer for this domain - the API key it also wanted turned out
+// to be irrelevant). Anyone whose browser, extension or proxy strips that
+// header got a blank map, and users in several countries reported exactly
+// that. Serving it ourselves ends the whole class of problem: no key, no
+// referer, no quota, no country.
+//
+// "osm" is OpenStreetMap's own raster tiles, and it is what makes a fresh
+// clone work. The pmtiles archive is 350MB and gitignored, so it simply is
+// not there after `git clone` - without a fallback the map would be blank
+// and the cause invisible. Fine for development and small sites under
+// OSM's tile usage policy; not what a deployment should rely on.
+//
+// "auto" picks self when the archive is actually reachable and falls back
+// otherwise. ?basemap=osm or ?basemap=self forces either, for comparing
+// them without editing this file.
+const BASEMAP_ARCHIVE = 'tiles/cyl.pmtiles';
+
+// Must equal MAXZOOM in scripts/fetch_basemap.sh, which builds the
+// archive. The library defaults this to 15; point it past what the archive
+// holds and the tiles come back empty, so the map goes blank exactly when
+// someone zooms in to find the building they are standing next to. Set
+// correctly, nothing above the data is requested at all - the renderer
+// overzooms the last real level instead, and vector tiles stay sharp doing
+// it where an upscaled raster tile would blur. maxZoom 19 is a different
+// number answering a different question: how far someone on foot keeps
+// zooming.
+const BASEMAP_MAX_DATA_ZOOM = 14;
+
+function selfHostedBasemap() {
+  return protomapsL.leafletLayer({
+    url: BASEMAP_ARCHIVE,
+    flavor: 'grayscale',
+    lang: currentLang,
+    maxDataZoom: BASEMAP_MAX_DATA_ZOOM,
+    maxZoom: 19,
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors &middot; <a href="https://protomaps.com">Protomaps</a>',
+  });
+}
+
+function osmBasemap() {
+  return L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
+    attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors',
+    maxZoom: 19,
+  });
+}
+
+async function addBasemap() {
+  const forced = new URLSearchParams(location.search).get('basemap');
+  let useSelf = forced !== 'osm';
+  if (!forced) {
+    // Read the archive's first seven bytes and check they spell PMTiles.
+    // Weaker tests all pass when they should not. A 200/404 check fails
+    // because this site's Caddy answers anything it cannot find with
+    // index.html, so a missing archive arrives as HTML - and a *206*, for
+    // a range request, which is why checking the status alone is not
+    // enough either (confirmed: bytes "<!docty", Content-Type text/html).
+    // The magic number is the only answer that cannot be faked by a
+    // fallback page.
+    //
+    // A range request rather than a HEAD, because it asks the same
+    // question the renderer asks a moment later - can this server serve
+    // ranges out of this file - for the same cost. A server without range
+    // support answers 200 with the entire 350MB attached, so that case is
+    // rejected too rather than left to download.
+    try {
+      const probe = await fetch(BASEMAP_ARCHIVE, { headers: { Range: 'bytes=0-6' } });
+      useSelf = probe.status === 206 && (await probe.text()) === 'PMTiles';
+      if (!useSelf) console.info('basemap: no usable local archive, using OpenStreetMap tiles');
+    } catch {
+      useSelf = false;
+    }
+  }
+  (useSelf ? selfHostedBasemap() : osmBasemap()).addTo(map);
+}
+addBasemap();
 
 // 26, matching .monument-icon's own width/height in style.css. The two
 // have to agree: Leaflet positions the icon element from iconSize/

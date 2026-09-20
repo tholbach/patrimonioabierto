@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := help
 
-.PHONY: help fetch build photo-stats wiki-extracts monument-pages potw serve deploy up down logs
+.PHONY: help fetch build photo-stats wiki-extracts monument-pages potw basemap serve deploy up down logs
 
 help:
 	@echo "Available targets:"
@@ -17,6 +17,8 @@ help:
 	@echo "  potw             Top up the picture-of-the-week pool (Commons search per"
 	@echo "                   monument - long, resumable, manual/occasional like"
 	@echo "                   photo-stats; writes web/data/ directly, no 'build' after)"
+	@echo "  basemap          (Re)build the self-hosted map background into"
+	@echo "                   web/tiles/ (~330MB, a few minutes - quarterly is plenty)"
 	@echo "  serve            Serve web/ on :8000 via the real Caddy config (needs docker)"
 	@echo "  deploy           On the host: pull, apply, and restart so a changed"
 	@echo "                   Caddyfile actually takes effect"
@@ -39,6 +41,12 @@ wiki-extracts:
 
 monument-pages:
 	@python3 scripts/build_monument_pages.py
+
+# The map's own basemap, served from this site instead of a tile provider.
+# See scripts/fetch_basemap.sh for why, and app.js's map setup for what it
+# replaced. Gitignored output: it reaches the server by running this there.
+basemap:
+	@./scripts/fetch_basemap.sh
 
 # The picture-of-the-week pool, all three stages. Manual and occasional like
 # photo-stats, deliberately NOT part of fetch/build: the middle stage runs a

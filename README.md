@@ -189,6 +189,7 @@ exist yet:
 
 ```sh
 docker network create ingress   # then attach your reverse proxy to it too
+make basemap                    # see "The basemap" below - not in git
 docker compose up -d
 ```
 
@@ -204,6 +205,36 @@ container was previously named `cylinked_web` (project rename) - if you
 are updating an existing deployment rather than starting fresh, update the
 external Caddyfile's `reverse_proxy` line to the new name in the same
 step, or the site goes down until both sides match.
+
+### The basemap
+
+The map's background is served from this site, not from a tile provider.
+`make basemap` builds `web/tiles/cyl.pmtiles` - one file holding Castilla y
+León at zoom 0-14, extracted from OpenStreetMap via Protomaps. Caddy serves
+it with HTTP range requests out of the box, so a visitor's browser fetches
+only the tiles in view rather than the 350MB archive.
+
+It replaced CARTO's raster tiles, which gate on the HTTP `Referer` and
+answer 403 without one. Anyone whose browser, extension or proxy strips
+that header saw a blank map, and users in several countries reported
+exactly that. Serving it ourselves removes the whole class of problem: no
+key, no referer, no quota, no country.
+
+The archive is gitignored, so **it is not there after a clone**. The map
+falls back to OpenStreetMap's own tiles when it is missing, which keeps a
+fresh checkout working; `?basemap=osm` forces that path and `?basemap=self`
+forces the local archive, for comparing them. A deployment should run `make
+basemap` rather than rely on the fallback - OSM's tile usage policy covers
+small sites, not a service leaning on it.
+
+Two things have to agree, in two files: `MAXZOOM` in
+`scripts/fetch_basemap.sh` and `BASEMAP_MAX_DATA_ZOOM` in `web/app.js`.
+Point the renderer past what the archive holds and the map goes blank
+exactly when someone zooms in to find a building.
+
+Serving it needs HTTP range support. Caddy has it; `python -m http.server`
+does not - it ignores the header, returns 200 with the whole file, and the
+map renders blank with nothing in the console to explain why.
 
 ### Updating a running deployment
 
