@@ -149,7 +149,11 @@ const MONUMENT_ICON_SIZE = 26;
 // to see any of this in the first place is flyToMonument()'s job.
 function iconFor(record, selected = false) {
   const emoji = CATEGORY_ICONS[record.category] || DEFAULT_ICON;
-  const statusClass = record.already_linked ? 'linked' : 'missing';
+  // Colored by whether a free photo exists, not by whether the monument is
+  // linked to Wikidata. Linkage is plumbing and nearly finished; a missing
+  // photo is the gap a visitor standing in front of the building can
+  // actually close.
+  const statusClass = record.has_wikidata_image ? 'has-photo' : 'no-photo';
   const half = MONUMENT_ICON_SIZE / 2;
   return L.divIcon({
     html: `<div class="monument-icon ${statusClass}${selected ? ' selected' : ''}">${emoji}</div>`,
@@ -160,14 +164,14 @@ function iconFor(record, selected = false) {
   });
 }
 
-// Clusters are colored by their own linked/missing ratio (green -> red),
+// Clusters are colored by their own with-photo/without ratio (green -> red),
 // not Leaflet's default blue/yellow/orange-by-count - so even zoomed out,
 // the map still reads as "where the documentation gaps are", not just
 // "where the monuments are".
 function clusterIcon(cluster) {
   const children = cluster.getAllChildMarkers();
-  const missing = children.filter((m) => !m.record.already_linked).length;
-  const ratio = missing / children.length; // 0 = fully linked, 1 = fully missing
+  const missing = children.filter((m) => !m.record.has_wikidata_image).length;
+  const ratio = missing / children.length; // 0 = all have a photo, 1 = none do
   // teal (#1c8a6d, linked) -> terracotta (#c2703d, missing) - not the usual
   // red/green: "missing" isn't an error, it's an invitation to help, so an
   // alarm-red reads wrong here even before considering how dated it looks.
@@ -263,12 +267,6 @@ let categoriesWithCounts = []; // [{ category, count }], sorted most common firs
 // be true on a record fetch_wikidata.py already found a P18 image for,
 // which only happens for items wdt:P3177 matched in the first place - so
 // it already implies linked, same data, no need to re-derive it.
-function isUnlinked(record) {
-  return !record.wikidata_qid;
-}
-function isLinked(record) {
-  return !!record.wikidata_qid;
-}
 function isLinkedNoPhoto(record) {
   return !!record.wikidata_qid && !record.has_wikidata_image;
 }
@@ -278,14 +276,18 @@ function hasPhoto(record) {
 function isLinkedNoWikipedia(record) {
   return !!record.wikidata_qid && !record.has_wikipedia_article;
 }
+// No linked/unlinked filter any more. It answered a question the map has
+// largely stopped having: 91% of the catalogue is linked, and everything
+// still missing is one category (ARTE RUPESTRE), so the filter mostly
+// returned either "almost everything" or "the rock art". What people
+// actually come here to find is what is still undocumented - a photo or an
+// article - which is what the remaining three answer.
 const STATUS_MATCHERS = {
-  unlinked: isUnlinked,
-  linked: isLinked,
   no_photo: isLinkedNoPhoto,
   has_photo: hasPhoto,
   no_wikipedia: isLinkedNoWikipedia,
 };
-const STATUS_ICONS = { unlinked: '🔗', linked: '🔗', no_photo: '🖼️', has_photo: '🖼️', no_wikipedia: '📖' };
+const STATUS_ICONS = { no_photo: '🖼️', has_photo: '🖼️', no_wikipedia: '📖' };
 
 function initStatusFilter() {
   // Built from STATUS_MATCHERS' own keys, not hand-listed - adding a new
@@ -2268,7 +2270,7 @@ function showImprintPanel({ updateUrl = true } = {}) {
 
 function monumentListItemHtml(record, subValue) {
   const emoji = CATEGORY_ICONS[record.category] || DEFAULT_ICON;
-  const statusClass = record.already_linked ? 'linked' : 'missing';
+  const statusClass = record.has_wikidata_image ? 'has-photo' : 'no-photo';
   // Thumbnail when we already know the filename (from the bulk SPARQL
   // pull, not a per-row fetch) - falls back to the emoji dot for anything
   // without a photo, same as before. loading="lazy" so rows off-screen
@@ -2276,7 +2278,7 @@ function monumentListItemHtml(record, subValue) {
   // also carries a text aria-label (same linked/missing status a map
   // marker for this record would show via color) - a screen reader has no
   // way to read "green" or "terracotta" otherwise.
-  const statusLabel = t(record.already_linked ? 'filter.status_linked' : 'filter.status_unlinked');
+  const statusLabel = t(record.has_wikidata_image ? 'marker.has_photo' : 'marker.no_photo');
   const icon = record.image_url
     ? `<img class="list-row-thumb" src="${record.image_url}?width=64" alt="" loading="lazy">`
     : `<span class="list-row-icon ${statusClass}" role="img" aria-label="${statusLabel}">${emoji}</span>`;
@@ -2895,7 +2897,7 @@ function searchRowHtml(type, key, icon, label, sub, imageUrl, statusClass, index
     : `<span class="search-row-icon ${statusClass || 'neutral'}">${icon}</span>`;
   // Small corner dot, same green/terracotta as everywhere else this status
   // shows (map markers, list rows) - only for monuments, and only a
-  // color-coded dot, not the only signal: filter.status_linked/unlinked's
+  // color-coded dot, not the only signal: marker.has_photo/no_photo's
   // own text already describes it elsewhere, this is a quick visual
   // echo for someone who already knows the color language from the map.
   const dot = statusClass ? `<span class="search-row-dot ${statusClass}"></span>` : '';
@@ -2929,7 +2931,7 @@ function renderSearchResults(query) {
       label: t('search.section.monuments'),
       rows: monumentMatches.map((r) => [
         'monument', r.jcyl_id, CATEGORY_ICONS[r.category] || DEFAULT_ICON, r.name, r.municipality, r.image_url,
-        r.already_linked ? 'linked' : 'missing',
+        r.has_wikidata_image ? 'has-photo' : 'no-photo',
       ]),
     },
   ].filter((s) => s.rows.length);

@@ -121,8 +121,12 @@
      error, it's an invitation to help, and the alarm-red read wrong before
      it even read dated. Teal/terracotta carries the same signal more
      honestly and sits better next to photography. */
-  --color-linked: #1c8a6d;
-  --color-missing: #c2703d;
+  /* One covered/gap axis, used for two different questions: the map and
+     its lists color by "has a free photo", the Stats chart by "linked to
+     Wikidata". Named for the role rather than either meaning, so neither
+     use has to read a variable that describes the other one. */
+  --color-covered: #1c8a6d;
+  --color-gap: #c2703d;
 
   --bg: #faf8f6;
   --ink: #2b2521;
@@ -375,8 +379,8 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
    green/terracotta as the map's own marker colors and .list-row-icon,
    just at low opacity as a tile background instead of a small solid dot -
    consistent color language, calmer at this larger size. */
-.search-row-icon.linked { background: rgba(28,138,109,0.14); }
-.search-row-icon.missing { background: rgba(194,112,61,0.14); }
+.search-row-icon.has-photo { background: rgba(28,138,109,0.14); }
+.search-row-icon.no-photo { background: rgba(194,112,61,0.14); }
 .search-row-icon.neutral { background: rgba(116,44,100,0.1); }
 /* Small corner status dot on the media tile, monuments only (statusClass
    is null for province/municipality rows - see searchRowHtml()) - same
@@ -393,8 +397,8 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
   border-radius: 50%;
   border: 2px solid var(--card);
 }
-.search-row-dot.linked { background: var(--color-linked); }
-.search-row-dot.missing { background: var(--color-missing); }
+.search-row-dot.has-photo { background: var(--color-covered); }
+.search-row-dot.no-photo { background: var(--color-gap); }
 
 .search-row-text { flex: 1 1 auto; min-width: 0; display: flex; flex-direction: column; gap: 1px; }
 .search-row-name { overflow: hidden; text-overflow: ellipsis; white-space: nowrap; font-weight: 500; }
@@ -578,11 +582,11 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
 /* Color alone isn't enough - ~8% of men are red-green colorblind (moot
    here since we dropped red/green, but the principle still applies to any
    two hues). A solid vs. dashed ring gives a second, non-color channel. */
-.monument-icon.linked { background: var(--color-linked); border-style: solid; }
-.monument-icon.missing { background: var(--color-missing); border-style: dashed; }
+.monument-icon.has-photo { background: var(--color-covered); border-style: solid; }
+.monument-icon.no-photo { background: var(--color-gap); border-style: dashed; }
 
 /* Whichever monument a click/search/"Cerca de aquí" tap just opened (see
-   highlightMonument() in app.js) - after .linked/.missing so it wins on
+   highlightMonument() in app.js) - after .has-photo/.no-photo so it wins on
    specificity regardless of which of those is also present. Purple, not
    blue/teal/terracotta - those already mean you-are-here/linked/missing,
    this is a distinct "this one, right now" signal, reusing the brand
@@ -932,7 +936,7 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
 .stats-chart-axis { display: flex; justify-content: space-between; font-size: 11px; color: var(--ink-soft); margin-top: 2px; }
 .stats-chart-legend { display: flex; gap: 16px; font-size: 12.5px; color: var(--ink-soft); margin-top: 8px; }
 .legend-swatch { display: inline-block; width: 12px; height: 3px; margin-right: 5px; vertical-align: middle; }
-.legend-swatch.linked { background: var(--color-linked); }
+.legend-swatch.linked { background: var(--color-covered); }
 .legend-swatch.image { background: var(--cyl-purple); }
 .stats-chart-empty { font-size: 13px; color: var(--ink-soft); font-style: italic; margin-top: 4px; }
 
@@ -947,7 +951,7 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
    calls that actually show/hide the dot (CSS always wins over presentation
    attributes). Starts at the SVG default (0, i.e. invisible). */
 .stats-chart-dot { stroke-width: 2; fill: var(--bg, #fff); transition: r 0.1s ease; }
-.stats-chart-dot.linked { stroke: var(--color-linked); }
+.stats-chart-dot.linked { stroke: var(--color-covered); }
 .stats-chart-dot.image { stroke: var(--cyl-purple); }
 .stats-chart-tooltip {
   /* Fixed, not absolute: #panel/#panel-content clip overflow (rounded
@@ -979,7 +983,7 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
 .stats-chart-tooltip .tt-date { font-weight: 600; margin-bottom: 2px; }
 .stats-chart-tooltip .tt-row { display: flex; align-items: center; gap: 5px; }
 .stats-chart-tooltip .tt-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-.stats-chart-tooltip .tt-dot.linked { background: var(--color-linked); }
+.stats-chart-tooltip .tt-dot.linked { background: var(--color-covered); }
 .stats-chart-tooltip .tt-dot.image { background: var(--cyl-purple); }
 .stats-chart-tooltip .tt-delta { color: #c9e8dc; }
 .stats-chart-tooltip .tt-delta.down { color: #f0c8c8; }
@@ -1014,8 +1018,8 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
   font-size: 11px;
   flex-shrink: 0;
 }
-.list-row-icon.linked { background: var(--color-linked); }
-.list-row-icon.missing { background: var(--color-missing); }
+.list-row-icon.has-photo { background: var(--color-covered); }
+.list-row-icon.no-photo { background: var(--color-gap); }
 .list-row-icon-plain { width: 22px; text-align: center; font-size: 16px; flex-shrink: 0; }
 .list-row-thumb {
   width: 26px; height: 26px;
