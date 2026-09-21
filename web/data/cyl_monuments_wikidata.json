@@ -27714,7 +27714,7 @@
       "en",
       "es"
     ],
-    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Pe%C3%B1afiel%20-%20Castillo%2008.JPG"
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Pe%C3%B1afiel%20PM%2017927.jpg"
   },
   {
     "jcyl_id": 15077,
@@ -46049,10 +46049,10 @@
     "wikidata_qid": "Q141449959",
     "already_linked": true,
     "wikidata_conflict": false,
-    "has_wikidata_image": false,
+    "has_wikidata_image": true,
     "has_wikipedia_article": false,
     "wikipedia_langs": [],
-    "image_url": null
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Sasamon%20-%20001%20%2830072249553%29.jpg"
   },
   {
     "jcyl_id": 874953,
