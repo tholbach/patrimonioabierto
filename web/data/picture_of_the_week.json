@@ -1,11 +1,10 @@
 [
   {
-    "jcyl_id": 11669,
-    "wikidata_qid": "Q244947",
-    "file": "Acueducto de Segovia 01.jpg",
+    "jcyl_id": 15465,
+    "wikidata_qid": "Q43168931",
+    "file": "Compass rose Cantino.svg",
     "tiers": [
-      "Featured pictures on Wikimedia Commons",
-      "Quality images"
+      "Featured pictures on Wikimedia Commons"
     ]
   },
   {
@@ -318,11 +317,12 @@
     ]
   },
   {
-    "jcyl_id": 15465,
-    "wikidata_qid": "Q43168931",
-    "file": "Compass rose Cantino.svg",
+    "jcyl_id": 11669,
+    "wikidata_qid": "Q244947",
+    "file": "Acueducto de Segovia 01.jpg",
     "tiers": [
-      "Featured pictures on Wikimedia Commons"
+      "Featured pictures on Wikimedia Commons",
+      "Quality images"
     ]
   },
   {
