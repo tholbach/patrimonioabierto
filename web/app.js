@@ -155,7 +155,11 @@ L.tileLayer('https://tile.openstreetmap.org/{z}/{x}/{y}.png', {
 // selected state used to swap in a bigger iconSize too, flipping that to
 // 2px up-left and making the marker visibly jump ~4px the moment it was
 // clicked.
-const MONUMENT_ICON_SIZE = 26;
+// 26 -> 30: a touch more legible/tappable without the map starting to feel
+// crowded at typical zoom levels. CSS .monument-icon's own width/height/
+// font-size (below) must change together with this, for the exact reason
+// explained just above.
+const MONUMENT_ICON_SIZE = 30;
 
 // selected (default false): the one marker a click/search/"Cerca de aquí"
 // tap just opened - see highlightMonument() below. It recolors this

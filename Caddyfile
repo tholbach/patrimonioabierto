@@ -124,6 +124,12 @@
 	# isn't mounted yet, and conflating those two makes the check less
 	# useful, not more.
 	handle /healthz {
+		# docker-compose.yml's own healthcheck hits this every 30s - without
+		# log_skip that's ~2,880 lines/day of nothing, drowning the real
+		# traffic this log exists to show. Verified: with it, two /healthz
+		# requests produced zero access-log lines while a plain / request
+		# right next to them still did.
+		log_skip
 		respond "ok" 200
 	}
 
