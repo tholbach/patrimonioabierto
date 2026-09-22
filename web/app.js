@@ -1322,7 +1322,12 @@ function heroBlock({ imageUrl, linkUrl, kicker, title, placeholderIcon, loading 
   // but being explicit here means no surprise eager-downloading later just
   // because a browser's default happened to be more aggressive than this.
   const video = `<video id="main-video" class="hero-video" controls playsinline preload="metadata" hidden></video>`;
-  return `<div class="hero">${bgImg}${fgEl}${video}${scrim}${dots}</div>`;
+  // Same spinner as the fallback branch above (one loading idiom, not two)
+  // - goToIndex() shows this for as long as a swipe's new photo isn't
+  // already sitting in the browser cache, so the hero doesn't just keep
+  // showing the previous photo with no sign a swipe even registered.
+  const swipeSpinner = `<div class="hero-spinner" id="hero-swipe-spinner" hidden aria-hidden="true"></div>`;
+  return `<div class="hero">${bgImg}${fgEl}${video}${swipeSpinner}${scrim}${dots}</div>`;
 }
 
 // Small dot-per-photo indicator, mobile-only (see .hero-dots CSS) - the
@@ -1594,6 +1599,7 @@ async function goToIndex(index) {
   const mainImageLinkEl = document.getElementById('main-image-link');
   const mainVideoEl = document.getElementById('main-video');
   const captionEl = document.getElementById('image-caption');
+  const spinnerEl = document.getElementById('hero-swipe-spinner');
   if (!mainImageEl) return;
 
   const filename = files[index];
@@ -1627,6 +1633,29 @@ async function goToIndex(index) {
     mainImageEl.src = thumbUrl;
   }
   applyHeroOrientation(isVideo);
+
+  // The new photo is usually already in the browser's cache (see the
+  // comment on thumbUrl above), in which case .complete is true the
+  // instant .src is set and there's nothing to show a spinner for. When
+  // it isn't - swiping faster than preloadNeighbors() can keep up, or a
+  // slow connection - the old photo would otherwise just sit there with
+  // no sign the swipe even registered until the new one suddenly pops in.
+  // Photos only: a video swaps a poster attribute, not an <img>, with no
+  // equivalent load event to hook here.
+  if (spinnerEl) {
+    if (!isVideo && !mainImageEl.complete) {
+      spinnerEl.hidden = false;
+      const thisIndex = index;
+      const onSettled = () => {
+        if (currentGalleryState.index !== thisIndex) return; // superseded by a later swipe - that one owns the spinner now
+        spinnerEl.hidden = true;
+      };
+      mainImageEl.addEventListener('load', onSettled, { once: true });
+      mainImageEl.addEventListener('error', onSettled, { once: true });
+    } else {
+      spinnerEl.hidden = true;
+    }
+  }
 
   currentGalleryState.index = index;
   updateHeroDots(index, files.length);
