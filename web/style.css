@@ -1757,6 +1757,78 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
   #map-wrap.potw-visible #filter-panel { bottom: 248px; }
 }
 
+/* #contribute-bar: unlike #potw, on screen (mobile and desktop both)
+   whenever the plain map is showing at all - see app.js, toggled in the
+   same two places as #potw but with no dismiss state of its own. */
+#contribute-bar {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  z-index: 499; /* just under #potw (500) so its shadow still reads if the two ever visually meet */
+  height: 48px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 0 16px;
+  background: rgba(116,44,100,0.94);
+  backdrop-filter: blur(8px);
+  color: white;
+  font-size: 13.5px;
+  font-weight: 600;
+  text-decoration: none;
+  cursor: pointer;
+}
+#contribute-bar:hover { background: var(--cyl-purple); }
+#contribute-bar[hidden] { display: none; }
+/* Two copies, not one truncated by CSS - a centered line clipped with
+   text-overflow: ellipsis only ever gets a hard cut on both ends (the
+   property assumes start- or end-aligned overflow, not a centered line
+   overflowing both sides at once), so a shorter sentence for narrow
+   screens reads properly instead of just losing its edges. */
+.contribute-bar-text-full,
+.contribute-bar-text-short {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  max-width: 100%;
+}
+.contribute-bar-text-short { display: none; }
+@media (max-width: 480px) {
+  .contribute-bar-text-full { display: none; }
+  .contribute-bar-text-short { display: inline; }
+}
+
+/* #potw stacks above #contribute-bar rather than the two overlapping -
+   desktop-only, matching #potw's own breakpoint (on mobile #potw never
+   shows, so #contribute-bar is always the true floor there). */
+@media (min-width: 769px) {
+  #potw { bottom: 48px; }
+}
+
+/* Same lift idea as .potw-visible above, but unconditional (mobile and
+   desktop both) since #contribute-bar itself is. Same 54px rhythm between
+   locate/shuffle/filter, just based off a 48px floor instead of 0. */
+#map-wrap.contribute-bar-visible .leaflet-bottom { bottom: 48px; }
+#map-wrap.contribute-bar-visible #locate-btn { bottom: 72px; }
+#map-wrap.contribute-bar-visible #shuffle-btn { bottom: 126px; }
+#map-wrap.contribute-bar-visible #filter-btn,
+#map-wrap.contribute-bar-visible #filter-panel { bottom: 180px; }
+
+/* Both strips up at once (desktop only - #contribute-bar-visible alone
+   already covers mobile, where .potw-visible never applies): higher
+   specificity than either single-class rule above, so this wins outright
+   regardless of source order, rather than the usual last-rule-wins
+   tiebreak silently picking whichever strip's rule happens to come later
+   in the file. */
+@media (min-width: 769px) {
+  #map-wrap.contribute-bar-visible.potw-visible .leaflet-bottom { bottom: 164px; }
+  #map-wrap.contribute-bar-visible.potw-visible #locate-btn { bottom: 188px; }
+  #map-wrap.contribute-bar-visible.potw-visible #shuffle-btn { bottom: 242px; }
+  #map-wrap.contribute-bar-visible.potw-visible #filter-btn,
+  #map-wrap.contribute-bar-visible.potw-visible #filter-panel { bottom: 296px; }
+}
+
 #locate-btn:hover { transform: scale(1.08); background: white; }
 #locate-btn.locating { animation: pulse 1s ease-in-out infinite; }
 @keyframes pulse {
@@ -1814,6 +1886,13 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
    is already maintained in four places (see dismissPotw() and friends), and
    a fifth to keep in sync is exactly how those drift apart. */
 body:has(#map-wrap.potw-visible) #toast { bottom: 140px; }
+/* Same reasoning, for #contribute-bar (48px, mobile and desktop both -
+   see its own CSS) - and the combined case when both strips are up. The
+   combined selector needs no extra specificity trick like the button
+   rules above: :has() rules here don't compete with each other the same
+   way, since only one of these three ever matches body at a time. */
+body:has(#map-wrap.contribute-bar-visible:not(.potw-visible)) #toast { bottom: 72px; }
+body:has(#map-wrap.contribute-bar-visible.potw-visible) #toast { bottom: 188px; }
 
 /* On big screens the map has plenty of room to spare - scale up the chrome
    around it (topbar, legend, panel) rather than leaving it looking thin

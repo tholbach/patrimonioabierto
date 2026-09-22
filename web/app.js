@@ -683,6 +683,8 @@ function openPanel(onMapReady) {
   // user separately, actually dismissed it (its own close button, or
   // following one of its own links) while a panel happened to be open.
   hidePotwForPanel();
+  contributeBarEl.hidden = true;
+  document.getElementById('map-wrap').classList.remove('contribute-bar-visible');
   // Every panel type routes through here, so this is the one place that
   // needs to know "is a specific monument marker meant to be highlighted
   // right now" - set it fresh for 'monument', clear it for everything else
@@ -729,6 +731,8 @@ function closePanel() {
   setTimeout(() => map.invalidateSize(), 260);
   clearMonumentHighlight();
   restorePotwAfterPanel();
+  contributeBarEl.hidden = false;
+  document.getElementById('map-wrap').classList.add('contribute-bar-visible');
   // Always back to root, not location.pathname - since shareUrl() can now
   // leave the address bar on /monumento/<id>-<slug>/ (or /stats/, /about/,
   // ...) while a panel is open, pushing the current pathname unchanged
@@ -2604,6 +2608,16 @@ document.getElementById('menu-btn').addEventListener('click', showMenuPanel);
 wireSpaLink(document.getElementById('brand-link'), () => {
   if (panelEl.classList.contains('open')) closePanel();
 });
+
+// Slim, always-on call to action - unlike #potw (see its own section
+// further down) this has no dismiss state of its own: it's just "is the
+// plain map showing right now", the same condition openPanel()/
+// closePanel() already track for #potw, so it toggles alongside that
+// rather than needing its own hidePotwForPanel()-style bookkeeping.
+const contributeBarEl = document.getElementById('contribute-bar');
+wireSpaLink(contributeBarEl, () => showContributePanel());
+contributeBarEl.hidden = false;
+document.getElementById('map-wrap').classList.add('contribute-bar-visible');
 
 // --- Geolocation ---------------------------------------------------------
 
