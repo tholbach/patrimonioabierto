@@ -10576,11 +10576,11 @@
     "municipality_ine_code_p772": "24100",
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=5112",
-    "wikidata_qid": "Q24013151",
-    "already_linked": true,
+    "wikidata_qid": null,
+    "already_linked": false,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
-    "has_wikipedia_article": true,
+    "has_wikipedia_article": false,
     "wikipedia_langs": [],
     "image_url": null
   },
@@ -11204,11 +11204,11 @@
     "municipality_ine_code_p772": "24139",
     "province": "León",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=5417",
-    "wikidata_qid": "Q23993186",
-    "already_linked": true,
+    "wikidata_qid": null,
+    "already_linked": false,
     "wikidata_conflict": false,
     "has_wikidata_image": false,
-    "has_wikipedia_article": true,
+    "has_wikipedia_article": false,
     "wikipedia_langs": [],
     "image_url": null
   },
@@ -27714,7 +27714,7 @@
       "en",
       "es"
     ],
-    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/030518%201323%20Pe%C3%B1afiel%20Juder%C3%ADa%20Durat%C3%B3n%20Castillo%20T91.JPG"
+    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Penafiel-Espana0011.JPG"
   },
   {
     "jcyl_id": 15077,
