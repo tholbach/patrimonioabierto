@@ -12325,15 +12325,13 @@
     "municipality_ine_code_p772": "34004",
     "province": "Palencia",
     "reference_url": "https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=6157",
-    "wikidata_qid": "Q5747410",
-    "already_linked": true,
+    "wikidata_qid": null,
+    "already_linked": false,
     "wikidata_conflict": false,
-    "has_wikidata_image": true,
-    "has_wikipedia_article": true,
-    "wikipedia_langs": [
-      "es"
-    ],
-    "image_url": "http://commons.wikimedia.org/wiki/Special:FilePath/Canduela.jpg"
+    "has_wikidata_image": false,
+    "has_wikipedia_article": false,
+    "wikipedia_langs": [],
+    "image_url": null
   },
   {
     "jcyl_id": 6164,
