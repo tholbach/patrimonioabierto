@@ -958,7 +958,7 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
 .stats-chart-axis { display: flex; justify-content: space-between; font-size: 11px; color: var(--ink-soft); margin-top: 2px; }
 .stats-chart-legend { display: flex; gap: 16px; font-size: 12.5px; color: var(--ink-soft); margin-top: 8px; }
 .legend-swatch { display: inline-block; width: 12px; height: 3px; margin-right: 5px; vertical-align: middle; }
-.legend-swatch.linked { background: var(--marker); }
+.legend-swatch.article { background: var(--marker); }
 .legend-swatch.image { background: var(--cyl-purple); }
 .stats-chart-empty { font-size: 13px; color: var(--ink-soft); font-style: italic; margin-top: 4px; }
 
@@ -973,7 +973,7 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
    calls that actually show/hide the dot (CSS always wins over presentation
    attributes). Starts at the SVG default (0, i.e. invisible). */
 .stats-chart-dot { stroke-width: 2; fill: var(--bg, #fff); transition: r 0.1s ease; }
-.stats-chart-dot.linked { stroke: var(--marker); }
+.stats-chart-dot.article { stroke: var(--marker); }
 .stats-chart-dot.image { stroke: var(--cyl-purple); }
 .stats-chart-tooltip {
   /* Fixed, not absolute: #panel/#panel-content clip overflow (rounded
@@ -1005,7 +1005,8 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
 .stats-chart-tooltip .tt-date { font-weight: 600; margin-bottom: 2px; }
 .stats-chart-tooltip .tt-row { display: flex; align-items: center; gap: 5px; }
 .stats-chart-tooltip .tt-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; flex-shrink: 0; }
-.stats-chart-tooltip .tt-dot.linked { background: var(--marker); }
+.stats-chart-tooltip .tt-dot.article { background: var(--marker); }
+.tt-row-nodata { color: var(--ink-soft); font-style: italic; }
 .stats-chart-tooltip .tt-dot.image { background: var(--cyl-purple); }
 .stats-chart-tooltip .tt-delta { color: #c9e8dc; }
 .stats-chart-tooltip .tt-delta.down { color: #f0c8c8; }

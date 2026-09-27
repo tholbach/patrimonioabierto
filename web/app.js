@@ -1999,7 +1999,16 @@ function renderHistoryChart(historyData, total) {
   }
   const { xStep, xFor, yFor } = chartGeometry(historyData, total);
 
-  const linkedPoints = historyData.map((h, i) => `${xFor(i)},${yFor(h.linked)}`).join(' ');
+  // has_wikipedia_article only started being recorded partway through this
+  // project (2026-09-01 onward) - older snapshots genuinely have no value
+  // for it, not a zero. Filtering those out before building the polyline
+  // (rather than treating a missing value as 0) means the article line
+  // just starts partway across the chart instead of opening with a fake
+  // plunge to the bottom axis.
+  const articlePoints = historyData
+    .map((h, i) => (h.with_article == null ? null : `${xFor(i)},${yFor(h.with_article)}`))
+    .filter(Boolean)
+    .join(' ');
   const imagePoints = historyData.map((h, i) => `${xFor(i)},${yFor(h.with_image)}`).join(' ');
   // One invisible full-height hit rect per data point - hovering anywhere in
   // its column (not just exactly on the line) triggers that point's tooltip.
@@ -2010,17 +2019,17 @@ function renderHistoryChart(historyData, total) {
   return `
     <div class="stats-chart-wrap">
       <svg class="stats-chart" viewBox="0 0 ${CHART_W} ${CHART_H}" preserveAspectRatio="none">
-        <polyline points="${linkedPoints}" fill="none" stroke="#0e7490" stroke-width="2.5" />
+        <polyline points="${articlePoints}" fill="none" stroke="#0e7490" stroke-width="2.5" />
         <polyline points="${imagePoints}" fill="none" stroke="#742c64" stroke-width="2.5" />
         <line class="stats-chart-guide" x1="0" x2="0" y1="${CHART_PAD}" y2="${CHART_H - CHART_PAD}" />
-        <circle class="stats-chart-dot linked" cx="0" cy="0"></circle>
+        <circle class="stats-chart-dot article" cx="0" cy="0"></circle>
         <circle class="stats-chart-dot image" cx="0" cy="0"></circle>
         ${hitRects}
       </svg>
       <div class="stats-chart-tooltip"></div>
       <div class="stats-chart-axis"><span>${historyData[0].date}</span><span>${historyData[historyData.length - 1].date}</span></div>
       <div class="stats-chart-legend">
-        <span><span class="legend-swatch linked"></span>${t('stats.legend_linked')}</span>
+        <span><span class="legend-swatch article"></span>${t('stats.legend_article')}</span>
         <span><span class="legend-swatch image"></span>${t('stats.legend_image')}</span>
       </div>
     </div>
@@ -2042,7 +2051,7 @@ function wireHistoryChart(wrapEl, historyData, total) {
   const svg = wrapEl.querySelector('.stats-chart');
   const tooltip = wrapEl.querySelector('.stats-chart-tooltip');
   const guide = wrapEl.querySelector('.stats-chart-guide');
-  const dotLinked = wrapEl.querySelector('.stats-chart-dot.linked');
+  const dotArticle = wrapEl.querySelector('.stats-chart-dot.article');
   const dotImage = wrapEl.querySelector('.stats-chart-dot.image');
   const { xFor, yFor } = chartGeometry(historyData, total);
 
@@ -2050,7 +2059,13 @@ function wireHistoryChart(wrapEl, historyData, total) {
   const fmtPct = (n) => n.toLocaleString(currentLang, { maximumFractionDigits: 1, minimumFractionDigits: 1 });
 
   function deltaHtml(i, key) {
-    if (i === 0) return `<span class="tt-delta">· ${t('stats.tooltip_first')}</span>`;
+    if (historyData[i][key] == null) return ''; // this point itself has no value for this series - nothing to show at all
+    // No earlier point to diff against - either this is the very first
+    // snapshot overall, or (with_article only) the first date this
+    // particular metric was ever recorded (it predates 2026-09-01 - see
+    // renderHistoryChart()'s own comment). Same "first point" label
+    // either way: both mean "nothing before this to compare".
+    if (i === 0 || historyData[i - 1][key] == null) return `<span class="tt-delta">· ${t('stats.tooltip_first')}</span>`;
     const now = pctOf(historyData[i][key], historyData[i]);
     const prev = pctOf(historyData[i - 1][key], historyData[i - 1]);
     const d = now - prev;
@@ -2061,18 +2076,23 @@ function wireHistoryChart(wrapEl, historyData, total) {
   function showFor(i) {
     const h = historyData[i];
     const x = xFor(i);
-    const yLinked = yFor(h.linked);
+    const hasArticle = h.with_article != null;
+    const yArticle = hasArticle ? yFor(h.with_article) : null;
     const yImage = yFor(h.with_image);
 
     guide.setAttribute('x1', x);
     guide.setAttribute('x2', x);
     guide.style.opacity = 1;
-    dotLinked.setAttribute('cx', x);
-    dotLinked.setAttribute('cy', yLinked);
     dotImage.setAttribute('cx', x);
     dotImage.setAttribute('cy', yImage);
-    dotLinked.setAttribute('r', 4);
     dotImage.setAttribute('r', 4);
+    if (hasArticle) {
+      dotArticle.setAttribute('cx', x);
+      dotArticle.setAttribute('cy', yArticle);
+      dotArticle.setAttribute('r', 4);
+    } else {
+      dotArticle.setAttribute('r', 0); // no data point to sit on - see renderHistoryChart()'s own comment
+    }
 
     // Built from y/m/d directly (not `new Date(h.date)`) - a plain
     // "YYYY-MM-DD" string parses as UTC midnight, which toLocaleDateString
@@ -2080,9 +2100,12 @@ function wireHistoryChart(wrapEl, historyData, total) {
     const [y, mo, d] = h.date.split('-').map(Number);
     const dateLabel = new Date(y, mo - 1, d).toLocaleDateString(currentLang, { day: 'numeric', month: 'short', year: 'numeric' });
 
+    const articleRow = hasArticle
+      ? `<div class="tt-row"><span class="tt-dot article"></span>${t('stats.legend_article')}: ${fmtNum(h.with_article)} (${fmtPct(pctOf(h.with_article, h))}%) ${deltaHtml(i, 'with_article')}</div>`
+      : `<div class="tt-row tt-row-nodata"><span class="tt-dot article"></span>${t('stats.legend_article')}: ${t('stats.tooltip_nodata')}</div>`;
     tooltip.innerHTML = `
       <div class="tt-date">${dateLabel}</div>
-      <div class="tt-row"><span class="tt-dot linked"></span>${t('stats.legend_linked')}: ${fmtNum(h.linked)} (${fmtPct(pctOf(h.linked, h))}%) ${deltaHtml(i, 'linked')}</div>
+      ${articleRow}
       <div class="tt-row"><span class="tt-dot image"></span>${t('stats.legend_image')}: ${fmtNum(h.with_image)} (${fmtPct(pctOf(h.with_image, h))}%) ${deltaHtml(i, 'with_image')}</div>
     `;
 
@@ -2093,8 +2116,8 @@ function wireHistoryChart(wrapEl, historyData, total) {
     const svgRect = svg.getBoundingClientRect();
     const scaleX = svgRect.width / CHART_W;
     const scaleY = svgRect.height / CHART_H;
-    const topY = svgRect.top + Math.min(yLinked, yImage) * scaleY;
-    const bottomY = svgRect.top + Math.max(yLinked, yImage) * scaleY;
+    const topY = svgRect.top + (hasArticle ? Math.min(yArticle, yImage) : yImage) * scaleY;
+    const bottomY = svgRect.top + (hasArticle ? Math.max(yArticle, yImage) : yImage) * scaleY;
     let pxX = svgRect.left + x * scaleX;
 
     // Measure with the tooltip already sized (content is set above) but
@@ -2115,7 +2138,7 @@ function wireHistoryChart(wrapEl, historyData, total) {
 
   function hide() {
     guide.style.opacity = 0;
-    dotLinked.setAttribute('r', 0);
+    dotArticle.setAttribute('r', 0);
     dotImage.setAttribute('r', 0);
     tooltip.classList.remove('visible');
   }

@@ -158,13 +158,14 @@ def append_history_snapshot(records):
     total = len(records)
     linked = sum(r["already_linked"] for r in records)
     with_image = sum(r["has_wikidata_image"] for r in records)
+    with_article = sum(r["has_wikipedia_article"] for r in records)
     today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
 
     history = []
     if os.path.exists(HISTORY_PATH):
         history = json.load(open(HISTORY_PATH))
 
-    snapshot = {"date": today, "total": total, "linked": linked, "with_image": with_image}
+    snapshot = {"date": today, "total": total, "linked": linked, "with_image": with_image, "with_article": with_article}
     if history and history[-1]["date"] == today:
         history[-1] = snapshot
     else:
