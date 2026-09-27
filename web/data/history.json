@@ -39,96 +39,112 @@
     "date": "2026-09-01",
     "total": 2479,
     "linked": 1846,
-    "with_image": 1274
+    "with_image": 1274,
+    "with_article": 986
   },
   {
     "date": "2026-09-02",
     "total": 2479,
     "linked": 1846,
-    "with_image": 1274
+    "with_image": 1274,
+    "with_article": 986
   },
   {
     "date": "2026-09-04",
     "total": 2479,
     "linked": 1846,
-    "with_image": 1277
+    "with_image": 1277,
+    "with_article": 987
   },
   {
     "date": "2026-09-07",
     "total": 2479,
     "linked": 1854,
-    "with_image": 1277
+    "with_image": 1277,
+    "with_article": 988
   },
   {
     "date": "2026-09-08",
     "total": 2479,
     "linked": 1918,
-    "with_image": 1277
+    "with_image": 1277,
+    "with_article": 988
   },
   {
     "date": "2026-09-14",
     "total": 2479,
     "linked": 2162,
-    "with_image": 1285
+    "with_image": 1285,
+    "with_article": 991
   },
   {
     "date": "2026-09-17",
     "total": 2479,
     "linked": 2162,
-    "with_image": 1286
+    "with_image": 1286,
+    "with_article": 992
   },
   {
     "date": "2026-09-18",
     "total": 2479,
     "linked": 2162,
-    "with_image": 1286
+    "with_image": 1286,
+    "with_article": 992
   },
   {
     "date": "2026-09-19",
     "total": 2479,
     "linked": 2247,
-    "with_image": 1305
+    "with_image": 1305,
+    "with_article": 1011
   },
   {
     "date": "2026-09-20",
     "total": 2479,
     "linked": 2247,
-    "with_image": 1305
+    "with_image": 1305,
+    "with_article": 1011
   },
   {
     "date": "2026-09-21",
     "total": 2479,
     "linked": 2247,
-    "with_image": 1306
+    "with_image": 1306,
+    "with_article": 1011
   },
   {
     "date": "2026-09-22",
     "total": 2479,
     "linked": 2247,
-    "with_image": 1306
+    "with_image": 1306,
+    "with_article": 1011
   },
   {
     "date": "2026-09-23",
     "total": 2479,
     "linked": 2245,
-    "with_image": 1306
+    "with_image": 1306,
+    "with_article": 1009
   },
   {
     "date": "2026-09-25",
     "total": 2479,
     "linked": 2244,
-    "with_image": 1305
+    "with_image": 1305,
+    "with_article": 1008
   },
   {
     "date": "2026-09-26",
     "total": 2479,
     "linked": 2244,
-    "with_image": 1305
+    "with_image": 1305,
+    "with_article": 1008
   },
   {
     "date": "2026-09-27",
     "total": 2479,
     "linked": 2244,
-    "with_image": 1305
+    "with_image": 1305,
+    "with_article": 1008
   }
 ]
