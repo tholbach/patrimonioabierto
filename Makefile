@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := help
 
-.PHONY: help fetch build photo-stats wiki-extracts monument-pages potw serve deploy up down logs
+.PHONY: help fetch build photo-stats wiki-extracts monument-pages potw test serve deploy up down logs
 
 help:
 	@echo "Available targets:"
@@ -17,6 +17,7 @@ help:
 	@echo "  potw             Top up the picture-of-the-week pool (Commons search per"
 	@echo "                   monument - long, resumable, manual/occasional like"
 	@echo "                   photo-stats; writes web/data/ directly, no 'build' after)"
+	@echo "  test             Run the scripts/ unit test suite"
 	@echo "  serve            Serve web/ on :8000 via the real Caddy config (needs docker)"
 	@echo "  deploy           On the host: pull, apply, and restart so a changed"
 	@echo "                   Caddyfile actually takes effect"
@@ -59,6 +60,9 @@ potw:
 	@python3 scripts/fetch_commons_categories.py
 	@python3 scripts/find_good_pictures.py
 	@python3 scripts/build_potw_seed.py
+
+test:
+	@cd scripts && python3 -m unittest discover -s tests -v
 
 # The real Caddy with the real Caddyfile, not python -m http.server, so
 # that what you see locally is what the server does. http.server serves
