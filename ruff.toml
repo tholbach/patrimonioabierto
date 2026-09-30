@@ -1,0 +1,21 @@
+# Explicit rule selection rather than relying on ruff's implicit default -
+# that way a ruff upgrade can't silently start (or stop) enforcing rules
+# nobody asked for here.
+#
+# `ruff format` is deliberately not run anywhere in this repo: the scripts
+# lean on hand-wrapped comments and prose for readability, which a
+# formatter would fight. This is lint-only.
+[lint]
+select = [
+    "E",  # pycodestyle errors
+    "F",  # pyflakes - unused imports/variables, undefined names, etc.
+    "I",  # import sorting
+    "UP", # pyupgrade - flag old-style syntax for the Python version in use
+    "B",  # bugbear - common bug-prone patterns (mutable defaults, bare except, ...)
+]
+ignore = [
+    # Line length: comments here are wrapped by hand at whatever width
+    # reads best, not at a fixed column - enforcing one would just fight
+    # that instead of catching anything real.
+    "E501",
+]
