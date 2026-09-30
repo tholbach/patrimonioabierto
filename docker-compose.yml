@@ -2,8 +2,12 @@ name: patrimonioabierto
 
 services:
   web:
-    # Matches the ingress proxy's own Caddy image choice for consistency.
-    image: caddy:2
+    # Pinned to an exact version (rather than the floating `caddy:2` tag)
+    # so a deploy is reproducible and Dependabot can open a PR when a new
+    # release lands, instead of `docker compose pull` silently picking up
+    # whatever "2" currently resolves to. Bump this alongside the ingress
+    # proxy's own Caddy image when keeping them in step matters.
+    image: caddy:2.11.4
     # Renamed from cylinked_web (project rename) - the ingress proxy's own
     # Caddyfile (kept in its own repo, NOT this one) references this exact
     # container name in its reverse_proxy line. Update that config to

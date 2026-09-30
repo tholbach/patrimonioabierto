@@ -81,7 +81,7 @@ serve:
 	@docker run --rm -p 8000:80 \
 		-v "$(CURDIR)/web:/srv:ro" \
 		-v "$(CURDIR)/Caddyfile:/etc/caddy/Caddyfile:ro" \
-		caddy:2
+		caddy:2.11.4
 
 # The restart is not redundant. git replaces files via atomic rename rather
 # than editing them in place, and Caddyfile is bind-mounted as a single

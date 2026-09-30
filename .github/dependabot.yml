@@ -1,0 +1,15 @@
+version: 2
+updates:
+  # docker-compose.yml's caddy image, now pinned to an exact version.
+  - package-ecosystem: "docker"
+    directory: "/"
+    schedule:
+      interval: "monthly"
+
+  # Actions used by the workflows in .github/workflows/ (lint, tests,
+  # shellcheck) - keeps actions/checkout etc. current, which matters since
+  # they run with repo access on every push/PR.
+  - package-ecosystem: "github-actions"
+    directory: "/"
+    schedule:
+      interval: "monthly"
