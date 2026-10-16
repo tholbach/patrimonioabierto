@@ -7,7 +7,7 @@ resolved.
 """
 import json
 import os
-from datetime import datetime, timedelta, timezone
+from datetime import UTC, datetime, timedelta
 
 from geometry import bbox_of_multipolygon, multipolygon_centroid, point_in_multipolygon
 
@@ -159,7 +159,7 @@ def append_history_snapshot(records):
     linked = sum(r["already_linked"] for r in records)
     with_image = sum(r["has_wikidata_image"] for r in records)
     with_article = sum(r["has_wikipedia_article"] for r in records)
-    today = datetime.now(timezone.utc).strftime("%Y-%m-%d")
+    today = datetime.now(UTC).strftime("%Y-%m-%d")
 
     history = []
     if os.path.exists(HISTORY_PATH):
@@ -316,7 +316,7 @@ def main():
 
     meta_path = os.path.join(os.path.dirname(OUT_PATH), "meta.json")
     json.dump(
-        {"generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ")},
+        {"generated_at": datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ")},
         open(meta_path, "w"),
     )
     append_history_snapshot(records)

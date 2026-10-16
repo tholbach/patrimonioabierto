@@ -31,7 +31,7 @@ import os
 import time
 import urllib.parse
 import urllib.request
-from datetime import datetime, timezone
+from datetime import UTC, datetime
 
 from project import user_agent
 
@@ -147,7 +147,7 @@ def main():
         category_files[cat] = total
 
     out = {
-        "generated_at": datetime.now(timezone.utc).strftime("%Y-%m-%dT%H:%M:%SZ"),
+        "generated_at": datetime.now(UTC).strftime("%Y-%m-%dT%H:%M:%SZ"),
         "item_category": item_category,
         "category_files": category_files,
     }

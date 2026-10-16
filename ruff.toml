@@ -5,6 +5,10 @@
 # `ruff format` is deliberately not run anywhere in this repo: the scripts
 # lean on hand-wrapped comments and prose for readability, which a
 # formatter would fight. This is lint-only.
+# Matches the Python used in CI (tests.yml). Pinned so ruff's default
+# target moving between releases doesn't change which UP rules fire.
+target-version = "py312"
+
 [lint]
 select = [
     "E",  # pycodestyle errors
