@@ -57,13 +57,13 @@ make monument-pages
 
 # status --porcelain, not git diff: a monument added upstream creates a new
 # (untracked) page directory, which git diff alone would never see.
-PUBLISHED="web/data/ web/monumento/ web/sitemap.xml web/robots.txt"
-if [ -z "$(git status --porcelain -- $PUBLISHED)" ]; then
+PUBLISHED=(web/data/ web/monumento/ web/sitemap.xml web/robots.txt)
+if [ -z "$(git status --porcelain -- "${PUBLISHED[@]}")" ]; then
   echo "[$(date -Is)] no changes to published files - nothing to commit"
   exit 0
 fi
 
-git add $PUBLISHED
+git add "${PUBLISHED[@]}"
 git commit -m "Refresh data
 
 Automated daily refresh (scripts/daily_refresh.sh via systemd timer)."
