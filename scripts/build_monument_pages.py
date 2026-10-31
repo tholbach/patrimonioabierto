@@ -153,7 +153,7 @@ def build_head(shell, record, extract):
     )
     shell = _sub(
         shell,
-        '<meta name="description" content="Mapa interactivo de los Bienes de Interés Cultural (BIC) de Castilla y León: castillos, yacimientos arqueológicos, arte rupestre, conjuntos históricos, hórreos, rollos de justicia y más - cada uno enlazado con su ficha en Wikidata, su artículo en Wikipedia y sus fotos libres en Wikimedia Commons. Explora, con historia y fotografías, más de 2.400 monumentos protegidos según el catálogo oficial de la Junta de Castilla y León - datos abiertos, gratis, sin cuentas ni anuncios.">',
+        '<meta name="description" content="Mapa interactivo de los Bienes de Interés Cultural (BIC) de Castilla y León: castillos, yacimientos arqueológicos, arte rupestre, conjuntos históricos, hórreos, rollos de justicia y más - cada uno enlazado con su ficha en Wikidata, su artículo en Wikipedia y sus fotos libres en Wikimedia Commons. Explora, con historia y fotografías, más de 2.500 monumentos protegidos según el catálogo oficial de la Junta de Castilla y León - datos abiertos, gratis, sin cuentas ni anuncios.">',
         f'<meta name="description" content="{description_attr}">',
     )
     shell = _sub(
@@ -168,7 +168,7 @@ def build_head(shell, record, extract):
     )
     shell = _sub(
         shell,
-        '<meta property="og:description" content="Castillos, yacimientos arqueológicos, arte rupestre, conjuntos históricos y más de 2.400 monumentos protegidos de Castilla y León, enlazados con Wikidata, Wikipedia y Wikimedia Commons - con fotos, historia y datos abiertos de la Junta de Castilla y León.">',
+        '<meta property="og:description" content="Castillos, yacimientos arqueológicos, arte rupestre, conjuntos históricos y más de 2.500 monumentos protegidos de Castilla y León, enlazados con Wikidata, Wikipedia y Wikimedia Commons - con fotos, historia y datos abiertos de la Junta de Castilla y León.">',
         f'<meta property="og:description" content="{description_attr}">',
     )
     shell = _sub(
@@ -188,7 +188,7 @@ def build_head(shell, record, extract):
     )
     shell = _sub(
         shell,
-        '<meta name="twitter:description" content="Castillos, yacimientos arqueológicos, arte rupestre, conjuntos históricos y más de 2.400 monumentos protegidos de Castilla y León, enlazados con Wikidata, Wikipedia y Wikimedia Commons.">',
+        '<meta name="twitter:description" content="Castillos, yacimientos arqueológicos, arte rupestre, conjuntos históricos y más de 2.500 monumentos protegidos de Castilla y León, enlazados con Wikidata, Wikipedia y Wikimedia Commons.">',
         f'<meta name="twitter:description" content="{description_attr}">',
     )
     shell = _sub(
