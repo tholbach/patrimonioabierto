@@ -29,7 +29,7 @@ import urllib.error
 import urllib.parse
 import urllib.request
 
-from project import user_agent
+from project import urlopen_with_retry, user_agent
 
 RAW_DIR = os.path.join(os.path.dirname(__file__), "..", "data", "raw")
 DATASET_FILE = os.path.join(os.path.dirname(__file__), "..", "web", "data", "cyl_monuments_wikidata.json")
@@ -38,22 +38,15 @@ WIKIDATA_API = "https://www.wikidata.org/w/api.php"
 UA = user_agent("patrimonioabierto-seo")
 
 
-def api_get(url, retries=4):
+def api_get(url):
     req = urllib.request.Request(url, headers={"User-Agent": UA, "Accept": "application/json"})
-    for attempt in range(retries):
-        try:
-            with urllib.request.urlopen(req, timeout=30) as resp:
-                return json.load(resp)
-        except urllib.error.HTTPError as e:
-            if e.code == 404:
-                return None  # a real "this article doesn't exist" answer, not a transient failure
-            if attempt == retries - 1:
-                raise
-            time.sleep(2**attempt)
-        except urllib.error.URLError:
-            if attempt == retries - 1:
-                raise
-            time.sleep(2**attempt)
+    try:
+        with urlopen_with_retry(req, timeout=30) as resp:
+            return json.load(resp)
+    except urllib.error.HTTPError as e:
+        if e.code == 404:
+            return None  # a real "this article doesn't exist" answer, not a transient failure
+        raise
 
 
 def chunks(seq, n):
@@ -145,7 +138,9 @@ def main():
                 "page_url": summary.get("content_urls", {}).get("desktop", {}).get("page")
                 or f"https://{lang}.wikipedia.org/wiki/{urllib.parse.quote(title)}",
             }
-        time.sleep(0.05)
+        # ~5 requests/s: Sunday's full refresh fetches ~1000 summaries in one
+        # go, and at 0.05s apart Wikipedia answered with 429 after ~200.
+        time.sleep(0.2)
         if (i + 1) % 100 == 0:
             json.dump(out, open(OUT_FILE, "w"), ensure_ascii=False)
             print(f"  ...{i + 1}/{len(todo)} ({len(out)} extracts total so far)")
