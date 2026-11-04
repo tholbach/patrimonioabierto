@@ -18,3 +18,7 @@ __pycache__/
 # infrastructure and differs per host, so it stays out of the repo -
 # .env.example is the committed template.
 .env
+.env.*
+!.env.example
+# Editor swap files of .env hold the same secrets.
+*.sw?
