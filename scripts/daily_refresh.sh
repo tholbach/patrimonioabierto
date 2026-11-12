@@ -32,6 +32,19 @@ set -euo pipefail
 
 cd "$(dirname "$0")/.."
 
+# Pull first: commits pushed from elsewhere (code changes made on a laptop)
+# would otherwise get the push below rejected every day from then on, and
+# the site would keep being built from the old code. --rebase carries over
+# any "Refresh data" commit an earlier run couldn't push; --autostash, files
+# a run that died midway left modified. If it conflicts, abort, so the
+# checkout isn't left mid-rebase for the next run.
+echo "[$(date -Is)] git pull --rebase"
+if ! git pull --rebase --autostash; then
+  git rebase --abort 2>/dev/null || true
+  echo "[$(date -Is)] git pull --rebase failed - fix the checkout by hand" >&2
+  exit 1
+fi
+
 echo "[$(date -Is)] make fetch"
 make fetch
 
@@ -67,6 +80,8 @@ git add $PUBLISHED
 git commit -m "Refresh data
 
 Automated daily refresh (scripts/daily_refresh.sh via systemd timer)."
+# Again, for anything pushed while the fetch/build ran (that takes minutes).
+git pull --rebase --autostash
 git push
 
 echo "[$(date -Is)] pushed data refresh"
