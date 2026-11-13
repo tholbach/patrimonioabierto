@@ -56,8 +56,8 @@ import math
 import os
 import re
 import shutil
-from collections import defaultdict
 import unicodedata
+from collections import defaultdict
 
 WEB_DIR = os.path.join(os.path.dirname(__file__), "..", "web")
 RAW_DIR = os.path.join(os.path.dirname(__file__), "..", "data", "raw")

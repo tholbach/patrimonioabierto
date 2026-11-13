@@ -71,10 +71,10 @@ def _transfer_from_label(name, label):
     words apart from accents; otherwise unchanged."""
     words = list(WORD.finditer(name))
     label_words = WORD.findall(label)
-    if len(label_words) != len(words) or not all(fold(m.group()) == fold(w) for m, w in zip(words, label_words)):
+    if len(label_words) != len(words) or not all(fold(m.group()) == fold(w) for m, w in zip(words, label_words, strict=True)):
         return name
     out, last = [], 0
-    for m, label_word in zip(words, label_words):
+    for m, label_word in zip(words, label_words, strict=True):
         word = m.group()
         out.append(name[last : m.start()])
         out.append(word if ACCENTED.search(word) else _with_case(label_word.lower(), word))
