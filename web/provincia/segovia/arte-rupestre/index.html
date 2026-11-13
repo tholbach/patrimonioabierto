@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <!-- Root-relative, not absolute - resolves against whatever origin
+       actually served the page (production or make serve/localhost) and
+       keeps every relative reference (style.css, assets/*, app.js's own
+       fetch('data/...') calls) pinned to site root even once app.js starts
+       pushState-ing the address bar to /monumento/<id>-<slug>/ during live
+       browsing - without this, those fetches would resolve one directory
+       too deep and 404. Same tag scripts/build_monument_pages.py's static
+       per-monument pages already carry, for the same reason. -->
+  <base href="/">
+  <title>Arte rupestre en Segovia: 72 bienes protegidos - Patrimonio Abierto</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- SEO/social preview. patrimonioabierto.es appears in four places
+       below (canonical, og:url, og:image, twitter:image) - if this domain
+       ever changes again, update all four together plus the <title>/
+       og:title/og:site_name text above, or a shared link preview will
+       keep pointing at the old name/domain. -->
+  <meta name="description" content="Lista de 72 yacimientos de arte rupestre protegidos como Bien de Interés Cultural en Segovia, por municipio, con fotos libres y Wikidata.">
+  <link rel="canonical" href="https://patrimonioabierto.es/provincia/segovia/arte-rupestre/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Patrimonio Abierto">
+  <meta property="og:title" content="Arte rupestre en Segovia: 72 bienes protegidos - Patrimonio Abierto">
+  <meta property="og:description" content="Lista de 72 yacimientos de arte rupestre protegidos como Bien de Interés Cultural en Segovia, por municipio, con fotos libres y Wikidata.">
+  <meta property="og:image" content="https://patrimonioabierto.es/assets/logo-readme.png">
+  <meta property="og:url" content="https://patrimonioabierto.es/provincia/segovia/arte-rupestre/">
+  <meta property="og:locale" content="es_ES">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Arte rupestre en Segovia: 72 bienes protegidos - Patrimonio Abierto">
+  <meta name="twitter:description" content="Lista de 72 yacimientos de arte rupestre protegidos como Bien de Interés Cultural en Segovia, por municipio, con fotos libres y Wikidata.">
+  <meta name="twitter:image" content="https://patrimonioabierto.es/assets/logo-readme.png">
+
+  <!-- Structured data (schema.org) for search engines - a Dataset (what
+       this project actually publishes: the merged BIC/Wikidata/Wikipedia/
+       Commons table) presented as part of a WebSite (how people reach it).
+       Doesn't change anything a visitor sees; only read by crawlers. -->
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "CollectionPage", "name": "Arte rupestre en Segovia", "description": "Lista de 72 yacimientos de arte rupestre protegidos como Bien de Interés Cultural en Segovia, por municipio, con fotos libres y Wikidata.", "url": "https://patrimonioabierto.es/provincia/segovia/arte-rupestre/", "isPartOf": {"@type": "WebSite", "name": "Patrimonio Abierto", "url": "https://patrimonioabierto.es/"}, "breadcrumb": {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://patrimonioabierto.es/"}, {"@type": "ListItem", "position": 2, "name": "Segovia", "item": "https://patrimonioabierto.es/provincia/segovia/"}, {"@type": "ListItem", "position": 3, "name": "Arte rupestre", "item": "https://patrimonioabierto.es/provincia/segovia/arte-rupestre/"}]}, "mainEntity": {"@type": "ItemList", "numberOfItems": 72, "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Cuesta del Padrazo", "url": "https://patrimonioabierto.es/monumento/165121-cuesta-del-padrazo/"}, {"@type": "ListItem", "position": 2, "name": "Monte del Tardón", "url": "https://patrimonioabierto.es/monumento/165173-monte-del-tardon/"}, {"@type": "ListItem", "position": 3, "name": "40-044-0001-02 Burgomillodo I", "url": "https://patrimonioabierto.es/monumento/165832-40-044-0001-02-burgomillodo-i/"}, {"@type": "ListItem", "position": 4, "name": "40-044-0001-03 Burgomillodoii", "url": "https://patrimonioabierto.es/monumento/165843-40-044-0001-03-burgomillodoii/"}, {"@type": "ListItem", "position": 5, "name": "40-044-0001-04 Burgomillodo Iii", "url": "https://patrimonioabierto.es/monumento/165854-40-044-0001-04-burgomillodo-iii/"}, {"@type": "ListItem", "position": 6, "name": "40-044-0001-05 Burgomillodo Iv", "url": "https://patrimonioabierto.es/monumento/165865-40-044-0001-05-burgomillodo-iv/"}, {"@type": "ListItem", "position": 7, "name": "40-044-0001-08 Burgomillodo V", "url": "https://patrimonioabierto.es/monumento/165898-40-044-0001-08-burgomillodo-v/"}, {"@type": "ListItem", "position": 8, "name": "40-044-0001-12 Burgomillodo Vi", "url": "https://patrimonioabierto.es/monumento/165942-40-044-0001-12-burgomillodo-vi/"}, {"@type": "ListItem", "position": 9, "name": "40-044-0001-13 Burgomillodo Vii", "url": "https://patrimonioabierto.es/monumento/165953-40-044-0001-13-burgomillodo-vii/"}, {"@type": "ListItem", "position": 10, "name": "40-044-0001-14 Burgomillodo Viii", "url": "https://patrimonioabierto.es/monumento/165964-40-044-0001-14-burgomillodo-viii/"}, {"@type": "ListItem", "position": 11, "name": "40-044-0001-15 Burgomillodo Ix", "url": "https://patrimonioabierto.es/monumento/165975-40-044-0001-15-burgomillodo-ix/"}, {"@type": "ListItem", "position": 12, "name": "40-044-0001-16 Burgomillodo X", "url": "https://patrimonioabierto.es/monumento/165986-40-044-0001-16-burgomillodo-x/"}, {"@type": "ListItem", "position": 13, "name": "40-044-0001-17 Burgomillodo Xi", "url": "https://patrimonioabierto.es/monumento/165997-40-044-0001-17-burgomillodo-xi/"}, {"@type": "ListItem", "position": 14, "name": "40-044-0001-18 Burgomillodo Xii", "url": "https://patrimonioabierto.es/monumento/166008-40-044-0001-18-burgomillodo-xii/"}, {"@type": "ListItem", "position": 15, "name": "40-044-0001-19 Burgomillodo Xiii", "url": "https://patrimonioabierto.es/monumento/166019-40-044-0001-19-burgomillodo-xiii/"}, {"@type": "ListItem", "position": 16, "name": "40-044-0001-23 Burgomillodo Xiv", "url": "https://patrimonioabierto.es/monumento/166063-40-044-0001-23-burgomillodo-xiv/"}, {"@type": "ListItem", "position": 17, "name": "40-044-0001-25 Burgomillodo Xv", "url": "https://patrimonioabierto.es/monumento/166085-40-044-0001-25-burgomillodo-xv/"}, {"@type": "ListItem", "position": 18, "name": "Abrigo de San Frutos", "url": "https://patrimonioabierto.es/monumento/165887-abrigo-de-san-frutos/"}, {"@type": "ListItem", "position": 19, "name": "Bugerones de San Frutos", "url": "https://patrimonioabierto.es/monumento/165876-bugerones-de-san-frutos/"}, {"@type": "ListItem", "position": 20, "name": "Carrascal I", "url": "https://patrimonioabierto.es/monumento/165909-carrascal-i/"}, {"@type": "ListItem", "position": 21, "name": "Carrascal Ii", "url": "https://patrimonioabierto.es/monumento/165920-carrascal-ii/"}, {"@type": "ListItem", "position": 22, "name": "Carrascal Iii", "url": "https://patrimonioabierto.es/monumento/165931-carrascal-iii/"}, {"@type": "ListItem", "position": 23, "name": "Las Rozas I", "url": "https://patrimonioabierto.es/monumento/166030-las-rozas-i/"}, {"@type": "ListItem", "position": 24, "name": "Las Rozas Ii", "url": "https://patrimonioabierto.es/monumento/166041-las-rozas-ii/"}, {"@type": "ListItem", "position": 25, "name": "Las Rozas Iii", "url": "https://patrimonioabierto.es/monumento/166052-las-rozas-iii/"}, {"@type": "ListItem", "position": 26, "name": "Las Rozas Iv", "url": "https://patrimonioabierto.es/monumento/166074-las-rozas-iv/"}, {"@type": "ListItem", "position": 27, "name": "Santa Engracia", "url": "https://patrimonioabierto.es/monumento/165821-santa-engracia/"}, {"@type": "ListItem", "position": 28, "name": "Cueva Pintada", "url": "https://patrimonioabierto.es/monumento/166750-cueva-pintada/"}, {"@type": "ListItem", "position": 29, "name": "Cueva Quemada", "url": "https://patrimonioabierto.es/monumento/166761-cueva-quemada/"}, {"@type": "ListItem", "position": 30, "name": "Peña Carrasquilla", "url": "https://patrimonioabierto.es/monumento/10693-pena-carrasquilla/"}, {"@type": "ListItem", "position": 31, "name": "Peñuelas", "url": "https://patrimonioabierto.es/monumento/10909-penuelas/"}, {"@type": "ListItem", "position": 32, "name": "40-115-0001-22", "url": "https://patrimonioabierto.es/monumento/171166-40-115-0001-22/"}, {"@type": "ListItem", "position": 33, "name": "Aldehuela", "url": "https://patrimonioabierto.es/monumento/171561-aldehuela/"}, {"@type": "ListItem", "position": 34, "name": "La Vega", "url": "https://patrimonioabierto.es/monumento/546574-la-vega/"}, {"@type": "ListItem", "position": 35, "name": "Peña Cabrera", "url": "https://patrimonioabierto.es/monumento/171583-pena-cabrera/"}, {"@type": "ListItem", "position": 36, "name": "Peña Mora", "url": "https://patrimonioabierto.es/monumento/171596-pena-mora/"}, {"@type": "ListItem", "position": 37, "name": "Cueva de la Griega", "url": "https://patrimonioabierto.es/monumento/11371-cueva-de-la-griega/"}, {"@type": "ListItem", "position": 38, "name": "El Molinillo", "url": "https://patrimonioabierto.es/monumento/11596-el-molinillo/"}, {"@type": "ListItem", "position": 39, "name": "Fuente Buena", "url": "https://patrimonioabierto.es/monumento/175657-fuente-buena/"}, {"@type": "ListItem", "position": 40, "name": "Molinillo, el", "url": "https://patrimonioabierto.es/monumento/175501-molinillo-el/"}, {"@type": "ListItem", "position": 41, "name": "Alto de las Cuevas", "url": "https://patrimonioabierto.es/monumento/175874-alto-de-las-cuevas/"}, {"@type": "ListItem", "position": 42, "name": "40-193-0001-03 Sebúlcor 1", "url": "https://patrimonioabierto.es/monumento/176191-40-193-0001-03-sebulcor-1/"}, {"@type": "ListItem", "position": 43, "name": "40-193-0001-04 Sebúlcor 2", "url": "https://patrimonioabierto.es/monumento/176202-40-193-0001-04-sebulcor-2/"}, {"@type": "ListItem", "position": 44, "name": "40-193-0001-05 Sebúlcor 3", "url": "https://patrimonioabierto.es/monumento/176213-40-193-0001-05-sebulcor-3/"}, {"@type": "ListItem", "position": 45, "name": "40-193-0001-06 Sebúlcor 4", "url": "https://patrimonioabierto.es/monumento/176224-40-193-0001-06-sebulcor-4/"}, {"@type": "ListItem", "position": 46, "name": "40-193-0001-07 Sebúlcor 5", "url": "https://patrimonioabierto.es/monumento/176235-40-193-0001-07-sebulcor-5/"}, {"@type": "ListItem", "position": 47, "name": "40-193-0001-08 Sebúlcor 6", "url": "https://patrimonioabierto.es/monumento/176246-40-193-0001-08-sebulcor-6/"}, {"@type": "ListItem", "position": 48, "name": "40-193-0001-09 Sebúlcor 7", "url": "https://patrimonioabierto.es/monumento/176257-40-193-0001-09-sebulcor-7/"}, {"@type": "ListItem", "position": 49, "name": "40-195-0011-13 Villaseca6", "url": "https://patrimonioabierto.es/monumento/178197-40-195-0011-13-villaseca6/"}, {"@type": "ListItem", "position": 50, "name": "Barranco del Arroyo de la Pallejera", "url": "https://patrimonioabierto.es/monumento/547161-barranco-del-arroyo-de-la-pallejera/"}, {"@type": "ListItem", "position": 51, "name": "40-193-0001-10 Sebúlcor 8", "url": "https://patrimonioabierto.es/monumento/176268-40-193-0001-10-sebulcor-8/"}, {"@type": "ListItem", "position": 52, "name": "40-193-0001-11 Sebúlcor 9", "url": "https://patrimonioabierto.es/monumento/176279-40-193-0001-11-sebulcor-9/"}, {"@type": "ListItem", "position": 53, "name": "40-195-0011-05 Villaseca1", "url": "https://patrimonioabierto.es/monumento/178102-40-195-0011-05-villaseca1/"}, {"@type": "ListItem", "position": 54, "name": "40-195-0011-08 Villaseca2", "url": "https://patrimonioabierto.es/monumento/178139-40-195-0011-08-villaseca2/"}, {"@type": "ListItem", "position": 55, "name": "40-195-0011-09 Villaseca3", "url": "https://patrimonioabierto.es/monumento/178150-40-195-0011-09-villaseca3/"}, {"@type": "ListItem", "position": 56, "name": "40-195-0011-11 Villaseca4", "url": "https://patrimonioabierto.es/monumento/178175-40-195-0011-11-villaseca4/"}, {"@type": "ListItem", "position": 57, "name": "40-195-0011-12 Villaseca5", "url": "https://patrimonioabierto.es/monumento/178186-40-195-0011-12-villaseca5/"}, {"@type": "ListItem", "position": 58, "name": "Abrigo del Cabrón I", "url": "https://patrimonioabierto.es/monumento/177265-abrigo-del-cabron-i/"}, {"@type": "ListItem", "position": 59, "name": "Abrigo del Cabrón Ii", "url": "https://patrimonioabierto.es/monumento/177277-abrigo-del-cabron-ii/"}, {"@type": "ListItem", "position": 60, "name": "Angostillos, los", "url": "https://patrimonioabierto.es/monumento/178113-angostillos-los/"}, {"@type": "ListItem", "position": 61, "name": "Cruces, las", "url": "https://patrimonioabierto.es/monumento/177288-cruces-las/"}, {"@type": "ListItem", "position": 62, "name": "Cueva del Hoyo", "url": "https://patrimonioabierto.es/monumento/177732-cueva-del-hoyo/"}, {"@type": "ListItem", "position": 63, "name": "Cueva Hermeja", "url": "https://patrimonioabierto.es/monumento/547021-cueva-hermeja/"}, {"@type": "ListItem", "position": 64, "name": "Entraderas a", "url": "https://patrimonioabierto.es/monumento/178091-entraderas-a/"}, {"@type": "ListItem", "position": 65, "name": "Entraderas B", "url": "https://patrimonioabierto.es/monumento/178476-entraderas-b/"}, {"@type": "ListItem", "position": 66, "name": "Huelgas, las", "url": "https://patrimonioabierto.es/monumento/177253-huelgas-las/"}, {"@type": "ListItem", "position": 67, "name": "Llave, la", "url": "https://patrimonioabierto.es/monumento/178235-llave-la/"}, {"@type": "ListItem", "position": 68, "name": "Nogalera, la", "url": "https://patrimonioabierto.es/monumento/178212-nogalera-la/"}, {"@type": "ListItem", "position": 69, "name": "Solapa de la Molinilla", "url": "https://patrimonioabierto.es/monumento/178163-solapa-de-la-molinilla/"}, {"@type": "ListItem", "position": 70, "name": "Solapa del Juego de la Chita", "url": "https://patrimonioabierto.es/monumento/178126-solapa-del-juego-de-la-chita/"}, {"@type": "ListItem", "position": 71, "name": "Solapa del Reguero de Valdegarcia", "url": "https://patrimonioabierto.es/monumento/178224-solapa-del-reguero-de-valdegarcia/"}, {"@type": "ListItem", "position": 72, "name": "Solapo del Águila", "url": "https://patrimonioabierto.es/monumento/178246-solapo-del-aguila/"}]}}</script>
+
+  <!-- Same mark as #logo-mark/#loading-logo/#welcome-logo (assets/logo.png)
+       - just square and on a solid brand-purple backing (same purple as
+       logo-readme.png's own README treatment), since a browser tab is
+       usually light or dark, not the purple header bar this logo is
+       normally drawn against - its white linework would go near-invisible
+       on a plain white tab background otherwise. -->
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <!-- Fraunces/Inter used to load from Google Fonts - self-hosted instead
+       (see the @font-face block at the top of style.css) so a visitor's
+       browser never has to talk to fonts.gstatic.com at all: no third-
+       party request, no IP address leaving this site's own domain, one
+       less thing for the Privacidad page to have to disclose. -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- Without JavaScript nothing ever dismisses the loading screen or the
+       welcome dialog, so they would cover the page's static content (the
+       per-monument pages carry real text and links in the HTML) forever. -->
+  <noscript><style>#loading-screen, #welcome-modal { display: none !important; }</style></noscript>
+</head>
+<body>
+  <!-- The very first focusable thing on the page, on purpose - a classic
+       "skip link", invisible until it actually receives keyboard focus (see
+       .skip-link CSS). The visible 📋 button/menu entry that used to sit
+       next to this got removed (redundant with search/map for anyone
+       clicking around) - this is now the only way into showListPanel(),
+       which is fine: it's aimed squarely at whoever can't/doesn't want to
+       drive the map, and reaches the same panel in a single Tab press from
+       anywhere, before the loading screen, the header, anything - no
+       fishing for a small icon first. -->
+  <a href="#" id="skip-to-list-link" class="skip-link" data-i18n="list.skip_link">Ir directamente a la lista de monumentos</a>
+
+  <!-- First paint, before app.js even runs: the dataset is ~2MB, worth
+       covering with something branded rather than a blank page while it
+       loads. Spanish text is hardcoded as the real initial content (not an
+       empty data-i18n placeholder) since the app always starts in 'es' -
+       applyStaticI18n() just re-confirms it once JS runs. -->
+  <div id="loading-screen">
+    <img src="assets/logo.png" alt="" id="loading-logo">
+    <div id="loading-spinner" aria-hidden="true"></div>
+    <p data-i18n="loading.screen">Cargando el catálogo…</p>
+  </div>
+
+  <!-- Shown once per browser (localStorage flag, see app.js), after the
+       data has loaded - not on top of a deep link (?id=/?muni=/?prov=/#...),
+       since someone arriving at a specific monument already knows what
+       they're looking at. -->
+  <div id="welcome-modal">
+    <div id="welcome-card">
+      <div id="welcome-logo-badge"><img src="assets/logo.png" alt="" id="welcome-logo"></div>
+      <h2 data-i18n="welcome.title">Bienvenido a Patrimonio Abierto</h2>
+      <p data-i18n="welcome.body">Aquí encontrarás todos los Bienes de Interés Cultural (BIC) declarados oficialmente en Castilla y León, junto con información y material multimedia de Wikidata, Wikipedia y Wikimedia Commons. Un proyecto libre, sin cuentas ni anuncios.</p>
+      <!-- Plain links into the per-province pages, so the homepage - and every
+           page built from this shell - leads a crawler to them. -->
+      <nav id="welcome-provinces" aria-label="Provincias"><span data-i18n="welcome.provinces">Explorar por provincia:</span>
+        <a href="/provincia/avila/">Ávila</a> <a href="/provincia/burgos/">Burgos</a> <a href="/provincia/leon/">León</a>
+        <a href="/provincia/palencia/">Palencia</a> <a href="/provincia/salamanca/">Salamanca</a> <a href="/provincia/segovia/">Segovia</a>
+        <a href="/provincia/soria/">Soria</a> <a href="/provincia/valladolid/">Valladolid</a> <a href="/provincia/zamora/">Zamora</a></nav>
+      <button type="button" id="welcome-close-btn" data-i18n="welcome.cta">Empezar a explorar</button>
+      <a href="#" id="welcome-about-link" data-i18n="welcome.about_link">Más sobre el proyecto</a>
+    </div>
+  </div>
+
+  <header id="topbar">
+    <!-- Real link (not a <span>/<button>) - see wireSpaLink() in app.js:
+         hovering shows the URL, right-click/ctrl-click/middle-click all do
+         a real navigation back to the plain map, and a normal click gets
+         the instant in-app close instead of a reload. -->
+    <a class="brand" href="." id="brand-link"><img src="assets/logo.png" alt="" id="logo-mark">Patrimonio Abierto</a>
+
+    <!-- Mobile only (see CSS) - collapses #search-wrap to just this icon
+         until tapped, so the default header stays one compact row instead
+         of permanently reserving a full second row for it. -->
+    <!-- Inline SVG, not the 🔍 emoji this used to be - emoji glyphs are
+         drawn by the OS's own emoji font, whose vertical metrics vary
+         enough between Apple/Noto/Samsung's color-emoji sets that it never
+         sat quite centered in this small round button on mobile. An SVG
+         with stroke="currentColor" sits exactly where the viewBox puts it,
+         on every platform, and inherits the button's own (white) color. -->
+    <button type="button" id="search-toggle-btn" data-i18n-title="search.placeholder" aria-label="Search">
+      <svg viewBox="0 0 24 24" width="25" height="25" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </button>
+
+    <div id="search-wrap">
+      <input type="text" id="search-input" autocomplete="off" data-i18n-placeholder="search.placeholder" />
+      <button type="button" id="search-close-btn" aria-label="Close search">✕</button>
+      <div id="search-results"></div>
+    </div>
+
+    <!-- Estadísticas/Acerca de/Cómo contribuir/language all live behind
+         this on every screen size now, not just mobile - see showMenuPanel()
+         in app.js. Keeps the header down to logo + search everywhere. -->
+    <button type="button" id="menu-btn" data-i18n-title="menu.button_title" aria-label="Menu">☰</button>
+  </header>
+
+  <div id="app">
+    <!-- map-wrap, not #app, is what #legend/#locate-btn anchor to - #app
+         spans the map AND the panel side-by-side, so anchoring to it means
+         "right: 16px" measures from the panel's edge once it's open, not
+         the map's. map-wrap always matches the map's own visible area. -->
+    <div id="map-wrap">
+      <div id="map"></div>
+
+      <!-- data-i18n-tooltip, not data-i18n-title: see applyStaticI18n() in
+           i18n.js - feeds style.css's [data-i18n-tooltip]::after desktop
+           label instead of the browser's own native title tooltip. -->
+      <button type="button" id="shuffle-btn" data-i18n-tooltip="shuffle.button_title" aria-label="Random monument">🎲</button>
+      <!-- Same blue dot/white ring as .you-are-here-dot below (the marker
+           this button actually places on the map once located), plus the
+           same soft outer halo that marker's ::after ring gives it - a bare
+           dot read as flat next to that; the halo is what actually makes it
+           recognizable as "the Google Maps blue dot" at a glance. Fixed
+           colors, not currentColor, so the button previews what pressing it
+           does regardless of button state. Replaces the 🎯 target emoji,
+           which read as "aim/select a spot" rather than "find me". -->
+      <button type="button" id="locate-btn" data-i18n-tooltip="geolocation.button_title" aria-label="Locate me">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <circle cx="12" cy="12" r="10" fill="#2a6fbb" opacity="0.18"/>
+          <circle cx="12" cy="12" r="7" fill="#2a6fbb" stroke="white" stroke-width="2.5"/>
+        </svg>
+      </button>
+
+      <!-- Filter button + its dropdown card, same anchor-to-map-wrap /
+           click-outside-closes pattern as #search-results. Row list itself
+           is built in app.js from whatever categories actually appear in
+           the dataset, not hardcoded here. -->
+      <!-- "Tune" icon, same slider-control metaphor as Google Maps' own
+           filter button, but the previous pass (thin currentColor lines +
+           tiny colored dots) still read as mostly monochrome - color was
+           only in three small accents, not the icon itself. This flips
+           that: three bold colored capsule tracks (teal/blue/terracotta -
+           NOT purple, which is #filter-btn.active's own background and
+           would nearly vanish against it, the same reasoning the earlier
+           solid-funnel pass already used) each with a white handle. Color
+           now carries real visual weight instead of being a detail on top
+           of black lines, and the white handles keep it legible on both
+           the idle white background and the active purple one. -->
+      <button type="button" id="filter-btn" data-i18n-tooltip="filter.button_title" aria-label="Filter">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+          <rect x="3" y="4.5" width="18" height="3" rx="1.5" fill="#1c8a6d"/>
+          <circle cx="9" cy="6" r="3" fill="white" stroke="#1c8a6d" stroke-width="1.5"/>
+          <rect x="3" y="10.5" width="18" height="3" rx="1.5" fill="#2a6fbb"/>
+          <circle cx="16" cy="12" r="3" fill="white" stroke="#2a6fbb" stroke-width="1.5"/>
+          <rect x="3" y="16.5" width="18" height="3" rx="1.5" fill="#c2703d"/>
+          <circle cx="11" cy="18" r="3" fill="white" stroke="#c2703d" stroke-width="1.5"/>
+        </svg>
+        <span id="filter-badge" class="filter-badge" hidden></span>
+      </button>
+      <div id="filter-panel">
+        <!-- "Estado" - orthogonal to category, AND-combined with it: a
+             record must match the selected categories AND (no status box
+             checked, or at least one checked status). Only 2 rows, so no
+             Todo/Ninguno shortcuts needed the way the longer category list
+             has. -->
+        <div class="filter-section-label" data-i18n="filter.status_title">Estado</div>
+        <div id="filter-status-list"></div>
+
+        <div id="filter-panel-header">
+          <span data-i18n="filter.title">Categorías</span>
+          <div id="filter-panel-actions">
+            <button type="button" id="filter-all-btn" data-i18n="filter.all">Todo</button>
+            <button type="button" id="filter-none-btn" data-i18n="filter.none">Ninguno</button>
+          </div>
+        </div>
+        <div id="filter-list"></div>
+      </div>
+
+      <!-- Desktop-only (hidden <=768px, see style.css) - a rotating
+           highlight card, one photo picked deterministically per ISO week
+           from web/data/picture_of_the_week.json (see find_good_pictures.py)
+           so it changes weekly with no server/build step involved, and
+           stays identical for every visitor that same week. Hidden
+           entirely (not just empty) whenever that pool is empty. -->
+      <div id="potw" hidden></div>
+
+      <!-- Slim, always-on call-to-action strip (both mobile and desktop) -
+           shown whenever the map itself is in view (panel closed), unlike
+           #potw above it has no dismiss state of its own: see app.js for
+           why the two are kept independent. Real <a>, not a <button> - see
+           wireSpaLink()'s own comment: hover/right-click/ctrl-click should
+           all behave like the real link to /contribute/ that this is. -->
+      <a href="/contribute/" id="contribute-bar" hidden>
+        <span class="contribute-bar-text-full" data-i18n="contribute_bar.text"></span>
+        <span class="contribute-bar-text-short" data-i18n="contribute_bar.text_short"></span>
+      </a>
+    </div>
+
+    <aside id="panel" class="open">
+      <div id="panel-handle"></div>
+      <button id="panel-close" aria-label="Cerrar">✕</button>
+      <div id="panel-content" data-static-province="Segovia" data-static-category="ARTE RUPESTRE"><div class="hero hero-fallback"><div class="hero-placeholder-icon">🗺️</div><div class="hero-scrim"><div class="hero-kicker">🪨 Arte rupestre</div><h1 class="hero-title">Arte rupestre en Segovia</h1></div></div><div class="panel-body"><nav class="crumbs" aria-label="Migas de pan"><a href="/">Inicio</a> <span aria-hidden="true">›</span> <a href="/provincia/segovia/">Segovia</a> <span aria-hidden="true">›</span> <span aria-current="page">Arte rupestre</span></nav><div class="meta">72 bienes · 13 municipios</div><p class="summary">72 yacimientos de arte rupestre protegidos como Bien de Interés Cultural en la provincia de Segovia, en 13 municipios, según el catálogo oficial de la Junta de Castilla y León. Ninguno tiene fotografía libre en Wikimedia Commons; 17 están enlazados a Wikidata. Aún faltan fotografías libres de 72. Carrascal del Río reúne 25 de ellos. La protección más antigua data de 1985.</p><h2>Bernardos</h2><ul class="list"><li><a class="list-row" href="/monumento/165121-cuesta-del-padrazo/" data-jcyl-id="165121"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Cuesta del Padrazo</span></a></li><li><a class="list-row" href="/monumento/165173-monte-del-tardon/" data-jcyl-id="165173"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Monte del Tardón</span></a></li></ul><h2>Carrascal del Río</h2><ul class="list"><li><a class="list-row" href="/monumento/165832-40-044-0001-02-burgomillodo-i/" data-jcyl-id="165832"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">40-044-0001-02 Burgomillodo I</span></a></li><li><a class="list-row" href="/monumento/165843-40-044-0001-03-burgomillodoii/" data-jcyl-id="165843"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">40-044-0001-03 Burgomillodoii</span></a></li><li><a class="list-row" href="/monumento/165854-40-044-0001-04-burgomillodo-iii/" data-jcyl-id="165854"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">40-044-0001-04 Burgomillodo Iii</span></a></li><li><a class="list-row" href="/monumento/165865-40-044-0001-05-burgomillodo-iv/" data-jcyl-id="165865"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">40-044-0001-05 Burgomillodo Iv</span></a></li><li><a class="list-row" href="/monumento/165898-40-044-0001-08-burgomillodo-v/" data-jcyl-id="165898"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">40-044-0001-08 Burgomillodo V</span></a></li><li><a class="list-row" href="/monumento/165942-40-044-0001-12-burgomillodo-vi/" data-jcyl-id="165942"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">40-044-0001-12 Burgomillodo Vi</span></a></li><li><a class="list-row" href="/monumento/165953-40-044-0001-13-burgomillodo-vii/" data-jcyl-id="165953"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">40-044-0001-13 Burgomillodo Vii</span></a></li><li><a class="list-row" href="/monumento/165964-40-044-0001-14-burgomillodo-viii/" data-jcyl-id="165964"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">40-044-0001-14 Burgomillodo Viii</span></a></li><li><a class="list-row" href="/monumento/165975-40-044-0001-15-burgomillodo-ix/" data-jcyl-id="165975"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">40-044-0001-15 Burgomillodo Ix</span></a></li><li><a class="list-row" href="/monumento/165986-40-044-0001-16-burgomillodo-x/" data-jcyl-id="165986"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">40-044-0001-16 Burgomillodo X</span></a></li><li><a class="list-row" href="/monumento/165997-40-044-0001-17-burgomillodo-xi/" data-jcyl-id="165997"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">40-044-0001-17 Burgomillodo Xi</span></a></li><li><a class="list-row" href="/monumento/166008-40-044-0001-18-burgomillodo-xii/" data-jcyl-id="166008"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">40-044-0001-18 Burgomillodo Xii</span></a></li><li><a class="list-row" href="/monumento/166019-40-044-0001-19-burgomillodo-xiii/" data-jcyl-id="166019"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">40-044-0001-19 Burgomillodo Xiii</span></a></li><li><a class="list-row" href="/monumento/166063-40-044-0001-23-burgomillodo-xiv/" data-jcyl-id="166063"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">40-044-0001-23 Burgomillodo Xiv</span></a></li><li><a class="list-row" href="/monumento/166085-40-044-0001-25-burgomillodo-xv/" data-jcyl-id="166085"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">40-044-0001-25 Burgomillodo Xv</span></a></li><li><a class="list-row" href="/monumento/165887-abrigo-de-san-frutos/" data-jcyl-id="165887"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Abrigo de San Frutos</span></a></li><li><a class="list-row" href="/monumento/165876-bugerones-de-san-frutos/" data-jcyl-id="165876"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Bugerones de San Frutos</span></a></li><li><a class="list-row" href="/monumento/165909-carrascal-i/" data-jcyl-id="165909"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Carrascal I</span></a></li><li><a class="list-row" href="/monumento/165920-carrascal-ii/" data-jcyl-id="165920"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Carrascal Ii</span></a></li><li><a class="list-row" href="/monumento/165931-carrascal-iii/" data-jcyl-id="165931"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Carrascal Iii</span></a></li><li><a class="list-row" href="/monumento/166030-las-rozas-i/" data-jcyl-id="166030"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Las Rozas I</span></a></li><li><a class="list-row" href="/monumento/166041-las-rozas-ii/" data-jcyl-id="166041"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Las Rozas Ii</span></a></li><li><a class="list-row" href="/monumento/166052-las-rozas-iii/" data-jcyl-id="166052"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Las Rozas Iii</span></a></li><li><a class="list-row" href="/monumento/166074-las-rozas-iv/" data-jcyl-id="166074"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Las Rozas Iv</span></a></li><li><a class="list-row" href="/monumento/165821-santa-engracia/" data-jcyl-id="165821"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Santa Engracia</span></a></li></ul><h2>Castroserna de Abajo</h2><ul class="list"><li><a class="list-row" href="/monumento/166750-cueva-pintada/" data-jcyl-id="166750"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Cueva Pintada</span></a></li><li><a class="list-row" href="/monumento/166761-cueva-quemada/" data-jcyl-id="166761"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Cueva Quemada</span></a></li></ul><h2>Cuéllar</h2><ul class="list"><li><a class="list-row" href="/monumento/10693-pena-carrasquilla/" data-jcyl-id="10693"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Peña Carrasquilla</span></a></li></ul><h2>Domingo García</h2><ul class="list"><li><a class="list-row" href="/monumento/10909-penuelas/" data-jcyl-id="10909"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Peñuelas</span></a></li></ul><h2>Maderuelo</h2><ul class="list"><li><a class="list-row" href="/monumento/171166-40-115-0001-22/" data-jcyl-id="171166"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">40-115-0001-22</span></a></li></ul><h2>Migueláñez</h2><ul class="list"><li><a class="list-row" href="/monumento/171561-aldehuela/" data-jcyl-id="171561"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Aldehuela</span></a></li><li><a class="list-row" href="/monumento/546574-la-vega/" data-jcyl-id="546574"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">La Vega</span></a></li><li><a class="list-row" href="/monumento/171583-pena-cabrera/" data-jcyl-id="171583"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Peña Cabrera</span></a></li><li><a class="list-row" href="/monumento/171596-pena-mora/" data-jcyl-id="171596"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Peña Mora</span></a></li></ul><h2>Pedraza</h2><ul class="list"><li><a class="list-row" href="/monumento/11371-cueva-de-la-griega/" data-jcyl-id="11371"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Cueva de la Griega</span></a></li></ul><h2>Santa María la Real de Nieva</h2><ul class="list"><li><a class="list-row" href="/monumento/11596-el-molinillo/" data-jcyl-id="11596"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">El Molinillo</span></a></li><li><a class="list-row" href="/monumento/175657-fuente-buena/" data-jcyl-id="175657"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Fuente Buena</span></a></li><li><a class="list-row" href="/monumento/175501-molinillo-el/" data-jcyl-id="175501"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Molinillo, el</span></a></li></ul><h2>Santiuste de Pedraza</h2><ul class="list"><li><a class="list-row" href="/monumento/175874-alto-de-las-cuevas/" data-jcyl-id="175874"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Alto de las Cuevas</span></a></li></ul><h2>Sebúlcor</h2><ul class="list"><li><a class="list-row" href="/monumento/176191-40-193-0001-03-sebulcor-1/" data-jcyl-id="176191"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">40-193-0001-03 Sebúlcor 1</span></a></li><li><a class="list-row" href="/monumento/176202-40-193-0001-04-sebulcor-2/" data-jcyl-id="176202"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">40-193-0001-04 Sebúlcor 2</span></a></li><li><a class="list-row" href="/monumento/176213-40-193-0001-05-sebulcor-3/" data-jcyl-id="176213"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">40-193-0001-05 Sebúlcor 3</span></a></li><li><a class="list-row" href="/monumento/176224-40-193-0001-06-sebulcor-4/" data-jcyl-id="176224"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">40-193-0001-06 Sebúlcor 4</span></a></li><li><a class="list-row" href="/monumento/176235-40-193-0001-07-sebulcor-5/" data-jcyl-id="176235"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">40-193-0001-07 Sebúlcor 5</span></a></li><li><a class="list-row" href="/monumento/176246-40-193-0001-08-sebulcor-6/" data-jcyl-id="176246"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">40-193-0001-08 Sebúlcor 6</span></a></li><li><a class="list-row" href="/monumento/176257-40-193-0001-09-sebulcor-7/" data-jcyl-id="176257"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">40-193-0001-09 Sebúlcor 7</span></a></li><li><a class="list-row" href="/monumento/178197-40-195-0011-13-villaseca6/" data-jcyl-id="178197"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">40-195-0011-13 Villaseca6</span></a></li></ul><h2>Segovia</h2><ul class="list"><li><a class="list-row" href="/monumento/547161-barranco-del-arroyo-de-la-pallejera/" data-jcyl-id="547161"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Barranco del Arroyo de la Pallejera</span></a></li></ul><h2>Sepúlveda</h2><ul class="list"><li><a class="list-row" href="/monumento/176268-40-193-0001-10-sebulcor-8/" data-jcyl-id="176268"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">40-193-0001-10 Sebúlcor 8</span></a></li><li><a class="list-row" href="/monumento/176279-40-193-0001-11-sebulcor-9/" data-jcyl-id="176279"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">40-193-0001-11 Sebúlcor 9</span></a></li><li><a class="list-row" href="/monumento/178102-40-195-0011-05-villaseca1/" data-jcyl-id="178102"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">40-195-0011-05 Villaseca1</span></a></li><li><a class="list-row" href="/monumento/178139-40-195-0011-08-villaseca2/" data-jcyl-id="178139"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">40-195-0011-08 Villaseca2</span></a></li><li><a class="list-row" href="/monumento/178150-40-195-0011-09-villaseca3/" data-jcyl-id="178150"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">40-195-0011-09 Villaseca3</span></a></li><li><a class="list-row" href="/monumento/178175-40-195-0011-11-villaseca4/" data-jcyl-id="178175"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">40-195-0011-11 Villaseca4</span></a></li><li><a class="list-row" href="/monumento/178186-40-195-0011-12-villaseca5/" data-jcyl-id="178186"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">40-195-0011-12 Villaseca5</span></a></li><li><a class="list-row" href="/monumento/177265-abrigo-del-cabron-i/" data-jcyl-id="177265"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Abrigo del Cabrón I</span></a></li><li><a class="list-row" href="/monumento/177277-abrigo-del-cabron-ii/" data-jcyl-id="177277"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Abrigo del Cabrón Ii</span></a></li><li><a class="list-row" href="/monumento/178113-angostillos-los/" data-jcyl-id="178113"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Angostillos, los</span></a></li><li><a class="list-row" href="/monumento/177288-cruces-las/" data-jcyl-id="177288"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Cruces, las</span></a></li><li><a class="list-row" href="/monumento/177732-cueva-del-hoyo/" data-jcyl-id="177732"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Cueva del Hoyo</span></a></li><li><a class="list-row" href="/monumento/547021-cueva-hermeja/" data-jcyl-id="547021"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Cueva Hermeja</span></a></li><li><a class="list-row" href="/monumento/178091-entraderas-a/" data-jcyl-id="178091"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Entraderas a</span></a></li><li><a class="list-row" href="/monumento/178476-entraderas-b/" data-jcyl-id="178476"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Entraderas B</span></a></li><li><a class="list-row" href="/monumento/177253-huelgas-las/" data-jcyl-id="177253"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Huelgas, las</span></a></li><li><a class="list-row" href="/monumento/178235-llave-la/" data-jcyl-id="178235"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Llave, la</span></a></li><li><a class="list-row" href="/monumento/178212-nogalera-la/" data-jcyl-id="178212"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Nogalera, la</span></a></li><li><a class="list-row" href="/monumento/178163-solapa-de-la-molinilla/" data-jcyl-id="178163"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Solapa de la Molinilla</span></a></li><li><a class="list-row" href="/monumento/178126-solapa-del-juego-de-la-chita/" data-jcyl-id="178126"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Solapa del Juego de la Chita</span></a></li><li><a class="list-row" href="/monumento/178224-solapa-del-reguero-de-valdegarcia/" data-jcyl-id="178224"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Solapa del Reguero de Valdegarcia</span></a></li><li><a class="list-row" href="/monumento/178246-solapo-del-aguila/" data-jcyl-id="178246"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Solapo del Águila</span></a></li></ul><h2>Más de Segovia</h2><ul class="page-links"><li><a href="/provincia/segovia/">Todo el patrimonio de Segovia</a> <span class="meta">228</span></li><li><a href="/provincia/segovia/monumentos/">Monumentos</a> <span class="meta">120</span></li><li><a href="/provincia/segovia/conjuntos-historicos/">Conjuntos históricos</a> <span class="meta">10</span></li><li><a href="/provincia/segovia/castillos/">Castillos</a> <span class="meta">9</span></li><li><a href="/provincia/segovia/zonas-arqueologicas/">Zonas arqueológicas</a> <span class="meta">7</span></li><li><a href="/provincia/segovia/rollos-de-justicia/">Rollos de justicia</a> <span class="meta">6</span></li></ul><h2>Arte rupestre en otras provincias</h2><ul class="page-links"><li><a href="/provincia/burgos/arte-rupestre/">Arte rupestre en Burgos</a> <span class="meta">9</span></li><li><a href="/provincia/leon/arte-rupestre/">Arte rupestre en León</a> <span class="meta">11</span></li><li><a href="/provincia/salamanca/arte-rupestre/">Arte rupestre en Salamanca</a> <span class="meta">66</span></li><li><a href="/provincia/soria/arte-rupestre/">Arte rupestre en Soria</a> <span class="meta">130</span></li><li><a href="/provincia/zamora/arte-rupestre/">Arte rupestre en Zamora</a> <span class="meta">25</span></li><li><a href="/provincia/avila/arte-rupestre/">Arte rupestre en Ávila</a> <span class="meta">10</span></li></ul></div></div>
+    </aside>
+  </div>
+
+  <div id="toast"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+  <script src="i18n.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

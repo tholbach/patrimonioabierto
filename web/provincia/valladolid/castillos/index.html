@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <!-- Root-relative, not absolute - resolves against whatever origin
+       actually served the page (production or make serve/localhost) and
+       keeps every relative reference (style.css, assets/*, app.js's own
+       fetch('data/...') calls) pinned to site root even once app.js starts
+       pushState-ing the address bar to /monumento/<id>-<slug>/ during live
+       browsing - without this, those fetches would resolve one directory
+       too deep and 404. Same tag scripts/build_monument_pages.py's static
+       per-monument pages already carry, for the same reason. -->
+  <base href="/">
+  <title>Castillos en Valladolid: 36 bienes protegidos - Patrimonio Abierto</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- SEO/social preview. patrimonioabierto.es appears in four places
+       below (canonical, og:url, og:image, twitter:image) - if this domain
+       ever changes again, update all four together plus the <title>/
+       og:title/og:site_name text above, or a shared link preview will
+       keep pointing at the old name/domain. -->
+  <meta name="description" content="Lista de 36 castillos protegidos como Bien de Interés Cultural en Valladolid, por municipio, con fotos libres y Wikidata.">
+  <link rel="canonical" href="https://patrimonioabierto.es/provincia/valladolid/castillos/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Patrimonio Abierto">
+  <meta property="og:title" content="Castillos en Valladolid: 36 bienes protegidos - Patrimonio Abierto">
+  <meta property="og:description" content="Lista de 36 castillos protegidos como Bien de Interés Cultural en Valladolid, por municipio, con fotos libres y Wikidata.">
+  <meta property="og:image" content="https://patrimonioabierto.es/assets/logo-readme.png">
+  <meta property="og:url" content="https://patrimonioabierto.es/provincia/valladolid/castillos/">
+  <meta property="og:locale" content="es_ES">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Castillos en Valladolid: 36 bienes protegidos - Patrimonio Abierto">
+  <meta name="twitter:description" content="Lista de 36 castillos protegidos como Bien de Interés Cultural en Valladolid, por municipio, con fotos libres y Wikidata.">
+  <meta name="twitter:image" content="https://patrimonioabierto.es/assets/logo-readme.png">
+
+  <!-- Structured data (schema.org) for search engines - a Dataset (what
+       this project actually publishes: the merged BIC/Wikidata/Wikipedia/
+       Commons table) presented as part of a WebSite (how people reach it).
+       Doesn't change anything a visitor sees; only read by crawlers. -->
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "CollectionPage", "name": "Castillos en Valladolid", "description": "Lista de 36 castillos protegidos como Bien de Interés Cultural en Valladolid, por municipio, con fotos libres y Wikidata.", "url": "https://patrimonioabierto.es/provincia/valladolid/castillos/", "isPartOf": {"@type": "WebSite", "name": "Patrimonio Abierto", "url": "https://patrimonioabierto.es/"}, "breadcrumb": {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://patrimonioabierto.es/"}, {"@type": "ListItem", "position": 2, "name": "Valladolid", "item": "https://patrimonioabierto.es/provincia/valladolid/"}, {"@type": "ListItem", "position": 3, "name": "Castillos", "item": "https://patrimonioabierto.es/provincia/valladolid/castillos/"}]}, "mainEntity": {"@type": "ItemList", "numberOfItems": 36, "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Castillo de Alaejos", "url": "https://patrimonioabierto.es/monumento/2016582-castillo-de-alaejos/"}, {"@type": "ListItem", "position": 2, "name": "Torre-fortaleza", "url": "https://patrimonioabierto.es/monumento/14409-torre-fortaleza/"}, {"@type": "ListItem", "position": 3, "name": "Castillo de Bolaños", "url": "https://patrimonioabierto.es/monumento/2118092-castillo-de-bolanos/"}, {"@type": "ListItem", "position": 4, "name": "Castillo de Canillas de Esgueva", "url": "https://patrimonioabierto.es/monumento/14482-castillo-de-canillas-de-esgueva/"}, {"@type": "ListItem", "position": 5, "name": "Ruinas del Torrejón", "url": "https://patrimonioabierto.es/monumento/2927718-ruinas-del-torrejon/"}, {"@type": "ListItem", "position": 6, "name": "Castillo de Castrejón", "url": "https://patrimonioabierto.es/monumento/2118095-castillo-de-castrejon/"}, {"@type": "ListItem", "position": 7, "name": "Atalaya Denominada \"el Molino\"", "url": "https://patrimonioabierto.es/monumento/14503-atalaya-denominada-el-molino/"}, {"@type": "ListItem", "position": 8, "name": "Castro - Recinto Amurallado", "url": "https://patrimonioabierto.es/monumento/14540-castro-recinto-amurallado/"}, {"@type": "ListItem", "position": 9, "name": "Castillo de Abajo", "url": "https://patrimonioabierto.es/monumento/14645-castillo-de-abajo/"}, {"@type": "ListItem", "position": 10, "name": "Castillo de Arriba", "url": "https://patrimonioabierto.es/monumento/14650-castillo-de-arriba/"}, {"@type": "ListItem", "position": 11, "name": "Castillo de Encinas", "url": "https://patrimonioabierto.es/monumento/14660-castillo-de-encinas/"}, {"@type": "ListItem", "position": 12, "name": "Castillo de Fuensaldaña", "url": "https://patrimonioabierto.es/monumento/14673-castillo-de-fuensaldana/"}, {"@type": "ListItem", "position": 13, "name": "Castillo de Fuente el Sol", "url": "https://patrimonioabierto.es/monumento/14680-castillo-de-fuente-el-sol/"}, {"@type": "ListItem", "position": 14, "name": "Castillo de Íscar", "url": "https://patrimonioabierto.es/monumento/14698-castillo-de-iscar/"}, {"@type": "ListItem", "position": 15, "name": "Recinto Murado de Medina del Campo", "url": "https://patrimonioabierto.es/monumento/711108-recinto-murado-de-medina-del-campo/"}, {"@type": "ListItem", "position": 16, "name": "Castillo de Montealegre", "url": "https://patrimonioabierto.es/monumento/14905-castillo-de-montealegre/"}, {"@type": "ListItem", "position": 17, "name": "Castillo de Mucientes", "url": "https://patrimonioabierto.es/monumento/14945-castillo-de-mucientes/"}, {"@type": "ListItem", "position": 18, "name": "Torrejón", "url": "https://patrimonioabierto.es/monumento/2927736-torrejon/"}, {"@type": "ListItem", "position": 19, "name": "Recinto Murado de Olmedo", "url": "https://patrimonioabierto.es/monumento/711124-recinto-murado-de-olmedo/"}, {"@type": "ListItem", "position": 20, "name": "Torre de Pozal de Gallinas", "url": "https://patrimonioabierto.es/monumento/2118107-torre-de-pozal-de-gallinas/"}, {"@type": "ListItem", "position": 21, "name": "Castillo de Pozaldez", "url": "https://patrimonioabierto.es/monumento/2118104-castillo-de-pozaldez/"}, {"@type": "ListItem", "position": 22, "name": "Castillo de Foncastín", "url": "https://patrimonioabierto.es/monumento/15219-castillo-de-foncastin/"}, {"@type": "ListItem", "position": 23, "name": "Castillo de San Martín de Valvení", "url": "https://patrimonioabierto.es/monumento/2016594-castillo-de-san-martin-de-valveni/"}, {"@type": "ListItem", "position": 24, "name": "Castillo de San Pedro de Latarce", "url": "https://patrimonioabierto.es/monumento/15258-castillo-de-san-pedro-de-latarce/"}, {"@type": "ListItem", "position": 25, "name": "Castillo de Eván de Abajo", "url": "https://patrimonioabierto.es/monumento/2117892-castillo-de-evan-de-abajo/"}, {"@type": "ListItem", "position": 26, "name": "Castillo de Eván de Arriba", "url": "https://patrimonioabierto.es/monumento/2117895-castillo-de-evan-de-arriba/"}, {"@type": "ListItem", "position": 27, "name": "Castillo - Archivo de Simancas", "url": "https://patrimonioabierto.es/monumento/15319-castillo-archivo-de-simancas/"}, {"@type": "ListItem", "position": 28, "name": "Castillo de Tiedra", "url": "https://patrimonioabierto.es/monumento/15386-castillo-de-tiedra/"}, {"@type": "ListItem", "position": 29, "name": "Castillo de Tordehumos", "url": "https://patrimonioabierto.es/monumento/15404-castillo-de-tordehumos/"}, {"@type": "ListItem", "position": 30, "name": "Castillo de Torrelobatón", "url": "https://patrimonioabierto.es/monumento/15487-castillo-de-torrelobaton/"}, {"@type": "ListItem", "position": 31, "name": "Castillo de Trigueros del Valle", "url": "https://patrimonioabierto.es/monumento/15493-castillo-de-trigueros-del-valle/"}, {"@type": "ListItem", "position": 32, "name": "Castillo de Urueña", "url": "https://patrimonioabierto.es/monumento/15512-castillo-de-uruena/"}, {"@type": "ListItem", "position": 33, "name": "El Cubo", "url": "https://patrimonioabierto.es/monumento/16206-el-cubo/"}, {"@type": "ListItem", "position": 34, "name": "Castillo de Villagarcia de Campos", "url": "https://patrimonioabierto.es/monumento/16227-castillo-de-villagarcia-de-campos/"}, {"@type": "ListItem", "position": 35, "name": "Castillo de Villavellid", "url": "https://patrimonioabierto.es/monumento/16355-castillo-de-villavellid/"}, {"@type": "ListItem", "position": 36, "name": "Torre de Villaverde de Medina", "url": "https://patrimonioabierto.es/monumento/2118120-torre-de-villaverde-de-medina/"}]}}</script>
+
+  <!-- Same mark as #logo-mark/#loading-logo/#welcome-logo (assets/logo.png)
+       - just square and on a solid brand-purple backing (same purple as
+       logo-readme.png's own README treatment), since a browser tab is
+       usually light or dark, not the purple header bar this logo is
+       normally drawn against - its white linework would go near-invisible
+       on a plain white tab background otherwise. -->
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <!-- Fraunces/Inter used to load from Google Fonts - self-hosted instead
+       (see the @font-face block at the top of style.css) so a visitor's
+       browser never has to talk to fonts.gstatic.com at all: no third-
+       party request, no IP address leaving this site's own domain, one
+       less thing for the Privacidad page to have to disclose. -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- Without JavaScript nothing ever dismisses the loading screen or the
+       welcome dialog, so they would cover the page's static content (the
+       per-monument pages carry real text and links in the HTML) forever. -->
+  <noscript><style>#loading-screen, #welcome-modal { display: none !important; }</style></noscript>
+</head>
+<body>
+  <!-- The very first focusable thing on the page, on purpose - a classic
+       "skip link", invisible until it actually receives keyboard focus (see
+       .skip-link CSS). The visible 📋 button/menu entry that used to sit
+       next to this got removed (redundant with search/map for anyone
+       clicking around) - this is now the only way into showListPanel(),
+       which is fine: it's aimed squarely at whoever can't/doesn't want to
+       drive the map, and reaches the same panel in a single Tab press from
+       anywhere, before the loading screen, the header, anything - no
+       fishing for a small icon first. -->
+  <a href="#" id="skip-to-list-link" class="skip-link" data-i18n="list.skip_link">Ir directamente a la lista de monumentos</a>
+
+  <!-- First paint, before app.js even runs: the dataset is ~2MB, worth
+       covering with something branded rather than a blank page while it
+       loads. Spanish text is hardcoded as the real initial content (not an
+       empty data-i18n placeholder) since the app always starts in 'es' -
+       applyStaticI18n() just re-confirms it once JS runs. -->
+  <div id="loading-screen">
+    <img src="assets/logo.png" alt="" id="loading-logo">
+    <div id="loading-spinner" aria-hidden="true"></div>
+    <p data-i18n="loading.screen">Cargando el catálogo…</p>
+  </div>
+
+  <!-- Shown once per browser (localStorage flag, see app.js), after the
+       data has loaded - not on top of a deep link (?id=/?muni=/?prov=/#...),
+       since someone arriving at a specific monument already knows what
+       they're looking at. -->
+  <div id="welcome-modal">
+    <div id="welcome-card">
+      <div id="welcome-logo-badge"><img src="assets/logo.png" alt="" id="welcome-logo"></div>
+      <h2 data-i18n="welcome.title">Bienvenido a Patrimonio Abierto</h2>
+      <p data-i18n="welcome.body">Aquí encontrarás todos los Bienes de Interés Cultural (BIC) declarados oficialmente en Castilla y León, junto con información y material multimedia de Wikidata, Wikipedia y Wikimedia Commons. Un proyecto libre, sin cuentas ni anuncios.</p>
+      <!-- Plain links into the per-province pages, so the homepage - and every
+           page built from this shell - leads a crawler to them. -->
+      <nav id="welcome-provinces" aria-label="Provincias"><span data-i18n="welcome.provinces">Explorar por provincia:</span>
+        <a href="/provincia/avila/">Ávila</a> <a href="/provincia/burgos/">Burgos</a> <a href="/provincia/leon/">León</a>
+        <a href="/provincia/palencia/">Palencia</a> <a href="/provincia/salamanca/">Salamanca</a> <a href="/provincia/segovia/">Segovia</a>
+        <a href="/provincia/soria/">Soria</a> <a href="/provincia/valladolid/">Valladolid</a> <a href="/provincia/zamora/">Zamora</a></nav>
+      <button type="button" id="welcome-close-btn" data-i18n="welcome.cta">Empezar a explorar</button>
+      <a href="#" id="welcome-about-link" data-i18n="welcome.about_link">Más sobre el proyecto</a>
+    </div>
+  </div>
+
+  <header id="topbar">
+    <!-- Real link (not a <span>/<button>) - see wireSpaLink() in app.js:
+         hovering shows the URL, right-click/ctrl-click/middle-click all do
+         a real navigation back to the plain map, and a normal click gets
+         the instant in-app close instead of a reload. -->
+    <a class="brand" href="." id="brand-link"><img src="assets/logo.png" alt="" id="logo-mark">Patrimonio Abierto</a>
+
+    <!-- Mobile only (see CSS) - collapses #search-wrap to just this icon
+         until tapped, so the default header stays one compact row instead
+         of permanently reserving a full second row for it. -->
+    <!-- Inline SVG, not the 🔍 emoji this used to be - emoji glyphs are
+         drawn by the OS's own emoji font, whose vertical metrics vary
+         enough between Apple/Noto/Samsung's color-emoji sets that it never
+         sat quite centered in this small round button on mobile. An SVG
+         with stroke="currentColor" sits exactly where the viewBox puts it,
+         on every platform, and inherits the button's own (white) color. -->
+    <button type="button" id="search-toggle-btn" data-i18n-title="search.placeholder" aria-label="Search">
+      <svg viewBox="0 0 24 24" width="25" height="25" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </button>
+
+    <div id="search-wrap">
+      <input type="text" id="search-input" autocomplete="off" data-i18n-placeholder="search.placeholder" />
+      <button type="button" id="search-close-btn" aria-label="Close search">✕</button>
+      <div id="search-results"></div>
+    </div>
+
+    <!-- Estadísticas/Acerca de/Cómo contribuir/language all live behind
+         this on every screen size now, not just mobile - see showMenuPanel()
+         in app.js. Keeps the header down to logo + search everywhere. -->
+    <button type="button" id="menu-btn" data-i18n-title="menu.button_title" aria-label="Menu">☰</button>
+  </header>
+
+  <div id="app">
+    <!-- map-wrap, not #app, is what #legend/#locate-btn anchor to - #app
+         spans the map AND the panel side-by-side, so anchoring to it means
+         "right: 16px" measures from the panel's edge once it's open, not
+         the map's. map-wrap always matches the map's own visible area. -->
+    <div id="map-wrap">
+      <div id="map"></div>
+
+      <!-- data-i18n-tooltip, not data-i18n-title: see applyStaticI18n() in
+           i18n.js - feeds style.css's [data-i18n-tooltip]::after desktop
+           label instead of the browser's own native title tooltip. -->
+      <button type="button" id="shuffle-btn" data-i18n-tooltip="shuffle.button_title" aria-label="Random monument">🎲</button>
+      <!-- Same blue dot/white ring as .you-are-here-dot below (the marker
+           this button actually places on the map once located), plus the
+           same soft outer halo that marker's ::after ring gives it - a bare
+           dot read as flat next to that; the halo is what actually makes it
+           recognizable as "the Google Maps blue dot" at a glance. Fixed
+           colors, not currentColor, so the button previews what pressing it
+           does regardless of button state. Replaces the 🎯 target emoji,
+           which read as "aim/select a spot" rather than "find me". -->
+      <button type="button" id="locate-btn" data-i18n-tooltip="geolocation.button_title" aria-label="Locate me">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <circle cx="12" cy="12" r="10" fill="#2a6fbb" opacity="0.18"/>
+          <circle cx="12" cy="12" r="7" fill="#2a6fbb" stroke="white" stroke-width="2.5"/>
+        </svg>
+      </button>
+
+      <!-- Filter button + its dropdown card, same anchor-to-map-wrap /
+           click-outside-closes pattern as #search-results. Row list itself
+           is built in app.js from whatever categories actually appear in
+           the dataset, not hardcoded here. -->
+      <!-- "Tune" icon, same slider-control metaphor as Google Maps' own
+           filter button, but the previous pass (thin currentColor lines +
+           tiny colored dots) still read as mostly monochrome - color was
+           only in three small accents, not the icon itself. This flips
+           that: three bold colored capsule tracks (teal/blue/terracotta -
+           NOT purple, which is #filter-btn.active's own background and
+           would nearly vanish against it, the same reasoning the earlier
+           solid-funnel pass already used) each with a white handle. Color
+           now carries real visual weight instead of being a detail on top
+           of black lines, and the white handles keep it legible on both
+           the idle white background and the active purple one. -->
+      <button type="button" id="filter-btn" data-i18n-tooltip="filter.button_title" aria-label="Filter">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+          <rect x="3" y="4.5" width="18" height="3" rx="1.5" fill="#1c8a6d"/>
+          <circle cx="9" cy="6" r="3" fill="white" stroke="#1c8a6d" stroke-width="1.5"/>
+          <rect x="3" y="10.5" width="18" height="3" rx="1.5" fill="#2a6fbb"/>
+          <circle cx="16" cy="12" r="3" fill="white" stroke="#2a6fbb" stroke-width="1.5"/>
+          <rect x="3" y="16.5" width="18" height="3" rx="1.5" fill="#c2703d"/>
+          <circle cx="11" cy="18" r="3" fill="white" stroke="#c2703d" stroke-width="1.5"/>
+        </svg>
+        <span id="filter-badge" class="filter-badge" hidden></span>
+      </button>
+      <div id="filter-panel">
+        <!-- "Estado" - orthogonal to category, AND-combined with it: a
+             record must match the selected categories AND (no status box
+             checked, or at least one checked status). Only 2 rows, so no
+             Todo/Ninguno shortcuts needed the way the longer category list
+             has. -->
+        <div class="filter-section-label" data-i18n="filter.status_title">Estado</div>
+        <div id="filter-status-list"></div>
+
+        <div id="filter-panel-header">
+          <span data-i18n="filter.title">Categorías</span>
+          <div id="filter-panel-actions">
+            <button type="button" id="filter-all-btn" data-i18n="filter.all">Todo</button>
+            <button type="button" id="filter-none-btn" data-i18n="filter.none">Ninguno</button>
+          </div>
+        </div>
+        <div id="filter-list"></div>
+      </div>
+
+      <!-- Desktop-only (hidden <=768px, see style.css) - a rotating
+           highlight card, one photo picked deterministically per ISO week
+           from web/data/picture_of_the_week.json (see find_good_pictures.py)
+           so it changes weekly with no server/build step involved, and
+           stays identical for every visitor that same week. Hidden
+           entirely (not just empty) whenever that pool is empty. -->
+      <div id="potw" hidden></div>
+
+      <!-- Slim, always-on call-to-action strip (both mobile and desktop) -
+           shown whenever the map itself is in view (panel closed), unlike
+           #potw above it has no dismiss state of its own: see app.js for
+           why the two are kept independent. Real <a>, not a <button> - see
+           wireSpaLink()'s own comment: hover/right-click/ctrl-click should
+           all behave like the real link to /contribute/ that this is. -->
+      <a href="/contribute/" id="contribute-bar" hidden>
+        <span class="contribute-bar-text-full" data-i18n="contribute_bar.text"></span>
+        <span class="contribute-bar-text-short" data-i18n="contribute_bar.text_short"></span>
+      </a>
+    </div>
+
+    <aside id="panel" class="open">
+      <div id="panel-handle"></div>
+      <button id="panel-close" aria-label="Cerrar">✕</button>
+      <div id="panel-content" data-static-province="Valladolid" data-static-category="CASTILLOS"><div class="hero hero-fallback"><div class="hero-placeholder-icon">🗺️</div><div class="hero-scrim"><div class="hero-kicker">🏰 Castillos</div><h1 class="hero-title">Castillos en Valladolid</h1></div></div><div class="panel-body"><nav class="crumbs" aria-label="Migas de pan"><a href="/">Inicio</a> <span aria-hidden="true">›</span> <a href="/provincia/valladolid/">Valladolid</a> <span aria-hidden="true">›</span> <span aria-current="page">Castillos</span></nav><div class="meta">36 bienes · 34 municipios</div><p class="summary">36 castillos protegidos como Bien de Interés Cultural en la provincia de Valladolid, en 34 municipios, según el catálogo oficial de la Junta de Castilla y León. 24 de ellos tienen fotografía libre en Wikimedia Commons; 36 están enlazados a Wikidata. Curiel de Duero reúne 2 de ellos. La protección más antigua data de 1949.</p><h2>Alaejos</h2><ul class="list"><li><a class="list-row" href="/monumento/2016582-castillo-de-alaejos/" data-jcyl-id="2016582"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/RuinasCastilloAlaejos.JPG?width=64" alt="" loading="lazy"><span class="list-row-name">Castillo de Alaejos</span></a></li></ul><h2>Barcial de la Loma</h2><ul class="list"><li><a class="list-row" href="/monumento/14409-torre-fortaleza/" data-jcyl-id="14409"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Castillo%20de%20Barcial%20de%20la%20Loma%2001.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Torre-fortaleza</span></a></li></ul><h2>Bolaños de Campos</h2><ul class="list"><li><a class="list-row" href="/monumento/2118092-castillo-de-bolanos/" data-jcyl-id="2118092"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🏰</span><span class="list-row-name">Castillo de Bolaños</span></a></li></ul><h2>Canillas de Esgueva</h2><ul class="list"><li><a class="list-row" href="/monumento/14482-castillo-de-canillas-de-esgueva/" data-jcyl-id="14482"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/CanillasDeEsgueva20110907180333P1130166.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Castillo de Canillas de Esgueva</span></a></li></ul><h2>Carpio</h2><ul class="list"><li><a class="list-row" href="/monumento/2927718-ruinas-del-torrejon/" data-jcyl-id="2927718"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🏰</span><span class="list-row-name">Ruinas del Torrejón</span></a></li></ul><h2>Castrejón de Trabancos</h2><ul class="list"><li><a class="list-row" href="/monumento/2118095-castillo-de-castrejon/" data-jcyl-id="2118095"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🏰</span><span class="list-row-name">Castillo de Castrejón</span></a></li></ul><h2>Castromembibre</h2><ul class="list"><li><a class="list-row" href="/monumento/14503-atalaya-denominada-el-molino/" data-jcyl-id="14503"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🏰</span><span class="list-row-name">Atalaya Denominada &quot;el Molino&quot;</span></a></li></ul><h2>Castroverde de Cerrato</h2><ul class="list"><li><a class="list-row" href="/monumento/14540-castro-recinto-amurallado/" data-jcyl-id="14540"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🏰</span><span class="list-row-name">Castro - Recinto Amurallado</span></a></li></ul><h2>Curiel de Duero</h2><ul class="list"><li><a class="list-row" href="/monumento/14645-castillo-de-abajo/" data-jcyl-id="14645"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Palacio%20de%20los%20Z%C3%BA%C3%B1iga%20de%20Curiel%20de%20Duero.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Castillo de Abajo</span></a></li><li><a class="list-row" href="/monumento/14650-castillo-de-arriba/" data-jcyl-id="14650"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/090920%201148%206243%20SLL%20Curiel%20Castillo%20T91.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Castillo de Arriba</span></a></li></ul><h2>Encinas de Esgueva</h2><ul class="list"><li><a class="list-row" href="/monumento/14660-castillo-de-encinas/" data-jcyl-id="14660"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/CastilloDeEncinasDeEsguevaP1130213-P1130214.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Castillo de Encinas</span></a></li></ul><h2>Fuensaldaña</h2><ul class="list"><li><a class="list-row" href="/monumento/14673-castillo-de-fuensaldana/" data-jcyl-id="14673"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Fuensalda%C3%B1a%20castillo%2004%20lou.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Castillo de Fuensaldaña</span></a></li></ul><h2>Fuente el Sol</h2><ul class="list"><li><a class="list-row" href="/monumento/14680-castillo-de-fuente-el-sol/" data-jcyl-id="14680"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Fundaci%C3%B3n%20Joaqu%C3%ADn%20D%C3%ADaz%20-%20Castillo%20-%20Fuente%20el%20Sol%20%28Valladolid%29.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Castillo de Fuente el Sol</span></a></li></ul><h2>Íscar</h2><ul class="list"><li><a class="list-row" href="/monumento/14698-castillo-de-iscar/" data-jcyl-id="14698"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Castel%20de%20Iscar.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Castillo de Íscar</span></a></li></ul><h2>Medina del Campo</h2><ul class="list"><li><a class="list-row" href="/monumento/711108-recinto-murado-de-medina-del-campo/" data-jcyl-id="711108"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🏰</span><span class="list-row-name">Recinto Murado de Medina del Campo</span></a></li></ul><h2>Montealegre de Campos</h2><ul class="list"><li><a class="list-row" href="/monumento/14905-castillo-de-montealegre/" data-jcyl-id="14905"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Montealegre20100115010757SAM%202348.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Castillo de Montealegre</span></a></li></ul><h2>Mucientes</h2><ul class="list"><li><a class="list-row" href="/monumento/14945-castillo-de-mucientes/" data-jcyl-id="14945"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Mucientes%20Castillo%20872.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Castillo de Mucientes</span></a></li></ul><h2>Nava del Rey</h2><ul class="list"><li><a class="list-row" href="/monumento/2927736-torrejon/" data-jcyl-id="2927736"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🏰</span><span class="list-row-name">Torrejón</span></a></li></ul><h2>Olmedo</h2><ul class="list"><li><a class="list-row" href="/monumento/711124-recinto-murado-de-olmedo/" data-jcyl-id="711124"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🏰</span><span class="list-row-name">Recinto Murado de Olmedo</span></a></li></ul><h2>Pozal de Gallinas</h2><ul class="list"><li><a class="list-row" href="/monumento/2118107-torre-de-pozal-de-gallinas/" data-jcyl-id="2118107"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Torrejon-pozal-de-gallinas-.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Torre de Pozal de Gallinas</span></a></li></ul><h2>Pozaldez</h2><ul class="list"><li><a class="list-row" href="/monumento/2118104-castillo-de-pozaldez/" data-jcyl-id="2118104"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Castillo%20de%20Pozaldez%204.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Castillo de Pozaldez</span></a></li></ul><h2>Rueda</h2><ul class="list"><li><a class="list-row" href="/monumento/15219-castillo-de-foncastin/" data-jcyl-id="15219"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Castillo%20de%20Foncastin.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Castillo de Foncastín</span></a></li></ul><h2>San Martín de Valvení</h2><ul class="list"><li><a class="list-row" href="/monumento/2016594-castillo-de-san-martin-de-valveni/" data-jcyl-id="2016594"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Castillo%20de%20San%20Mart%C3%ADn%20de%20Valven%C3%AD.JPG?width=64" alt="" loading="lazy"><span class="list-row-name">Castillo de San Martín de Valvení</span></a></li></ul><h2>San Pedro de Latarce</h2><ul class="list"><li><a class="list-row" href="/monumento/15258-castillo-de-san-pedro-de-latarce/" data-jcyl-id="15258"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/San%20Pedro%20de%20Latarce.JPG?width=64" alt="" loading="lazy"><span class="list-row-name">Castillo de San Pedro de Latarce</span></a></li></ul><h2>Siete Iglesias de Trabancos</h2><ul class="list"><li><a class="list-row" href="/monumento/2117892-castillo-de-evan-de-abajo/" data-jcyl-id="2117892"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🏰</span><span class="list-row-name">Castillo de Eván de Abajo</span></a></li><li><a class="list-row" href="/monumento/2117895-castillo-de-evan-de-arriba/" data-jcyl-id="2117895"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🏰</span><span class="list-row-name">Castillo de Eván de Arriba</span></a></li></ul><h2>Simancas</h2><ul class="list"><li><a class="list-row" href="/monumento/15319-castillo-archivo-de-simancas/" data-jcyl-id="15319"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Castillo%20de%20Simancas.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Castillo - Archivo de Simancas</span></a></li></ul><h2>Tiedra</h2><ul class="list"><li><a class="list-row" href="/monumento/15386-castillo-de-tiedra/" data-jcyl-id="15386"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Tiedra%20Castillo%20003.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Castillo de Tiedra</span></a></li></ul><h2>Tordehumos</h2><ul class="list"><li><a class="list-row" href="/monumento/15404-castillo-de-tordehumos/" data-jcyl-id="15404"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Castillo%20de%20Tordehumos.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Castillo de Tordehumos</span></a></li></ul><h2>Torrelobatón</h2><ul class="list"><li><a class="list-row" href="/monumento/15487-castillo-de-torrelobaton/" data-jcyl-id="15487"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Torrelobat%C3%B3n%20Castillo%20551.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Castillo de Torrelobatón</span></a></li></ul><h2>Trigueros del Valle</h2><ul class="list"><li><a class="list-row" href="/monumento/15493-castillo-de-trigueros-del-valle/" data-jcyl-id="15493"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Castillo%20de%20Trigueros%20del%20Valle%2C%20Valladolid%2C%20Castilla.%20%28MAG%29.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Castillo de Trigueros del Valle</span></a></li></ul><h2>Urueña</h2><ul class="list"><li><a class="list-row" href="/monumento/15512-castillo-de-uruena/" data-jcyl-id="15512"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Urue%C3%B1a%20castillo1%20lou.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Castillo de Urueña</span></a></li></ul><h2>Villacid de Campos</h2><ul class="list"><li><a class="list-row" href="/monumento/16206-el-cubo/" data-jcyl-id="16206"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🏰</span><span class="list-row-name">El Cubo</span></a></li></ul><h2>Villagarcía de Campos</h2><ul class="list"><li><a class="list-row" href="/monumento/16227-castillo-de-villagarcia-de-campos/" data-jcyl-id="16227"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Villagarc%C3%ADa%20de%20Campos%20Ruinas%20JMM.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Castillo de Villagarcia de Campos</span></a></li></ul><h2>Villavellid</h2><ul class="list"><li><a class="list-row" href="/monumento/16355-castillo-de-villavellid/" data-jcyl-id="16355"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/01a%20Villavellid%20castillo%20Ni.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Castillo de Villavellid</span></a></li></ul><h2>Villaverde de Medina</h2><ul class="list"><li><a class="list-row" href="/monumento/2118120-torre-de-villaverde-de-medina/" data-jcyl-id="2118120"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🏰</span><span class="list-row-name">Torre de Villaverde de Medina</span></a></li></ul><h2>Más de Valladolid</h2><ul class="page-links"><li><a href="/provincia/valladolid/">Todo el patrimonio de Valladolid</a> <span class="meta">216</span></li><li><a href="/provincia/valladolid/monumentos/">Monumentos</a> <span class="meta">123</span></li><li><a href="/provincia/valladolid/inmuebles-asociados-a-la-declaracion/">Inmuebles asociados a la declaración</a> <span class="meta">22</span></li><li><a href="/provincia/valladolid/conjuntos-historicos/">Conjuntos históricos</a> <span class="meta">13</span></li><li><a href="/provincia/valladolid/zonas-arqueologicas/">Zonas arqueológicas</a> <span class="meta">11</span></li><li><a href="/provincia/valladolid/rollos-de-justicia/">Rollos de justicia</a> <span class="meta">6</span></li></ul><h2>Castillos en otras provincias</h2><ul class="page-links"><li><a href="/provincia/burgos/castillos/">Castillos en Burgos</a> <span class="meta">175</span></li><li><a href="/provincia/leon/castillos/">Castillos en León</a> <span class="meta">60</span></li><li><a href="/provincia/palencia/castillos/">Castillos en Palencia</a> <span class="meta">16</span></li><li><a href="/provincia/salamanca/castillos/">Castillos en Salamanca</a> <span class="meta">30</span></li><li><a href="/provincia/segovia/castillos/">Castillos en Segovia</a> <span class="meta">9</span></li><li><a href="/provincia/soria/castillos/">Castillos en Soria</a> <span class="meta">65</span></li><li><a href="/provincia/zamora/castillos/">Castillos en Zamora</a> <span class="meta">18</span></li><li><a href="/provincia/avila/castillos/">Castillos en Ávila</a> <span class="meta">17</span></li></ul></div></div>
+    </aside>
+  </div>
+
+  <div id="toast"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+  <script src="i18n.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

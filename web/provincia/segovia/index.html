@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <!-- Root-relative, not absolute - resolves against whatever origin
+       actually served the page (production or make serve/localhost) and
+       keeps every relative reference (style.css, assets/*, app.js's own
+       fetch('data/...') calls) pinned to site root even once app.js starts
+       pushState-ing the address bar to /monumento/<id>-<slug>/ during live
+       browsing - without this, those fetches would resolve one directory
+       too deep and 404. Same tag scripts/build_monument_pages.py's static
+       per-monument pages already carry, for the same reason. -->
+  <base href="/">
+  <title>Bienes de Interés Cultural en Segovia (228) - Patrimonio Abierto</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- SEO/social preview. patrimonioabierto.es appears in four places
+       below (canonical, og:url, og:image, twitter:image) - if this domain
+       ever changes again, update all four together plus the <title>/
+       og:title/og:site_name text above, or a shared link preview will
+       keep pointing at the old name/domain. -->
+  <meta name="description" content="228 bienes protegidos en Segovia: 120 monumentos, 72 yacimientos de arte rupestre, 10 conjuntos históricos y más. Con fotos libres, Wikidata y Wikipedia.">
+  <link rel="canonical" href="https://patrimonioabierto.es/provincia/segovia/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Patrimonio Abierto">
+  <meta property="og:title" content="Bienes de Interés Cultural en Segovia (228) - Patrimonio Abierto">
+  <meta property="og:description" content="228 bienes protegidos en Segovia: 120 monumentos, 72 yacimientos de arte rupestre, 10 conjuntos históricos y más. Con fotos libres, Wikidata y Wikipedia.">
+  <meta property="og:image" content="https://patrimonioabierto.es/assets/logo-readme.png">
+  <meta property="og:url" content="https://patrimonioabierto.es/provincia/segovia/">
+  <meta property="og:locale" content="es_ES">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Bienes de Interés Cultural en Segovia (228) - Patrimonio Abierto">
+  <meta name="twitter:description" content="228 bienes protegidos en Segovia: 120 monumentos, 72 yacimientos de arte rupestre, 10 conjuntos históricos y más. Con fotos libres, Wikidata y Wikipedia.">
+  <meta name="twitter:image" content="https://patrimonioabierto.es/assets/logo-readme.png">
+
+  <!-- Structured data (schema.org) for search engines - a Dataset (what
+       this project actually publishes: the merged BIC/Wikidata/Wikipedia/
+       Commons table) presented as part of a WebSite (how people reach it).
+       Doesn't change anything a visitor sees; only read by crawlers. -->
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "CollectionPage", "name": "Patrimonio protegido en Segovia", "description": "228 bienes protegidos en Segovia: 120 monumentos, 72 yacimientos de arte rupestre, 10 conjuntos históricos y más. Con fotos libres, Wikidata y Wikipedia.", "url": "https://patrimonioabierto.es/provincia/segovia/", "isPartOf": {"@type": "WebSite", "name": "Patrimonio Abierto", "url": "https://patrimonioabierto.es/"}, "breadcrumb": {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://patrimonioabierto.es/"}, {"@type": "ListItem", "position": 2, "name": "Segovia", "item": "https://patrimonioabierto.es/provincia/segovia/"}]}}</script>
+
+  <!-- Same mark as #logo-mark/#loading-logo/#welcome-logo (assets/logo.png)
+       - just square and on a solid brand-purple backing (same purple as
+       logo-readme.png's own README treatment), since a browser tab is
+       usually light or dark, not the purple header bar this logo is
+       normally drawn against - its white linework would go near-invisible
+       on a plain white tab background otherwise. -->
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <!-- Fraunces/Inter used to load from Google Fonts - self-hosted instead
+       (see the @font-face block at the top of style.css) so a visitor's
+       browser never has to talk to fonts.gstatic.com at all: no third-
+       party request, no IP address leaving this site's own domain, one
+       less thing for the Privacidad page to have to disclose. -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- Without JavaScript nothing ever dismisses the loading screen or the
+       welcome dialog, so they would cover the page's static content (the
+       per-monument pages carry real text and links in the HTML) forever. -->
+  <noscript><style>#loading-screen, #welcome-modal { display: none !important; }</style></noscript>
+</head>
+<body>
+  <!-- The very first focusable thing on the page, on purpose - a classic
+       "skip link", invisible until it actually receives keyboard focus (see
+       .skip-link CSS). The visible 📋 button/menu entry that used to sit
+       next to this got removed (redundant with search/map for anyone
+       clicking around) - this is now the only way into showListPanel(),
+       which is fine: it's aimed squarely at whoever can't/doesn't want to
+       drive the map, and reaches the same panel in a single Tab press from
+       anywhere, before the loading screen, the header, anything - no
+       fishing for a small icon first. -->
+  <a href="#" id="skip-to-list-link" class="skip-link" data-i18n="list.skip_link">Ir directamente a la lista de monumentos</a>
+
+  <!-- First paint, before app.js even runs: the dataset is ~2MB, worth
+       covering with something branded rather than a blank page while it
+       loads. Spanish text is hardcoded as the real initial content (not an
+       empty data-i18n placeholder) since the app always starts in 'es' -
+       applyStaticI18n() just re-confirms it once JS runs. -->
+  <div id="loading-screen">
+    <img src="assets/logo.png" alt="" id="loading-logo">
+    <div id="loading-spinner" aria-hidden="true"></div>
+    <p data-i18n="loading.screen">Cargando el catálogo…</p>
+  </div>
+
+  <!-- Shown once per browser (localStorage flag, see app.js), after the
+       data has loaded - not on top of a deep link (?id=/?muni=/?prov=/#...),
+       since someone arriving at a specific monument already knows what
+       they're looking at. -->
+  <div id="welcome-modal">
+    <div id="welcome-card">
+      <div id="welcome-logo-badge"><img src="assets/logo.png" alt="" id="welcome-logo"></div>
+      <h2 data-i18n="welcome.title">Bienvenido a Patrimonio Abierto</h2>
+      <p data-i18n="welcome.body">Aquí encontrarás todos los Bienes de Interés Cultural (BIC) declarados oficialmente en Castilla y León, junto con información y material multimedia de Wikidata, Wikipedia y Wikimedia Commons. Un proyecto libre, sin cuentas ni anuncios.</p>
+      <!-- Plain links into the per-province pages, so the homepage - and every
+           page built from this shell - leads a crawler to them. -->
+      <nav id="welcome-provinces" aria-label="Provincias"><span data-i18n="welcome.provinces">Explorar por provincia:</span>
+        <a href="/provincia/avila/">Ávila</a> <a href="/provincia/burgos/">Burgos</a> <a href="/provincia/leon/">León</a>
+        <a href="/provincia/palencia/">Palencia</a> <a href="/provincia/salamanca/">Salamanca</a> <a href="/provincia/segovia/">Segovia</a>
+        <a href="/provincia/soria/">Soria</a> <a href="/provincia/valladolid/">Valladolid</a> <a href="/provincia/zamora/">Zamora</a></nav>
+      <button type="button" id="welcome-close-btn" data-i18n="welcome.cta">Empezar a explorar</button>
+      <a href="#" id="welcome-about-link" data-i18n="welcome.about_link">Más sobre el proyecto</a>
+    </div>
+  </div>
+
+  <header id="topbar">
+    <!-- Real link (not a <span>/<button>) - see wireSpaLink() in app.js:
+         hovering shows the URL, right-click/ctrl-click/middle-click all do
+         a real navigation back to the plain map, and a normal click gets
+         the instant in-app close instead of a reload. -->
+    <a class="brand" href="." id="brand-link"><img src="assets/logo.png" alt="" id="logo-mark">Patrimonio Abierto</a>
+
+    <!-- Mobile only (see CSS) - collapses #search-wrap to just this icon
+         until tapped, so the default header stays one compact row instead
+         of permanently reserving a full second row for it. -->
+    <!-- Inline SVG, not the 🔍 emoji this used to be - emoji glyphs are
+         drawn by the OS's own emoji font, whose vertical metrics vary
+         enough between Apple/Noto/Samsung's color-emoji sets that it never
+         sat quite centered in this small round button on mobile. An SVG
+         with stroke="currentColor" sits exactly where the viewBox puts it,
+         on every platform, and inherits the button's own (white) color. -->
+    <button type="button" id="search-toggle-btn" data-i18n-title="search.placeholder" aria-label="Search">
+      <svg viewBox="0 0 24 24" width="25" height="25" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </button>
+
+    <div id="search-wrap">
+      <input type="text" id="search-input" autocomplete="off" data-i18n-placeholder="search.placeholder" />
+      <button type="button" id="search-close-btn" aria-label="Close search">✕</button>
+      <div id="search-results"></div>
+    </div>
+
+    <!-- Estadísticas/Acerca de/Cómo contribuir/language all live behind
+         this on every screen size now, not just mobile - see showMenuPanel()
+         in app.js. Keeps the header down to logo + search everywhere. -->
+    <button type="button" id="menu-btn" data-i18n-title="menu.button_title" aria-label="Menu">☰</button>
+  </header>
+
+  <div id="app">
+    <!-- map-wrap, not #app, is what #legend/#locate-btn anchor to - #app
+         spans the map AND the panel side-by-side, so anchoring to it means
+         "right: 16px" measures from the panel's edge once it's open, not
+         the map's. map-wrap always matches the map's own visible area. -->
+    <div id="map-wrap">
+      <div id="map"></div>
+
+      <!-- data-i18n-tooltip, not data-i18n-title: see applyStaticI18n() in
+           i18n.js - feeds style.css's [data-i18n-tooltip]::after desktop
+           label instead of the browser's own native title tooltip. -->
+      <button type="button" id="shuffle-btn" data-i18n-tooltip="shuffle.button_title" aria-label="Random monument">🎲</button>
+      <!-- Same blue dot/white ring as .you-are-here-dot below (the marker
+           this button actually places on the map once located), plus the
+           same soft outer halo that marker's ::after ring gives it - a bare
+           dot read as flat next to that; the halo is what actually makes it
+           recognizable as "the Google Maps blue dot" at a glance. Fixed
+           colors, not currentColor, so the button previews what pressing it
+           does regardless of button state. Replaces the 🎯 target emoji,
+           which read as "aim/select a spot" rather than "find me". -->
+      <button type="button" id="locate-btn" data-i18n-tooltip="geolocation.button_title" aria-label="Locate me">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <circle cx="12" cy="12" r="10" fill="#2a6fbb" opacity="0.18"/>
+          <circle cx="12" cy="12" r="7" fill="#2a6fbb" stroke="white" stroke-width="2.5"/>
+        </svg>
+      </button>
+
+      <!-- Filter button + its dropdown card, same anchor-to-map-wrap /
+           click-outside-closes pattern as #search-results. Row list itself
+           is built in app.js from whatever categories actually appear in
+           the dataset, not hardcoded here. -->
+      <!-- "Tune" icon, same slider-control metaphor as Google Maps' own
+           filter button, but the previous pass (thin currentColor lines +
+           tiny colored dots) still read as mostly monochrome - color was
+           only in three small accents, not the icon itself. This flips
+           that: three bold colored capsule tracks (teal/blue/terracotta -
+           NOT purple, which is #filter-btn.active's own background and
+           would nearly vanish against it, the same reasoning the earlier
+           solid-funnel pass already used) each with a white handle. Color
+           now carries real visual weight instead of being a detail on top
+           of black lines, and the white handles keep it legible on both
+           the idle white background and the active purple one. -->
+      <button type="button" id="filter-btn" data-i18n-tooltip="filter.button_title" aria-label="Filter">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+          <rect x="3" y="4.5" width="18" height="3" rx="1.5" fill="#1c8a6d"/>
+          <circle cx="9" cy="6" r="3" fill="white" stroke="#1c8a6d" stroke-width="1.5"/>
+          <rect x="3" y="10.5" width="18" height="3" rx="1.5" fill="#2a6fbb"/>
+          <circle cx="16" cy="12" r="3" fill="white" stroke="#2a6fbb" stroke-width="1.5"/>
+          <rect x="3" y="16.5" width="18" height="3" rx="1.5" fill="#c2703d"/>
+          <circle cx="11" cy="18" r="3" fill="white" stroke="#c2703d" stroke-width="1.5"/>
+        </svg>
+        <span id="filter-badge" class="filter-badge" hidden></span>
+      </button>
+      <div id="filter-panel">
+        <!-- "Estado" - orthogonal to category, AND-combined with it: a
+             record must match the selected categories AND (no status box
+             checked, or at least one checked status). Only 2 rows, so no
+             Todo/Ninguno shortcuts needed the way the longer category list
+             has. -->
+        <div class="filter-section-label" data-i18n="filter.status_title">Estado</div>
+        <div id="filter-status-list"></div>
+
+        <div id="filter-panel-header">
+          <span data-i18n="filter.title">Categorías</span>
+          <div id="filter-panel-actions">
+            <button type="button" id="filter-all-btn" data-i18n="filter.all">Todo</button>
+            <button type="button" id="filter-none-btn" data-i18n="filter.none">Ninguno</button>
+          </div>
+        </div>
+        <div id="filter-list"></div>
+      </div>
+
+      <!-- Desktop-only (hidden <=768px, see style.css) - a rotating
+           highlight card, one photo picked deterministically per ISO week
+           from web/data/picture_of_the_week.json (see find_good_pictures.py)
+           so it changes weekly with no server/build step involved, and
+           stays identical for every visitor that same week. Hidden
+           entirely (not just empty) whenever that pool is empty. -->
+      <div id="potw" hidden></div>
+
+      <!-- Slim, always-on call-to-action strip (both mobile and desktop) -
+           shown whenever the map itself is in view (panel closed), unlike
+           #potw above it has no dismiss state of its own: see app.js for
+           why the two are kept independent. Real <a>, not a <button> - see
+           wireSpaLink()'s own comment: hover/right-click/ctrl-click should
+           all behave like the real link to /contribute/ that this is. -->
+      <a href="/contribute/" id="contribute-bar" hidden>
+        <span class="contribute-bar-text-full" data-i18n="contribute_bar.text"></span>
+        <span class="contribute-bar-text-short" data-i18n="contribute_bar.text_short"></span>
+      </a>
+    </div>
+
+    <aside id="panel" class="open">
+      <div id="panel-handle"></div>
+      <button id="panel-close" aria-label="Cerrar">✕</button>
+      <div id="panel-content" data-static-province="Segovia"><div class="hero hero-fallback"><div class="hero-placeholder-icon">🗺️</div><div class="hero-scrim"><div class="hero-kicker">🗺️ Provincia</div><h1 class="hero-title">Patrimonio protegido en Segovia</h1></div></div><div class="panel-body"><nav class="crumbs" aria-label="Migas de pan"><a href="/">Inicio</a> <span aria-hidden="true">›</span> <span aria-current="page">Segovia</span></nav><div class="meta">228 bienes protegidos · 67 municipios</div><p class="summary">La provincia de Segovia cuenta con 228 bienes protegidos como Bien de Interés Cultural, repartidos en 67 municipios y 9 categorías, según el catálogo oficial de la Junta de Castilla y León. 135 de ellos tienen fotografía libre en Wikimedia Commons; 173 están enlazados a Wikidata. La categoría más numerosa es «Monumentos» (120) y el municipio con más bienes es Segovia (43). El más antiguo, Acueducto Romano (Segovia), está protegido desde 1884.</p><h2>Por categoría</h2><ul class="page-links"><li><a href="/provincia/segovia/monumentos/">Monumentos</a> <span class="meta">120</span></li><li><a href="/provincia/segovia/arte-rupestre/">Arte rupestre</a> <span class="meta">72</span></li><li><a href="/provincia/segovia/conjuntos-historicos/">Conjuntos históricos</a> <span class="meta">10</span></li><li><a href="/provincia/segovia/castillos/">Castillos</a> <span class="meta">9</span></li><li><a href="/provincia/segovia/zonas-arqueologicas/">Zonas arqueológicas</a> <span class="meta">7</span></li><li><a href="/provincia/segovia/rollos-de-justicia/">Rollos de justicia</a> <span class="meta">6</span></li><li>Escudos <span class="meta">2</span></li><li>Archivos, museos y bibliotecas <span class="meta">1</span></li><li>Paisajes culturales <span class="meta">1</span></li></ul><h2>Municipios con más bienes</h2><ul class="page-links"><li>Segovia <span class="meta">43</span></li><li>Sepúlveda <span class="meta">30</span></li><li>Carrascal del Río <span class="meta">26</span></li><li>Sebúlcor <span class="meta">10</span></li><li>Cuéllar <span class="meta">8</span></li><li>Fuentidueña <span class="meta">7</span></li><li>Real Sitio de San Ildefonso <span class="meta">7</span></li><li>Santa María la Real de Nieva <span class="meta">6</span></li><li>Ayllón <span class="meta">4</span></li><li>Bernardos <span class="meta">4</span></li></ul><h2>Bienes destacados</h2><ul class="list"><li><a class="list-row" href="/monumento/10646-abadia-de-santa-maria-de-parraces/" data-jcyl-id="10646"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Abad%C3%ADa%20de%20P%C3%A1rraces%2C%20Bercial%2004.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Abadía de Santa María de Párraces</span><span class="list-row-stat">Bercial</span></a></li><li><a class="list-row" href="/monumento/2950878-abrigos-del-molino-y-san-lazaro/" data-jcyl-id="2950878"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Abrigo%20de%20San%20L%C3%A1zaro.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Abrigos del Molino y San Lázaro</span><span class="list-row-stat">Segovia</span></a></li><li><a class="list-row" href="/monumento/11535-conjunto-historico-la-granja-de-san-ildefonso/" data-jcyl-id="11535"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Desde%20Pe%C3%B1alara%2C%20Real%20Sitio%20de%20San%20Ildefonso.%20Segovia%2C%20Espa%C3%B1a.%20Spain.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Conjunto Histórico la Granja de San Ildefonso</span><span class="list-row-stat">Real Sitio de San Ildefonso</span></a></li><li><a class="list-row" href="/monumento/11365-castillo-de-zuloaga/" data-jcyl-id="11365"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Pedraza%20Castillo%20343.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Castillo de Zuloaga</span><span class="list-row-stat">Pedraza</span></a></li><li><a class="list-row" href="/monumento/11734-casa-del-sol-museo-de-segovia/" data-jcyl-id="11734"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Segovia%20-%20Museo%20de%20Segovia%201.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Casa del Sol, Museo de Segovia</span><span class="list-row-stat">Segovia</span></a></li><li><a class="list-row" href="/monumento/11755-conjunto-de-arbolado-y-alameda-de-ciudad/" data-jcyl-id="11755"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Segovia%20Stadtansicht%20vom%20Parador.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Conjunto de Arbolado y Alameda de Ciudad</span><span class="list-row-stat">Segovia</span></a></li><li><a class="list-row" href="/monumento/11106-rollo-de-justicia/" data-jcyl-id="11106"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Rollo%20e%20Iglesia%20de%20San%20Vitores%202.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Rollo de Justicia</span><span class="list-row-stat">Grajera</span></a></li><li><a class="list-row" href="/monumento/11669-acueducto-romano/" data-jcyl-id="11669"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Aqueduct%20of%20Segovia%2008.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Acueducto Romano</span><span class="list-row-stat">Segovia</span></a></li><li><a class="list-row" href="/monumento/10652-cerro-de-la-virgen-del-castillo/" data-jcyl-id="10652"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/10a%20Bernardos%20Cerro%20Virgen%20Castillo%20Muralla%20Ni.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Cerro de la Virgen del Castillo</span><span class="list-row-stat">Bernardos</span></a></li><li><a class="list-row" href="/monumento/10608-la-villa/" data-jcyl-id="10608"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Ayll%C3%B3n01-agosto-04.JPG?width=64" alt="" loading="lazy"><span class="list-row-name">La Villa</span><span class="list-row-stat">Ayllón</span></a></li><li><a class="list-row" href="/monumento/2015134-torreon-de-lozoya/" data-jcyl-id="2015134"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Torre%C3%B3n%20de%20Lozoya%2C%20Casa%20de%20Bornos%2C%20Casa%20de%20Solier%2C%20monumento%20a%20Juan%20Bravo.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Torreón de Lozoya</span><span class="list-row-stat">Segovia</span></a></li></ul><h2>Otros bienes protegidos</h2><ul class="list"><li><a class="list-row" href="/monumento/11734-casa-del-sol-museo-de-segovia/" data-jcyl-id="11734"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Segovia%20-%20Museo%20de%20Segovia%201.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Casa del Sol, Museo de Segovia</span><span class="list-row-stat">Segovia</span></a></li><li><a class="list-row" href="/monumento/11688-carcel-real/" data-jcyl-id="11688"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Segovia%20-%20Antigua%20Carcel%20Real.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Cárcel Real</span><span class="list-row-stat">Segovia</span></a></li><li><a class="list-row" href="/monumento/3140373-casa-con-escudo-en-la-plaza-de-la-constitucion-4/" data-jcyl-id="3140373"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🛡️</span><span class="list-row-name">Casa Con Escudo en la Plaza de la Constitución, 4</span><span class="list-row-stat">Navares de las Cuevas</span></a></li><li><a class="list-row" href="/monumento/11755-conjunto-de-arbolado-y-alameda-de-ciudad/" data-jcyl-id="11755"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Segovia%20Stadtansicht%20vom%20Parador.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Conjunto de Arbolado y Alameda de Ciudad</span><span class="list-row-stat">Segovia</span></a></li></ul><h2>Otras provincias</h2><ul class="page-links"><li><a href="/provincia/leon/">León</a> <span class="meta">574</span></li><li><a href="/provincia/palencia/">Palencia</a> <span class="meta">286</span></li><li><a href="/provincia/avila/">Ávila</a> <span class="meta">140</span></li><li><a href="/provincia/burgos/">Burgos</a> <span class="meta">445</span></li><li><a href="/provincia/soria/">Soria</a> <span class="meta">372</span></li><li><a href="/provincia/valladolid/">Valladolid</a> <span class="meta">216</span></li><li><a href="/provincia/salamanca/">Salamanca</a> <span class="meta">229</span></li><li><a href="/provincia/zamora/">Zamora</a> <span class="meta">145</span></li></ul></div></div>
+    </aside>
+  </div>
+
+  <div id="toast"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+  <script src="i18n.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

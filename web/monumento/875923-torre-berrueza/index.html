@@ -11,7 +11,7 @@
        too deep and 404. Same tag scripts/build_monument_pages.py's static
        per-monument pages already carry, for the same reason. -->
   <base href="/">
-  <title>Torre Berrueza - Patrimonio Abierto</title>
+  <title>Torre Berrueza, Espinosa de los Monteros (Burgos) - Patrimonio Abierto</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- SEO/social preview. patrimonioabierto.es appears in four places
@@ -19,25 +19,25 @@
        ever changes again, update all four together plus the <title>/
        og:title/og:site_name text above, or a shared link preview will
        keep pointing at the old name/domain. -->
-  <meta name="description" content="Torre Berrueza, Castillos en Espinosa de los Monteros (Burgos), Bien de Interés Cultural de Castilla y León.">
+  <meta name="description" content="Torre Berrueza, castillo en Espinosa de los Monteros (Burgos). Ficha con datos oficiales, Wikidata y fotos libres.">
   <link rel="canonical" href="https://patrimonioabierto.es/monumento/875923-torre-berrueza/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Patrimonio Abierto">
-  <meta property="og:title" content="Torre Berrueza - Patrimonio Abierto">
-  <meta property="og:description" content="Torre Berrueza, Castillos en Espinosa de los Monteros (Burgos), Bien de Interés Cultural de Castilla y León.">
+  <meta property="og:title" content="Torre Berrueza, Espinosa de los Monteros (Burgos) - Patrimonio Abierto">
+  <meta property="og:description" content="Torre Berrueza, castillo en Espinosa de los Monteros (Burgos). Ficha con datos oficiales, Wikidata y fotos libres.">
   <meta property="og:image" content="https://patrimonioabierto.es/assets/logo-readme.png">
   <meta property="og:url" content="https://patrimonioabierto.es/monumento/875923-torre-berrueza/">
   <meta property="og:locale" content="es_ES">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Torre Berrueza - Patrimonio Abierto">
-  <meta name="twitter:description" content="Torre Berrueza, Castillos en Espinosa de los Monteros (Burgos), Bien de Interés Cultural de Castilla y León.">
+  <meta name="twitter:title" content="Torre Berrueza, Espinosa de los Monteros (Burgos) - Patrimonio Abierto">
+  <meta name="twitter:description" content="Torre Berrueza, castillo en Espinosa de los Monteros (Burgos). Ficha con datos oficiales, Wikidata y fotos libres.">
   <meta name="twitter:image" content="https://patrimonioabierto.es/assets/logo-readme.png">
 
   <!-- Structured data (schema.org) for search engines - a Dataset (what
        this project actually publishes: the merged BIC/Wikidata/Wikipedia/
        Commons table) presented as part of a WebSite (how people reach it).
        Doesn't change anything a visitor sees; only read by crawlers. -->
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LandmarkOrHistoricalBuilding", "name": "Torre Berrueza", "description": "Torre Berrueza, Castillos en Espinosa de los Monteros (Burgos), Bien de Interés Cultural de Castilla y León.", "url": "https://patrimonioabierto.es/monumento/875923-torre-berrueza/", "address": {"@type": "PostalAddress", "addressLocality": "Espinosa de los Monteros", "addressRegion": "Burgos", "addressCountry": "ES"}, "geo": {"@type": "GeoCoordinates", "latitude": 43.076709, "longitude": -3.548701}, "isPartOf": {"@type": "WebSite", "name": "Patrimonio Abierto", "url": "https://patrimonioabierto.es/"}, "sameAs": ["https://www.wikidata.org/wiki/Q141449861"]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LandmarkOrHistoricalBuilding", "name": "Torre Berrueza", "description": "Torre Berrueza, castillo en Espinosa de los Monteros (Burgos). Ficha con datos oficiales, Wikidata y fotos libres.", "url": "https://patrimonioabierto.es/monumento/875923-torre-berrueza/", "address": {"@type": "PostalAddress", "addressLocality": "Espinosa de los Monteros", "addressRegion": "Burgos", "addressCountry": "ES"}, "geo": {"@type": "GeoCoordinates", "latitude": 43.076709, "longitude": -3.548701}, "isPartOf": {"@type": "WebSite", "name": "Patrimonio Abierto", "url": "https://patrimonioabierto.es/"}, "sameAs": ["https://www.wikidata.org/wiki/Q141449861"]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://patrimonioabierto.es/"}, {"@type": "ListItem", "position": 2, "name": "Burgos", "item": "https://patrimonioabierto.es/provincia/burgos/"}, {"@type": "ListItem", "position": 3, "name": "Castillos", "item": "https://patrimonioabierto.es/provincia/burgos/castillos/"}, {"@type": "ListItem", "position": 4, "name": "Torre Berrueza", "item": "https://patrimonioabierto.es/monumento/875923-torre-berrueza/"}]}</script>
 
   <!-- Same mark as #logo-mark/#loading-logo/#welcome-logo (assets/logo.png)
        - just square and on a solid brand-purple backing (same purple as
@@ -56,6 +56,10 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
   <link rel="stylesheet" href="style.css" />
+  <!-- Without JavaScript nothing ever dismisses the loading screen or the
+       welcome dialog, so they would cover the page's static content (the
+       per-monument pages carry real text and links in the HTML) forever. -->
+  <noscript><style>#loading-screen, #welcome-modal { display: none !important; }</style></noscript>
 </head>
 <body>
   <!-- The very first focusable thing on the page, on purpose - a classic
@@ -89,6 +93,12 @@
       <div id="welcome-logo-badge"><img src="assets/logo.png" alt="" id="welcome-logo"></div>
       <h2 data-i18n="welcome.title">Bienvenido a Patrimonio Abierto</h2>
       <p data-i18n="welcome.body">Aquí encontrarás todos los Bienes de Interés Cultural (BIC) declarados oficialmente en Castilla y León, junto con información y material multimedia de Wikidata, Wikipedia y Wikimedia Commons. Un proyecto libre, sin cuentas ni anuncios.</p>
+      <!-- Plain links into the per-province pages, so the homepage - and every
+           page built from this shell - leads a crawler to them. -->
+      <nav id="welcome-provinces" aria-label="Provincias"><span data-i18n="welcome.provinces">Explorar por provincia:</span>
+        <a href="/provincia/avila/">Ávila</a> <a href="/provincia/burgos/">Burgos</a> <a href="/provincia/leon/">León</a>
+        <a href="/provincia/palencia/">Palencia</a> <a href="/provincia/salamanca/">Salamanca</a> <a href="/provincia/segovia/">Segovia</a>
+        <a href="/provincia/soria/">Soria</a> <a href="/provincia/valladolid/">Valladolid</a> <a href="/provincia/zamora/">Zamora</a></nav>
       <button type="button" id="welcome-close-btn" data-i18n="welcome.cta">Empezar a explorar</button>
       <a href="#" id="welcome-about-link" data-i18n="welcome.about_link">Más sobre el proyecto</a>
     </div>
@@ -221,7 +231,7 @@
     <aside id="panel" class="open">
       <div id="panel-handle"></div>
       <button id="panel-close" aria-label="Cerrar">✕</button>
-      <div id="panel-content"><div class="hero hero-fallback"><div class="hero-placeholder-icon">🏰</div><div class="hero-scrim"><div class="hero-kicker">🏰 CASTILLOS</div><h2 class="hero-title">Torre Berrueza</h2></div></div><div class="panel-body"><div class="meta">Espinosa de los Monteros · Burgos · BIC desde 1949-04-22</div><div class="missing-note">Este monumento todavía no tiene artículo en Wikipedia.</div><div class="link-badges"><a class="badge jcyl" href="https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=875923" target="_blank" rel="noopener">📄 Ficha JCyL</a><a class="badge wikidata" href="https://www.wikidata.org/wiki/Q141449861" target="_blank" rel="noopener"><svg viewBox="0 0 1050 590" width="18" height="10" aria-hidden="true"><path d="m 120,545 h 30 V 45 H 120 V 545 z m 60,0 h 90 V 45 H 180 V 545 z M 300,45 V 545 h 90 V 45 h -90 z" fill="#990000"/><path d="m 840,545 h 30 V 45 H 840 V 545 z M 900,45 V 545 h 30 V 45 H 900 z M 420,545 h 30 V 45 H 420 V 545 z M 480,45 V 545 h 30 V 45 h -30 z" fill="#339966"/><path d="m 540,545 h 90 V 45 h -90 V 545 z m 120,0 h 30 V 45 H 660 V 545 z M 720,45 V 545 h 90 V 45 H 720 z" fill="#006699"/></svg>Wikidata</a></div></div></div>
+      <div id="panel-content"><div class="hero hero-fallback"><div class="hero-placeholder-icon">🏰</div><div class="hero-scrim"><div class="hero-kicker">🏰 CASTILLOS</div><h1 class="hero-title">Torre Berrueza</h1></div></div><div class="panel-body"><nav class="crumbs" aria-label="Migas de pan"><a href="/">Inicio</a> <span aria-hidden="true">›</span> <a href="/provincia/burgos/">Burgos</a> <span aria-hidden="true">›</span> <a href="/provincia/burgos/castillos/">Castillos</a> <span aria-hidden="true">›</span> <span aria-current="page">Torre Berrueza</span></nav><div class="meta">Espinosa de los Monteros · Burgos · BIC desde 1949-04-22</div><p class="summary">Torre Berrueza es un bien protegido de la categoría «castillo» situado en Espinosa de los Monteros, provincia de Burgos, en Castilla y León. Está declarado Bien de Interés Cultural desde el 22 de abril de 1949.</p><div class="missing-note">Este monumento todavía no tiene artículo en Wikipedia.</div><div class="link-badges"><a class="badge jcyl" href="https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=875923" target="_blank" rel="noopener">📄 Ficha JCyL</a><a class="badge wikidata" href="https://www.wikidata.org/wiki/Q141449861" target="_blank" rel="noopener"><svg viewBox="0 0 1050 590" width="18" height="10" aria-hidden="true"><path d="m 120,545 h 30 V 45 H 120 V 545 z m 60,0 h 90 V 45 H 180 V 545 z M 300,45 V 545 h 90 V 45 h -90 z" fill="#990000"/><path d="m 840,545 h 30 V 45 H 840 V 545 z M 900,45 V 545 h 30 V 45 H 900 z M 420,545 h 30 V 45 H 420 V 545 z M 480,45 V 545 h 30 V 45 h -30 z" fill="#339966"/><path d="m 540,545 h 90 V 45 h -90 V 545 z m 120,0 h 30 V 45 H 660 V 545 z M 720,45 V 545 h 90 V 45 H 720 z" fill="#006699"/></svg>Wikidata</a></div><h3>Cerca de aquí</h3><ul class="list"><li><a class="list-row" href="/monumento/2168-torre-de-los-valanto-o-torreon-de-los-monteros/" data-jcyl-id="2168"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🏰</span><span class="list-row-name">Torre de los Valanto O Torreon de los Monteros</span><span class="list-row-stat">29 m</span></a></li><li><a class="list-row" href="/monumento/2112-casa-palacio-de-los-fernandez-villa/" data-jcyl-id="2112"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Palacio%20de%20los%20Fern%C3%A1ndez%20Villa.JPG?width=64" alt="" loading="lazy"><span class="list-row-name">Casa-palacio de los Fernández Villa</span><span class="list-row-stat">139 m</span></a></li><li><a class="list-row" href="/monumento/2100-casa-de-los-cubos-o-torre-pumarejo/" data-jcyl-id="2100"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🏰</span><span class="list-row-name">Casa de los Cubos O Torre Pumarejo</span><span class="list-row-stat">193 m</span></a></li><li><a class="list-row" href="/monumento/2156-torre-de-cantimplor/" data-jcyl-id="2156"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🏰</span><span class="list-row-name">Torre de Cantimplor</span><span class="list-row-stat">198 m</span></a></li><li><a class="list-row" href="/monumento/2162-torre-de-los-azulejos/" data-jcyl-id="2162"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🏰</span><span class="list-row-name">Torre de los Azulejos</span><span class="list-row-stat">220 m</span></a></li><li><a class="list-row" href="/monumento/2128-casa-palacio-el-fuerte-o-de-chiloeches/" data-jcyl-id="2128"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Espinosa%20de%20los%20Monteros%20Palacio%20Chiloeches.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Casa-palacio el Fuerte O de Chiloeches</span><span class="list-row-stat">226 m</span></a></li></ul></div></div>
     </aside>
   </div>
 

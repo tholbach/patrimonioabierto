@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <!-- Root-relative, not absolute - resolves against whatever origin
+       actually served the page (production or make serve/localhost) and
+       keeps every relative reference (style.css, assets/*, app.js's own
+       fetch('data/...') calls) pinned to site root even once app.js starts
+       pushState-ing the address bar to /monumento/<id>-<slug>/ during live
+       browsing - without this, those fetches would resolve one directory
+       too deep and 404. Same tag scripts/build_monument_pages.py's static
+       per-monument pages already carry, for the same reason. -->
+  <base href="/">
+  <title>Rollos de justicia en Burgos: 50 bienes protegidos - Patrimonio Abierto</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- SEO/social preview. patrimonioabierto.es appears in four places
+       below (canonical, og:url, og:image, twitter:image) - if this domain
+       ever changes again, update all four together plus the <title>/
+       og:title/og:site_name text above, or a shared link preview will
+       keep pointing at the old name/domain. -->
+  <meta name="description" content="Lista de 50 rollos de justicia protegidos como Bien de Interés Cultural en Burgos, por municipio, con fotos libres y Wikidata.">
+  <link rel="canonical" href="https://patrimonioabierto.es/provincia/burgos/rollos-de-justicia/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Patrimonio Abierto">
+  <meta property="og:title" content="Rollos de justicia en Burgos: 50 bienes protegidos - Patrimonio Abierto">
+  <meta property="og:description" content="Lista de 50 rollos de justicia protegidos como Bien de Interés Cultural en Burgos, por municipio, con fotos libres y Wikidata.">
+  <meta property="og:image" content="https://patrimonioabierto.es/assets/logo-readme.png">
+  <meta property="og:url" content="https://patrimonioabierto.es/provincia/burgos/rollos-de-justicia/">
+  <meta property="og:locale" content="es_ES">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Rollos de justicia en Burgos: 50 bienes protegidos - Patrimonio Abierto">
+  <meta name="twitter:description" content="Lista de 50 rollos de justicia protegidos como Bien de Interés Cultural en Burgos, por municipio, con fotos libres y Wikidata.">
+  <meta name="twitter:image" content="https://patrimonioabierto.es/assets/logo-readme.png">
+
+  <!-- Structured data (schema.org) for search engines - a Dataset (what
+       this project actually publishes: the merged BIC/Wikidata/Wikipedia/
+       Commons table) presented as part of a WebSite (how people reach it).
+       Doesn't change anything a visitor sees; only read by crawlers. -->
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "CollectionPage", "name": "Rollos de justicia en Burgos", "description": "Lista de 50 rollos de justicia protegidos como Bien de Interés Cultural en Burgos, por municipio, con fotos libres y Wikidata.", "url": "https://patrimonioabierto.es/provincia/burgos/rollos-de-justicia/", "isPartOf": {"@type": "WebSite", "name": "Patrimonio Abierto", "url": "https://patrimonioabierto.es/"}, "breadcrumb": {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://patrimonioabierto.es/"}, {"@type": "ListItem", "position": 2, "name": "Burgos", "item": "https://patrimonioabierto.es/provincia/burgos/"}, {"@type": "ListItem", "position": 3, "name": "Rollos de justicia", "item": "https://patrimonioabierto.es/provincia/burgos/rollos-de-justicia/"}]}, "mainEntity": {"@type": "ItemList", "numberOfItems": 50, "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Rollo de Justicia", "url": "https://patrimonioabierto.es/monumento/1395-rollo-de-justicia/"}, {"@type": "ListItem", "position": 2, "name": "Rollo de Justicia", "url": "https://patrimonioabierto.es/monumento/1482-rollo-de-justicia/"}, {"@type": "ListItem", "position": 3, "name": "Rollo de Justicia", "url": "https://patrimonioabierto.es/monumento/1487-rollo-de-justicia/"}, {"@type": "ListItem", "position": 4, "name": "Crucero Calle Nuño Rasura", "url": "https://patrimonioabierto.es/monumento/875137-crucero-calle-nuno-rasura/"}, {"@type": "ListItem", "position": 5, "name": "Crucero Gamonal Río Pico", "url": "https://patrimonioabierto.es/monumento/875151-crucero-gamonal-rio-pico/"}, {"@type": "ListItem", "position": 6, "name": "Crucero Plaza del Rey", "url": "https://patrimonioabierto.es/monumento/875141-crucero-plaza-del-rey/"}, {"@type": "ListItem", "position": 7, "name": "Rollo de Justicia", "url": "https://patrimonioabierto.es/monumento/1843-rollo-de-justicia/"}, {"@type": "ListItem", "position": 8, "name": "Crucero en Castellanos de Castro", "url": "https://patrimonioabierto.es/monumento/875389-crucero-en-castellanos-de-castro/"}, {"@type": "ListItem", "position": 9, "name": "Crucero", "url": "https://patrimonioabierto.es/monumento/875159-crucero/"}, {"@type": "ListItem", "position": 10, "name": "Rollo de Justicia", "url": "https://patrimonioabierto.es/monumento/1971-rollo-de-justicia/"}, {"@type": "ListItem", "position": 11, "name": "Rollo de Justicia", "url": "https://patrimonioabierto.es/monumento/2029-rollo-de-justicia/"}, {"@type": "ListItem", "position": 12, "name": "Rollo de Justicia", "url": "https://patrimonioabierto.es/monumento/2047-rollo-de-justicia/"}, {"@type": "ListItem", "position": 13, "name": "Crucero", "url": "https://patrimonioabierto.es/monumento/873506-crucero/"}, {"@type": "ListItem", "position": 14, "name": "Crucero Frente Al Archivo del Adelantamiento de Castilla", "url": "https://patrimonioabierto.es/monumento/873510-crucero-frente-al-archivo-del-adelantamiento-de-castilla/"}, {"@type": "ListItem", "position": 15, "name": "Rollo de Justicia", "url": "https://patrimonioabierto.es/monumento/2065-rollo-de-justicia/"}, {"@type": "ListItem", "position": 16, "name": "Rollo de Justicia", "url": "https://patrimonioabierto.es/monumento/2185-rollo-de-justicia/"}, {"@type": "ListItem", "position": 17, "name": "Rollo de Justicia", "url": "https://patrimonioabierto.es/monumento/2197-rollo-de-justicia/"}, {"@type": "ListItem", "position": 18, "name": "Rollo de Justicia", "url": "https://patrimonioabierto.es/monumento/2221-rollo-de-justicia/"}, {"@type": "ListItem", "position": 19, "name": "Rollo de Justicia Con Crucero", "url": "https://patrimonioabierto.es/monumento/2061365-rollo-de-justicia-con-crucero/"}, {"@type": "ListItem", "position": 20, "name": "Rollo de Justicia", "url": "https://patrimonioabierto.es/monumento/2061371-rollo-de-justicia/"}, {"@type": "ListItem", "position": 21, "name": "Rollo de Justicia", "url": "https://patrimonioabierto.es/monumento/2282-rollo-de-justicia/"}, {"@type": "ListItem", "position": 22, "name": "Rollo de Justicia", "url": "https://patrimonioabierto.es/monumento/2309-rollo-de-justicia/"}, {"@type": "ListItem", "position": 23, "name": "Rollo de Justicia", "url": "https://patrimonioabierto.es/monumento/2394-rollo-de-justicia/"}, {"@type": "ListItem", "position": 24, "name": "Rollo de Justicia", "url": "https://patrimonioabierto.es/monumento/3746-rollo-de-justicia/"}, {"@type": "ListItem", "position": 25, "name": "Rollo de Justicia", "url": "https://patrimonioabierto.es/monumento/2545-rollo-de-justicia/"}, {"@type": "ListItem", "position": 26, "name": "Rollo de Justicia", "url": "https://patrimonioabierto.es/monumento/2550-rollo-de-justicia/"}, {"@type": "ListItem", "position": 27, "name": "Rollo de Justicia", "url": "https://patrimonioabierto.es/monumento/4126-rollo-de-justicia/"}, {"@type": "ListItem", "position": 28, "name": "Rollo de Justicia", "url": "https://patrimonioabierto.es/monumento/2845-rollo-de-justicia/"}, {"@type": "ListItem", "position": 29, "name": "Rollo de Justicia", "url": "https://patrimonioabierto.es/monumento/2884-rollo-de-justicia/"}, {"@type": "ListItem", "position": 30, "name": "Rollo de Justicia", "url": "https://patrimonioabierto.es/monumento/2889-rollo-de-justicia/"}, {"@type": "ListItem", "position": 31, "name": "Rollo de Justicia", "url": "https://patrimonioabierto.es/monumento/2961-rollo-de-justicia/"}, {"@type": "ListItem", "position": 32, "name": "Rollo de Justicia", "url": "https://patrimonioabierto.es/monumento/2988-rollo-de-justicia/"}, {"@type": "ListItem", "position": 33, "name": "Rollo de Justicia", "url": "https://patrimonioabierto.es/monumento/2062997-rollo-de-justicia/"}, {"@type": "ListItem", "position": 34, "name": "Picota", "url": "https://patrimonioabierto.es/monumento/875412-picota/"}, {"@type": "ListItem", "position": 35, "name": "Rollo", "url": "https://patrimonioabierto.es/monumento/875408-rollo/"}, {"@type": "ListItem", "position": 36, "name": "Rollo de Justicia", "url": "https://patrimonioabierto.es/monumento/3216-rollo-de-justicia/"}, {"@type": "ListItem", "position": 37, "name": "Rollo Jurisdiccional", "url": "https://patrimonioabierto.es/monumento/2075296-rollo-jurisdiccional/"}, {"@type": "ListItem", "position": 38, "name": "Rollo de Justicia", "url": "https://patrimonioabierto.es/monumento/3290-rollo-de-justicia/"}, {"@type": "ListItem", "position": 39, "name": "Rollo de Justicia", "url": "https://patrimonioabierto.es/monumento/3295-rollo-de-justicia/"}, {"@type": "ListItem", "position": 40, "name": "Rollo de Justicia", "url": "https://patrimonioabierto.es/monumento/3335-rollo-de-justicia/"}, {"@type": "ListItem", "position": 41, "name": "Rollo de Justicia", "url": "https://patrimonioabierto.es/monumento/3435-rollo-de-justicia/"}, {"@type": "ListItem", "position": 42, "name": "Rollo de Justicia", "url": "https://patrimonioabierto.es/monumento/3543-rollo-de-justicia/"}, {"@type": "ListItem", "position": 43, "name": "Crucero", "url": "https://patrimonioabierto.es/monumento/3002080-crucero/"}, {"@type": "ListItem", "position": 44, "name": "Rollo de Justicia", "url": "https://patrimonioabierto.es/monumento/3838-rollo-de-justicia/"}, {"@type": "ListItem", "position": 45, "name": "Rollo de Justicia", "url": "https://patrimonioabierto.es/monumento/3843-rollo-de-justicia/"}, {"@type": "ListItem", "position": 46, "name": "Rollo de Justicia", "url": "https://patrimonioabierto.es/monumento/3855-rollo-de-justicia/"}, {"@type": "ListItem", "position": 47, "name": "Rollo de Justicia", "url": "https://patrimonioabierto.es/monumento/3865-rollo-de-justicia/"}, {"@type": "ListItem", "position": 48, "name": "Rollo de Justicia", "url": "https://patrimonioabierto.es/monumento/3962-rollo-de-justicia/"}, {"@type": "ListItem", "position": 49, "name": "Rollo de Justicia de Revenga", "url": "https://patrimonioabierto.es/monumento/3177-rollo-de-justicia-de-revenga/"}, {"@type": "ListItem", "position": 50, "name": "Rollo de Justicia", "url": "https://patrimonioabierto.es/monumento/3914-rollo-de-justicia/"}]}}</script>
+
+  <!-- Same mark as #logo-mark/#loading-logo/#welcome-logo (assets/logo.png)
+       - just square and on a solid brand-purple backing (same purple as
+       logo-readme.png's own README treatment), since a browser tab is
+       usually light or dark, not the purple header bar this logo is
+       normally drawn against - its white linework would go near-invisible
+       on a plain white tab background otherwise. -->
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <!-- Fraunces/Inter used to load from Google Fonts - self-hosted instead
+       (see the @font-face block at the top of style.css) so a visitor's
+       browser never has to talk to fonts.gstatic.com at all: no third-
+       party request, no IP address leaving this site's own domain, one
+       less thing for the Privacidad page to have to disclose. -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- Without JavaScript nothing ever dismisses the loading screen or the
+       welcome dialog, so they would cover the page's static content (the
+       per-monument pages carry real text and links in the HTML) forever. -->
+  <noscript><style>#loading-screen, #welcome-modal { display: none !important; }</style></noscript>
+</head>
+<body>
+  <!-- The very first focusable thing on the page, on purpose - a classic
+       "skip link", invisible until it actually receives keyboard focus (see
+       .skip-link CSS). The visible 📋 button/menu entry that used to sit
+       next to this got removed (redundant with search/map for anyone
+       clicking around) - this is now the only way into showListPanel(),
+       which is fine: it's aimed squarely at whoever can't/doesn't want to
+       drive the map, and reaches the same panel in a single Tab press from
+       anywhere, before the loading screen, the header, anything - no
+       fishing for a small icon first. -->
+  <a href="#" id="skip-to-list-link" class="skip-link" data-i18n="list.skip_link">Ir directamente a la lista de monumentos</a>
+
+  <!-- First paint, before app.js even runs: the dataset is ~2MB, worth
+       covering with something branded rather than a blank page while it
+       loads. Spanish text is hardcoded as the real initial content (not an
+       empty data-i18n placeholder) since the app always starts in 'es' -
+       applyStaticI18n() just re-confirms it once JS runs. -->
+  <div id="loading-screen">
+    <img src="assets/logo.png" alt="" id="loading-logo">
+    <div id="loading-spinner" aria-hidden="true"></div>
+    <p data-i18n="loading.screen">Cargando el catálogo…</p>
+  </div>
+
+  <!-- Shown once per browser (localStorage flag, see app.js), after the
+       data has loaded - not on top of a deep link (?id=/?muni=/?prov=/#...),
+       since someone arriving at a specific monument already knows what
+       they're looking at. -->
+  <div id="welcome-modal">
+    <div id="welcome-card">
+      <div id="welcome-logo-badge"><img src="assets/logo.png" alt="" id="welcome-logo"></div>
+      <h2 data-i18n="welcome.title">Bienvenido a Patrimonio Abierto</h2>
+      <p data-i18n="welcome.body">Aquí encontrarás todos los Bienes de Interés Cultural (BIC) declarados oficialmente en Castilla y León, junto con información y material multimedia de Wikidata, Wikipedia y Wikimedia Commons. Un proyecto libre, sin cuentas ni anuncios.</p>
+      <!-- Plain links into the per-province pages, so the homepage - and every
+           page built from this shell - leads a crawler to them. -->
+      <nav id="welcome-provinces" aria-label="Provincias"><span data-i18n="welcome.provinces">Explorar por provincia:</span>
+        <a href="/provincia/avila/">Ávila</a> <a href="/provincia/burgos/">Burgos</a> <a href="/provincia/leon/">León</a>
+        <a href="/provincia/palencia/">Palencia</a> <a href="/provincia/salamanca/">Salamanca</a> <a href="/provincia/segovia/">Segovia</a>
+        <a href="/provincia/soria/">Soria</a> <a href="/provincia/valladolid/">Valladolid</a> <a href="/provincia/zamora/">Zamora</a></nav>
+      <button type="button" id="welcome-close-btn" data-i18n="welcome.cta">Empezar a explorar</button>
+      <a href="#" id="welcome-about-link" data-i18n="welcome.about_link">Más sobre el proyecto</a>
+    </div>
+  </div>
+
+  <header id="topbar">
+    <!-- Real link (not a <span>/<button>) - see wireSpaLink() in app.js:
+         hovering shows the URL, right-click/ctrl-click/middle-click all do
+         a real navigation back to the plain map, and a normal click gets
+         the instant in-app close instead of a reload. -->
+    <a class="brand" href="." id="brand-link"><img src="assets/logo.png" alt="" id="logo-mark">Patrimonio Abierto</a>
+
+    <!-- Mobile only (see CSS) - collapses #search-wrap to just this icon
+         until tapped, so the default header stays one compact row instead
+         of permanently reserving a full second row for it. -->
+    <!-- Inline SVG, not the 🔍 emoji this used to be - emoji glyphs are
+         drawn by the OS's own emoji font, whose vertical metrics vary
+         enough between Apple/Noto/Samsung's color-emoji sets that it never
+         sat quite centered in this small round button on mobile. An SVG
+         with stroke="currentColor" sits exactly where the viewBox puts it,
+         on every platform, and inherits the button's own (white) color. -->
+    <button type="button" id="search-toggle-btn" data-i18n-title="search.placeholder" aria-label="Search">
+      <svg viewBox="0 0 24 24" width="25" height="25" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </button>
+
+    <div id="search-wrap">
+      <input type="text" id="search-input" autocomplete="off" data-i18n-placeholder="search.placeholder" />
+      <button type="button" id="search-close-btn" aria-label="Close search">✕</button>
+      <div id="search-results"></div>
+    </div>
+
+    <!-- Estadísticas/Acerca de/Cómo contribuir/language all live behind
+         this on every screen size now, not just mobile - see showMenuPanel()
+         in app.js. Keeps the header down to logo + search everywhere. -->
+    <button type="button" id="menu-btn" data-i18n-title="menu.button_title" aria-label="Menu">☰</button>
+  </header>
+
+  <div id="app">
+    <!-- map-wrap, not #app, is what #legend/#locate-btn anchor to - #app
+         spans the map AND the panel side-by-side, so anchoring to it means
+         "right: 16px" measures from the panel's edge once it's open, not
+         the map's. map-wrap always matches the map's own visible area. -->
+    <div id="map-wrap">
+      <div id="map"></div>
+
+      <!-- data-i18n-tooltip, not data-i18n-title: see applyStaticI18n() in
+           i18n.js - feeds style.css's [data-i18n-tooltip]::after desktop
+           label instead of the browser's own native title tooltip. -->
+      <button type="button" id="shuffle-btn" data-i18n-tooltip="shuffle.button_title" aria-label="Random monument">🎲</button>
+      <!-- Same blue dot/white ring as .you-are-here-dot below (the marker
+           this button actually places on the map once located), plus the
+           same soft outer halo that marker's ::after ring gives it - a bare
+           dot read as flat next to that; the halo is what actually makes it
+           recognizable as "the Google Maps blue dot" at a glance. Fixed
+           colors, not currentColor, so the button previews what pressing it
+           does regardless of button state. Replaces the 🎯 target emoji,
+           which read as "aim/select a spot" rather than "find me". -->
+      <button type="button" id="locate-btn" data-i18n-tooltip="geolocation.button_title" aria-label="Locate me">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <circle cx="12" cy="12" r="10" fill="#2a6fbb" opacity="0.18"/>
+          <circle cx="12" cy="12" r="7" fill="#2a6fbb" stroke="white" stroke-width="2.5"/>
+        </svg>
+      </button>
+
+      <!-- Filter button + its dropdown card, same anchor-to-map-wrap /
+           click-outside-closes pattern as #search-results. Row list itself
+           is built in app.js from whatever categories actually appear in
+           the dataset, not hardcoded here. -->
+      <!-- "Tune" icon, same slider-control metaphor as Google Maps' own
+           filter button, but the previous pass (thin currentColor lines +
+           tiny colored dots) still read as mostly monochrome - color was
+           only in three small accents, not the icon itself. This flips
+           that: three bold colored capsule tracks (teal/blue/terracotta -
+           NOT purple, which is #filter-btn.active's own background and
+           would nearly vanish against it, the same reasoning the earlier
+           solid-funnel pass already used) each with a white handle. Color
+           now carries real visual weight instead of being a detail on top
+           of black lines, and the white handles keep it legible on both
+           the idle white background and the active purple one. -->
+      <button type="button" id="filter-btn" data-i18n-tooltip="filter.button_title" aria-label="Filter">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+          <rect x="3" y="4.5" width="18" height="3" rx="1.5" fill="#1c8a6d"/>
+          <circle cx="9" cy="6" r="3" fill="white" stroke="#1c8a6d" stroke-width="1.5"/>
+          <rect x="3" y="10.5" width="18" height="3" rx="1.5" fill="#2a6fbb"/>
+          <circle cx="16" cy="12" r="3" fill="white" stroke="#2a6fbb" stroke-width="1.5"/>
+          <rect x="3" y="16.5" width="18" height="3" rx="1.5" fill="#c2703d"/>
+          <circle cx="11" cy="18" r="3" fill="white" stroke="#c2703d" stroke-width="1.5"/>
+        </svg>
+        <span id="filter-badge" class="filter-badge" hidden></span>
+      </button>
+      <div id="filter-panel">
+        <!-- "Estado" - orthogonal to category, AND-combined with it: a
+             record must match the selected categories AND (no status box
+             checked, or at least one checked status). Only 2 rows, so no
+             Todo/Ninguno shortcuts needed the way the longer category list
+             has. -->
+        <div class="filter-section-label" data-i18n="filter.status_title">Estado</div>
+        <div id="filter-status-list"></div>
+
+        <div id="filter-panel-header">
+          <span data-i18n="filter.title">Categorías</span>
+          <div id="filter-panel-actions">
+            <button type="button" id="filter-all-btn" data-i18n="filter.all">Todo</button>
+            <button type="button" id="filter-none-btn" data-i18n="filter.none">Ninguno</button>
+          </div>
+        </div>
+        <div id="filter-list"></div>
+      </div>
+
+      <!-- Desktop-only (hidden <=768px, see style.css) - a rotating
+           highlight card, one photo picked deterministically per ISO week
+           from web/data/picture_of_the_week.json (see find_good_pictures.py)
+           so it changes weekly with no server/build step involved, and
+           stays identical for every visitor that same week. Hidden
+           entirely (not just empty) whenever that pool is empty. -->
+      <div id="potw" hidden></div>
+
+      <!-- Slim, always-on call-to-action strip (both mobile and desktop) -
+           shown whenever the map itself is in view (panel closed), unlike
+           #potw above it has no dismiss state of its own: see app.js for
+           why the two are kept independent. Real <a>, not a <button> - see
+           wireSpaLink()'s own comment: hover/right-click/ctrl-click should
+           all behave like the real link to /contribute/ that this is. -->
+      <a href="/contribute/" id="contribute-bar" hidden>
+        <span class="contribute-bar-text-full" data-i18n="contribute_bar.text"></span>
+        <span class="contribute-bar-text-short" data-i18n="contribute_bar.text_short"></span>
+      </a>
+    </div>
+
+    <aside id="panel" class="open">
+      <div id="panel-handle"></div>
+      <button id="panel-close" aria-label="Cerrar">✕</button>
+      <div id="panel-content" data-static-province="Burgos" data-static-category="ROLLOS DE JUSTICIA"><div class="hero hero-fallback"><div class="hero-placeholder-icon">🗺️</div><div class="hero-scrim"><div class="hero-kicker">⚖️ Rollos de justicia</div><h1 class="hero-title">Rollos de justicia en Burgos</h1></div></div><div class="panel-body"><nav class="crumbs" aria-label="Migas de pan"><a href="/">Inicio</a> <span aria-hidden="true">›</span> <a href="/provincia/burgos/">Burgos</a> <span aria-hidden="true">›</span> <span aria-current="page">Rollos de justicia</span></nav><div class="meta">50 bienes · 44 municipios</div><p class="summary">50 rollos de justicia protegidos como Bien de Interés Cultural en la provincia de Burgos, en 44 municipios, según el catálogo oficial de la Junta de Castilla y León. 17 de ellos tienen fotografía libre en Wikimedia Commons; 50 están enlazados a Wikidata. Aún faltan fotografías libres de 33. Burgos reúne 3 de ellos. La protección más antigua data de 1963.</p><h2>Aranda de Duero</h2><ul class="list"><li><a class="list-row" href="/monumento/1395-rollo-de-justicia/" data-jcyl-id="1395"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Aranda%20de%20Duero%20-%20rollo%20jurisdiccional.JPG?width=64" alt="" loading="lazy"><span class="list-row-name">Rollo de Justicia</span></a></li></ul><h2>Barbadillo del Mercado</h2><ul class="list"><li><a class="list-row" href="/monumento/1482-rollo-de-justicia/" data-jcyl-id="1482"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Barbadillo%20del%20Mercado%20-%20Rollo%20jurisdiccional.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Rollo de Justicia</span></a></li></ul><h2>Barrio de Muñó</h2><ul class="list"><li><a class="list-row" href="/monumento/1487-rollo-de-justicia/" data-jcyl-id="1487"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">⚖️</span><span class="list-row-name">Rollo de Justicia</span></a></li></ul><h2>Burgos</h2><ul class="list"><li><a class="list-row" href="/monumento/875137-crucero-calle-nuno-rasura/" data-jcyl-id="875137"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Cruz%20de%20piedra%20en%20la%20calle%20Nu%C3%B1o%20Rasura.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Crucero Calle Nuño Rasura</span></a></li><li><a class="list-row" href="/monumento/875151-crucero-gamonal-rio-pico/" data-jcyl-id="875151"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Burgos%20-%20Iglesia%20de%20Nuestra%20Se%C3%B1ora%20la%20Real%20y%20Antigua%20de%20Gamonal%2003.JPG?width=64" alt="" loading="lazy"><span class="list-row-name">Crucero Gamonal Río Pico</span></a></li><li><a class="list-row" href="/monumento/875141-crucero-plaza-del-rey/" data-jcyl-id="875141"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">⚖️</span><span class="list-row-name">Crucero Plaza del Rey</span></a></li></ul><h2>Cabezón de la Sierra</h2><ul class="list"><li><a class="list-row" href="/monumento/1843-rollo-de-justicia/" data-jcyl-id="1843"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Cabez%C3%B3n%20de%20la%20Sierra%20rollo.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Rollo de Justicia</span></a></li></ul><h2>Castellanos de Castro</h2><ul class="list"><li><a class="list-row" href="/monumento/875389-crucero-en-castellanos-de-castro/" data-jcyl-id="875389"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">⚖️</span><span class="list-row-name">Crucero en Castellanos de Castro</span></a></li></ul><h2>Castrillo Mota de Judíos</h2><ul class="list"><li><a class="list-row" href="/monumento/875159-crucero/" data-jcyl-id="875159"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">⚖️</span><span class="list-row-name">Crucero</span></a></li></ul><h2>Cilleruelo de Abajo</h2><ul class="list"><li><a class="list-row" href="/monumento/1971-rollo-de-justicia/" data-jcyl-id="1971"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">⚖️</span><span class="list-row-name">Rollo de Justicia</span></a></li></ul><h2>Condado de Treviño</h2><ul class="list"><li><a class="list-row" href="/monumento/2029-rollo-de-justicia/" data-jcyl-id="2029"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">⚖️</span><span class="list-row-name">Rollo de Justicia</span></a></li></ul><h2>Coruña del Conde</h2><ul class="list"><li><a class="list-row" href="/monumento/2047-rollo-de-justicia/" data-jcyl-id="2047"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">⚖️</span><span class="list-row-name">Rollo de Justicia</span></a></li></ul><h2>Covarrubias</h2><ul class="list"><li><a class="list-row" href="/monumento/873506-crucero/" data-jcyl-id="873506"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">⚖️</span><span class="list-row-name">Crucero</span></a></li><li><a class="list-row" href="/monumento/873510-crucero-frente-al-archivo-del-adelantamiento-de-castilla/" data-jcyl-id="873510"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Covarrubias%2002%20crucero%20by-dpc.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Crucero Frente Al Archivo del Adelantamiento de Castilla</span></a></li><li><a class="list-row" href="/monumento/2065-rollo-de-justicia/" data-jcyl-id="2065"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">⚖️</span><span class="list-row-name">Rollo de Justicia</span></a></li></ul><h2>Estépar</h2><ul class="list"><li><a class="list-row" href="/monumento/2185-rollo-de-justicia/" data-jcyl-id="2185"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">⚖️</span><span class="list-row-name">Rollo de Justicia</span></a></li><li><a class="list-row" href="/monumento/2197-rollo-de-justicia/" data-jcyl-id="2197"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Rollo%20jurisdiccional.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Rollo de Justicia</span></a></li></ul><h2>Frías</h2><ul class="list"><li><a class="list-row" href="/monumento/2221-rollo-de-justicia/" data-jcyl-id="2221"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">⚖️</span><span class="list-row-name">Rollo de Justicia</span></a></li></ul><h2>Fuentenebro</h2><ul class="list"><li><a class="list-row" href="/monumento/2061365-rollo-de-justicia-con-crucero/" data-jcyl-id="2061365"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">⚖️</span><span class="list-row-name">Rollo de Justicia Con Crucero</span></a></li></ul><h2>Fuentespina</h2><ul class="list"><li><a class="list-row" href="/monumento/2061371-rollo-de-justicia/" data-jcyl-id="2061371"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">⚖️</span><span class="list-row-name">Rollo de Justicia</span></a></li></ul><h2>Hacinas</h2><ul class="list"><li><a class="list-row" href="/monumento/2282-rollo-de-justicia/" data-jcyl-id="2282"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Hacinos%20rollo.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Rollo de Justicia</span></a></li></ul><h2>Hontoria del Pinar</h2><ul class="list"><li><a class="list-row" href="/monumento/2309-rollo-de-justicia/" data-jcyl-id="2309"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Hontoria%20del%20Pinar%20-%20003%20%2832317353327%29.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Rollo de Justicia</span></a></li></ul><h2>Jaramillo de la Fuente</h2><ul class="list"><li><a class="list-row" href="/monumento/2394-rollo-de-justicia/" data-jcyl-id="2394"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Jaramillo%20de%20la%20Fuente%20rollo.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Rollo de Justicia</span></a></li></ul><h2>La Vid y Barrios</h2><ul class="list"><li><a class="list-row" href="/monumento/3746-rollo-de-justicia/" data-jcyl-id="3746"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">⚖️</span><span class="list-row-name">Rollo de Justicia</span></a></li></ul><h2>Mahamud</h2><ul class="list"><li><a class="list-row" href="/monumento/2545-rollo-de-justicia/" data-jcyl-id="2545"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Mahamud%20%2825042229408%29.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Rollo de Justicia</span></a></li></ul><h2>Mambrilla de Castrejón</h2><ul class="list"><li><a class="list-row" href="/monumento/2550-rollo-de-justicia/" data-jcyl-id="2550"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">⚖️</span><span class="list-row-name">Rollo de Justicia</span></a></li></ul><h2>Merindad de Río Ubierna</h2><ul class="list"><li><a class="list-row" href="/monumento/4126-rollo-de-justicia/" data-jcyl-id="4126"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Sotopalacios%20-%20Rollo%20jurisdiccional%20%281%29.JPG?width=64" alt="" loading="lazy"><span class="list-row-name">Rollo de Justicia</span></a></li></ul><h2>Miranda de Ebro</h2><ul class="list"><li><a class="list-row" href="/monumento/2845-rollo-de-justicia/" data-jcyl-id="2845"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Miranda%20de%20Ebro%20064.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Rollo de Justicia</span></a></li></ul><h2>Neila</h2><ul class="list"><li><a class="list-row" href="/monumento/2884-rollo-de-justicia/" data-jcyl-id="2884"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">⚖️</span><span class="list-row-name">Rollo de Justicia</span></a></li></ul><h2>Olmillos de Muñó</h2><ul class="list"><li><a class="list-row" href="/monumento/2889-rollo-de-justicia/" data-jcyl-id="2889"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Olmillos%20de%20Mu%C3%B1%C3%B3%2008.JPG?width=64" alt="" loading="lazy"><span class="list-row-name">Rollo de Justicia</span></a></li></ul><h2>Pampliega</h2><ul class="list"><li><a class="list-row" href="/monumento/2961-rollo-de-justicia/" data-jcyl-id="2961"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">⚖️</span><span class="list-row-name">Rollo de Justicia</span></a></li></ul><h2>Pardilla</h2><ul class="list"><li><a class="list-row" href="/monumento/2988-rollo-de-justicia/" data-jcyl-id="2988"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">⚖️</span><span class="list-row-name">Rollo de Justicia</span></a></li></ul><h2>Pedrosa del Príncipe</h2><ul class="list"><li><a class="list-row" href="/monumento/2062997-rollo-de-justicia/" data-jcyl-id="2062997"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">⚖️</span><span class="list-row-name">Rollo de Justicia</span></a></li></ul><h2>Presencio</h2><ul class="list"><li><a class="list-row" href="/monumento/875412-picota/" data-jcyl-id="875412"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">⚖️</span><span class="list-row-name">Picota</span></a></li><li><a class="list-row" href="/monumento/875408-rollo/" data-jcyl-id="875408"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">⚖️</span><span class="list-row-name">Rollo</span></a></li></ul><h2>Redecilla del Camino</h2><ul class="list"><li><a class="list-row" href="/monumento/3216-rollo-de-justicia/" data-jcyl-id="3216"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">⚖️</span><span class="list-row-name">Rollo de Justicia</span></a></li></ul><h2>Retuerta</h2><ul class="list"><li><a class="list-row" href="/monumento/2075296-rollo-jurisdiccional/" data-jcyl-id="2075296"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">⚖️</span><span class="list-row-name">Rollo Jurisdiccional</span></a></li></ul><h2>San Juan del Monte</h2><ul class="list"><li><a class="list-row" href="/monumento/3290-rollo-de-justicia/" data-jcyl-id="3290"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">⚖️</span><span class="list-row-name">Rollo de Justicia</span></a></li></ul><h2>San Millán de Lara</h2><ul class="list"><li><a class="list-row" href="/monumento/3295-rollo-de-justicia/" data-jcyl-id="3295"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/San%20millan%20de%20lara%2007%20%28Rollo%20de%20justicia%29.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Rollo de Justicia</span></a></li></ul><h2>Santibáñez de Esgueva</h2><ul class="list"><li><a class="list-row" href="/monumento/3335-rollo-de-justicia/" data-jcyl-id="3335"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">⚖️</span><span class="list-row-name">Rollo de Justicia</span></a></li></ul><h2>Solarana</h2><ul class="list"><li><a class="list-row" href="/monumento/3435-rollo-de-justicia/" data-jcyl-id="3435"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">⚖️</span><span class="list-row-name">Rollo de Justicia</span></a></li></ul><h2>Vadocondes</h2><ul class="list"><li><a class="list-row" href="/monumento/3543-rollo-de-justicia/" data-jcyl-id="3543"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">⚖️</span><span class="list-row-name">Rollo de Justicia</span></a></li></ul><h2>Valle de Sedano</h2><ul class="list"><li><a class="list-row" href="/monumento/3002080-crucero/" data-jcyl-id="3002080"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">⚖️</span><span class="list-row-name">Crucero</span></a></li></ul><h2>Villahoz</h2><ul class="list"><li><a class="list-row" href="/monumento/3838-rollo-de-justicia/" data-jcyl-id="3838"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/RolloDeVillahozBurgos.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Rollo de Justicia</span></a></li></ul><h2>Villaldemiro</h2><ul class="list"><li><a class="list-row" href="/monumento/3843-rollo-de-justicia/" data-jcyl-id="3843"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">⚖️</span><span class="list-row-name">Rollo de Justicia</span></a></li></ul><h2>Villangómez</h2><ul class="list"><li><a class="list-row" href="/monumento/3855-rollo-de-justicia/" data-jcyl-id="3855"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">⚖️</span><span class="list-row-name">Rollo de Justicia</span></a></li></ul><h2>Villaquirán de los Infantes</h2><ul class="list"><li><a class="list-row" href="/monumento/3865-rollo-de-justicia/" data-jcyl-id="3865"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Villaquiran%20de%20los%20Infantes%2003%20rollo%20by-dpc.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Rollo de Justicia</span></a></li></ul><h2>Villarcayo de Merindad de Castilla la Vieja</h2><ul class="list"><li><a class="list-row" href="/monumento/3962-rollo-de-justicia/" data-jcyl-id="3962"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">⚖️</span><span class="list-row-name">Rollo de Justicia</span></a></li></ul><h2>Villaverde del Monte</h2><ul class="list"><li><a class="list-row" href="/monumento/3177-rollo-de-justicia-de-revenga/" data-jcyl-id="3177"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">⚖️</span><span class="list-row-name">Rollo de Justicia de Revenga</span></a></li></ul><h2>Zazuar</h2><ul class="list"><li><a class="list-row" href="/monumento/3914-rollo-de-justicia/" data-jcyl-id="3914"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">⚖️</span><span class="list-row-name">Rollo de Justicia</span></a></li></ul><h2>Más de Burgos</h2><ul class="page-links"><li><a href="/provincia/burgos/">Todo el patrimonio de Burgos</a> <span class="meta">445</span></li><li><a href="/provincia/burgos/castillos/">Castillos</a> <span class="meta">175</span></li><li><a href="/provincia/burgos/monumentos/">Monumentos</a> <span class="meta">135</span></li><li><a href="/provincia/burgos/conjuntos-historicos/">Conjuntos históricos</a> <span class="meta">33</span></li><li><a href="/provincia/burgos/inmuebles-asociados-a-la-declaracion/">Inmuebles asociados a la declaración</a> <span class="meta">17</span></li><li><a href="/provincia/burgos/zonas-arqueologicas/">Zonas arqueológicas</a> <span class="meta">16</span></li><li><a href="/provincia/burgos/arte-rupestre/">Arte rupestre</a> <span class="meta">9</span></li></ul><h2>Rollos de justicia en otras provincias</h2><ul class="page-links"><li><a href="/provincia/leon/rollos-de-justicia/">Rollos de justicia en León</a> <span class="meta">5</span></li><li><a href="/provincia/salamanca/rollos-de-justicia/">Rollos de justicia en Salamanca</a> <span class="meta">6</span></li><li><a href="/provincia/segovia/rollos-de-justicia/">Rollos de justicia en Segovia</a> <span class="meta">6</span></li><li><a href="/provincia/soria/rollos-de-justicia/">Rollos de justicia en Soria</a> <span class="meta">24</span></li><li><a href="/provincia/valladolid/rollos-de-justicia/">Rollos de justicia en Valladolid</a> <span class="meta">6</span></li><li><a href="/provincia/avila/rollos-de-justicia/">Rollos de justicia en Ávila</a> <span class="meta">20</span></li></ul></div></div>
+    </aside>
+  </div>
+
+  <div id="toast"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+  <script src="i18n.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <!-- Root-relative, not absolute - resolves against whatever origin
+       actually served the page (production or make serve/localhost) and
+       keeps every relative reference (style.css, assets/*, app.js's own
+       fetch('data/...') calls) pinned to site root even once app.js starts
+       pushState-ing the address bar to /monumento/<id>-<slug>/ during live
+       browsing - without this, those fetches would resolve one directory
+       too deep and 404. Same tag scripts/build_monument_pages.py's static
+       per-monument pages already carry, for the same reason. -->
+  <base href="/">
+  <title>Castillos en Salamanca: 30 bienes protegidos - Patrimonio Abierto</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- SEO/social preview. patrimonioabierto.es appears in four places
+       below (canonical, og:url, og:image, twitter:image) - if this domain
+       ever changes again, update all four together plus the <title>/
+       og:title/og:site_name text above, or a shared link preview will
+       keep pointing at the old name/domain. -->
+  <meta name="description" content="Lista de 30 castillos protegidos como Bien de Interés Cultural en Salamanca, por municipio, con fotos libres y Wikidata.">
+  <link rel="canonical" href="https://patrimonioabierto.es/provincia/salamanca/castillos/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Patrimonio Abierto">
+  <meta property="og:title" content="Castillos en Salamanca: 30 bienes protegidos - Patrimonio Abierto">
+  <meta property="og:description" content="Lista de 30 castillos protegidos como Bien de Interés Cultural en Salamanca, por municipio, con fotos libres y Wikidata.">
+  <meta property="og:image" content="https://patrimonioabierto.es/assets/logo-readme.png">
+  <meta property="og:url" content="https://patrimonioabierto.es/provincia/salamanca/castillos/">
+  <meta property="og:locale" content="es_ES">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Castillos en Salamanca: 30 bienes protegidos - Patrimonio Abierto">
+  <meta name="twitter:description" content="Lista de 30 castillos protegidos como Bien de Interés Cultural en Salamanca, por municipio, con fotos libres y Wikidata.">
+  <meta name="twitter:image" content="https://patrimonioabierto.es/assets/logo-readme.png">
+
+  <!-- Structured data (schema.org) for search engines - a Dataset (what
+       this project actually publishes: the merged BIC/Wikidata/Wikipedia/
+       Commons table) presented as part of a WebSite (how people reach it).
+       Doesn't change anything a visitor sees; only read by crawlers. -->
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "CollectionPage", "name": "Castillos en Salamanca", "description": "Lista de 30 castillos protegidos como Bien de Interés Cultural en Salamanca, por municipio, con fotos libres y Wikidata.", "url": "https://patrimonioabierto.es/provincia/salamanca/castillos/", "isPartOf": {"@type": "WebSite", "name": "Patrimonio Abierto", "url": "https://patrimonioabierto.es/"}, "breadcrumb": {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://patrimonioabierto.es/"}, {"@type": "ListItem", "position": 2, "name": "Salamanca", "item": "https://patrimonioabierto.es/provincia/salamanca/"}, {"@type": "ListItem", "position": 3, "name": "Castillos", "item": "https://patrimonioabierto.es/provincia/salamanca/castillos/"}]}, "mainEntity": {"@type": "ItemList", "numberOfItems": 30, "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Castillo de Alba de Tormes", "url": "https://patrimonioabierto.es/monumento/8369-castillo-de-alba-de-tormes/"}, {"@type": "ListItem", "position": 2, "name": "Castillo de \"el Gardón\"", "url": "https://patrimonioabierto.es/monumento/8632-castillo-de-el-gardon/"}, {"@type": "ListItem", "position": 3, "name": "Castillo de Buenamadre", "url": "https://patrimonioabierto.es/monumento/8781-castillo-de-buenamadre/"}, {"@type": "ListItem", "position": 4, "name": "Castillo del Tejado", "url": "https://patrimonioabierto.es/monumento/10346-castillo-del-tejado/"}, {"@type": "ListItem", "position": 5, "name": "Torreon de la Muralla O del Deán", "url": "https://patrimonioabierto.es/monumento/8847-torreon-de-la-muralla-o-del-dean/"}, {"@type": "ListItem", "position": 6, "name": "Castillo de Cerralbo", "url": "https://patrimonioabierto.es/monumento/8919-castillo-de-cerralbo/"}, {"@type": "ListItem", "position": 7, "name": "Castillo de Cespedosa de Tormes", "url": "https://patrimonioabierto.es/monumento/8930-castillo-de-cespedosa-de-tormes/"}, {"@type": "ListItem", "position": 8, "name": "Castillo de Enrique Ii de Trastamara", "url": "https://patrimonioabierto.es/monumento/8968-castillo-de-enrique-ii-de-trastamara/"}, {"@type": "ListItem", "position": 9, "name": "Castillo del Cubo de Don Sancho", "url": "https://patrimonioabierto.es/monumento/9102-castillo-del-cubo-de-don-sancho/"}, {"@type": "ListItem", "position": 10, "name": "Castillo de Galinduste", "url": "https://patrimonioabierto.es/monumento/9163-castillo-de-galinduste/"}, {"@type": "ListItem", "position": 11, "name": "Torre", "url": "https://patrimonioabierto.es/monumento/813573-torre/"}, {"@type": "ListItem", "position": 12, "name": "Castillo", "url": "https://patrimonioabierto.es/monumento/8626-castillo/"}, {"@type": "ListItem", "position": 13, "name": "Castillo Denominado \"la Fortaleza\"", "url": "https://patrimonioabierto.es/monumento/9224-castillo-denominado-la-fortaleza/"}, {"@type": "ListItem", "position": 14, "name": "Castillo de Santa Cruz", "url": "https://patrimonioabierto.es/monumento/9332-castillo-de-santa-cruz/"}, {"@type": "ListItem", "position": 15, "name": "Castillo \"plaza de Armas\"", "url": "https://patrimonioabierto.es/monumento/9340-castillo-plaza-de-armas/"}, {"@type": "ListItem", "position": 16, "name": "Castillo de Monleon", "url": "https://patrimonioabierto.es/monumento/9369-castillo-de-monleon/"}, {"@type": "ListItem", "position": 17, "name": "Castillo de Montemayor", "url": "https://patrimonioabierto.es/monumento/9380-castillo-de-montemayor/"}, {"@type": "ListItem", "position": 18, "name": "El Castillo", "url": "https://patrimonioabierto.es/monumento/2117965-el-castillo/"}, {"@type": "ListItem", "position": 19, "name": "Castillo de Puente de Congosto", "url": "https://patrimonioabierto.es/monumento/9478-castillo-de-puente-de-congosto/"}, {"@type": "ListItem", "position": 20, "name": "Alcázar de San Juan", "url": "https://patrimonioabierto.es/monumento/9500-alcazar-de-san-juan/"}, {"@type": "ListItem", "position": 21, "name": "Castillo de la Mora Encantada", "url": "https://patrimonioabierto.es/monumento/10177-castillo-de-la-mora-encantada/"}, {"@type": "ListItem", "position": 22, "name": "Castillo de San Felices de los Gallegos", "url": "https://patrimonioabierto.es/monumento/10198-castillo-de-san-felices-de-los-gallegos/"}, {"@type": "ListItem", "position": 23, "name": "Castillo de San Martín del Castañar", "url": "https://patrimonioabierto.es/monumento/10216-castillo-de-san-martin-del-castanar/"}, {"@type": "ListItem", "position": 24, "name": "Castillo de Santibañez de Béjar", "url": "https://patrimonioabierto.es/monumento/10255-castillo-de-santibanez-de-bejar/"}, {"@type": "ListItem", "position": 25, "name": "Castillo de Sobradillo", "url": "https://patrimonioabierto.es/monumento/10330-castillo-de-sobradillo/"}, {"@type": "ListItem", "position": 26, "name": "Castillo de Tamames", "url": "https://patrimonioabierto.es/monumento/10341-castillo-de-tamames/"}, {"@type": "ListItem", "position": 27, "name": "Castillo de Tejeda", "url": "https://patrimonioabierto.es/monumento/10361-castillo-de-tejeda/"}, {"@type": "ListItem", "position": 28, "name": "Castillo de Bernardo del Carpio", "url": "https://patrimonioabierto.es/monumento/10436-castillo-de-bernardo-del-carpio/"}, {"@type": "ListItem", "position": 29, "name": "Castillo de Villares de Yeltes", "url": "https://patrimonioabierto.es/monumento/10471-castillo-de-villares-de-yeltes/"}, {"@type": "ListItem", "position": 30, "name": "Castillo de Vilvestre", "url": "https://patrimonioabierto.es/monumento/10422-castillo-de-vilvestre/"}]}}</script>
+
+  <!-- Same mark as #logo-mark/#loading-logo/#welcome-logo (assets/logo.png)
+       - just square and on a solid brand-purple backing (same purple as
+       logo-readme.png's own README treatment), since a browser tab is
+       usually light or dark, not the purple header bar this logo is
+       normally drawn against - its white linework would go near-invisible
+       on a plain white tab background otherwise. -->
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <!-- Fraunces/Inter used to load from Google Fonts - self-hosted instead
+       (see the @font-face block at the top of style.css) so a visitor's
+       browser never has to talk to fonts.gstatic.com at all: no third-
+       party request, no IP address leaving this site's own domain, one
+       less thing for the Privacidad page to have to disclose. -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- Without JavaScript nothing ever dismisses the loading screen or the
+       welcome dialog, so they would cover the page's static content (the
+       per-monument pages carry real text and links in the HTML) forever. -->
+  <noscript><style>#loading-screen, #welcome-modal { display: none !important; }</style></noscript>
+</head>
+<body>
+  <!-- The very first focusable thing on the page, on purpose - a classic
+       "skip link", invisible until it actually receives keyboard focus (see
+       .skip-link CSS). The visible 📋 button/menu entry that used to sit
+       next to this got removed (redundant with search/map for anyone
+       clicking around) - this is now the only way into showListPanel(),
+       which is fine: it's aimed squarely at whoever can't/doesn't want to
+       drive the map, and reaches the same panel in a single Tab press from
+       anywhere, before the loading screen, the header, anything - no
+       fishing for a small icon first. -->
+  <a href="#" id="skip-to-list-link" class="skip-link" data-i18n="list.skip_link">Ir directamente a la lista de monumentos</a>
+
+  <!-- First paint, before app.js even runs: the dataset is ~2MB, worth
+       covering with something branded rather than a blank page while it
+       loads. Spanish text is hardcoded as the real initial content (not an
+       empty data-i18n placeholder) since the app always starts in 'es' -
+       applyStaticI18n() just re-confirms it once JS runs. -->
+  <div id="loading-screen">
+    <img src="assets/logo.png" alt="" id="loading-logo">
+    <div id="loading-spinner" aria-hidden="true"></div>
+    <p data-i18n="loading.screen">Cargando el catálogo…</p>
+  </div>
+
+  <!-- Shown once per browser (localStorage flag, see app.js), after the
+       data has loaded - not on top of a deep link (?id=/?muni=/?prov=/#...),
+       since someone arriving at a specific monument already knows what
+       they're looking at. -->
+  <div id="welcome-modal">
+    <div id="welcome-card">
+      <div id="welcome-logo-badge"><img src="assets/logo.png" alt="" id="welcome-logo"></div>
+      <h2 data-i18n="welcome.title">Bienvenido a Patrimonio Abierto</h2>
+      <p data-i18n="welcome.body">Aquí encontrarás todos los Bienes de Interés Cultural (BIC) declarados oficialmente en Castilla y León, junto con información y material multimedia de Wikidata, Wikipedia y Wikimedia Commons. Un proyecto libre, sin cuentas ni anuncios.</p>
+      <!-- Plain links into the per-province pages, so the homepage - and every
+           page built from this shell - leads a crawler to them. -->
+      <nav id="welcome-provinces" aria-label="Provincias"><span data-i18n="welcome.provinces">Explorar por provincia:</span>
+        <a href="/provincia/avila/">Ávila</a> <a href="/provincia/burgos/">Burgos</a> <a href="/provincia/leon/">León</a>
+        <a href="/provincia/palencia/">Palencia</a> <a href="/provincia/salamanca/">Salamanca</a> <a href="/provincia/segovia/">Segovia</a>
+        <a href="/provincia/soria/">Soria</a> <a href="/provincia/valladolid/">Valladolid</a> <a href="/provincia/zamora/">Zamora</a></nav>
+      <button type="button" id="welcome-close-btn" data-i18n="welcome.cta">Empezar a explorar</button>
+      <a href="#" id="welcome-about-link" data-i18n="welcome.about_link">Más sobre el proyecto</a>
+    </div>
+  </div>
+
+  <header id="topbar">
+    <!-- Real link (not a <span>/<button>) - see wireSpaLink() in app.js:
+         hovering shows the URL, right-click/ctrl-click/middle-click all do
+         a real navigation back to the plain map, and a normal click gets
+         the instant in-app close instead of a reload. -->
+    <a class="brand" href="." id="brand-link"><img src="assets/logo.png" alt="" id="logo-mark">Patrimonio Abierto</a>
+
+    <!-- Mobile only (see CSS) - collapses #search-wrap to just this icon
+         until tapped, so the default header stays one compact row instead
+         of permanently reserving a full second row for it. -->
+    <!-- Inline SVG, not the 🔍 emoji this used to be - emoji glyphs are
+         drawn by the OS's own emoji font, whose vertical metrics vary
+         enough between Apple/Noto/Samsung's color-emoji sets that it never
+         sat quite centered in this small round button on mobile. An SVG
+         with stroke="currentColor" sits exactly where the viewBox puts it,
+         on every platform, and inherits the button's own (white) color. -->
+    <button type="button" id="search-toggle-btn" data-i18n-title="search.placeholder" aria-label="Search">
+      <svg viewBox="0 0 24 24" width="25" height="25" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </button>
+
+    <div id="search-wrap">
+      <input type="text" id="search-input" autocomplete="off" data-i18n-placeholder="search.placeholder" />
+      <button type="button" id="search-close-btn" aria-label="Close search">✕</button>
+      <div id="search-results"></div>
+    </div>
+
+    <!-- Estadísticas/Acerca de/Cómo contribuir/language all live behind
+         this on every screen size now, not just mobile - see showMenuPanel()
+         in app.js. Keeps the header down to logo + search everywhere. -->
+    <button type="button" id="menu-btn" data-i18n-title="menu.button_title" aria-label="Menu">☰</button>
+  </header>
+
+  <div id="app">
+    <!-- map-wrap, not #app, is what #legend/#locate-btn anchor to - #app
+         spans the map AND the panel side-by-side, so anchoring to it means
+         "right: 16px" measures from the panel's edge once it's open, not
+         the map's. map-wrap always matches the map's own visible area. -->
+    <div id="map-wrap">
+      <div id="map"></div>
+
+      <!-- data-i18n-tooltip, not data-i18n-title: see applyStaticI18n() in
+           i18n.js - feeds style.css's [data-i18n-tooltip]::after desktop
+           label instead of the browser's own native title tooltip. -->
+      <button type="button" id="shuffle-btn" data-i18n-tooltip="shuffle.button_title" aria-label="Random monument">🎲</button>
+      <!-- Same blue dot/white ring as .you-are-here-dot below (the marker
+           this button actually places on the map once located), plus the
+           same soft outer halo that marker's ::after ring gives it - a bare
+           dot read as flat next to that; the halo is what actually makes it
+           recognizable as "the Google Maps blue dot" at a glance. Fixed
+           colors, not currentColor, so the button previews what pressing it
+           does regardless of button state. Replaces the 🎯 target emoji,
+           which read as "aim/select a spot" rather than "find me". -->
+      <button type="button" id="locate-btn" data-i18n-tooltip="geolocation.button_title" aria-label="Locate me">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <circle cx="12" cy="12" r="10" fill="#2a6fbb" opacity="0.18"/>
+          <circle cx="12" cy="12" r="7" fill="#2a6fbb" stroke="white" stroke-width="2.5"/>
+        </svg>
+      </button>
+
+      <!-- Filter button + its dropdown card, same anchor-to-map-wrap /
+           click-outside-closes pattern as #search-results. Row list itself
+           is built in app.js from whatever categories actually appear in
+           the dataset, not hardcoded here. -->
+      <!-- "Tune" icon, same slider-control metaphor as Google Maps' own
+           filter button, but the previous pass (thin currentColor lines +
+           tiny colored dots) still read as mostly monochrome - color was
+           only in three small accents, not the icon itself. This flips
+           that: three bold colored capsule tracks (teal/blue/terracotta -
+           NOT purple, which is #filter-btn.active's own background and
+           would nearly vanish against it, the same reasoning the earlier
+           solid-funnel pass already used) each with a white handle. Color
+           now carries real visual weight instead of being a detail on top
+           of black lines, and the white handles keep it legible on both
+           the idle white background and the active purple one. -->
+      <button type="button" id="filter-btn" data-i18n-tooltip="filter.button_title" aria-label="Filter">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+          <rect x="3" y="4.5" width="18" height="3" rx="1.5" fill="#1c8a6d"/>
+          <circle cx="9" cy="6" r="3" fill="white" stroke="#1c8a6d" stroke-width="1.5"/>
+          <rect x="3" y="10.5" width="18" height="3" rx="1.5" fill="#2a6fbb"/>
+          <circle cx="16" cy="12" r="3" fill="white" stroke="#2a6fbb" stroke-width="1.5"/>
+          <rect x="3" y="16.5" width="18" height="3" rx="1.5" fill="#c2703d"/>
+          <circle cx="11" cy="18" r="3" fill="white" stroke="#c2703d" stroke-width="1.5"/>
+        </svg>
+        <span id="filter-badge" class="filter-badge" hidden></span>
+      </button>
+      <div id="filter-panel">
+        <!-- "Estado" - orthogonal to category, AND-combined with it: a
+             record must match the selected categories AND (no status box
+             checked, or at least one checked status). Only 2 rows, so no
+             Todo/Ninguno shortcuts needed the way the longer category list
+             has. -->
+        <div class="filter-section-label" data-i18n="filter.status_title">Estado</div>
+        <div id="filter-status-list"></div>
+
+        <div id="filter-panel-header">
+          <span data-i18n="filter.title">Categorías</span>
+          <div id="filter-panel-actions">
+            <button type="button" id="filter-all-btn" data-i18n="filter.all">Todo</button>
+            <button type="button" id="filter-none-btn" data-i18n="filter.none">Ninguno</button>
+          </div>
+        </div>
+        <div id="filter-list"></div>
+      </div>
+
+      <!-- Desktop-only (hidden <=768px, see style.css) - a rotating
+           highlight card, one photo picked deterministically per ISO week
+           from web/data/picture_of_the_week.json (see find_good_pictures.py)
+           so it changes weekly with no server/build step involved, and
+           stays identical for every visitor that same week. Hidden
+           entirely (not just empty) whenever that pool is empty. -->
+      <div id="potw" hidden></div>
+
+      <!-- Slim, always-on call-to-action strip (both mobile and desktop) -
+           shown whenever the map itself is in view (panel closed), unlike
+           #potw above it has no dismiss state of its own: see app.js for
+           why the two are kept independent. Real <a>, not a <button> - see
+           wireSpaLink()'s own comment: hover/right-click/ctrl-click should
+           all behave like the real link to /contribute/ that this is. -->
+      <a href="/contribute/" id="contribute-bar" hidden>
+        <span class="contribute-bar-text-full" data-i18n="contribute_bar.text"></span>
+        <span class="contribute-bar-text-short" data-i18n="contribute_bar.text_short"></span>
+      </a>
+    </div>
+
+    <aside id="panel" class="open">
+      <div id="panel-handle"></div>
+      <button id="panel-close" aria-label="Cerrar">✕</button>
+      <div id="panel-content" data-static-province="Salamanca" data-static-category="CASTILLOS"><div class="hero hero-fallback"><div class="hero-placeholder-icon">🗺️</div><div class="hero-scrim"><div class="hero-kicker">🏰 Castillos</div><h1 class="hero-title">Castillos en Salamanca</h1></div></div><div class="panel-body"><nav class="crumbs" aria-label="Migas de pan"><a href="/">Inicio</a> <span aria-hidden="true">›</span> <a href="/provincia/salamanca/">Salamanca</a> <span aria-hidden="true">›</span> <span aria-current="page">Castillos</span></nav><div class="meta">30 bienes · 30 municipios</div><p class="summary">30 castillos protegidos como Bien de Interés Cultural en la provincia de Salamanca, en 30 municipios, según el catálogo oficial de la Junta de Castilla y León. 15 de ellos tienen fotografía libre en Wikimedia Commons; 30 están enlazados a Wikidata. La protección más antigua data de 1949.</p><h2>Alba de Tormes</h2><ul class="list"><li><a class="list-row" href="/monumento/8369-castillo-de-alba-de-tormes/" data-jcyl-id="8369"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Torre%20del%20homenaje%20Alba%20de%20Tormes.JPG?width=64" alt="" loading="lazy"><span class="list-row-name">Castillo de Alba de Tormes</span></a></li></ul><h2>Aldea del Obispo</h2><ul class="list"><li><a class="list-row" href="/monumento/8632-castillo-de-el-gardon/" data-jcyl-id="8632"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🏰</span><span class="list-row-name">Castillo de &quot;el Gardón&quot;</span></a></li></ul><h2>Buenamadre</h2><ul class="list"><li><a class="list-row" href="/monumento/8781-castillo-de-buenamadre/" data-jcyl-id="8781"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🏰</span><span class="list-row-name">Castillo de Buenamadre</span></a></li></ul><h2>Calzada de Don Diego</h2><ul class="list"><li><a class="list-row" href="/monumento/10346-castillo-del-tejado/" data-jcyl-id="10346"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🏰</span><span class="list-row-name">Castillo del Tejado</span></a></li></ul><h2>Cantalapiedra</h2><ul class="list"><li><a class="list-row" href="/monumento/8847-torreon-de-la-muralla-o-del-dean/" data-jcyl-id="8847"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🏰</span><span class="list-row-name">Torreon de la Muralla O del Deán</span></a></li></ul><h2>Cerralbo</h2><ul class="list"><li><a class="list-row" href="/monumento/8919-castillo-de-cerralbo/" data-jcyl-id="8919"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Cerralbo%20Castle%201271.JPG?width=64" alt="" loading="lazy"><span class="list-row-name">Castillo de Cerralbo</span></a></li></ul><h2>Cespedosa de Tormes</h2><ul class="list"><li><a class="list-row" href="/monumento/8930-castillo-de-cespedosa-de-tormes/" data-jcyl-id="8930"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Castillocespedosa.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Castillo de Cespedosa de Tormes</span></a></li></ul><h2>Ciudad Rodrigo</h2><ul class="list"><li><a class="list-row" href="/monumento/8968-castillo-de-enrique-ii-de-trastamara/" data-jcyl-id="8968"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Torre%20del%20Homenaje%20del%20Castillo%20de%20Enrique%20II%20desde%20la%20Plaza%20del%20Castillo%2C%20con%20barrera%20de%201507%20en%20primer%20plano.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Castillo de Enrique Ii de Trastamara</span></a></li></ul><h2>El Cubo de Don Sancho</h2><ul class="list"><li><a class="list-row" href="/monumento/9102-castillo-del-cubo-de-don-sancho/" data-jcyl-id="9102"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🏰</span><span class="list-row-name">Castillo del Cubo de Don Sancho</span></a></li></ul><h2>Galinduste</h2><ul class="list"><li><a class="list-row" href="/monumento/9163-castillo-de-galinduste/" data-jcyl-id="9163"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🏰</span><span class="list-row-name">Castillo de Galinduste</span></a></li></ul><h2>Guadramiro</h2><ul class="list"><li><a class="list-row" href="/monumento/813573-torre/" data-jcyl-id="813573"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Cortina%20edu2.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Torre</span></a></li></ul><h2>La Alberguería de Argañán</h2><ul class="list"><li><a class="list-row" href="/monumento/8626-castillo/" data-jcyl-id="8626"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🏰</span><span class="list-row-name">Castillo</span></a></li></ul><h2>Ledesma</h2><ul class="list"><li><a class="list-row" href="/monumento/9224-castillo-denominado-la-fortaleza/" data-jcyl-id="9224"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Entrada%20principal%20del%20castillo%20de%20Ledesma---5.JPG?width=64" alt="" loading="lazy"><span class="list-row-name">Castillo Denominado &quot;la Fortaleza&quot;</span></a></li></ul><h2>Membribe de la Sierra</h2><ul class="list"><li><a class="list-row" href="/monumento/9332-castillo-de-santa-cruz/" data-jcyl-id="9332"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🏰</span><span class="list-row-name">Castillo de Santa Cruz</span></a></li></ul><h2>Miranda del Castañar</h2><ul class="list"><li><a class="list-row" href="/monumento/9340-castillo-plaza-de-armas/" data-jcyl-id="9340"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Miranda%20del%20Casta%C3%B1ar%20-%20004%20%2832493762493%29.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Castillo &quot;plaza de Armas&quot;</span></a></li></ul><h2>Monleón</h2><ul class="list"><li><a class="list-row" href="/monumento/9369-castillo-de-monleon/" data-jcyl-id="9369"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🏰</span><span class="list-row-name">Castillo de Monleon</span></a></li></ul><h2>Montemayor del Río</h2><ul class="list"><li><a class="list-row" href="/monumento/9380-castillo-de-montemayor/" data-jcyl-id="9380"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Castillosanvicente.JPG?width=64" alt="" loading="lazy"><span class="list-row-name">Castillo de Montemayor</span></a></li></ul><h2>Puebla de Azaba</h2><ul class="list"><li><a class="list-row" href="/monumento/2117965-el-castillo/" data-jcyl-id="2117965"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🏰</span><span class="list-row-name">El Castillo</span></a></li></ul><h2>Puente del Congosto</h2><ul class="list"><li><a class="list-row" href="/monumento/9478-castillo-de-puente-de-congosto/" data-jcyl-id="9478"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Puente%20del%20Congosto%2002%20castillo%20by-dpc.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Castillo de Puente de Congosto</span></a></li></ul><h2>Salamanca</h2><ul class="list"><li><a class="list-row" href="/monumento/9500-alcazar-de-san-juan/" data-jcyl-id="9500"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Alc%C3%A1zar%20de%20Salamanca%20P9140007.JPG?width=64" alt="" loading="lazy"><span class="list-row-name">Alcázar de San Juan</span></a></li></ul><h2>Salvatierra de Tormes</h2><ul class="list"><li><a class="list-row" href="/monumento/10177-castillo-de-la-mora-encantada/" data-jcyl-id="10177"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/PB020896%20Castillo%20Mora%20Encantada%2C%20Salvatierra%20de%20Tormes.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Castillo de la Mora Encantada</span></a></li></ul><h2>San Felices de los Gallegos</h2><ul class="list"><li><a class="list-row" href="/monumento/10198-castillo-de-san-felices-de-los-gallegos/" data-jcyl-id="10198"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Castillosanfelices.JPG?width=64" alt="" loading="lazy"><span class="list-row-name">Castillo de San Felices de los Gallegos</span></a></li></ul><h2>San Martín del Castañar</h2><ul class="list"><li><a class="list-row" href="/monumento/10216-castillo-de-san-martin-del-castanar/" data-jcyl-id="10216"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🏰</span><span class="list-row-name">Castillo de San Martín del Castañar</span></a></li></ul><h2>Santibáñez de Béjar</h2><ul class="list"><li><a class="list-row" href="/monumento/10255-castillo-de-santibanez-de-bejar/" data-jcyl-id="10255"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🏰</span><span class="list-row-name">Castillo de Santibañez de Béjar</span></a></li></ul><h2>Sobradillo</h2><ul class="list"><li><a class="list-row" href="/monumento/10330-castillo-de-sobradillo/" data-jcyl-id="10330"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Casa%20del%20Parque%20%22Torre%C3%B3n%20de%20Sobradillo%22%2C%20Sobradillo%20%28Salamanca%29.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Castillo de Sobradillo</span></a></li></ul><h2>Tamames</h2><ul class="list"><li><a class="list-row" href="/monumento/10341-castillo-de-tamames/" data-jcyl-id="10341"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🏰</span><span class="list-row-name">Castillo de Tamames</span></a></li></ul><h2>Tejeda y Segoyuela</h2><ul class="list"><li><a class="list-row" href="/monumento/10361-castillo-de-tejeda/" data-jcyl-id="10361"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Castillo%20de%20Tejeda%2001%20by-dpc.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Castillo de Tejeda</span></a></li></ul><h2>Villagonzalo de Tormes</h2><ul class="list"><li><a class="list-row" href="/monumento/10436-castillo-de-bernardo-del-carpio/" data-jcyl-id="10436"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🏰</span><span class="list-row-name">Castillo de Bernardo del Carpio</span></a></li></ul><h2>Villares de Yeltes</h2><ul class="list"><li><a class="list-row" href="/monumento/10471-castillo-de-villares-de-yeltes/" data-jcyl-id="10471"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🏰</span><span class="list-row-name">Castillo de Villares de Yeltes</span></a></li></ul><h2>Vilvestre</h2><ul class="list"><li><a class="list-row" href="/monumento/10422-castillo-de-vilvestre/" data-jcyl-id="10422"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Restos%20del%20castillo%20de%20Vilvestre%20%28Salamanca%29.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Castillo de Vilvestre</span></a></li></ul><h2>Más de Salamanca</h2><ul class="page-links"><li><a href="/provincia/salamanca/">Todo el patrimonio de Salamanca</a> <span class="meta">229</span></li><li><a href="/provincia/salamanca/monumentos/">Monumentos</a> <span class="meta">91</span></li><li><a href="/provincia/salamanca/arte-rupestre/">Arte rupestre</a> <span class="meta">66</span></li><li><a href="/provincia/salamanca/conjuntos-historicos/">Conjuntos históricos</a> <span class="meta">16</span></li><li><a href="/provincia/salamanca/zonas-arqueologicas/">Zonas arqueológicas</a> <span class="meta">14</span></li><li><a href="/provincia/salamanca/rollos-de-justicia/">Rollos de justicia</a> <span class="meta">6</span></li></ul><h2>Castillos en otras provincias</h2><ul class="page-links"><li><a href="/provincia/burgos/castillos/">Castillos en Burgos</a> <span class="meta">175</span></li><li><a href="/provincia/leon/castillos/">Castillos en León</a> <span class="meta">60</span></li><li><a href="/provincia/palencia/castillos/">Castillos en Palencia</a> <span class="meta">16</span></li><li><a href="/provincia/segovia/castillos/">Castillos en Segovia</a> <span class="meta">9</span></li><li><a href="/provincia/soria/castillos/">Castillos en Soria</a> <span class="meta">65</span></li><li><a href="/provincia/valladolid/castillos/">Castillos en Valladolid</a> <span class="meta">36</span></li><li><a href="/provincia/zamora/castillos/">Castillos en Zamora</a> <span class="meta">18</span></li><li><a href="/provincia/avila/castillos/">Castillos en Ávila</a> <span class="meta">17</span></li></ul></div></div>
+    </aside>
+  </div>
+
+  <div id="toast"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+  <script src="i18n.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

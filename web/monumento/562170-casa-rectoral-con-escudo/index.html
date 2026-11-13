@@ -11,7 +11,7 @@
        too deep and 404. Same tag scripts/build_monument_pages.py's static
        per-monument pages already carry, for the same reason. -->
   <base href="/">
-  <title>Casa Rectoral Con Escudo - Patrimonio Abierto</title>
+  <title>Casa Rectoral Con Escudo, Espinosa de Cervera (Burgos) - Patrimonio Abierto</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- SEO/social preview. patrimonioabierto.es appears in four places
@@ -19,25 +19,25 @@
        ever changes again, update all four together plus the <title>/
        og:title/og:site_name text above, or a shared link preview will
        keep pointing at the old name/domain. -->
-  <meta name="description" content="Casa Rectoral Con Escudo, Escudos en Espinosa de Cervera (Burgos), Bien de Interés Cultural de Castilla y León.">
+  <meta name="description" content="Casa Rectoral Con Escudo, escudo en Espinosa de Cervera (Burgos). Ficha con datos oficiales, Wikidata y fotos libres.">
   <link rel="canonical" href="https://patrimonioabierto.es/monumento/562170-casa-rectoral-con-escudo/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Patrimonio Abierto">
-  <meta property="og:title" content="Casa Rectoral Con Escudo - Patrimonio Abierto">
-  <meta property="og:description" content="Casa Rectoral Con Escudo, Escudos en Espinosa de Cervera (Burgos), Bien de Interés Cultural de Castilla y León.">
+  <meta property="og:title" content="Casa Rectoral Con Escudo, Espinosa de Cervera (Burgos) - Patrimonio Abierto">
+  <meta property="og:description" content="Casa Rectoral Con Escudo, escudo en Espinosa de Cervera (Burgos). Ficha con datos oficiales, Wikidata y fotos libres.">
   <meta property="og:image" content="https://patrimonioabierto.es/assets/logo-readme.png">
   <meta property="og:url" content="https://patrimonioabierto.es/monumento/562170-casa-rectoral-con-escudo/">
   <meta property="og:locale" content="es_ES">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Casa Rectoral Con Escudo - Patrimonio Abierto">
-  <meta name="twitter:description" content="Casa Rectoral Con Escudo, Escudos en Espinosa de Cervera (Burgos), Bien de Interés Cultural de Castilla y León.">
+  <meta name="twitter:title" content="Casa Rectoral Con Escudo, Espinosa de Cervera (Burgos) - Patrimonio Abierto">
+  <meta name="twitter:description" content="Casa Rectoral Con Escudo, escudo en Espinosa de Cervera (Burgos). Ficha con datos oficiales, Wikidata y fotos libres.">
   <meta name="twitter:image" content="https://patrimonioabierto.es/assets/logo-readme.png">
 
   <!-- Structured data (schema.org) for search engines - a Dataset (what
        this project actually publishes: the merged BIC/Wikidata/Wikipedia/
        Commons table) presented as part of a WebSite (how people reach it).
        Doesn't change anything a visitor sees; only read by crawlers. -->
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LandmarkOrHistoricalBuilding", "name": "Casa Rectoral Con Escudo", "description": "Casa Rectoral Con Escudo, Escudos en Espinosa de Cervera (Burgos), Bien de Interés Cultural de Castilla y León.", "url": "https://patrimonioabierto.es/monumento/562170-casa-rectoral-con-escudo/", "address": {"@type": "PostalAddress", "addressLocality": "Espinosa de Cervera", "addressRegion": "Burgos", "addressCountry": "ES"}, "geo": {"@type": "GeoCoordinates", "latitude": 41.895664, "longitude": -3.469291}, "isPartOf": {"@type": "WebSite", "name": "Patrimonio Abierto", "url": "https://patrimonioabierto.es/"}, "sameAs": ["https://www.wikidata.org/wiki/Q141502813"]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LandmarkOrHistoricalBuilding", "name": "Casa Rectoral Con Escudo", "description": "Casa Rectoral Con Escudo, escudo en Espinosa de Cervera (Burgos). Ficha con datos oficiales, Wikidata y fotos libres.", "url": "https://patrimonioabierto.es/monumento/562170-casa-rectoral-con-escudo/", "address": {"@type": "PostalAddress", "addressLocality": "Espinosa de Cervera", "addressRegion": "Burgos", "addressCountry": "ES"}, "geo": {"@type": "GeoCoordinates", "latitude": 41.895664, "longitude": -3.469291}, "isPartOf": {"@type": "WebSite", "name": "Patrimonio Abierto", "url": "https://patrimonioabierto.es/"}, "sameAs": ["https://www.wikidata.org/wiki/Q141502813"]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://patrimonioabierto.es/"}, {"@type": "ListItem", "position": 2, "name": "Burgos", "item": "https://patrimonioabierto.es/provincia/burgos/"}, {"@type": "ListItem", "position": 3, "name": "Casa Rectoral Con Escudo", "item": "https://patrimonioabierto.es/monumento/562170-casa-rectoral-con-escudo/"}]}</script>
 
   <!-- Same mark as #logo-mark/#loading-logo/#welcome-logo (assets/logo.png)
        - just square and on a solid brand-purple backing (same purple as
@@ -56,6 +56,10 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
   <link rel="stylesheet" href="style.css" />
+  <!-- Without JavaScript nothing ever dismisses the loading screen or the
+       welcome dialog, so they would cover the page's static content (the
+       per-monument pages carry real text and links in the HTML) forever. -->
+  <noscript><style>#loading-screen, #welcome-modal { display: none !important; }</style></noscript>
 </head>
 <body>
   <!-- The very first focusable thing on the page, on purpose - a classic
@@ -89,6 +93,12 @@
       <div id="welcome-logo-badge"><img src="assets/logo.png" alt="" id="welcome-logo"></div>
       <h2 data-i18n="welcome.title">Bienvenido a Patrimonio Abierto</h2>
       <p data-i18n="welcome.body">Aquí encontrarás todos los Bienes de Interés Cultural (BIC) declarados oficialmente en Castilla y León, junto con información y material multimedia de Wikidata, Wikipedia y Wikimedia Commons. Un proyecto libre, sin cuentas ni anuncios.</p>
+      <!-- Plain links into the per-province pages, so the homepage - and every
+           page built from this shell - leads a crawler to them. -->
+      <nav id="welcome-provinces" aria-label="Provincias"><span data-i18n="welcome.provinces">Explorar por provincia:</span>
+        <a href="/provincia/avila/">Ávila</a> <a href="/provincia/burgos/">Burgos</a> <a href="/provincia/leon/">León</a>
+        <a href="/provincia/palencia/">Palencia</a> <a href="/provincia/salamanca/">Salamanca</a> <a href="/provincia/segovia/">Segovia</a>
+        <a href="/provincia/soria/">Soria</a> <a href="/provincia/valladolid/">Valladolid</a> <a href="/provincia/zamora/">Zamora</a></nav>
       <button type="button" id="welcome-close-btn" data-i18n="welcome.cta">Empezar a explorar</button>
       <a href="#" id="welcome-about-link" data-i18n="welcome.about_link">Más sobre el proyecto</a>
     </div>
@@ -221,7 +231,7 @@
     <aside id="panel" class="open">
       <div id="panel-handle"></div>
       <button id="panel-close" aria-label="Cerrar">✕</button>
-      <div id="panel-content"><div class="hero hero-fallback"><div class="hero-placeholder-icon">🛡️</div><div class="hero-scrim"><div class="hero-kicker">🛡️ ESCUDOS</div><h2 class="hero-title">Casa Rectoral Con Escudo</h2></div></div><div class="panel-body"><div class="meta">Espinosa de Cervera · Burgos · BIC desde 1963-03-14</div><div class="missing-note">Este monumento todavía no tiene artículo en Wikipedia.</div><div class="link-badges"><a class="badge jcyl" href="https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=562170" target="_blank" rel="noopener">📄 Ficha JCyL</a><a class="badge wikidata" href="https://www.wikidata.org/wiki/Q141502813" target="_blank" rel="noopener"><svg viewBox="0 0 1050 590" width="18" height="10" aria-hidden="true"><path d="m 120,545 h 30 V 45 H 120 V 545 z m 60,0 h 90 V 45 H 180 V 545 z M 300,45 V 545 h 90 V 45 h -90 z" fill="#990000"/><path d="m 840,545 h 30 V 45 H 840 V 545 z M 900,45 V 545 h 30 V 45 H 900 z M 420,545 h 30 V 45 H 420 V 545 z M 480,45 V 545 h 30 V 45 h -30 z" fill="#339966"/><path d="m 540,545 h 90 V 45 h -90 V 545 z m 120,0 h 30 V 45 H 660 V 545 z M 720,45 V 545 h 90 V 45 H 720 z" fill="#006699"/></svg>Wikidata</a></div></div></div>
+      <div id="panel-content"><div class="hero hero-fallback"><div class="hero-placeholder-icon">🛡️</div><div class="hero-scrim"><div class="hero-kicker">🛡️ ESCUDOS</div><h1 class="hero-title">Casa Rectoral Con Escudo</h1></div></div><div class="panel-body"><nav class="crumbs" aria-label="Migas de pan"><a href="/">Inicio</a> <span aria-hidden="true">›</span> <a href="/provincia/burgos/">Burgos</a> <span aria-hidden="true">›</span> <span aria-current="page">Casa Rectoral Con Escudo</span></nav><div class="meta">Espinosa de Cervera · Burgos · BIC desde 1963-03-14</div><p class="summary">Casa Rectoral Con Escudo es un bien protegido de la categoría «escudo» situado en Espinosa de Cervera, provincia de Burgos, en Castilla y León. Está declarado Bien de Interés Cultural desde el 14 de marzo de 1963.</p><div class="missing-note">Este monumento todavía no tiene artículo en Wikipedia.</div><div class="link-badges"><a class="badge jcyl" href="https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=562170" target="_blank" rel="noopener">📄 Ficha JCyL</a><a class="badge wikidata" href="https://www.wikidata.org/wiki/Q141502813" target="_blank" rel="noopener"><svg viewBox="0 0 1050 590" width="18" height="10" aria-hidden="true"><path d="m 120,545 h 30 V 45 H 120 V 545 z m 60,0 h 90 V 45 H 180 V 545 z M 300,45 V 545 h 90 V 45 h -90 z" fill="#990000"/><path d="m 840,545 h 30 V 45 H 840 V 545 z M 900,45 V 545 h 30 V 45 H 900 z M 420,545 h 30 V 45 H 420 V 545 z M 480,45 V 545 h 30 V 45 h -30 z" fill="#339966"/><path d="m 540,545 h 90 V 45 h -90 V 545 z m 120,0 h 30 V 45 H 660 V 545 z M 720,45 V 545 h 90 V 45 H 720 z" fill="#006699"/></svg>Wikidata</a></div><h3>Cerca de aquí</h3><ul class="list"><li><a class="list-row" href="/monumento/3339-ermita-de-santa-cecilia/" data-jcyl-id="3339"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Ermita%20de%20Santa%20Cecilia%20de%20Barr%C3%ADosuso%20II.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Ermita de Santa Cecilia</span><span class="list-row-stat">7,9 km</span></a></li><li><a class="list-row" href="/monumento/1859-torre-de-caleruega-o-de-los-guzmanes/" data-jcyl-id="1859"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🏰</span><span class="list-row-name">Torre de Caleruega O de los Guzmanes</span><span class="list-row-stat">8,0 km</span></a></li><li><a class="list-row" href="/monumento/874939-murallas-de-santo-domingo-de-silos/" data-jcyl-id="874939"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Puerta%20muralla%2C%20Silos.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Murallas de Santo Domingo de Silos</span><span class="list-row-stat">8,4 km</span></a></li><li><a class="list-row" href="/monumento/3359-monasterio-de-santo-domingo-de-silos/" data-jcyl-id="3359"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Monasterio%20de%20Santo%20Domingo%20de%20Silos%20%28Burgos%29.%20Entrada.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Monasterio de Santo Domingo de Silos</span><span class="list-row-stat">8,5 km</span></a></li><li><a class="list-row" href="/monumento/3352-la-villa/" data-jcyl-id="3352"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/SantoDomingoDeSilosDesdeElSur-rectangular.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">La Villa</span><span class="list-row-stat">8,5 km</span></a></li><li><a class="list-row" href="/monumento/3547-yacimiento-romano-de-ciella/" data-jcyl-id="3547"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🏺</span><span class="list-row-name">Yacimiento Romano de &quot;ciella&quot;</span><span class="list-row-stat">8,9 km</span></a></li></ul></div></div>
     </aside>
   </div>
 

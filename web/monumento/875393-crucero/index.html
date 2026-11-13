@@ -11,7 +11,7 @@
        too deep and 404. Same tag scripts/build_monument_pages.py's static
        per-monument pages already carry, for the same reason. -->
   <base href="/">
-  <title>Crucero - Patrimonio Abierto</title>
+  <title>Crucero, Tardajos (Burgos) - Patrimonio Abierto</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- SEO/social preview. patrimonioabierto.es appears in four places
@@ -19,25 +19,25 @@
        ever changes again, update all four together plus the <title>/
        og:title/og:site_name text above, or a shared link preview will
        keep pointing at the old name/domain. -->
-  <meta name="description" content="Crucero, Hitos Forales en Tardajos (Burgos), Bien de Interés Cultural de Castilla y León.">
+  <meta name="description" content="Crucero, hito foral en Tardajos (Burgos). Ficha con datos oficiales, Wikidata y fotos libres.">
   <link rel="canonical" href="https://patrimonioabierto.es/monumento/875393-crucero/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Patrimonio Abierto">
-  <meta property="og:title" content="Crucero - Patrimonio Abierto">
-  <meta property="og:description" content="Crucero, Hitos Forales en Tardajos (Burgos), Bien de Interés Cultural de Castilla y León.">
+  <meta property="og:title" content="Crucero, Tardajos (Burgos) - Patrimonio Abierto">
+  <meta property="og:description" content="Crucero, hito foral en Tardajos (Burgos). Ficha con datos oficiales, Wikidata y fotos libres.">
   <meta property="og:image" content="https://patrimonioabierto.es/assets/logo-readme.png">
   <meta property="og:url" content="https://patrimonioabierto.es/monumento/875393-crucero/">
   <meta property="og:locale" content="es_ES">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Crucero - Patrimonio Abierto">
-  <meta name="twitter:description" content="Crucero, Hitos Forales en Tardajos (Burgos), Bien de Interés Cultural de Castilla y León.">
+  <meta name="twitter:title" content="Crucero, Tardajos (Burgos) - Patrimonio Abierto">
+  <meta name="twitter:description" content="Crucero, hito foral en Tardajos (Burgos). Ficha con datos oficiales, Wikidata y fotos libres.">
   <meta name="twitter:image" content="https://patrimonioabierto.es/assets/logo-readme.png">
 
   <!-- Structured data (schema.org) for search engines - a Dataset (what
        this project actually publishes: the merged BIC/Wikidata/Wikipedia/
        Commons table) presented as part of a WebSite (how people reach it).
        Doesn't change anything a visitor sees; only read by crawlers. -->
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LandmarkOrHistoricalBuilding", "name": "Crucero", "description": "Crucero, Hitos Forales en Tardajos (Burgos), Bien de Interés Cultural de Castilla y León.", "url": "https://patrimonioabierto.es/monumento/875393-crucero/", "address": {"@type": "PostalAddress", "addressLocality": "Tardajos", "addressRegion": "Burgos", "addressCountry": "ES"}, "geo": {"@type": "GeoCoordinates", "latitude": 42.3484, "longitude": -3.813413}, "isPartOf": {"@type": "WebSite", "name": "Patrimonio Abierto", "url": "https://patrimonioabierto.es/"}, "sameAs": ["https://www.wikidata.org/wiki/Q106807075"]}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LandmarkOrHistoricalBuilding", "name": "Crucero", "description": "Crucero, hito foral en Tardajos (Burgos). Ficha con datos oficiales, Wikidata y fotos libres.", "url": "https://patrimonioabierto.es/monumento/875393-crucero/", "address": {"@type": "PostalAddress", "addressLocality": "Tardajos", "addressRegion": "Burgos", "addressCountry": "ES"}, "geo": {"@type": "GeoCoordinates", "latitude": 42.3484, "longitude": -3.813413}, "isPartOf": {"@type": "WebSite", "name": "Patrimonio Abierto", "url": "https://patrimonioabierto.es/"}, "alternateName": ["Cruz de piedra"], "sameAs": ["https://www.wikidata.org/wiki/Q106807075"]}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://patrimonioabierto.es/"}, {"@type": "ListItem", "position": 2, "name": "Burgos", "item": "https://patrimonioabierto.es/provincia/burgos/"}, {"@type": "ListItem", "position": 3, "name": "Crucero", "item": "https://patrimonioabierto.es/monumento/875393-crucero/"}]}</script>
 
   <!-- Same mark as #logo-mark/#loading-logo/#welcome-logo (assets/logo.png)
        - just square and on a solid brand-purple backing (same purple as
@@ -56,6 +56,10 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
   <link rel="stylesheet" href="style.css" />
+  <!-- Without JavaScript nothing ever dismisses the loading screen or the
+       welcome dialog, so they would cover the page's static content (the
+       per-monument pages carry real text and links in the HTML) forever. -->
+  <noscript><style>#loading-screen, #welcome-modal { display: none !important; }</style></noscript>
 </head>
 <body>
   <!-- The very first focusable thing on the page, on purpose - a classic
@@ -89,6 +93,12 @@
       <div id="welcome-logo-badge"><img src="assets/logo.png" alt="" id="welcome-logo"></div>
       <h2 data-i18n="welcome.title">Bienvenido a Patrimonio Abierto</h2>
       <p data-i18n="welcome.body">Aquí encontrarás todos los Bienes de Interés Cultural (BIC) declarados oficialmente en Castilla y León, junto con información y material multimedia de Wikidata, Wikipedia y Wikimedia Commons. Un proyecto libre, sin cuentas ni anuncios.</p>
+      <!-- Plain links into the per-province pages, so the homepage - and every
+           page built from this shell - leads a crawler to them. -->
+      <nav id="welcome-provinces" aria-label="Provincias"><span data-i18n="welcome.provinces">Explorar por provincia:</span>
+        <a href="/provincia/avila/">Ávila</a> <a href="/provincia/burgos/">Burgos</a> <a href="/provincia/leon/">León</a>
+        <a href="/provincia/palencia/">Palencia</a> <a href="/provincia/salamanca/">Salamanca</a> <a href="/provincia/segovia/">Segovia</a>
+        <a href="/provincia/soria/">Soria</a> <a href="/provincia/valladolid/">Valladolid</a> <a href="/provincia/zamora/">Zamora</a></nav>
       <button type="button" id="welcome-close-btn" data-i18n="welcome.cta">Empezar a explorar</button>
       <a href="#" id="welcome-about-link" data-i18n="welcome.about_link">Más sobre el proyecto</a>
     </div>
@@ -221,7 +231,7 @@
     <aside id="panel" class="open">
       <div id="panel-handle"></div>
       <button id="panel-close" aria-label="Cerrar">✕</button>
-      <div id="panel-content"><div class="hero hero-fallback"><div class="hero-placeholder-icon">🪧</div><div class="hero-scrim"><div class="hero-kicker">🪧 HITOS FORALES</div><h2 class="hero-title">Crucero</h2></div></div><div class="panel-body"><div class="meta">Tardajos · Burgos · BIC desde 1963-03-14</div><div class="missing-note">Este monumento todavía no tiene artículo en Wikipedia.</div><div class="link-badges"><a class="badge jcyl" href="https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=875393" target="_blank" rel="noopener">📄 Ficha JCyL</a><a class="badge wikidata" href="https://www.wikidata.org/wiki/Q106807075" target="_blank" rel="noopener"><svg viewBox="0 0 1050 590" width="18" height="10" aria-hidden="true"><path d="m 120,545 h 30 V 45 H 120 V 545 z m 60,0 h 90 V 45 H 180 V 545 z M 300,45 V 545 h 90 V 45 h -90 z" fill="#990000"/><path d="m 840,545 h 30 V 45 H 840 V 545 z M 900,45 V 545 h 30 V 45 H 900 z M 420,545 h 30 V 45 H 420 V 545 z M 480,45 V 545 h 30 V 45 h -30 z" fill="#339966"/><path d="m 540,545 h 90 V 45 h -90 V 545 z m 120,0 h 30 V 45 H 660 V 545 z M 720,45 V 545 h 90 V 45 H 720 z" fill="#006699"/></svg>Wikidata</a></div></div></div>
+      <div id="panel-content"><div class="hero hero-fallback"><div class="hero-placeholder-icon">🪧</div><div class="hero-scrim"><div class="hero-kicker">🪧 HITOS FORALES</div><h1 class="hero-title">Crucero</h1></div></div><div class="panel-body"><nav class="crumbs" aria-label="Migas de pan"><a href="/">Inicio</a> <span aria-hidden="true">›</span> <a href="/provincia/burgos/">Burgos</a> <span aria-hidden="true">›</span> <span aria-current="page">Crucero</span></nav><div class="meta">Tardajos · Burgos · BIC desde 1963-03-14</div><p class="summary">Crucero es un bien protegido de la categoría «hito foral» situado en Tardajos, provincia de Burgos, en Castilla y León. Está declarado Bien de Interés Cultural desde el 14 de marzo de 1963.</p><p class="aka">También conocido como: <i>Cruz de piedra</i>.</p><div class="missing-note">Este monumento todavía no tiene artículo en Wikipedia.</div><div class="link-badges"><a class="badge jcyl" href="https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=875393" target="_blank" rel="noopener">📄 Ficha JCyL</a><a class="badge wikidata" href="https://www.wikidata.org/wiki/Q106807075" target="_blank" rel="noopener"><svg viewBox="0 0 1050 590" width="18" height="10" aria-hidden="true"><path d="m 120,545 h 30 V 45 H 120 V 545 z m 60,0 h 90 V 45 H 180 V 545 z M 300,45 V 545 h 90 V 45 h -90 z" fill="#990000"/><path d="m 840,545 h 30 V 45 H 840 V 545 z M 900,45 V 545 h 30 V 45 H 900 z M 420,545 h 30 V 45 H 420 V 545 z M 480,45 V 545 h 30 V 45 h -30 z" fill="#339966"/><path d="m 540,545 h 90 V 45 h -90 V 545 z m 120,0 h 30 V 45 H 660 V 545 z M 720,45 V 545 h 90 V 45 H 720 z" fill="#006699"/></svg>Wikidata</a></div><h3>Cerca de aquí</h3><ul class="list"><li><a class="list-row" href="/monumento/3468-yacimiento-de-deobrigula/" data-jcyl-id="3468"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🏺</span><span class="list-row-name">Yacimiento de &quot;deobrígula&quot;</span><span class="list-row-stat">650 m</span></a></li><li><a class="list-row" href="/monumento/1706-hospital-del-rey/" data-jcyl-id="1706"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Hospital%20Del%20Rey%20UBU.JPG?width=64" alt="" loading="lazy"><span class="list-row-name">Hospital del Rey</span><span class="list-row-stat">7,1 km</span></a></li><li><a class="list-row" href="/monumento/3810-torreon-de-villagonzalo-arenas/" data-jcyl-id="3810"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Torre%20de%20Villagonzalo-Arenas%2001.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Torreon de Villagonzalo-arenas</span><span class="list-row-stat">7,1 km</span></a></li><li><a class="list-row" href="/monumento/1848-casa-fuerte-de-los-rojas/" data-jcyl-id="1848"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Cavia%20castillo%2001.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Casa Fuerte de los Rojas</span><span class="list-row-stat">7,7 km</span></a></li><li><a class="list-row" href="/monumento/1765-museo-del-real-monasterio-de-las-huelgas/" data-jcyl-id="1765"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🏛️</span><span class="list-row-name">Museo del Real Monasterio de las Huelgas</span><span class="list-row-stat">7,7 km</span></a></li><li><a class="list-row" href="/monumento/1748-monasterio-de-santa-maria-la-real-de-huelgas/" data-jcyl-id="1748"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Burgos%20monasterio%20huelgas%20lou.JPG?width=64" alt="" loading="lazy"><span class="list-row-name">Monasterio de Santa María la Real de Huelgas</span><span class="list-row-stat">7,8 km</span></a></li></ul></div></div>
     </aside>
   </div>
 

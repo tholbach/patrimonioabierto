@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <!-- Root-relative, not absolute - resolves against whatever origin
+       actually served the page (production or make serve/localhost) and
+       keeps every relative reference (style.css, assets/*, app.js's own
+       fetch('data/...') calls) pinned to site root even once app.js starts
+       pushState-ing the address bar to /monumento/<id>-<slug>/ during live
+       browsing - without this, those fetches would resolve one directory
+       too deep and 404. Same tag scripts/build_monument_pages.py's static
+       per-monument pages already carry, for the same reason. -->
+  <base href="/">
+  <title>Arte rupestre en Salamanca: 66 bienes protegidos - Patrimonio Abierto</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- SEO/social preview. patrimonioabierto.es appears in four places
+       below (canonical, og:url, og:image, twitter:image) - if this domain
+       ever changes again, update all four together plus the <title>/
+       og:title/og:site_name text above, or a shared link preview will
+       keep pointing at the old name/domain. -->
+  <meta name="description" content="Lista de 66 yacimientos de arte rupestre protegidos como Bien de Interés Cultural en Salamanca, por municipio, con fotos libres y Wikidata.">
+  <link rel="canonical" href="https://patrimonioabierto.es/provincia/salamanca/arte-rupestre/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Patrimonio Abierto">
+  <meta property="og:title" content="Arte rupestre en Salamanca: 66 bienes protegidos - Patrimonio Abierto">
+  <meta property="og:description" content="Lista de 66 yacimientos de arte rupestre protegidos como Bien de Interés Cultural en Salamanca, por municipio, con fotos libres y Wikidata.">
+  <meta property="og:image" content="https://patrimonioabierto.es/assets/logo-readme.png">
+  <meta property="og:url" content="https://patrimonioabierto.es/provincia/salamanca/arte-rupestre/">
+  <meta property="og:locale" content="es_ES">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Arte rupestre en Salamanca: 66 bienes protegidos - Patrimonio Abierto">
+  <meta name="twitter:description" content="Lista de 66 yacimientos de arte rupestre protegidos como Bien de Interés Cultural en Salamanca, por municipio, con fotos libres y Wikidata.">
+  <meta name="twitter:image" content="https://patrimonioabierto.es/assets/logo-readme.png">
+
+  <!-- Structured data (schema.org) for search engines - a Dataset (what
+       this project actually publishes: the merged BIC/Wikidata/Wikipedia/
+       Commons table) presented as part of a WebSite (how people reach it).
+       Doesn't change anything a visitor sees; only read by crawlers. -->
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "CollectionPage", "name": "Arte rupestre en Salamanca", "description": "Lista de 66 yacimientos de arte rupestre protegidos como Bien de Interés Cultural en Salamanca, por municipio, con fotos libres y Wikidata.", "url": "https://patrimonioabierto.es/provincia/salamanca/arte-rupestre/", "isPartOf": {"@type": "WebSite", "name": "Patrimonio Abierto", "url": "https://patrimonioabierto.es/"}, "breadcrumb": {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://patrimonioabierto.es/"}, {"@type": "ListItem", "position": 2, "name": "Salamanca", "item": "https://patrimonioabierto.es/provincia/salamanca/"}, {"@type": "ListItem", "position": 3, "name": "Arte rupestre", "item": "https://patrimonioabierto.es/provincia/salamanca/arte-rupestre/"}]}, "mainEntity": {"@type": "ItemList", "numberOfItems": 66, "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Grabado del Castillo", "url": "https://patrimonioabierto.es/monumento/141136-grabado-del-castillo/"}, {"@type": "ListItem", "position": 2, "name": "Peñas del Gato", "url": "https://patrimonioabierto.es/monumento/8914-penas-del-gato/"}, {"@type": "ListItem", "position": 3, "name": "Bonete del Cura", "url": "https://patrimonioabierto.es/monumento/145871-bonete-del-cura/"}, {"@type": "ListItem", "position": 4, "name": "Abrigo de las Cabras", "url": "https://patrimonioabierto.es/monumento/149653-abrigo-de-las-cabras/"}, {"@type": "ListItem", "position": 5, "name": "Alto de la Mina", "url": "https://patrimonioabierto.es/monumento/149541-alto-de-la-mina/"}, {"@type": "ListItem", "position": 6, "name": "Canchal de la Culebra", "url": "https://patrimonioabierto.es/monumento/149597-canchal-de-la-culebra/"}, {"@type": "ListItem", "position": 7, "name": "Canchal de las Barras", "url": "https://patrimonioabierto.es/monumento/149583-canchal-de-las-barras/"}, {"@type": "ListItem", "position": 8, "name": "Canchal Mediano", "url": "https://patrimonioabierto.es/monumento/149569-canchal-mediano/"}, {"@type": "ListItem", "position": 9, "name": "Cueva del Buitre", "url": "https://patrimonioabierto.es/monumento/149731-cueva-del-buitre/"}, {"@type": "ListItem", "position": 10, "name": "Francas, las", "url": "https://patrimonioabierto.es/monumento/149639-francas-las/"}, {"@type": "ListItem", "position": 11, "name": "La Peña del Águila", "url": "https://patrimonioabierto.es/monumento/9212-la-pena-del-aguila/"}, {"@type": "ListItem", "position": 12, "name": "Majada del Tio Tasio", "url": "https://patrimonioabierto.es/monumento/149625-majada-del-tio-tasio/"}, {"@type": "ListItem", "position": 13, "name": "Peña Merendera", "url": "https://patrimonioabierto.es/monumento/149611-pena-merendera/"}, {"@type": "ListItem", "position": 14, "name": "Peñas del Horno", "url": "https://patrimonioabierto.es/monumento/149555-penas-del-horno/"}, {"@type": "ListItem", "position": 15, "name": "Piedras Albas", "url": "https://patrimonioabierto.es/monumento/149667-piedras-albas/"}, {"@type": "ListItem", "position": 16, "name": "Risco de los Altares", "url": "https://patrimonioabierto.es/monumento/149524-risco-de-los-altares/"}, {"@type": "ListItem", "position": 17, "name": "Torrita I, la", "url": "https://patrimonioabierto.es/monumento/149702-torrita-i-la/"}, {"@type": "ListItem", "position": 18, "name": "Torrita Ii, la", "url": "https://patrimonioabierto.es/monumento/149717-torrita-ii-la/"}, {"@type": "ListItem", "position": 19, "name": "Cabeza de Moncalvo", "url": "https://patrimonioabierto.es/monumento/149824-cabeza-de-moncalvo/"}, {"@type": "ListItem", "position": 20, "name": "Pinturas Rupestres de la Malgarrida", "url": "https://patrimonioabierto.es/monumento/149884-pinturas-rupestres-de-la-malgarrida/"}, {"@type": "ListItem", "position": 21, "name": "Abrigo I", "url": "https://patrimonioabierto.es/monumento/718959-abrigo-i/"}, {"@type": "ListItem", "position": 22, "name": "Abrigo Ii", "url": "https://patrimonioabierto.es/monumento/719444-abrigo-ii/"}, {"@type": "ListItem", "position": 23, "name": "Canchal de las Cabras Pintadas Ii", "url": "https://patrimonioabierto.es/monumento/139012-canchal-de-las-cabras-pintadas-ii/"}, {"@type": "ListItem", "position": 24, "name": "Canchal de las Torres I", "url": "https://patrimonioabierto.es/monumento/138810-canchal-de-las-torres-i/"}, {"@type": "ListItem", "position": 25, "name": "Canchal de las Torres Ii", "url": "https://patrimonioabierto.es/monumento/139102-canchal-de-las-torres-ii/"}, {"@type": "ListItem", "position": 26, "name": "Canchal de Mahoma I", "url": "https://patrimonioabierto.es/monumento/138880-canchal-de-mahoma-i/"}, {"@type": "ListItem", "position": 27, "name": "Canchal de Mahoma Ii", "url": "https://patrimonioabierto.es/monumento/139120-canchal-de-mahoma-ii/"}, {"@type": "ListItem", "position": 28, "name": "Canchal de Mahoma Iii", "url": "https://patrimonioabierto.es/monumento/139135-canchal-de-mahoma-iii/"}, {"@type": "ListItem", "position": 29, "name": "Canchal de Mahoma Iv", "url": "https://patrimonioabierto.es/monumento/139150-canchal-de-mahoma-iv/"}, {"@type": "ListItem", "position": 30, "name": "Canchal del Zarzalón I", "url": "https://patrimonioabierto.es/monumento/138750-canchal-del-zarzalon-i/"}, {"@type": "ListItem", "position": 31, "name": "Canchal del Zarzalón Ii", "url": "https://patrimonioabierto.es/monumento/138770-canchal-del-zarzalon-ii/"}, {"@type": "ListItem", "position": 32, "name": "Canchal del Zarzalón Iii", "url": "https://patrimonioabierto.es/monumento/138790-canchal-del-zarzalon-iii/"}, {"@type": "ListItem", "position": 33, "name": "Canchal del Zarzalón Iv", "url": "https://patrimonioabierto.es/monumento/139057-canchal-del-zarzalon-iv/"}, {"@type": "ListItem", "position": 34, "name": "Canchal del Zarzalón Vi", "url": "https://patrimonioabierto.es/monumento/139087-canchal-del-zarzalon-vi/"}, {"@type": "ListItem", "position": 35, "name": "Corral de Morcilla", "url": "https://patrimonioabierto.es/monumento/138639-corral-de-morcilla/"}, {"@type": "ListItem", "position": 36, "name": "Covacho de Pallón, el", "url": "https://patrimonioabierto.es/monumento/138617-covacho-de-pallon-el/"}, {"@type": "ListItem", "position": 37, "name": "Hornacina del Zarzalón", "url": "https://patrimonioabierto.es/monumento/139072-hornacina-del-zarzalon/"}, {"@type": "ListItem", "position": 38, "name": "Las Batuecas Canchal de la Pizarra 1", "url": "https://patrimonioabierto.es/monumento/8551-las-batuecas-canchal-de-la-pizarra-1/"}, {"@type": "ListItem", "position": 39, "name": "Las Batuecas Canchal de la Pizarra 2", "url": "https://patrimonioabierto.es/monumento/8491-las-batuecas-canchal-de-la-pizarra-2/"}, {"@type": "ListItem", "position": 40, "name": "Las Batuecas Canchal de la Pizarra 3", "url": "https://patrimonioabierto.es/monumento/8495-las-batuecas-canchal-de-la-pizarra-3/"}, {"@type": "ListItem", "position": 41, "name": "Las Batuecas Canchal de la Pizarra 4", "url": "https://patrimonioabierto.es/monumento/8499-las-batuecas-canchal-de-la-pizarra-4/"}, {"@type": "ListItem", "position": 42, "name": "Las Batuecas Canchal de la Pizarra 5", "url": "https://patrimonioabierto.es/monumento/8503-las-batuecas-canchal-de-la-pizarra-5/"}, {"@type": "ListItem", "position": 43, "name": "Las Batuecas Canchal de la Villita", "url": "https://patrimonioabierto.es/monumento/8507-las-batuecas-canchal-de-la-villita/"}, {"@type": "ListItem", "position": 44, "name": "Las Batuecas Canchal del Cristo", "url": "https://patrimonioabierto.es/monumento/8527-las-batuecas-canchal-del-cristo/"}, {"@type": "ListItem", "position": 45, "name": "Las Batuecas Cristo Iv O Covachito Pequeño Cristo", "url": "https://patrimonioabierto.es/monumento/8555-las-batuecas-cristo-iv-o-covachito-pequeno-cristo/"}, {"@type": "ListItem", "position": 46, "name": "Las Batuecas. Abriguito del Paseo", "url": "https://patrimonioabierto.es/monumento/8571-las-batuecas-abriguito-del-paseo/"}, {"@type": "ListItem", "position": 47, "name": "Las Batuecas. Cristo V O Abrigo Bajo del Cristo", "url": "https://patrimonioabierto.es/monumento/8559-las-batuecas-cristo-v-o-abrigo-bajo-del-cristo/"}, {"@type": "ListItem", "position": 48, "name": "Las Batuecas. Cueva del Cristo", "url": "https://patrimonioabierto.es/monumento/8563-las-batuecas-cueva-del-cristo/"}, {"@type": "ListItem", "position": 49, "name": "Las Batuecas. Risco del Ciervo", "url": "https://patrimonioabierto.es/monumento/8607-las-batuecas-risco-del-ciervo/"}, {"@type": "ListItem", "position": 50, "name": "Las Batuecas. Umbria del Canchal del Cristo", "url": "https://patrimonioabierto.es/monumento/8567-las-batuecas-umbria-del-canchal-del-cristo/"}, {"@type": "ListItem", "position": 51, "name": "Lera I", "url": "https://patrimonioabierto.es/monumento/138359-lera-i/"}, {"@type": "ListItem", "position": 52, "name": "Lera Ii", "url": "https://patrimonioabierto.es/monumento/138373-lera-ii/"}, {"@type": "ListItem", "position": 53, "name": "Lera Iii", "url": "https://patrimonioabierto.es/monumento/138387-lera-iii/"}, {"@type": "ListItem", "position": 54, "name": "Majadilla las Torres", "url": "https://patrimonioabierto.es/monumento/138912-majadilla-las-torres/"}, {"@type": "ListItem", "position": 55, "name": "Palla I, la", "url": "https://patrimonioabierto.es/monumento/138928-palla-i-la/"}, {"@type": "ListItem", "position": 56, "name": "Palla Ii, la", "url": "https://patrimonioabierto.es/monumento/138943-palla-ii-la/"}, {"@type": "ListItem", "position": 57, "name": "La Palla Rubia (pozo de los Humos)", "url": "https://patrimonioabierto.es/monumento/9473-la-palla-rubia-pozo-de-los-humos/"}, {"@type": "ListItem", "position": 58, "name": "Castil de Cabras. Sierra de las Quilamas", "url": "https://patrimonioabierto.es/monumento/10236-castil-de-cabras-sierra-de-las-quilamas/"}, {"@type": "ListItem", "position": 59, "name": "Canchal de los Letreros", "url": "https://patrimonioabierto.es/monumento/159471-canchal-de-los-letreros/"}, {"@type": "ListItem", "position": 60, "name": "Cueva del Tio Papas", "url": "https://patrimonioabierto.es/monumento/10406-cueva-del-tio-papas/"}, {"@type": "ListItem", "position": 61, "name": "Hoyita del Coscorrón, I", "url": "https://patrimonioabierto.es/monumento/538616-hoyita-del-coscorron-i/"}, {"@type": "ListItem", "position": 62, "name": "Hoyita del Coscorrón, Ii", "url": "https://patrimonioabierto.es/monumento/160169-hoyita-del-coscorron-ii/"}, {"@type": "ListItem", "position": 63, "name": "Hoyita del Cuervo", "url": "https://patrimonioabierto.es/monumento/160137-hoyita-del-cuervo/"}, {"@type": "ListItem", "position": 64, "name": "La Pata del Moro", "url": "https://patrimonioabierto.es/monumento/10456-la-pata-del-moro/"}, {"@type": "ListItem", "position": 65, "name": "Camino de los Dulces", "url": "https://patrimonioabierto.es/monumento/864471-camino-de-los-dulces/"}, {"@type": "ListItem", "position": 66, "name": "Castillo de Yecla la Vieja", "url": "https://patrimonioabierto.es/monumento/10544-castillo-de-yecla-la-vieja/"}]}}</script>
+
+  <!-- Same mark as #logo-mark/#loading-logo/#welcome-logo (assets/logo.png)
+       - just square and on a solid brand-purple backing (same purple as
+       logo-readme.png's own README treatment), since a browser tab is
+       usually light or dark, not the purple header bar this logo is
+       normally drawn against - its white linework would go near-invisible
+       on a plain white tab background otherwise. -->
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <!-- Fraunces/Inter used to load from Google Fonts - self-hosted instead
+       (see the @font-face block at the top of style.css) so a visitor's
+       browser never has to talk to fonts.gstatic.com at all: no third-
+       party request, no IP address leaving this site's own domain, one
+       less thing for the Privacidad page to have to disclose. -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- Without JavaScript nothing ever dismisses the loading screen or the
+       welcome dialog, so they would cover the page's static content (the
+       per-monument pages carry real text and links in the HTML) forever. -->
+  <noscript><style>#loading-screen, #welcome-modal { display: none !important; }</style></noscript>
+</head>
+<body>
+  <!-- The very first focusable thing on the page, on purpose - a classic
+       "skip link", invisible until it actually receives keyboard focus (see
+       .skip-link CSS). The visible 📋 button/menu entry that used to sit
+       next to this got removed (redundant with search/map for anyone
+       clicking around) - this is now the only way into showListPanel(),
+       which is fine: it's aimed squarely at whoever can't/doesn't want to
+       drive the map, and reaches the same panel in a single Tab press from
+       anywhere, before the loading screen, the header, anything - no
+       fishing for a small icon first. -->
+  <a href="#" id="skip-to-list-link" class="skip-link" data-i18n="list.skip_link">Ir directamente a la lista de monumentos</a>
+
+  <!-- First paint, before app.js even runs: the dataset is ~2MB, worth
+       covering with something branded rather than a blank page while it
+       loads. Spanish text is hardcoded as the real initial content (not an
+       empty data-i18n placeholder) since the app always starts in 'es' -
+       applyStaticI18n() just re-confirms it once JS runs. -->
+  <div id="loading-screen">
+    <img src="assets/logo.png" alt="" id="loading-logo">
+    <div id="loading-spinner" aria-hidden="true"></div>
+    <p data-i18n="loading.screen">Cargando el catálogo…</p>
+  </div>
+
+  <!-- Shown once per browser (localStorage flag, see app.js), after the
+       data has loaded - not on top of a deep link (?id=/?muni=/?prov=/#...),
+       since someone arriving at a specific monument already knows what
+       they're looking at. -->
+  <div id="welcome-modal">
+    <div id="welcome-card">
+      <div id="welcome-logo-badge"><img src="assets/logo.png" alt="" id="welcome-logo"></div>
+      <h2 data-i18n="welcome.title">Bienvenido a Patrimonio Abierto</h2>
+      <p data-i18n="welcome.body">Aquí encontrarás todos los Bienes de Interés Cultural (BIC) declarados oficialmente en Castilla y León, junto con información y material multimedia de Wikidata, Wikipedia y Wikimedia Commons. Un proyecto libre, sin cuentas ni anuncios.</p>
+      <!-- Plain links into the per-province pages, so the homepage - and every
+           page built from this shell - leads a crawler to them. -->
+      <nav id="welcome-provinces" aria-label="Provincias"><span data-i18n="welcome.provinces">Explorar por provincia:</span>
+        <a href="/provincia/avila/">Ávila</a> <a href="/provincia/burgos/">Burgos</a> <a href="/provincia/leon/">León</a>
+        <a href="/provincia/palencia/">Palencia</a> <a href="/provincia/salamanca/">Salamanca</a> <a href="/provincia/segovia/">Segovia</a>
+        <a href="/provincia/soria/">Soria</a> <a href="/provincia/valladolid/">Valladolid</a> <a href="/provincia/zamora/">Zamora</a></nav>
+      <button type="button" id="welcome-close-btn" data-i18n="welcome.cta">Empezar a explorar</button>
+      <a href="#" id="welcome-about-link" data-i18n="welcome.about_link">Más sobre el proyecto</a>
+    </div>
+  </div>
+
+  <header id="topbar">
+    <!-- Real link (not a <span>/<button>) - see wireSpaLink() in app.js:
+         hovering shows the URL, right-click/ctrl-click/middle-click all do
+         a real navigation back to the plain map, and a normal click gets
+         the instant in-app close instead of a reload. -->
+    <a class="brand" href="." id="brand-link"><img src="assets/logo.png" alt="" id="logo-mark">Patrimonio Abierto</a>
+
+    <!-- Mobile only (see CSS) - collapses #search-wrap to just this icon
+         until tapped, so the default header stays one compact row instead
+         of permanently reserving a full second row for it. -->
+    <!-- Inline SVG, not the 🔍 emoji this used to be - emoji glyphs are
+         drawn by the OS's own emoji font, whose vertical metrics vary
+         enough between Apple/Noto/Samsung's color-emoji sets that it never
+         sat quite centered in this small round button on mobile. An SVG
+         with stroke="currentColor" sits exactly where the viewBox puts it,
+         on every platform, and inherits the button's own (white) color. -->
+    <button type="button" id="search-toggle-btn" data-i18n-title="search.placeholder" aria-label="Search">
+      <svg viewBox="0 0 24 24" width="25" height="25" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </button>
+
+    <div id="search-wrap">
+      <input type="text" id="search-input" autocomplete="off" data-i18n-placeholder="search.placeholder" />
+      <button type="button" id="search-close-btn" aria-label="Close search">✕</button>
+      <div id="search-results"></div>
+    </div>
+
+    <!-- Estadísticas/Acerca de/Cómo contribuir/language all live behind
+         this on every screen size now, not just mobile - see showMenuPanel()
+         in app.js. Keeps the header down to logo + search everywhere. -->
+    <button type="button" id="menu-btn" data-i18n-title="menu.button_title" aria-label="Menu">☰</button>
+  </header>
+
+  <div id="app">
+    <!-- map-wrap, not #app, is what #legend/#locate-btn anchor to - #app
+         spans the map AND the panel side-by-side, so anchoring to it means
+         "right: 16px" measures from the panel's edge once it's open, not
+         the map's. map-wrap always matches the map's own visible area. -->
+    <div id="map-wrap">
+      <div id="map"></div>
+
+      <!-- data-i18n-tooltip, not data-i18n-title: see applyStaticI18n() in
+           i18n.js - feeds style.css's [data-i18n-tooltip]::after desktop
+           label instead of the browser's own native title tooltip. -->
+      <button type="button" id="shuffle-btn" data-i18n-tooltip="shuffle.button_title" aria-label="Random monument">🎲</button>
+      <!-- Same blue dot/white ring as .you-are-here-dot below (the marker
+           this button actually places on the map once located), plus the
+           same soft outer halo that marker's ::after ring gives it - a bare
+           dot read as flat next to that; the halo is what actually makes it
+           recognizable as "the Google Maps blue dot" at a glance. Fixed
+           colors, not currentColor, so the button previews what pressing it
+           does regardless of button state. Replaces the 🎯 target emoji,
+           which read as "aim/select a spot" rather than "find me". -->
+      <button type="button" id="locate-btn" data-i18n-tooltip="geolocation.button_title" aria-label="Locate me">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <circle cx="12" cy="12" r="10" fill="#2a6fbb" opacity="0.18"/>
+          <circle cx="12" cy="12" r="7" fill="#2a6fbb" stroke="white" stroke-width="2.5"/>
+        </svg>
+      </button>
+
+      <!-- Filter button + its dropdown card, same anchor-to-map-wrap /
+           click-outside-closes pattern as #search-results. Row list itself
+           is built in app.js from whatever categories actually appear in
+           the dataset, not hardcoded here. -->
+      <!-- "Tune" icon, same slider-control metaphor as Google Maps' own
+           filter button, but the previous pass (thin currentColor lines +
+           tiny colored dots) still read as mostly monochrome - color was
+           only in three small accents, not the icon itself. This flips
+           that: three bold colored capsule tracks (teal/blue/terracotta -
+           NOT purple, which is #filter-btn.active's own background and
+           would nearly vanish against it, the same reasoning the earlier
+           solid-funnel pass already used) each with a white handle. Color
+           now carries real visual weight instead of being a detail on top
+           of black lines, and the white handles keep it legible on both
+           the idle white background and the active purple one. -->
+      <button type="button" id="filter-btn" data-i18n-tooltip="filter.button_title" aria-label="Filter">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+          <rect x="3" y="4.5" width="18" height="3" rx="1.5" fill="#1c8a6d"/>
+          <circle cx="9" cy="6" r="3" fill="white" stroke="#1c8a6d" stroke-width="1.5"/>
+          <rect x="3" y="10.5" width="18" height="3" rx="1.5" fill="#2a6fbb"/>
+          <circle cx="16" cy="12" r="3" fill="white" stroke="#2a6fbb" stroke-width="1.5"/>
+          <rect x="3" y="16.5" width="18" height="3" rx="1.5" fill="#c2703d"/>
+          <circle cx="11" cy="18" r="3" fill="white" stroke="#c2703d" stroke-width="1.5"/>
+        </svg>
+        <span id="filter-badge" class="filter-badge" hidden></span>
+      </button>
+      <div id="filter-panel">
+        <!-- "Estado" - orthogonal to category, AND-combined with it: a
+             record must match the selected categories AND (no status box
+             checked, or at least one checked status). Only 2 rows, so no
+             Todo/Ninguno shortcuts needed the way the longer category list
+             has. -->
+        <div class="filter-section-label" data-i18n="filter.status_title">Estado</div>
+        <div id="filter-status-list"></div>
+
+        <div id="filter-panel-header">
+          <span data-i18n="filter.title">Categorías</span>
+          <div id="filter-panel-actions">
+            <button type="button" id="filter-all-btn" data-i18n="filter.all">Todo</button>
+            <button type="button" id="filter-none-btn" data-i18n="filter.none">Ninguno</button>
+          </div>
+        </div>
+        <div id="filter-list"></div>
+      </div>
+
+      <!-- Desktop-only (hidden <=768px, see style.css) - a rotating
+           highlight card, one photo picked deterministically per ISO week
+           from web/data/picture_of_the_week.json (see find_good_pictures.py)
+           so it changes weekly with no server/build step involved, and
+           stays identical for every visitor that same week. Hidden
+           entirely (not just empty) whenever that pool is empty. -->
+      <div id="potw" hidden></div>
+
+      <!-- Slim, always-on call-to-action strip (both mobile and desktop) -
+           shown whenever the map itself is in view (panel closed), unlike
+           #potw above it has no dismiss state of its own: see app.js for
+           why the two are kept independent. Real <a>, not a <button> - see
+           wireSpaLink()'s own comment: hover/right-click/ctrl-click should
+           all behave like the real link to /contribute/ that this is. -->
+      <a href="/contribute/" id="contribute-bar" hidden>
+        <span class="contribute-bar-text-full" data-i18n="contribute_bar.text"></span>
+        <span class="contribute-bar-text-short" data-i18n="contribute_bar.text_short"></span>
+      </a>
+    </div>
+
+    <aside id="panel" class="open">
+      <div id="panel-handle"></div>
+      <button id="panel-close" aria-label="Cerrar">✕</button>
+      <div id="panel-content" data-static-province="Salamanca" data-static-category="ARTE RUPESTRE"><div class="hero hero-fallback"><div class="hero-placeholder-icon">🗺️</div><div class="hero-scrim"><div class="hero-kicker">🪨 Arte rupestre</div><h1 class="hero-title">Arte rupestre en Salamanca</h1></div></div><div class="panel-body"><nav class="crumbs" aria-label="Migas de pan"><a href="/">Inicio</a> <span aria-hidden="true">›</span> <a href="/provincia/salamanca/">Salamanca</a> <span aria-hidden="true">›</span> <span aria-current="page">Arte rupestre</span></nav><div class="meta">66 bienes · 13 municipios</div><p class="summary">66 yacimientos de arte rupestre protegidos como Bien de Interés Cultural en la provincia de Salamanca, en 13 municipios, según el catálogo oficial de la Junta de Castilla y León. Ninguno tiene fotografía libre en Wikimedia Commons; 30 están enlazados a Wikidata. Aún faltan fotografías libres de 66. La Alberca reúne 36 de ellos. La protección más antigua data de 1985.</p><h2>Barruecopardo</h2><ul class="list"><li><a class="list-row" href="/monumento/141136-grabado-del-castillo/" data-jcyl-id="141136"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Grabado del Castillo</span></a></li></ul><h2>Cereceda de la Sierra</h2><ul class="list"><li><a class="list-row" href="/monumento/8914-penas-del-gato/" data-jcyl-id="8914"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Peñas del Gato</span></a></li></ul><h2>Ciudad Rodrigo</h2><ul class="list"><li><a class="list-row" href="/monumento/145871-bonete-del-cura/" data-jcyl-id="145871"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Bonete del Cura</span></a></li></ul><h2>Herguijuela de la Sierra</h2><ul class="list"><li><a class="list-row" href="/monumento/149653-abrigo-de-las-cabras/" data-jcyl-id="149653"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Abrigo de las Cabras</span></a></li><li><a class="list-row" href="/monumento/149541-alto-de-la-mina/" data-jcyl-id="149541"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Alto de la Mina</span></a></li><li><a class="list-row" href="/monumento/149597-canchal-de-la-culebra/" data-jcyl-id="149597"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Canchal de la Culebra</span></a></li><li><a class="list-row" href="/monumento/149583-canchal-de-las-barras/" data-jcyl-id="149583"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Canchal de las Barras</span></a></li><li><a class="list-row" href="/monumento/149569-canchal-mediano/" data-jcyl-id="149569"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Canchal Mediano</span></a></li><li><a class="list-row" href="/monumento/149731-cueva-del-buitre/" data-jcyl-id="149731"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Cueva del Buitre</span></a></li><li><a class="list-row" href="/monumento/149639-francas-las/" data-jcyl-id="149639"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Francas, las</span></a></li><li><a class="list-row" href="/monumento/9212-la-pena-del-aguila/" data-jcyl-id="9212"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">La Peña del Águila</span></a></li><li><a class="list-row" href="/monumento/149625-majada-del-tio-tasio/" data-jcyl-id="149625"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Majada del Tio Tasio</span></a></li><li><a class="list-row" href="/monumento/149611-pena-merendera/" data-jcyl-id="149611"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Peña Merendera</span></a></li><li><a class="list-row" href="/monumento/149555-penas-del-horno/" data-jcyl-id="149555"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Peñas del Horno</span></a></li><li><a class="list-row" href="/monumento/149667-piedras-albas/" data-jcyl-id="149667"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Piedras Albas</span></a></li><li><a class="list-row" href="/monumento/149524-risco-de-los-altares/" data-jcyl-id="149524"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Risco de los Altares</span></a></li><li><a class="list-row" href="/monumento/149702-torrita-i-la/" data-jcyl-id="149702"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Torrita I, la</span></a></li><li><a class="list-row" href="/monumento/149717-torrita-ii-la/" data-jcyl-id="149717"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Torrita Ii, la</span></a></li></ul><h2>Hinojosa de Duero</h2><ul class="list"><li><a class="list-row" href="/monumento/149824-cabeza-de-moncalvo/" data-jcyl-id="149824"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Cabeza de Moncalvo</span></a></li><li><a class="list-row" href="/monumento/149884-pinturas-rupestres-de-la-malgarrida/" data-jcyl-id="149884"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Pinturas Rupestres de la Malgarrida</span></a></li></ul><h2>La Alberca</h2><ul class="list"><li><a class="list-row" href="/monumento/718959-abrigo-i/" data-jcyl-id="718959"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Abrigo I</span></a></li><li><a class="list-row" href="/monumento/719444-abrigo-ii/" data-jcyl-id="719444"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Abrigo Ii</span></a></li><li><a class="list-row" href="/monumento/139012-canchal-de-las-cabras-pintadas-ii/" data-jcyl-id="139012"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Canchal de las Cabras Pintadas Ii</span></a></li><li><a class="list-row" href="/monumento/138810-canchal-de-las-torres-i/" data-jcyl-id="138810"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Canchal de las Torres I</span></a></li><li><a class="list-row" href="/monumento/139102-canchal-de-las-torres-ii/" data-jcyl-id="139102"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Canchal de las Torres Ii</span></a></li><li><a class="list-row" href="/monumento/138880-canchal-de-mahoma-i/" data-jcyl-id="138880"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Canchal de Mahoma I</span></a></li><li><a class="list-row" href="/monumento/139120-canchal-de-mahoma-ii/" data-jcyl-id="139120"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Canchal de Mahoma Ii</span></a></li><li><a class="list-row" href="/monumento/139135-canchal-de-mahoma-iii/" data-jcyl-id="139135"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Canchal de Mahoma Iii</span></a></li><li><a class="list-row" href="/monumento/139150-canchal-de-mahoma-iv/" data-jcyl-id="139150"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Canchal de Mahoma Iv</span></a></li><li><a class="list-row" href="/monumento/138750-canchal-del-zarzalon-i/" data-jcyl-id="138750"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Canchal del Zarzalón I</span></a></li><li><a class="list-row" href="/monumento/138770-canchal-del-zarzalon-ii/" data-jcyl-id="138770"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Canchal del Zarzalón Ii</span></a></li><li><a class="list-row" href="/monumento/138790-canchal-del-zarzalon-iii/" data-jcyl-id="138790"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Canchal del Zarzalón Iii</span></a></li><li><a class="list-row" href="/monumento/139057-canchal-del-zarzalon-iv/" data-jcyl-id="139057"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Canchal del Zarzalón Iv</span></a></li><li><a class="list-row" href="/monumento/139087-canchal-del-zarzalon-vi/" data-jcyl-id="139087"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Canchal del Zarzalón Vi</span></a></li><li><a class="list-row" href="/monumento/138639-corral-de-morcilla/" data-jcyl-id="138639"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Corral de Morcilla</span></a></li><li><a class="list-row" href="/monumento/138617-covacho-de-pallon-el/" data-jcyl-id="138617"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Covacho de Pallón, el</span></a></li><li><a class="list-row" href="/monumento/139072-hornacina-del-zarzalon/" data-jcyl-id="139072"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Hornacina del Zarzalón</span></a></li><li><a class="list-row" href="/monumento/8551-las-batuecas-canchal-de-la-pizarra-1/" data-jcyl-id="8551"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Las Batuecas Canchal de la Pizarra 1</span></a></li><li><a class="list-row" href="/monumento/8491-las-batuecas-canchal-de-la-pizarra-2/" data-jcyl-id="8491"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Las Batuecas Canchal de la Pizarra 2</span></a></li><li><a class="list-row" href="/monumento/8495-las-batuecas-canchal-de-la-pizarra-3/" data-jcyl-id="8495"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Las Batuecas Canchal de la Pizarra 3</span></a></li><li><a class="list-row" href="/monumento/8499-las-batuecas-canchal-de-la-pizarra-4/" data-jcyl-id="8499"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Las Batuecas Canchal de la Pizarra 4</span></a></li><li><a class="list-row" href="/monumento/8503-las-batuecas-canchal-de-la-pizarra-5/" data-jcyl-id="8503"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Las Batuecas Canchal de la Pizarra 5</span></a></li><li><a class="list-row" href="/monumento/8507-las-batuecas-canchal-de-la-villita/" data-jcyl-id="8507"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Las Batuecas Canchal de la Villita</span></a></li><li><a class="list-row" href="/monumento/8527-las-batuecas-canchal-del-cristo/" data-jcyl-id="8527"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Las Batuecas Canchal del Cristo</span></a></li><li><a class="list-row" href="/monumento/8555-las-batuecas-cristo-iv-o-covachito-pequeno-cristo/" data-jcyl-id="8555"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Las Batuecas Cristo Iv O Covachito Pequeño Cristo</span></a></li><li><a class="list-row" href="/monumento/8571-las-batuecas-abriguito-del-paseo/" data-jcyl-id="8571"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Las Batuecas. Abriguito del Paseo</span></a></li><li><a class="list-row" href="/monumento/8559-las-batuecas-cristo-v-o-abrigo-bajo-del-cristo/" data-jcyl-id="8559"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Las Batuecas. Cristo V O Abrigo Bajo del Cristo</span></a></li><li><a class="list-row" href="/monumento/8563-las-batuecas-cueva-del-cristo/" data-jcyl-id="8563"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Las Batuecas. Cueva del Cristo</span></a></li><li><a class="list-row" href="/monumento/8607-las-batuecas-risco-del-ciervo/" data-jcyl-id="8607"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Las Batuecas. Risco del Ciervo</span></a></li><li><a class="list-row" href="/monumento/8567-las-batuecas-umbria-del-canchal-del-cristo/" data-jcyl-id="8567"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Las Batuecas. Umbria del Canchal del Cristo</span></a></li><li><a class="list-row" href="/monumento/138359-lera-i/" data-jcyl-id="138359"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Lera I</span></a></li><li><a class="list-row" href="/monumento/138373-lera-ii/" data-jcyl-id="138373"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Lera Ii</span></a></li><li><a class="list-row" href="/monumento/138387-lera-iii/" data-jcyl-id="138387"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Lera Iii</span></a></li><li><a class="list-row" href="/monumento/138912-majadilla-las-torres/" data-jcyl-id="138912"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Majadilla las Torres</span></a></li><li><a class="list-row" href="/monumento/138928-palla-i-la/" data-jcyl-id="138928"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Palla I, la</span></a></li><li><a class="list-row" href="/monumento/138943-palla-ii-la/" data-jcyl-id="138943"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Palla Ii, la</span></a></li></ul><h2>Pereña de la Ribera</h2><ul class="list"><li><a class="list-row" href="/monumento/9473-la-palla-rubia-pozo-de-los-humos/" data-jcyl-id="9473"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">La Palla Rubia (pozo de los Humos)</span></a></li></ul><h2>San Miguel de Valero</h2><ul class="list"><li><a class="list-row" href="/monumento/10236-castil-de-cabras-sierra-de-las-quilamas/" data-jcyl-id="10236"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Castil de Cabras. Sierra de las Quilamas</span></a></li></ul><h2>Tejeda y Segoyuela</h2><ul class="list"><li><a class="list-row" href="/monumento/159471-canchal-de-los-letreros/" data-jcyl-id="159471"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Canchal de los Letreros</span></a></li></ul><h2>Valero</h2><ul class="list"><li><a class="list-row" href="/monumento/10406-cueva-del-tio-papas/" data-jcyl-id="10406"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Cueva del Tio Papas</span></a></li><li><a class="list-row" href="/monumento/538616-hoyita-del-coscorron-i/" data-jcyl-id="538616"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Hoyita del Coscorrón, I</span></a></li><li><a class="list-row" href="/monumento/160169-hoyita-del-coscorron-ii/" data-jcyl-id="160169"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Hoyita del Coscorrón, Ii</span></a></li><li><a class="list-row" href="/monumento/160137-hoyita-del-cuervo/" data-jcyl-id="160137"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Hoyita del Cuervo</span></a></li></ul><h2>Villar de la Yegua</h2><ul class="list"><li><a class="list-row" href="/monumento/10456-la-pata-del-moro/" data-jcyl-id="10456"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">La Pata del Moro</span></a></li></ul><h2>Villavieja de Yeltes</h2><ul class="list"><li><a class="list-row" href="/monumento/864471-camino-de-los-dulces/" data-jcyl-id="864471"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Camino de los Dulces</span></a></li></ul><h2>Yecla de Yeltes</h2><ul class="list"><li><a class="list-row" href="/monumento/10544-castillo-de-yecla-la-vieja/" data-jcyl-id="10544"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🪨</span><span class="list-row-name">Castillo de Yecla la Vieja</span></a></li></ul><h2>Más de Salamanca</h2><ul class="page-links"><li><a href="/provincia/salamanca/">Todo el patrimonio de Salamanca</a> <span class="meta">229</span></li><li><a href="/provincia/salamanca/monumentos/">Monumentos</a> <span class="meta">91</span></li><li><a href="/provincia/salamanca/castillos/">Castillos</a> <span class="meta">30</span></li><li><a href="/provincia/salamanca/conjuntos-historicos/">Conjuntos históricos</a> <span class="meta">16</span></li><li><a href="/provincia/salamanca/zonas-arqueologicas/">Zonas arqueológicas</a> <span class="meta">14</span></li><li><a href="/provincia/salamanca/rollos-de-justicia/">Rollos de justicia</a> <span class="meta">6</span></li></ul><h2>Arte rupestre en otras provincias</h2><ul class="page-links"><li><a href="/provincia/burgos/arte-rupestre/">Arte rupestre en Burgos</a> <span class="meta">9</span></li><li><a href="/provincia/leon/arte-rupestre/">Arte rupestre en León</a> <span class="meta">11</span></li><li><a href="/provincia/segovia/arte-rupestre/">Arte rupestre en Segovia</a> <span class="meta">72</span></li><li><a href="/provincia/soria/arte-rupestre/">Arte rupestre en Soria</a> <span class="meta">130</span></li><li><a href="/provincia/zamora/arte-rupestre/">Arte rupestre en Zamora</a> <span class="meta">25</span></li><li><a href="/provincia/avila/arte-rupestre/">Arte rupestre en Ávila</a> <span class="meta">10</span></li></ul></div></div>
+    </aside>
+  </div>
+
+  <div id="toast"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+  <script src="i18n.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

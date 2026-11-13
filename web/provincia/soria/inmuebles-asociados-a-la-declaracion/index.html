@@ -1,0 +1,245 @@
+<!doctype html>
+<html lang="es">
+<head>
+  <meta charset="utf-8">
+  <!-- Root-relative, not absolute - resolves against whatever origin
+       actually served the page (production or make serve/localhost) and
+       keeps every relative reference (style.css, assets/*, app.js's own
+       fetch('data/...') calls) pinned to site root even once app.js starts
+       pushState-ing the address bar to /monumento/<id>-<slug>/ during live
+       browsing - without this, those fetches would resolve one directory
+       too deep and 404. Same tag scripts/build_monument_pages.py's static
+       per-monument pages already carry, for the same reason. -->
+  <base href="/">
+  <title>Inmuebles asociados a la declaración en Soria: 29 bienes protegidos - Patrimonio Abierto</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- SEO/social preview. patrimonioabierto.es appears in four places
+       below (canonical, og:url, og:image, twitter:image) - if this domain
+       ever changes again, update all four together plus the <title>/
+       og:title/og:site_name text above, or a shared link preview will
+       keep pointing at the old name/domain. -->
+  <meta name="description" content="Lista de 29 inmuebles asociados a la declaración protegidos como Bien de Interés Cultural en Soria, por municipio, con fotos libres y Wikidata.">
+  <link rel="canonical" href="https://patrimonioabierto.es/provincia/soria/inmuebles-asociados-a-la-declaracion/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="Patrimonio Abierto">
+  <meta property="og:title" content="Inmuebles asociados a la declaración en Soria: 29 bienes protegidos - Patrimonio Abierto">
+  <meta property="og:description" content="Lista de 29 inmuebles asociados a la declaración protegidos como Bien de Interés Cultural en Soria, por municipio, con fotos libres y Wikidata.">
+  <meta property="og:image" content="https://patrimonioabierto.es/assets/logo-readme.png">
+  <meta property="og:url" content="https://patrimonioabierto.es/provincia/soria/inmuebles-asociados-a-la-declaracion/">
+  <meta property="og:locale" content="es_ES">
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="Inmuebles asociados a la declaración en Soria: 29 bienes protegidos - Patrimonio Abierto">
+  <meta name="twitter:description" content="Lista de 29 inmuebles asociados a la declaración protegidos como Bien de Interés Cultural en Soria, por municipio, con fotos libres y Wikidata.">
+  <meta name="twitter:image" content="https://patrimonioabierto.es/assets/logo-readme.png">
+
+  <!-- Structured data (schema.org) for search engines - a Dataset (what
+       this project actually publishes: the merged BIC/Wikidata/Wikipedia/
+       Commons table) presented as part of a WebSite (how people reach it).
+       Doesn't change anything a visitor sees; only read by crawlers. -->
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "CollectionPage", "name": "Inmuebles asociados a la declaración en Soria", "description": "Lista de 29 inmuebles asociados a la declaración protegidos como Bien de Interés Cultural en Soria, por municipio, con fotos libres y Wikidata.", "url": "https://patrimonioabierto.es/provincia/soria/inmuebles-asociados-a-la-declaracion/", "isPartOf": {"@type": "WebSite", "name": "Patrimonio Abierto", "url": "https://patrimonioabierto.es/"}, "breadcrumb": {"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://patrimonioabierto.es/"}, {"@type": "ListItem", "position": 2, "name": "Soria", "item": "https://patrimonioabierto.es/provincia/soria/"}, {"@type": "ListItem", "position": 3, "name": "Inmuebles asociados a la declaración", "item": "https://patrimonioabierto.es/provincia/soria/inmuebles-asociados-a-la-declaracion/"}]}, "mainEntity": {"@type": "ItemList", "numberOfItems": 29, "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Dehesa de Gallinero I", "url": "https://patrimonioabierto.es/monumento/537628-dehesa-de-gallinero-i/"}, {"@type": "ListItem", "position": 2, "name": "Dehesa de Gallinero Ii", "url": "https://patrimonioabierto.es/monumento/538263-dehesa-de-gallinero-ii/"}, {"@type": "ListItem", "position": 3, "name": "El Royo", "url": "https://patrimonioabierto.es/monumento/537788-el-royo/"}, {"@type": "ListItem", "position": 4, "name": "El Salgar de Sillas", "url": "https://patrimonioabierto.es/monumento/538088-el-salgar-de-sillas/"}, {"@type": "ListItem", "position": 5, "name": "La Revilleja", "url": "https://patrimonioabierto.es/monumento/538087-la-revilleja/"}, {"@type": "ListItem", "position": 6, "name": "Los Campos Iii", "url": "https://patrimonioabierto.es/monumento/537950-los-campos-iii/"}, {"@type": "ListItem", "position": 7, "name": "Valloria I", "url": "https://patrimonioabierto.es/monumento/537646-valloria-i/"}, {"@type": "ListItem", "position": 8, "name": "Valloria Iii", "url": "https://patrimonioabierto.es/monumento/537647-valloria-iii/"}, {"@type": "ListItem", "position": 9, "name": "Valloria Iv", "url": "https://patrimonioabierto.es/monumento/537648-valloria-iv/"}, {"@type": "ListItem", "position": 10, "name": "La Losa I", "url": "https://patrimonioabierto.es/monumento/538089-la-losa-i/"}, {"@type": "ListItem", "position": 11, "name": "La Losa Ii", "url": "https://patrimonioabierto.es/monumento/538090-la-losa-ii/"}, {"@type": "ListItem", "position": 12, "name": "Las Adoberas", "url": "https://patrimonioabierto.es/monumento/537641-las-adoberas/"}, {"@type": "ListItem", "position": 13, "name": "Las Costanillas", "url": "https://patrimonioabierto.es/monumento/538092-las-costanillas/"}, {"@type": "ListItem", "position": 14, "name": "San Roque", "url": "https://patrimonioabierto.es/monumento/537640-san-roque/"}, {"@type": "ListItem", "position": 15, "name": "Los Tormos", "url": "https://patrimonioabierto.es/monumento/538094-los-tormos/"}, {"@type": "ListItem", "position": 16, "name": "Santa Cruz de Yanguas", "url": "https://patrimonioabierto.es/monumento/537639-santa-cruz-de-yanguas/"}, {"@type": "ListItem", "position": 17, "name": "El Corral de la Peña", "url": "https://patrimonioabierto.es/monumento/537638-el-corral-de-la-pena/"}, {"@type": "ListItem", "position": 18, "name": "El Frontal", "url": "https://patrimonioabierto.es/monumento/537786-el-frontal/"}, {"@type": "ListItem", "position": 19, "name": "Fuente Lacorte", "url": "https://patrimonioabierto.es/monumento/537671-fuente-lacorte/"}, {"@type": "ListItem", "position": 20, "name": "Fuentesalvo", "url": "https://patrimonioabierto.es/monumento/537790-fuentesalvo/"}, {"@type": "ListItem", "position": 21, "name": "La Dehesa", "url": "https://patrimonioabierto.es/monumento/537645-la-dehesa/"}, {"@type": "ListItem", "position": 22, "name": "La Laguna I", "url": "https://patrimonioabierto.es/monumento/537782-la-laguna-i/"}, {"@type": "ListItem", "position": 23, "name": "La Matecasa", "url": "https://patrimonioabierto.es/monumento/537589-la-matecasa/"}, {"@type": "ListItem", "position": 24, "name": "La Peña", "url": "https://patrimonioabierto.es/monumento/537642-la-pena/"}, {"@type": "ListItem", "position": 25, "name": "Las Palomeras", "url": "https://patrimonioabierto.es/monumento/538093-las-palomeras/"}, {"@type": "ListItem", "position": 26, "name": "Santa Cristina", "url": "https://patrimonioabierto.es/monumento/537644-santa-cristina/"}, {"@type": "ListItem", "position": 27, "name": "Serrantes I", "url": "https://patrimonioabierto.es/monumento/538095-serrantes-i/"}, {"@type": "ListItem", "position": 28, "name": "Villaseca 32", "url": "https://patrimonioabierto.es/monumento/537933-villaseca-32/"}, {"@type": "ListItem", "position": 29, "name": "El Majadal", "url": "https://patrimonioabierto.es/monumento/537787-el-majadal/"}]}}</script>
+
+  <!-- Same mark as #logo-mark/#loading-logo/#welcome-logo (assets/logo.png)
+       - just square and on a solid brand-purple backing (same purple as
+       logo-readme.png's own README treatment), since a browser tab is
+       usually light or dark, not the purple header bar this logo is
+       normally drawn against - its white linework would go near-invisible
+       on a plain white tab background otherwise. -->
+  <link rel="icon" type="image/png" href="assets/favicon.png">
+  <link rel="apple-touch-icon" href="assets/apple-touch-icon.png">
+  <!-- Fraunces/Inter used to load from Google Fonts - self-hosted instead
+       (see the @font-face block at the top of style.css) so a visitor's
+       browser never has to talk to fonts.gstatic.com at all: no third-
+       party request, no IP address leaving this site's own domain, one
+       less thing for the Privacidad page to have to disclose. -->
+  <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
+  <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
+  <link rel="stylesheet" href="style.css" />
+  <!-- Without JavaScript nothing ever dismisses the loading screen or the
+       welcome dialog, so they would cover the page's static content (the
+       per-monument pages carry real text and links in the HTML) forever. -->
+  <noscript><style>#loading-screen, #welcome-modal { display: none !important; }</style></noscript>
+</head>
+<body>
+  <!-- The very first focusable thing on the page, on purpose - a classic
+       "skip link", invisible until it actually receives keyboard focus (see
+       .skip-link CSS). The visible 📋 button/menu entry that used to sit
+       next to this got removed (redundant with search/map for anyone
+       clicking around) - this is now the only way into showListPanel(),
+       which is fine: it's aimed squarely at whoever can't/doesn't want to
+       drive the map, and reaches the same panel in a single Tab press from
+       anywhere, before the loading screen, the header, anything - no
+       fishing for a small icon first. -->
+  <a href="#" id="skip-to-list-link" class="skip-link" data-i18n="list.skip_link">Ir directamente a la lista de monumentos</a>
+
+  <!-- First paint, before app.js even runs: the dataset is ~2MB, worth
+       covering with something branded rather than a blank page while it
+       loads. Spanish text is hardcoded as the real initial content (not an
+       empty data-i18n placeholder) since the app always starts in 'es' -
+       applyStaticI18n() just re-confirms it once JS runs. -->
+  <div id="loading-screen">
+    <img src="assets/logo.png" alt="" id="loading-logo">
+    <div id="loading-spinner" aria-hidden="true"></div>
+    <p data-i18n="loading.screen">Cargando el catálogo…</p>
+  </div>
+
+  <!-- Shown once per browser (localStorage flag, see app.js), after the
+       data has loaded - not on top of a deep link (?id=/?muni=/?prov=/#...),
+       since someone arriving at a specific monument already knows what
+       they're looking at. -->
+  <div id="welcome-modal">
+    <div id="welcome-card">
+      <div id="welcome-logo-badge"><img src="assets/logo.png" alt="" id="welcome-logo"></div>
+      <h2 data-i18n="welcome.title">Bienvenido a Patrimonio Abierto</h2>
+      <p data-i18n="welcome.body">Aquí encontrarás todos los Bienes de Interés Cultural (BIC) declarados oficialmente en Castilla y León, junto con información y material multimedia de Wikidata, Wikipedia y Wikimedia Commons. Un proyecto libre, sin cuentas ni anuncios.</p>
+      <!-- Plain links into the per-province pages, so the homepage - and every
+           page built from this shell - leads a crawler to them. -->
+      <nav id="welcome-provinces" aria-label="Provincias"><span data-i18n="welcome.provinces">Explorar por provincia:</span>
+        <a href="/provincia/avila/">Ávila</a> <a href="/provincia/burgos/">Burgos</a> <a href="/provincia/leon/">León</a>
+        <a href="/provincia/palencia/">Palencia</a> <a href="/provincia/salamanca/">Salamanca</a> <a href="/provincia/segovia/">Segovia</a>
+        <a href="/provincia/soria/">Soria</a> <a href="/provincia/valladolid/">Valladolid</a> <a href="/provincia/zamora/">Zamora</a></nav>
+      <button type="button" id="welcome-close-btn" data-i18n="welcome.cta">Empezar a explorar</button>
+      <a href="#" id="welcome-about-link" data-i18n="welcome.about_link">Más sobre el proyecto</a>
+    </div>
+  </div>
+
+  <header id="topbar">
+    <!-- Real link (not a <span>/<button>) - see wireSpaLink() in app.js:
+         hovering shows the URL, right-click/ctrl-click/middle-click all do
+         a real navigation back to the plain map, and a normal click gets
+         the instant in-app close instead of a reload. -->
+    <a class="brand" href="." id="brand-link"><img src="assets/logo.png" alt="" id="logo-mark">Patrimonio Abierto</a>
+
+    <!-- Mobile only (see CSS) - collapses #search-wrap to just this icon
+         until tapped, so the default header stays one compact row instead
+         of permanently reserving a full second row for it. -->
+    <!-- Inline SVG, not the 🔍 emoji this used to be - emoji glyphs are
+         drawn by the OS's own emoji font, whose vertical metrics vary
+         enough between Apple/Noto/Samsung's color-emoji sets that it never
+         sat quite centered in this small round button on mobile. An SVG
+         with stroke="currentColor" sits exactly where the viewBox puts it,
+         on every platform, and inherits the button's own (white) color. -->
+    <button type="button" id="search-toggle-btn" data-i18n-title="search.placeholder" aria-label="Search">
+      <svg viewBox="0 0 24 24" width="25" height="25" aria-hidden="true" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="7"/><line x1="21" y1="21" x2="16.65" y2="16.65"/></svg>
+    </button>
+
+    <div id="search-wrap">
+      <input type="text" id="search-input" autocomplete="off" data-i18n-placeholder="search.placeholder" />
+      <button type="button" id="search-close-btn" aria-label="Close search">✕</button>
+      <div id="search-results"></div>
+    </div>
+
+    <!-- Estadísticas/Acerca de/Cómo contribuir/language all live behind
+         this on every screen size now, not just mobile - see showMenuPanel()
+         in app.js. Keeps the header down to logo + search everywhere. -->
+    <button type="button" id="menu-btn" data-i18n-title="menu.button_title" aria-label="Menu">☰</button>
+  </header>
+
+  <div id="app">
+    <!-- map-wrap, not #app, is what #legend/#locate-btn anchor to - #app
+         spans the map AND the panel side-by-side, so anchoring to it means
+         "right: 16px" measures from the panel's edge once it's open, not
+         the map's. map-wrap always matches the map's own visible area. -->
+    <div id="map-wrap">
+      <div id="map"></div>
+
+      <!-- data-i18n-tooltip, not data-i18n-title: see applyStaticI18n() in
+           i18n.js - feeds style.css's [data-i18n-tooltip]::after desktop
+           label instead of the browser's own native title tooltip. -->
+      <button type="button" id="shuffle-btn" data-i18n-tooltip="shuffle.button_title" aria-label="Random monument">🎲</button>
+      <!-- Same blue dot/white ring as .you-are-here-dot below (the marker
+           this button actually places on the map once located), plus the
+           same soft outer halo that marker's ::after ring gives it - a bare
+           dot read as flat next to that; the halo is what actually makes it
+           recognizable as "the Google Maps blue dot" at a glance. Fixed
+           colors, not currentColor, so the button previews what pressing it
+           does regardless of button state. Replaces the 🎯 target emoji,
+           which read as "aim/select a spot" rather than "find me". -->
+      <button type="button" id="locate-btn" data-i18n-tooltip="geolocation.button_title" aria-label="Locate me">
+        <svg viewBox="0 0 24 24" width="22" height="22" aria-hidden="true">
+          <circle cx="12" cy="12" r="10" fill="#2a6fbb" opacity="0.18"/>
+          <circle cx="12" cy="12" r="7" fill="#2a6fbb" stroke="white" stroke-width="2.5"/>
+        </svg>
+      </button>
+
+      <!-- Filter button + its dropdown card, same anchor-to-map-wrap /
+           click-outside-closes pattern as #search-results. Row list itself
+           is built in app.js from whatever categories actually appear in
+           the dataset, not hardcoded here. -->
+      <!-- "Tune" icon, same slider-control metaphor as Google Maps' own
+           filter button, but the previous pass (thin currentColor lines +
+           tiny colored dots) still read as mostly monochrome - color was
+           only in three small accents, not the icon itself. This flips
+           that: three bold colored capsule tracks (teal/blue/terracotta -
+           NOT purple, which is #filter-btn.active's own background and
+           would nearly vanish against it, the same reasoning the earlier
+           solid-funnel pass already used) each with a white handle. Color
+           now carries real visual weight instead of being a detail on top
+           of black lines, and the white handles keep it legible on both
+           the idle white background and the active purple one. -->
+      <button type="button" id="filter-btn" data-i18n-tooltip="filter.button_title" aria-label="Filter">
+        <svg viewBox="0 0 24 24" width="20" height="20" aria-hidden="true">
+          <rect x="3" y="4.5" width="18" height="3" rx="1.5" fill="#1c8a6d"/>
+          <circle cx="9" cy="6" r="3" fill="white" stroke="#1c8a6d" stroke-width="1.5"/>
+          <rect x="3" y="10.5" width="18" height="3" rx="1.5" fill="#2a6fbb"/>
+          <circle cx="16" cy="12" r="3" fill="white" stroke="#2a6fbb" stroke-width="1.5"/>
+          <rect x="3" y="16.5" width="18" height="3" rx="1.5" fill="#c2703d"/>
+          <circle cx="11" cy="18" r="3" fill="white" stroke="#c2703d" stroke-width="1.5"/>
+        </svg>
+        <span id="filter-badge" class="filter-badge" hidden></span>
+      </button>
+      <div id="filter-panel">
+        <!-- "Estado" - orthogonal to category, AND-combined with it: a
+             record must match the selected categories AND (no status box
+             checked, or at least one checked status). Only 2 rows, so no
+             Todo/Ninguno shortcuts needed the way the longer category list
+             has. -->
+        <div class="filter-section-label" data-i18n="filter.status_title">Estado</div>
+        <div id="filter-status-list"></div>
+
+        <div id="filter-panel-header">
+          <span data-i18n="filter.title">Categorías</span>
+          <div id="filter-panel-actions">
+            <button type="button" id="filter-all-btn" data-i18n="filter.all">Todo</button>
+            <button type="button" id="filter-none-btn" data-i18n="filter.none">Ninguno</button>
+          </div>
+        </div>
+        <div id="filter-list"></div>
+      </div>
+
+      <!-- Desktop-only (hidden <=768px, see style.css) - a rotating
+           highlight card, one photo picked deterministically per ISO week
+           from web/data/picture_of_the_week.json (see find_good_pictures.py)
+           so it changes weekly with no server/build step involved, and
+           stays identical for every visitor that same week. Hidden
+           entirely (not just empty) whenever that pool is empty. -->
+      <div id="potw" hidden></div>
+
+      <!-- Slim, always-on call-to-action strip (both mobile and desktop) -
+           shown whenever the map itself is in view (panel closed), unlike
+           #potw above it has no dismiss state of its own: see app.js for
+           why the two are kept independent. Real <a>, not a <button> - see
+           wireSpaLink()'s own comment: hover/right-click/ctrl-click should
+           all behave like the real link to /contribute/ that this is. -->
+      <a href="/contribute/" id="contribute-bar" hidden>
+        <span class="contribute-bar-text-full" data-i18n="contribute_bar.text"></span>
+        <span class="contribute-bar-text-short" data-i18n="contribute_bar.text_short"></span>
+      </a>
+    </div>
+
+    <aside id="panel" class="open">
+      <div id="panel-handle"></div>
+      <button id="panel-close" aria-label="Cerrar">✕</button>
+      <div id="panel-content" data-static-province="Soria" data-static-category="INMUEBLES ASOCIADOS A LA DECLARACIÓN"><div class="hero hero-fallback"><div class="hero-placeholder-icon">🗺️</div><div class="hero-scrim"><div class="hero-kicker">🔗 Inmuebles asociados a la declaración</div><h1 class="hero-title">Inmuebles asociados a la declaración en Soria</h1></div></div><div class="panel-body"><nav class="crumbs" aria-label="Migas de pan"><a href="/">Inicio</a> <span aria-hidden="true">›</span> <a href="/provincia/soria/">Soria</a> <span aria-hidden="true">›</span> <span aria-current="page">Inmuebles asociados a la declaración</span></nav><div class="meta">29 bienes · 7 municipios</div><p class="summary">29 inmuebles asociados a la declaración protegidos como Bien de Interés Cultural en la provincia de Soria, en 7 municipios, según el catálogo oficial de la Junta de Castilla y León. Solo uno tiene fotografía libre en Wikimedia Commons; 6 están enlazados a Wikidata. Aún faltan fotografías libres de 28. Villar del Río reúne 12 de ellos.</p><h2>Almarza</h2><ul class="list"><li><a class="list-row" href="/monumento/537628-dehesa-de-gallinero-i/" data-jcyl-id="537628"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🔗</span><span class="list-row-name">Dehesa de Gallinero I</span></a></li><li><a class="list-row" href="/monumento/538263-dehesa-de-gallinero-ii/" data-jcyl-id="538263"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🔗</span><span class="list-row-name">Dehesa de Gallinero Ii</span></a></li></ul><h2>El Royo</h2><ul class="list"><li><a class="list-row" href="/monumento/537788-el-royo/" data-jcyl-id="537788"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🔗</span><span class="list-row-name">El Royo</span></a></li></ul><h2>Las Aldehuelas</h2><ul class="list"><li><a class="list-row" href="/monumento/538088-el-salgar-de-sillas/" data-jcyl-id="538088"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🔗</span><span class="list-row-name">El Salgar de Sillas</span></a></li><li><a class="list-row" href="/monumento/538087-la-revilleja/" data-jcyl-id="538087"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🔗</span><span class="list-row-name">La Revilleja</span></a></li><li><a class="list-row" href="/monumento/537950-los-campos-iii/" data-jcyl-id="537950"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🔗</span><span class="list-row-name">Los Campos Iii</span></a></li><li><a class="list-row" href="/monumento/537646-valloria-i/" data-jcyl-id="537646"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🔗</span><span class="list-row-name">Valloria I</span></a></li><li><a class="list-row" href="/monumento/537647-valloria-iii/" data-jcyl-id="537647"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🔗</span><span class="list-row-name">Valloria Iii</span></a></li><li><a class="list-row" href="/monumento/537648-valloria-iv/" data-jcyl-id="537648"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🔗</span><span class="list-row-name">Valloria Iv</span></a></li></ul><h2>San Pedro Manrique</h2><ul class="list"><li><a class="list-row" href="/monumento/538089-la-losa-i/" data-jcyl-id="538089"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🔗</span><span class="list-row-name">La Losa I</span></a></li><li><a class="list-row" href="/monumento/538090-la-losa-ii/" data-jcyl-id="538090"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🔗</span><span class="list-row-name">La Losa Ii</span></a></li><li><a class="list-row" href="/monumento/537641-las-adoberas/" data-jcyl-id="537641"><img class="list-row-thumb" src="https://commons.wikimedia.org/wiki/Special:FilePath/Yacimiento%20de%20icnitas%20de%20Las%20Adoberas%2C%20en%20Matasej%C3%BAn.jpg?width=64" alt="" loading="lazy"><span class="list-row-name">Las Adoberas</span></a></li><li><a class="list-row" href="/monumento/538092-las-costanillas/" data-jcyl-id="538092"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🔗</span><span class="list-row-name">Las Costanillas</span></a></li><li><a class="list-row" href="/monumento/537640-san-roque/" data-jcyl-id="537640"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🔗</span><span class="list-row-name">San Roque</span></a></li></ul><h2>Santa Cruz de Yanguas</h2><ul class="list"><li><a class="list-row" href="/monumento/538094-los-tormos/" data-jcyl-id="538094"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🔗</span><span class="list-row-name">Los Tormos</span></a></li><li><a class="list-row" href="/monumento/537639-santa-cruz-de-yanguas/" data-jcyl-id="537639"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🔗</span><span class="list-row-name">Santa Cruz de Yanguas</span></a></li></ul><h2>Villar del Río</h2><ul class="list"><li><a class="list-row" href="/monumento/537638-el-corral-de-la-pena/" data-jcyl-id="537638"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🔗</span><span class="list-row-name">El Corral de la Peña</span></a></li><li><a class="list-row" href="/monumento/537786-el-frontal/" data-jcyl-id="537786"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🔗</span><span class="list-row-name">El Frontal</span></a></li><li><a class="list-row" href="/monumento/537671-fuente-lacorte/" data-jcyl-id="537671"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🔗</span><span class="list-row-name">Fuente Lacorte</span></a></li><li><a class="list-row" href="/monumento/537790-fuentesalvo/" data-jcyl-id="537790"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🔗</span><span class="list-row-name">Fuentesalvo</span></a></li><li><a class="list-row" href="/monumento/537645-la-dehesa/" data-jcyl-id="537645"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🔗</span><span class="list-row-name">La Dehesa</span></a></li><li><a class="list-row" href="/monumento/537782-la-laguna-i/" data-jcyl-id="537782"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🔗</span><span class="list-row-name">La Laguna I</span></a></li><li><a class="list-row" href="/monumento/537589-la-matecasa/" data-jcyl-id="537589"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🔗</span><span class="list-row-name">La Matecasa</span></a></li><li><a class="list-row" href="/monumento/537642-la-pena/" data-jcyl-id="537642"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🔗</span><span class="list-row-name">La Peña</span></a></li><li><a class="list-row" href="/monumento/538093-las-palomeras/" data-jcyl-id="538093"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🔗</span><span class="list-row-name">Las Palomeras</span></a></li><li><a class="list-row" href="/monumento/537644-santa-cristina/" data-jcyl-id="537644"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🔗</span><span class="list-row-name">Santa Cristina</span></a></li><li><a class="list-row" href="/monumento/538095-serrantes-i/" data-jcyl-id="538095"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🔗</span><span class="list-row-name">Serrantes I</span></a></li><li><a class="list-row" href="/monumento/537933-villaseca-32/" data-jcyl-id="537933"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🔗</span><span class="list-row-name">Villaseca 32</span></a></li></ul><h2>Yanguas</h2><ul class="list"><li><a class="list-row" href="/monumento/537787-el-majadal/" data-jcyl-id="537787"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🔗</span><span class="list-row-name">El Majadal</span></a></li></ul><h2>Más de Soria</h2><ul class="page-links"><li><a href="/provincia/soria/">Todo el patrimonio de Soria</a> <span class="meta">372</span></li><li><a href="/provincia/soria/arte-rupestre/">Arte rupestre</a> <span class="meta">130</span></li><li><a href="/provincia/soria/monumentos/">Monumentos</a> <span class="meta">90</span></li><li><a href="/provincia/soria/castillos/">Castillos</a> <span class="meta">65</span></li><li><a href="/provincia/soria/rollos-de-justicia/">Rollos de justicia</a> <span class="meta">24</span></li><li><a href="/provincia/soria/zonas-arqueologicas/">Zonas arqueológicas</a> <span class="meta">18</span></li><li><a href="/provincia/soria/conjuntos-historicos/">Conjuntos históricos</a> <span class="meta">13</span></li></ul><h2>Inmuebles asociados a la declaración en otras provincias</h2><ul class="page-links"><li><a href="/provincia/burgos/inmuebles-asociados-a-la-declaracion/">Inmuebles asociados a la declaración en Burgos</a> <span class="meta">17</span></li><li><a href="/provincia/palencia/inmuebles-asociados-a-la-declaracion/">Inmuebles asociados a la declaración en Palencia</a> <span class="meta">115</span></li><li><a href="/provincia/valladolid/inmuebles-asociados-a-la-declaracion/">Inmuebles asociados a la declaración en Valladolid</a> <span class="meta">22</span></li></ul></div></div>
+    </aside>
+  </div>
+
+  <div id="toast"></div>
+
+  <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+  <script src="https://unpkg.com/leaflet.markercluster@1.5.3/dist/leaflet.markercluster.js"></script>
+  <script src="i18n.js"></script>
+  <script src="app.js"></script>
+</body>
+</html>

@@ -11,7 +11,7 @@
        too deep and 404. Same tag scripts/build_monument_pages.py's static
        per-monument pages already carry, for the same reason. -->
   <base href="/">
-  <title>Arqueta de Carravacas - Patrimonio Abierto</title>
+  <title>Arqueta de Carravacas, Frómista (Palencia) - Patrimonio Abierto</title>
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
   <!-- SEO/social preview. patrimonioabierto.es appears in four places
@@ -19,25 +19,25 @@
        ever changes again, update all four together plus the <title>/
        og:title/og:site_name text above, or a shared link preview will
        keep pointing at the old name/domain. -->
-  <meta name="description" content="Arqueta de Carravacas, Inmuebles Asociados A La Declaración en Frómista (Palencia), Bien de Interés Cultural de Castilla y León.">
+  <meta name="description" content="Arqueta de Carravacas, inmueble asociado a una declaración de BIC en Frómista (Palencia). Ficha con datos oficiales, Wikidata y fotos libres.">
   <link rel="canonical" href="https://patrimonioabierto.es/monumento/7165-arqueta-de-carravacas/">
   <meta property="og:type" content="website">
   <meta property="og:site_name" content="Patrimonio Abierto">
-  <meta property="og:title" content="Arqueta de Carravacas - Patrimonio Abierto">
-  <meta property="og:description" content="Arqueta de Carravacas, Inmuebles Asociados A La Declaración en Frómista (Palencia), Bien de Interés Cultural de Castilla y León.">
+  <meta property="og:title" content="Arqueta de Carravacas, Frómista (Palencia) - Patrimonio Abierto">
+  <meta property="og:description" content="Arqueta de Carravacas, inmueble asociado a una declaración de BIC en Frómista (Palencia). Ficha con datos oficiales, Wikidata y fotos libres.">
   <meta property="og:image" content="https://patrimonioabierto.es/assets/logo-readme.png">
   <meta property="og:url" content="https://patrimonioabierto.es/monumento/7165-arqueta-de-carravacas/">
   <meta property="og:locale" content="es_ES">
   <meta name="twitter:card" content="summary_large_image">
-  <meta name="twitter:title" content="Arqueta de Carravacas - Patrimonio Abierto">
-  <meta name="twitter:description" content="Arqueta de Carravacas, Inmuebles Asociados A La Declaración en Frómista (Palencia), Bien de Interés Cultural de Castilla y León.">
+  <meta name="twitter:title" content="Arqueta de Carravacas, Frómista (Palencia) - Patrimonio Abierto">
+  <meta name="twitter:description" content="Arqueta de Carravacas, inmueble asociado a una declaración de BIC en Frómista (Palencia). Ficha con datos oficiales, Wikidata y fotos libres.">
   <meta name="twitter:image" content="https://patrimonioabierto.es/assets/logo-readme.png">
 
   <!-- Structured data (schema.org) for search engines - a Dataset (what
        this project actually publishes: the merged BIC/Wikidata/Wikipedia/
        Commons table) presented as part of a WebSite (how people reach it).
        Doesn't change anything a visitor sees; only read by crawlers. -->
-  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LandmarkOrHistoricalBuilding", "name": "Arqueta de Carravacas", "description": "Arqueta de Carravacas, Inmuebles Asociados A La Declaración en Frómista (Palencia), Bien de Interés Cultural de Castilla y León.", "url": "https://patrimonioabierto.es/monumento/7165-arqueta-de-carravacas/", "address": {"@type": "PostalAddress", "addressLocality": "Frómista", "addressRegion": "Palencia", "addressCountry": "ES"}, "geo": {"@type": "GeoCoordinates", "latitude": 42.232, "longitude": -4.43176}, "isPartOf": {"@type": "WebSite", "name": "Patrimonio Abierto", "url": "https://patrimonioabierto.es/"}}</script>
+  <script type="application/ld+json">{"@context": "https://schema.org", "@type": "LandmarkOrHistoricalBuilding", "name": "Arqueta de Carravacas", "description": "Arqueta de Carravacas, inmueble asociado a una declaración de BIC en Frómista (Palencia). Ficha con datos oficiales, Wikidata y fotos libres.", "url": "https://patrimonioabierto.es/monumento/7165-arqueta-de-carravacas/", "address": {"@type": "PostalAddress", "addressLocality": "Frómista", "addressRegion": "Palencia", "addressCountry": "ES"}, "geo": {"@type": "GeoCoordinates", "latitude": 42.232, "longitude": -4.43176}, "isPartOf": {"@type": "WebSite", "name": "Patrimonio Abierto", "url": "https://patrimonioabierto.es/"}}</script><script type="application/ld+json">{"@context": "https://schema.org", "@type": "BreadcrumbList", "itemListElement": [{"@type": "ListItem", "position": 1, "name": "Inicio", "item": "https://patrimonioabierto.es/"}, {"@type": "ListItem", "position": 2, "name": "Palencia", "item": "https://patrimonioabierto.es/provincia/palencia/"}, {"@type": "ListItem", "position": 3, "name": "Inmuebles asociados a la declaración", "item": "https://patrimonioabierto.es/provincia/palencia/inmuebles-asociados-a-la-declaracion/"}, {"@type": "ListItem", "position": 4, "name": "Arqueta de Carravacas", "item": "https://patrimonioabierto.es/monumento/7165-arqueta-de-carravacas/"}]}</script>
 
   <!-- Same mark as #logo-mark/#loading-logo/#welcome-logo (assets/logo.png)
        - just square and on a solid brand-purple backing (same purple as
@@ -56,6 +56,10 @@
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.css" />
   <link rel="stylesheet" href="https://unpkg.com/leaflet.markercluster@1.5.3/dist/MarkerCluster.Default.css" />
   <link rel="stylesheet" href="style.css" />
+  <!-- Without JavaScript nothing ever dismisses the loading screen or the
+       welcome dialog, so they would cover the page's static content (the
+       per-monument pages carry real text and links in the HTML) forever. -->
+  <noscript><style>#loading-screen, #welcome-modal { display: none !important; }</style></noscript>
 </head>
 <body>
   <!-- The very first focusable thing on the page, on purpose - a classic
@@ -89,6 +93,12 @@
       <div id="welcome-logo-badge"><img src="assets/logo.png" alt="" id="welcome-logo"></div>
       <h2 data-i18n="welcome.title">Bienvenido a Patrimonio Abierto</h2>
       <p data-i18n="welcome.body">Aquí encontrarás todos los Bienes de Interés Cultural (BIC) declarados oficialmente en Castilla y León, junto con información y material multimedia de Wikidata, Wikipedia y Wikimedia Commons. Un proyecto libre, sin cuentas ni anuncios.</p>
+      <!-- Plain links into the per-province pages, so the homepage - and every
+           page built from this shell - leads a crawler to them. -->
+      <nav id="welcome-provinces" aria-label="Provincias"><span data-i18n="welcome.provinces">Explorar por provincia:</span>
+        <a href="/provincia/avila/">Ávila</a> <a href="/provincia/burgos/">Burgos</a> <a href="/provincia/leon/">León</a>
+        <a href="/provincia/palencia/">Palencia</a> <a href="/provincia/salamanca/">Salamanca</a> <a href="/provincia/segovia/">Segovia</a>
+        <a href="/provincia/soria/">Soria</a> <a href="/provincia/valladolid/">Valladolid</a> <a href="/provincia/zamora/">Zamora</a></nav>
       <button type="button" id="welcome-close-btn" data-i18n="welcome.cta">Empezar a explorar</button>
       <a href="#" id="welcome-about-link" data-i18n="welcome.about_link">Más sobre el proyecto</a>
     </div>
@@ -221,7 +231,7 @@
     <aside id="panel" class="open">
       <div id="panel-handle"></div>
       <button id="panel-close" aria-label="Cerrar">✕</button>
-      <div id="panel-content"><div class="hero hero-fallback"><div class="hero-placeholder-icon">🔗</div><div class="hero-scrim"><div class="hero-kicker">🔗 INMUEBLES ASOCIADOS A LA DECLARACIÓN</div><h2 class="hero-title">Arqueta de Carravacas</h2></div></div><div class="panel-body"><div class="meta">Frómista · Palencia</div><div class="missing-note">Sin enlazar a Wikidata todavía.</div><div class="link-badges"><a class="badge jcyl" href="https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=7165" target="_blank" rel="noopener">📄 Ficha JCyL</a></div></div></div>
+      <div id="panel-content"><div class="hero hero-fallback"><div class="hero-placeholder-icon">🔗</div><div class="hero-scrim"><div class="hero-kicker">🔗 INMUEBLES ASOCIADOS A LA DECLARACIÓN</div><h1 class="hero-title">Arqueta de Carravacas</h1></div></div><div class="panel-body"><nav class="crumbs" aria-label="Migas de pan"><a href="/">Inicio</a> <span aria-hidden="true">›</span> <a href="/provincia/palencia/">Palencia</a> <span aria-hidden="true">›</span> <a href="/provincia/palencia/inmuebles-asociados-a-la-declaracion/">Inmuebles asociados a la declaración</a> <span aria-hidden="true">›</span> <span aria-current="page">Arqueta de Carravacas</span></nav><div class="meta">Frómista · Palencia</div><p class="summary">Arqueta de Carravacas es un bien protegido de la categoría «inmueble asociado a una declaración de BIC» situado en Frómista, provincia de Palencia, en Castilla y León.</p><div class="missing-note">Sin enlazar a Wikidata todavía.</div><div class="link-badges"><a class="badge jcyl" href="https://servicios.jcyl.es/pweb/datosGIS.do?tipo=inmueble&numero=7165" target="_blank" rel="noopener">📄 Ficha JCyL</a></div><h3>Cerca de aquí</h3><ul class="list"><li><a class="list-row" href="/monumento/7796-puente-de-pina/" data-jcyl-id="7796"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🔗</span><span class="list-row-name">Puente de Piña</span><span class="list-row-stat">1,5 km</span></a></li><li><a class="list-row" href="/monumento/7175-canal-de-castilla-acueducto-de-ucieza/" data-jcyl-id="7175"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🔗</span><span class="list-row-name">Canal de Castilla: Acueducto de Ucieza</span><span class="list-row-stat">1,6 km</span></a></li><li><a class="list-row" href="/monumento/7786-canal-de-castilla-acueducto-de-val/" data-jcyl-id="7786"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🔗</span><span class="list-row-name">Canal de Castilla: Acueducto de Val</span><span class="list-row-stat">1,8 km</span></a></li><li><a class="list-row" href="/monumento/7781-arqueta-de-fuentemanias/" data-jcyl-id="7781"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🔗</span><span class="list-row-name">Arqueta de Fuentemanias</span><span class="list-row-stat">1,9 km</span></a></li><li><a class="list-row" href="/monumento/7219-canal-de-castilla-esclusa-21-ramal-norte/" data-jcyl-id="7219"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🔗</span><span class="list-row-name">Canal de Castilla: Esclusa 21 Ramal Norte</span><span class="list-row-stat">2,5 km</span></a></li><li><a class="list-row" href="/monumento/7214-puente-del-ferrocarril/" data-jcyl-id="7214"><span class="list-row-icon no-photo" role="img" aria-label="Sin foto libre">🔗</span><span class="list-row-name">Puente del Ferrocarril</span><span class="list-row-stat">4,1 km</span></a></li></ul></div></div>
     </aside>
   </div>
 
