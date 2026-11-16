@@ -65,6 +65,14 @@ fi
 echo "[$(date -Is)] make wiki-extracts"
 make wiki-extracts
 
+# Emblems (coat of arms, flag) hardly ever change: weekly is plenty. Two
+# queries. It keeps the last good file if Wikidata misbehaves, so a failure
+# here must not stop the refresh.
+if [ "$(date +%u)" = "7" ]; then
+  echo "[$(date -Is)] make emblems"
+  make emblems || echo "[$(date -Is)] make emblems failed - keeping the existing web/data/emblems.json" >&2
+fi
+
 echo "[$(date -Is)] make monument-pages"
 make monument-pages
 

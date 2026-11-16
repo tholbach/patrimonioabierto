@@ -25,6 +25,7 @@ than blended into one call:
 ## Pipeline
 
 ```
+make emblems         # scripts/fetch_emblems.py -> web/data/emblems.json (coat of arms + flag per municipality/province; weekly)
 make fetch           # scripts/fetch_jcyl.py + fetch_wikidata.py + fetch_wikidata_labels.py -> data/raw/*.json
 make build           # scripts/build_dataset.py -> web/data/cyl_monuments_wikidata.json
 make wiki-extracts    # scripts/fetch_wikipedia_extracts.py -> data/raw/wikipedia_extracts.json (optional, feeds monument-pages)
