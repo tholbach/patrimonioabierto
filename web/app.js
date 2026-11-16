@@ -971,7 +971,14 @@ function bodyMetaLine(record) {
   // the province in what a crawler that runs the script ends up with. A plain
   // click opens the in-app province panel instead (the handler below).
   const province = `<a class="meta-link" href="/provincia/${slugify(record.province)}/" data-province="${record.province}">${record.province}</a>`;
-  let line = `${record.municipality} · ${province}`;
+  // Same for the municipality: it has no page of its own, so the href is the
+  // app's own ?muni= deep link (municipalityShareUrl()), and a plain click
+  // opens its panel in place (the handler below).
+  const ine = record.municipality_ine_code_p772;
+  const municipality = ine
+    ? `<a class="meta-link" href="/?muni=${encodeURIComponent(ine)}" data-muni="${ine}">${record.municipality}</a>`
+    : record.municipality;
+  let line = `${municipality} · ${province}`;
   if (record.protection_date) {
     line += ` · ${t('protection.since')} ${record.protection_date}`;
   }
@@ -2674,6 +2681,15 @@ function selectOnlyCategory(category) {
 }
 
 panelContentEl.addEventListener('click', (e) => {
+  const muniLink = e.target.closest('a[data-muni]');
+  if (muniLink && e.button === 0 && !(e.metaKey || e.ctrlKey || e.shiftKey || e.altKey)) {
+    const muni = allMunicipalities.find((m) => m.ine_code_p772 === muniLink.dataset.muni);
+    if (muni) {
+      e.preventDefault();
+      showMunicipalityPanel(muni, { flyTo: true });
+    }
+    return;
+  }
   const link = e.target.closest('a[data-province]');
   if (!link || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
   const prov = allProvinces.find((p) => p.name === link.dataset.province);
