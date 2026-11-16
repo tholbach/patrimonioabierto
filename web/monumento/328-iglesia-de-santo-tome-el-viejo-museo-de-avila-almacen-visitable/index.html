@@ -195,6 +195,12 @@
              checked, or at least one checked status). Only 2 rows, so no
              Todo/Ninguno shortcuts needed the way the longer category list
              has. -->
+        <!-- Only shown while a province is being filtered on (arriving from
+             /provincia/<province>/); unchecking its row clears it. -->
+        <div id="filter-province-section" hidden>
+          <div class="filter-section-label" data-i18n="filter.province_title">Provincia</div>
+          <div id="filter-province-list"></div>
+        </div>
         <div class="filter-section-label" data-i18n="filter.status_title">Estado</div>
         <div id="filter-status-list"></div>
 
