@@ -1,0 +1,5178 @@
+{
+"municipalities": {
+"05001": {
+"coa": "Escudo de Adanero.svg",
+"flag": "Bandera de Adanero.svg"
+},
+"05002": {
+"coa": "Escudo de La Adrada.svg"
+},
+"05005": {
+"coa": "Escudo de Albornos.svg"
+},
+"05007": {
+"coa": "Escudo de Aldeanueva de Santa cruz.svg",
+"flag": "Bandera de Aldeanueva de Santa cruz.svg"
+},
+"05008": {
+"coa": "Escudo de Aldeaseca.svg",
+"flag": "Bandera de Aldeaseca.svg"
+},
+"05010": {
+"coa": "Escudo de La Aldehuela.svg",
+"flag": "Bandera de La Aldehuela.svg"
+},
+"05013": {
+"coa": "Escudo de El Arenal (Ávila).svg"
+},
+"05014": {
+"coa": "Escudo de Arenas de San Pedro (Ávila).svg",
+"flag": "Bandera de Arenas de San Pedro (Ávila).svg"
+},
+"05015": {
+"coa": "Coat of Arms of Arevalillo 2024.svg",
+"flag": "Flag of Arevalillo 2024.svg"
+},
+"05016": {
+"coa": "Escudo de Arévalo.svg",
+"flag": "Bandera de Arevalo.png"
+},
+"05018": {
+"coa": "Escudo de Avellaneda.svg",
+"flag": "Bandera de Avellaneda.svg"
+},
+"05019": {
+"coa": "Coat of Arms of Ávila (Spain).svg",
+"flag": "Bandera de Ávila.svg"
+},
+"05021": {
+"coa": "Escudo de El Barco de Ávila.svg",
+"flag": "Bandera de El Barco de Ávila.svg"
+},
+"05022": {
+"coa": "Escudo del Barraco.svg",
+"flag": "Bandera del Barraco.svg"
+},
+"05023": {
+"coa": "Escudo de Barromán.svg"
+},
+"05024": {
+"coa": "Escudo de Becedas.svg",
+"flag": "Flag of Becedas.svg"
+},
+"05025": {
+"coa": "Escudo de Becedillas.svg",
+"flag": "Bandera de Becedillas.svg"
+},
+"05026": {
+"coa": "Escudo de Bercial de Zapardiel (Ávila).svg",
+"flag": "Bandera de Bercial de Zapardiel.svg"
+},
+"05027": {
+"coa": "Escudo de Las Berlanas.svg",
+"flag": "Bandera de Las Berlanas.svg"
+},
+"05029": {
+"coa": "Escudo de Bernuy Zapardiel.svg",
+"flag": "Bandera de Bernuy Zapardiel.svg"
+},
+"05030": {
+"coa": "Escudo de Berrocalejo de Aragona.svg",
+"flag": "Bandera de Berrocalejo de Aragona.svg"
+},
+"05036": {
+"coa": "Escudo de El Bohodón.svg",
+"flag": "Bandera de El Bohodón.svg"
+},
+"05037": {
+"coa": "Escudo de Bohoyo.svg",
+"flag": "Bandera de Bohoyo.svg"
+},
+"05040": {
+"coa": "Escudo de Bularros (Ávila).svg"
+},
+"05041": {
+"coa": "Escudo de Burgohondo.svg",
+"flag": "Bandera de Burgohondo.svg"
+},
+"05042": {
+"coa": "Escudo de Cabezas de Alambre.svg",
+"flag": "Bandera de Cabezas de Alambre.svg"
+},
+"05043": {
+"coa": "Escudo de Cabezas del Pozo.svg",
+"flag": "Bandera de Cabezas del Pozo.svg"
+},
+"05047": {
+"coa": "Escudo de Candeleda.svg",
+"flag": "Bandera de Candeleda.svg"
+},
+"05048": {
+"coa": "Escudo de Cantiveros (Ávila).svg"
+},
+"05051": {
+"coa": "Escudo de La Carrera.svg"
+},
+"05054": {
+"coa": "Escudo de Casavieja.svg",
+"flag": "Bandera de Casavieja.svg"
+},
+"05055": {
+"coa": "Escudo de Casillas.svg",
+"flag": "Bandera de Casillas.svg"
+},
+"05056": {
+"coa": "Escudo de Castellanos de Zapardiel.svg",
+"flag": "Bandera de Castellanos de Zapardiel.svg"
+},
+"05057": {
+"coa": "Escudo Ayuntamiento de Cebreros.png",
+"flag": "Bandera de Cebreros.svg"
+},
+"05058": {
+"coa": "Escudo de Cepeda la Mora.svg",
+"flag": "Bandera de Cepeda la Mora.svg"
+},
+"05061": {
+"coa": "Escudo de La colilla.svg",
+"flag": "Bandera de La Colilla.svg"
+},
+"05062": {
+"coa": "Escudo de Collado de Contreras.svg",
+"flag": "Bandera de Collado de Contreras.svg"
+},
+"05063": {
+"flag": "Bandera de Collado del Miron.svg"
+},
+"05064": {
+"coa": "Escudo de Constanzana (Ávila).svg",
+"flag": "Bandera de Constanzana.svg"
+},
+"05065": {
+"coa": "Escudo de Crespos.svg",
+"flag": "Bandera de Crespos.svg"
+},
+"05066": {
+"coa": "Escudo de Cuevas del Valle.svg",
+"flag": "Bandera de Cuevas del Valle.svg"
+},
+"05067": {
+"coa": "Escudo de Chamartin.svg",
+"flag": "Bandera de Chamartin.svg"
+},
+"05069": {
+"coa": "Escudo de Donjimeno.svg",
+"flag": "Bandera de Donjimeno.svg"
+},
+"05074": {
+"coa": "Escudo de Fontiveros (Ávila).svg"
+},
+"05076": {
+"coa": "Escudo de El Fresno.svg",
+"flag": "Bandera de El Fresno.svg"
+},
+"05077": {
+"coa": "Escudo de Fuente el Sauz.svg",
+"flag": "Bandera de Fuente el Sauz.svg"
+},
+"05078": {
+"coa": "Escudo de Fuentes de Año (Ávila).svg"
+},
+"05079": {
+"coa": "Escudo de Gallegos de Altamiros (Ávila).svg"
+},
+"05081": {
+"coa": "Escudo de Garganta del Villar (Ávila).svg",
+"flag": "Bandera de Garganta del Villar (Ávila).svg"
+},
+"05082": {
+"coa": "Escudo de Gavilanes (Ávila) 2.svg",
+"flag": "Bandera de Gavilanes.svg"
+},
+"05084": {
+"coa": "Escudo de Gilbuena (Ávila).svg"
+},
+"05087": {
+"coa": "Escudo de Gotarrendura.svg",
+"flag": "Bandera de Gotarrendura.svg"
+},
+"05089": {
+"coa": "Escudo de Guisando (Ávila).svg",
+"flag": "Bandera de Guisando (Ávila).svg"
+},
+"05090": {
+"coa": "Escudo de Gutierre-Muñoz (Ávila).svg"
+},
+"05094": {
+"coa": "Escudo de Herreros de Suso (Ávila).svg",
+"flag": "Bandera de Herreros de Suso (Ávila).svg"
+},
+"05095": {
+"coa": "Escudo de Higuera de las Dueñas (Ávila).svg",
+"flag": "Bandera de Higuera de las Dueñas.svg"
+},
+"05096": {
+"coa": "Escudo La Hija de Dios.svg"
+},
+"05097": {
+"coa": "Escudo de La Horcajada.svg",
+"flag": "Bandera de La Horcajada.svg"
+},
+"05099": {
+"coa": "Escudo de Horcajo de las Torres.svg",
+"flag": "Bandera de Horcajo de las Torres.svg"
+},
+"05100": {
+"coa": "Escudo de El Hornillo.svg",
+"flag": "Bandera de El Hornillo.svg"
+},
+"05101": {
+"coa": "Escudo de Hoyocasero (Ávila).svg",
+"flag": "Bandera de Hoyocasero.svg"
+},
+"05102": {
+"coa": "Escudo de El Hoyo de Pinares.svg"
+},
+"05103": {
+"coa": "Escudo de Hoyorredondo (Ávila).svg"
+},
+"05105": {
+"coa": "Escudo de Hoyos del Espino.svg",
+"flag": "Bandera de Hoyos del Espino.svg"
+},
+"05109": {
+"coa": "Escudo de Langa.svg",
+"flag": "Bandera de Langa (Ávila).svg"
+},
+"05110": {
+"coa": "Escudo de Lanzahíta (Ávila).svg",
+"flag": "Bandera de Lanzahíta.svg"
+},
+"05113": {
+"coa": "Escudo de Los Llanos de Tormes.svg",
+"flag": "Bandera de Los Llanos de Tormes.svg"
+},
+"05114": {
+"coa": "Escudo de Madrigal de las Altas Torres (Ávila).svg"
+},
+"05115": {
+"coa": "Escudo de Maello.svg",
+"flag": "Bandera de Maello.svg"
+},
+"05117": {
+"coa": "Escudo de Mamblas.svg",
+"flag": "Bandera de Mamblas.svg"
+},
+"05119": {
+"coa": "Escudo de Manjabálago y Ortigosa de Rioalmar.svg"
+},
+"05121": {
+"coa": "Escudo de Martiherrero.svg"
+},
+"05123": {
+"coa": "Escudo de Mediana de Voltoya.svg"
+},
+"05124": {
+"coa": "Escudo de Medinilla.svg",
+"flag": "Bandera de Medinilla.svg"
+},
+"05125": {
+"coa": "Escudo de Mengamuñoz.svg"
+},
+"05126": {
+"coa": "Escudo de Mesegar de Corneja.svg",
+"flag": "Bandera de Mesegar de Corneja.svg"
+},
+"05127": {
+"coa": "Escudo de Mijares.svg",
+"flag": "Bandera de Mijares.svg"
+},
+"05128": {
+"flag": "Banderamingorria.jpg"
+},
+"05129": {
+"coa": "Escudo de El Mirón.svg",
+"flag": "Bandera de El Mirón.svg"
+},
+"05131": {
+"coa": "Escudo de Mirueña de los Infanzones.svg",
+"flag": "Bandera de Mirueña de los Infanzones.svg"
+},
+"05132": {
+"coa": "Escudo de Mombeltrán (Ávila).svg"
+},
+"05133": {
+"coa": "Escudo de Monsalupe (Ávila).svg"
+},
+"05134": {
+"coa": "Escudo de Moraleja de Matacabras (Ávila).svg",
+"flag": "Bandera de Moraleja de Matacabras (Ávila).svg"
+},
+"05135": {
+"coa": "Escudo de Muñana.svg",
+"flag": "Bandera de Muñana.svg"
+},
+"05136": {
+"coa": "Escudo de Muñico.svg",
+"flag": "Bandera de Muñico.svg"
+},
+"05138": {
+"coa": "Escudo de Muñogalindo.svg",
+"flag": "Flag of Muñogalindo Spain.svg"
+},
+"05140": {
+"coa": "Escudo de Muñomer del Peco.svg",
+"flag": "Bandera de Muñomer del Peco.svg"
+},
+"05144": {
+"coa": "Escudo de Narrillos del Álamo.svg",
+"flag": "Bandera de Narrillos del Alamo.svg"
+},
+"05148": {
+"coa": "Escudo NarrosDelPuerto.svg",
+"flag": "Bandera NarrosDelPuerto.svg"
+},
+"05149": {
+"coa": "Escudo de Narros de Saldueña.svg",
+"flag": "Bandera de Narros de Saldueña.svg"
+},
+"05151": {
+"coa": "Escudo de Navacepedilla de Corneja.svg"
+},
+"05154": {
+"coa": "Escudo de Navadijos.svg",
+"flag": "Bandera de Navadijos.svg"
+},
+"05156": {
+"coa": "Escudo de Navahondilla (Ávila).svg",
+"flag": "Bandera de Navahondilla.svg"
+},
+"05157": {
+"coa": "Escudo de Navalacruz (Ávila).svg",
+"flag": "Bandera de Navalacruz.svg"
+},
+"05158": {
+"coa": "Escudo de Navalmoral de la Sierra (Ávila).svg",
+"flag": "Bandera de Navalmoral de la Sierra.svg"
+},
+"05160": {
+"coa": "Escudo de Navalosa.svg",
+"flag": "Bandera de Navalosa.svg"
+},
+"05161": {
+"coa": "Escudo de Navalperal de Pinares ( Avila).jpg"
+},
+"05162": {
+"coa": "Escudo de Navalperal de Tormes.svg",
+"flag": "Bandera de Navalperal deTormes.svg"
+},
+"05165": {
+"coa": "Escudo de Navarredonda de Gredos.svg",
+"flag": "Bandera de Navarredonda de Gredos.svg"
+},
+"05167": {
+"coa": "Escudo de Navarrevisca.svg"
+},
+"05168": {
+"coa": "Escudo de Las Navas del Marqués.svg",
+"flag": "Bandera de Las Navas del Marqués.svg"
+},
+"05169": {
+"coa": "Escudo de Navatalgordo.svg",
+"flag": "Bandera de Navatalgordo.svg"
+},
+"05170": {
+"coa": "Escudo de Navatejares.svg",
+"flag": "Bandera de Navatejares.svg"
+},
+"05171": {
+"coa": "Escudo de Neila de San Miguel (Ávila).svg"
+},
+"05172": {
+"coa": "Escudo de Niharra.svg",
+"flag": "Bandera de Niharra.svg"
+},
+"05173": {
+"flag": "Bandera de Ojos Albos.svg"
+},
+"05175": {
+"coa": "Escudo de El Oso (Ávila).svg"
+},
+"05176": {
+"coa": "Escudo de Padiernos.svg",
+"flag": "Flag of Padiernos Spain.svg"
+},
+"05177": {
+"coa": "Escudo de Pajares de Adaja.svg",
+"flag": "Bandera de Pajares de Adaja.svg"
+},
+"05178": {
+"coa": "Escudo de Palacios de Goda (Ávila).svg",
+"flag": "Bandera de Palacios de Goda.svg"
+},
+"05182": {
+"coa": "Escudo de Pedro Bernardo.svg",
+"flag": "Bandera de Pedro Bernardo.svg"
+},
+"05183": {
+"coa": "Escudo de Pedro Rodriguez.svg",
+"flag": "Bandera de Pedro Rodriguez.svg"
+},
+"05184": {
+"coa": "Escudo de Peguerinos (Ávila).svg"
+},
+"05186": {
+"coa": "Escudo de Piedrahita.svg",
+"flag": "Bandera de Piedrahita.svg"
+},
+"05187": {
+"coa": "Escudo de Piedralaves (Ávila).svg",
+"flag": "Bandera de Piedralaves.svg"
+},
+"05191": {
+"flag": "Bandera de Pradosegar (Avila).png"
+},
+"05192": {
+"coa": "Escudo de Puerto Castilla.svg"
+},
+"05193": {
+"coa": "Escudo de Rasueros (Ávila).svg"
+},
+"05194": {
+"coa": "Escudo de Riocabado.svg",
+"flag": "Bandera de Riocabado.svg"
+},
+"05195": {
+"coa": "Escudo de Riofrio.svg",
+"flag": "Bandera de Riofrio.svg"
+},
+"05201": {
+"coa": "Escudo de San Bartolomé de Pinares.svg",
+"flag": "Bandera de San Bartolomé de Pinares.svg"
+},
+"05204": {
+"coa": "Escudo de Sanchidrián.svg",
+"flag": "Bandera de Sanchidrián.svg"
+},
+"05205": {
+"coa": "Escudo de Sanchorreja (Ávila).svg",
+"flag": "Bandera de Sanchorreja.svg"
+},
+"05207": {
+"coa": "Escudo de San Esteban del Valle.svg",
+"flag": "Bandera de San Esteban del Valle.svg"
+},
+"05211": {
+"coa": "Escudo de San Juan de la Nava (Ávila).svg",
+"flag": "Bandera de San Juan de la Nava.svg"
+},
+"05214": {
+"coa": "Escudo de San Lorenzo de Tormes.svg",
+"flag": "Bandera de San Lorenzo de Tormes.svg"
+},
+"05215": {
+"coa": "Escudo de San Martín de la Vega del Alberche (Ávila).svg"
+},
+"05217": {
+"coa": "Escudo de San Miguel de Corneja.svg",
+"flag": "Bandera-san-miguel.png"
+},
+"05220": {
+"coa": "Escudo San Pedro del Arroyo.svg",
+"flag": "Bandera San Pedro del Arroyo.jpg"
+},
+"05221": {
+"coa": "Escudo de Santa Cruz del Valle (Ávila).svg"
+},
+"05222": {
+"coa": "Escudo Santa Cruz de Pinares.svg",
+"flag": "Bandera Santa Cruz de Pinares.svg"
+},
+"05225": {
+"coa": "Escudo de Santa María del Berrocal.svg"
+},
+"05226": {
+"coa": "Escudo de Santa María de los Caballeros.svg",
+"flag": "Bandera de Santa María de los Caballeros.svg"
+},
+"05227": {
+"coa": "Escudo de Santa María del Tiétar.svg",
+"flag": "Bandera de Santa María del Tiétar.svg"
+},
+"05229": {
+"coa": "Escudo de Santo Domingo de las Posadas (Ávila).svg",
+"flag": "Bandera de Santo Domingo de las Posadas.svg"
+},
+"05230": {
+"coa": "Escudo de Santo Tomé de Zabarcos.svg",
+"flag": "Bandera de Santo Tomé de Zabarcos.svg"
+},
+"05231": {
+"coa": "Escudo de San Vicente de Arévalo.svg",
+"flag": "Bandera de San Vicente de Arévalo.svg"
+},
+"05233": {
+"coa": "Escudo de Serranillos.svg",
+"flag": "Bandera de Serranillos.svg"
+},
+"05235": {
+"coa": "Escudo de Sinlabajos.svg",
+"flag": "Bandera de Sinlabajos.svg"
+},
+"05237": {
+"coa": "Escudo de Solana de Rioalmar.svg",
+"flag": "Bandera de Solana de Rioalmar.svg"
+},
+"05238": {
+"coa": "Escudo de Solosancho.svg",
+"flag": "Bandera de Solosancho.svg"
+},
+"05239": {
+"coa": "Escudo de Sotalbo.svg",
+"flag": "Bandera de Sotalbo.svg"
+},
+"05240": {
+"coa": "Escudo de Sotillo de la Adrada.svg",
+"flag": "Bandera de Sotillo de la Adrada.svg"
+},
+"05241": {
+"coa": "Escudo de El Tiemblo.svg",
+"flag": "Bandera de El Tiemblo.svg"
+},
+"05242": {
+"coa": "Escudo de Tiñosillos.svg",
+"flag": "Bandera de Tiñosillos.svg"
+},
+"05243": {
+"coa": "Escudo de Tolbaños.svg"
+},
+"05245": {
+"coa": "Escudo de Tornadizos de Ávila.svg",
+"flag": "Bandera de Tornadizos de Ávila.svg"
+},
+"05253": {
+"coa": "Escudo de Vega de Santa María.svg",
+"flag": "Bandera de Vega de Santa María.svg"
+},
+"05254": {
+"coa": "Escudo de Velayos.svg",
+"flag": "Bandera de Velayos.svg"
+},
+"05256": {
+"coa": "Escudo de Villaflor.svg",
+"flag": "Bandera de Villaflor.svg"
+},
+"05257": {
+"coa": "Escudo de Villafranca de la sierra.svg",
+"flag": "Bandera de Villafranca de la sierra.svg"
+},
+"05258": {
+"coa": "Escudo de Villanueva de Gómez.svg",
+"flag": "Bandera de Villanueva de Gómez.svg"
+},
+"05262": {
+"coa": "Escudo de Villarejo del Valle.svg",
+"flag": "Bandera de Villarejo del Valle.svg"
+},
+"05263": {
+"coa": "Escudo de Villatoro (Ávila).svg",
+"flag": "Bandera de Villatoro.svg"
+},
+"05265": {
+"coa": "Escudo de Vita.svg",
+"flag": "Bandera de Vita.svg"
+},
+"05266": {
+"coa": "Coat of arms of Zapardiel de la Cañada.svg",
+"flag": "Flag of Zapardiel de la Cañada.svg"
+},
+"05901": {
+"coa": "Escudo de San Juan de Gredos.svg",
+"flag": "Bandera de San Juan de Gredos.svg"
+},
+"05902": {
+"coa": "Escudo de Santa Maria del Cubillo.svg",
+"flag": "Bandera de Santa Maria del Cubillo.svg"
+},
+"05903": {
+"coa": "Escudo de Diego del Carpio.svg",
+"flag": "Bandera de Diego del Carpio.svg"
+},
+"05905": {
+"coa": "Escudo de Villanueva de Ávila.svg",
+"flag": "Bandera de Villanueva de Ávila.svg"
+},
+"09001": {
+"coa": "Escudo de Abajas (Burgos).svg"
+},
+"09003": {
+"coa": "Escudo de Adrada de Haza (Burgos).svg",
+"flag": "Bandera de Adrada de Haza (Burgos).svg"
+},
+"09006": {
+"coa": "Escudo de Aguas Cándidas.svg",
+"flag": "Bandera de Aguas Cándidas.svg"
+},
+"09007": {
+"coa": "Escudo de Aguilar de Bureba.svg"
+},
+"09009": {
+"coa": "Escudo de Albillos (Burgos).svg",
+"flag": "Bandera de Albillos (Burgos).svg"
+},
+"09010": {
+"coa": "Escudo de Alcocero de Mola (Burgos).svg"
+},
+"09012": {
+"coa": "Escudo de Alfoz de Santa Gadea.svg",
+"flag": "Bandera de Alfoz de Santa Gadea.svg"
+},
+"09013": {
+"coa": "Escudo de Altable (Burgos).svg",
+"flag": "Bandera de Altable (Burgos).svg"
+},
+"09014": {
+"coa": "Escudo de Los Altos.svg",
+"flag": "Bandera de Los Altos.svg"
+},
+"09016": {
+"coa": "Escudo de Ameyugo.svg",
+"flag": "Bandera de Ameyugo.svg"
+},
+"09017": {
+"coa": "Escudo de Anguix.svg",
+"flag": "Bandera de Anguix.svg"
+},
+"09018": {
+"coa": "Escudo de Aranda de Duero (Burgos).svg",
+"flag": "Bandera de Aranda de Duero (Burgos).svg"
+},
+"09019": {
+"coa": "Escudo de Arandilla.svg",
+"flag": "Bandera de Arandilla.svg"
+},
+"09020": {
+"coa": "Escudo de Arauzo de Miel.svg",
+"flag": "Bandera de Arauzo de Miel.svg"
+},
+"09021": {
+"coa": "Escudo salce.svg",
+"flag": "Bandera de Arauzo de Salce.svg"
+},
+"09022": {
+"coa": "Escudo de Arauzo de Torre.svg",
+"flag": "Bandera-arauzo-de-torre.svg"
+},
+"09023": {
+"coa": "Escudo de Arcos.svg"
+},
+"09025": {
+"coa": "Escudo de Arija (Burgos).svg",
+"flag": "Bandera de Arija (Burgos).svg"
+},
+"09026": {
+"coa": "Escudo de Arlanzón (Burgos).svg"
+},
+"09027": {
+"coa": "Escudo de Arraya de Oca.svg"
+},
+"09029": {
+"coa": "Escudo de Atapuerca (Burgos).svg",
+"flag": "Bandera de Atapuerca (Burgos).svg"
+},
+"09030": {
+"coa": "Escudo de Los Ausines.svg"
+},
+"09032": {
+"coa": "Escudo de Avellanosa de Muñó.svg",
+"flag": "Bandera de Avellanosa de Muñó.svg"
+},
+"09033": {
+"coa": "Escudo de Bahabón de Esgueva.svg"
+},
+"09034": {
+"coa": "Escudo de los Balbases.svg"
+},
+"09035": {
+"coa": "Escudo de Baños de Valdearados (Burgos).svg",
+"flag": "Bandera de Baños de Valdearados (Burgos).svg"
+},
+"09037": {
+"coa": "Escudo de Barbadillo de Herreros.svg",
+"flag": "Bandera de Barbadillo de Herreros.svg"
+},
+"09038": {
+"coa": "Escudo de Barbadillo del Mercado (Burgos).svg",
+"flag": "Bandera de Barbadillo del Mercado (Burgos).svg"
+},
+"09043": {
+"coa": "Escudo de Los Barrios de Bureba (Burgos).svg"
+},
+"09044": {
+"coa": "Escudo de Barrios de Colina.svg",
+"flag": "Bandera de Barrios de Colina.svg"
+},
+"09045": {
+"coa": "Escudo de Basconcillos del Tozo (Burgos).svg"
+},
+"09047": {
+"coa": "Escudo de Belmimbre.svg",
+"flag": "Bandera de Belmimbre.svg"
+},
+"09048": {
+"coa": "Escudo de Belorado.svg",
+"flag": "Bandera de Belorado.svg"
+},
+"09050": {
+"coa": "Escudo de Berberana.svg",
+"flag": "Bandera de Berberana.svg"
+},
+"09051": {
+"coa": "Escudo de Berlangas de Roa.svg"
+},
+"09055": {
+"coa": "Escudo de Brazacorta.svg",
+"flag": "Bandera Brazacorta.svg"
+},
+"09056": {
+"coa": "Escudo de Briviesca (Burgos).svg",
+"flag": "Bandera de Briviesca (Burgos).svg"
+},
+"09057": {
+"coa": "Escudo de Bugedo.svg",
+"flag": "Bandera de Bugedo.svg"
+},
+"09058": {
+"coa": "Escudo de Buniel (Burgos).svg"
+},
+"09059": {
+"coa": "Escudo de Burgos.svg",
+"flag": "Bandera de la ciudad de Burgos (España).svg"
+},
+"09060": {
+"coa": "Escudo de Busto de Bureba (Burgos).svg",
+"flag": "Bandera de Busto de Bureba (Burgos).svg"
+},
+"09061": {
+"coa": "Escudo de Cabañes de Esgueva (Burgos).svg"
+},
+"09062": {
+"coa": "Escudo de Cabezón de la Sierra.svg",
+"flag": "Bandera de Cabezón de la Sierra.svg"
+},
+"09063": {
+"coa": "Cavia-escudo.png",
+"flag": "Cavia-bandera.png"
+},
+"09064": {
+"coa": "Caleruega Escudo.svg",
+"flag": "Bandera de Caleruega.svg"
+},
+"09065": {
+"coa": "Campillo-de-Aranda-escudo.png",
+"flag": "Campillo-de-Aranda-bandera.png"
+},
+"09067": {
+"coa": "Escudo de Canicosa de la Sierra.svg"
+},
+"09068": {
+"coa": "Escudo de Cantabrana (Burgos).svg",
+"flag": "Bandera de Cantabrana (Burgos).svg"
+},
+"09072": {
+"coa": "Escudo de Carcedo de Burgos.svg",
+"flag": "Bandera de Carcedo de Burgos.svg"
+},
+"09073": {
+"coa": "Escudo de Cardeñadijo.svg"
+},
+"09074": {
+"coa": "Escudo de Cardeñajimeno (Burgos).svg"
+},
+"09075": {
+"coa": "Escudo de Cardeñuela Riopico.svg",
+"flag": "Bandera de Cardeñuela Riopico.svg"
+},
+"09076": {
+"coa": "Escudo de Carrias.svg",
+"flag": "Bandera de Carrias.svg"
+},
+"09077": {
+"coa": "Escudo de Cascajares de Bureba (Burgos).svg",
+"flag": "Cascajares-de-Bureba-bandera.png"
+},
+"09079": {
+"coa": "Escudo de Castellanos de Castro.svg",
+"flag": "Bandera de Castellanos de Castro.svg"
+},
+"09082": {
+"coa": "Escudo de Castildelgado.svg",
+"flag": "Bandera de Castildelgado.svg"
+},
+"09083": {
+"coa": "Escudo de Castil de Peones.svg",
+"flag": "Bandera de Castil de Peones.svg"
+},
+"09084": {
+"coa": "Escudo de Castrillo de la Reina.svg",
+"flag": "Bandera de Castrillo de la Reina.svg"
+},
+"09085": {
+"coa": "Escudo de Castrillo de la Vega (Burgos).svg",
+"flag": "Bandera de Castrillo de la Vega (Burgos).svg"
+},
+"09086": {
+"coa": "Escudo de Castrillo del Val.svg",
+"flag": "Bandera de Castrillo del Val.svg"
+},
+"09088": {
+"coa": "Escudo de Castrillo de Riopisuerga (Burgos).svg"
+},
+"09090": {
+"coa": "Escudo de Castrillo Mota de Judíos (Burgos).svg",
+"flag": "Bandera de Castrillo Mota de Judíos (Burgos).svg"
+},
+"09091": {
+"coa": "Escudo de Castrojeriz (Burgos).svg"
+},
+"09093": {
+"coa": "Escudo de Cayuela.svg",
+"flag": "Cayuela-bandera.png"
+},
+"09098": {
+"coa": "Escudo de Cerezo de Río Tirón.svg",
+"flag": "Bandera de Cerezo de Río Tirón.svg"
+},
+"09100": {
+"coa": "Escudo de Cerratón de Juarros (Burgos).svg",
+"flag": "Cerratón-de-Juarros-bandera.png"
+},
+"09101": {
+"coa": "Escudo de Ciadoncha.svg",
+"flag": "Bandera de Ciadoncha.svg"
+},
+"09102": {
+"coa": "Escudo de Cillaperlata.svg",
+"flag": "Bandera de Cillaperlata.svg"
+},
+"09103": {
+"coa": "Escudo de Cilleruelo de Abajo.svg",
+"flag": "Cilleruelo-de-Abajo-bandera.png"
+},
+"09104": {
+"coa": "Escudo de Cilleruelo de Arriba.svg",
+"flag": "Bandera de Cilleruelo de Arriba (Burgos).svg"
+},
+"09105": {
+"coa": "Escudo de Ciruelos de Cervera.svg",
+"flag": "Ciruelos de Cervera.svg"
+},
+"09108": {
+"coa": "Escudo de Cogollos.svg",
+"flag": "Bandera Cogollos Burgos.svg"
+},
+"09109": {
+"coa": "Emblem of Condado de Treviño.svg"
+},
+"09112": {
+"coa": "Escudo de Coruña del Conde (Burgos).svg"
+},
+"09113": {
+"coa": "Covarrubias-escudo.png",
+"flag": "Covarrubias-bandera.png"
+},
+"09114": {
+"coa": "Escudo de Cubillo del Campo (Burgos).svg",
+"flag": "Bandera de Cubillo del Campo (Burgos).svg"
+},
+"09115": {
+"coa": "Escudo de Cubo de Bureba.svg",
+"flag": "Cubo de bureba.png"
+},
+"09117": {
+"coa": "Escudo de La Cueva de Roa (Burgos).svg"
+},
+"09120": {
+"coa": "Escudo de Encío.svg"
+},
+"09122": {
+"coa": "Escudo de Espinosa de Cervera (Burgos).svg"
+},
+"09123": {
+"coa": "Escudo de Espinosa del Camino.svg",
+"flag": "Bandera de Espinosa del Camino.svg"
+},
+"09124": {
+"coa": "Escudo Espinosa de los Monteros (Burgos).svg",
+"flag": "Espinosa-de-los-Monteros-bandera.gif"
+},
+"09125": {
+"coa": "Escudo de Estépar.svg"
+},
+"09128": {
+"coa": "Escudo de Frandovínez-Burgos.svg",
+"flag": "Bandera de Frandovínez (DE FACTO).svg"
+},
+"09130": {
+"coa": "Escudo de Fresneña (Burgos).svg"
+},
+"09131": {
+"coa": "Escudo de Fresnillo de las Dueñas.svg"
+},
+"09132": {
+"coa": "Escudo de Fresno de Río Tirón (Burgos).svg",
+"flag": "Bandera de Fresno de Río Tirón (Burgos).svg"
+},
+"09133": {
+"coa": "Escudo de Fresno de Rodilla.svg"
+},
+"09135": {
+"coa": "Escudo de Fuentebureba.svg"
+},
+"09136": {
+"coa": "Escudo de Fuentecén.svg",
+"flag": "Bandera de Fuentecén.svg"
+},
+"09137": {
+"coa": "Fuentelcésped-escudo.gif",
+"flag": "Fuentelcésped-bandera.gif"
+},
+"09138": {
+"coa": "Fuentelisendo (heráldica).jpg"
+},
+"09139": {
+"coa": "Escudo de Fuentemolinos (Burgos).svg",
+"flag": "Bandera de Fuentemolinos (Burgos).svg"
+},
+"09140": {
+"coa": "Escudo de Fuentenebro.svg"
+},
+"09141": {
+"coa": "Escudo de Fuentespina.svg",
+"flag": "Fuentespina-bandera.gif"
+},
+"09144": {
+"coa": "Escudo de La Gallega.svg"
+},
+"09149": {
+"coa": "Escudo de Grisaleña (Burgos) 2.svg"
+},
+"09155": {
+"coa": "Escudo de Haza.svg",
+"flag": "Bandera de Haza.svg"
+},
+"09159": {
+"coa": "Escudo de Hontanas (Burgos).svg"
+},
+"09160": {
+"coa": "Escudo de Hontangas (Burgos).svg"
+},
+"09162": {
+"coa": "Escudo de Hontoria de la Cantera (Burgos).svg"
+},
+"09163": {
+"coa": "Hontoria-del-pinar-escudo.jpg",
+"flag": "Hontoria-del-pinar-bandera.jpg"
+},
+"09164": {
+"coa": "Hontoria-de-Valdearados-escudo.gif",
+"flag": "Hontoria-de-Valdearados-bandera.gif"
+},
+"09166": {
+"coa": "Escudo de Las Hormazas.svg"
+},
+"09167": {
+"coa": "Escudo de Hornillos del Camino.svg"
+},
+"09168": {
+"coa": "Escudo de La Horra.svg",
+"flag": "Flag of La Horra Spain.svg"
+},
+"09169": {
+"coa": "Escudo de Hortigüela (Burgos).svg"
+},
+"09170": {
+"coa": "Escudo de Hoyales de Roa.svg",
+"flag": "Bandera de Hoyales de Roa.svg"
+},
+"09172": {
+"coa": "Escudo de Huérmeces.svg"
+},
+"09173": {
+"coa": "Escudo de Huerta de Arriba.svg",
+"flag": "Bandera de Huerta de Arriba.svg"
+},
+"09174": {
+"coa": "Escudo de Huerta de Rey.svg",
+"flag": "Bandera de Huerta del Rey.svg"
+},
+"09177": {
+"coa": "Escudo de Ibeas de Juarros.svg",
+"flag": "Bandera de Ibeas de Juarros (Burgos).png"
+},
+"09178": {
+"coa": "Escudo de Ibrillos (Burgos).svg"
+},
+"09179": {
+"coa": "Escudo de Iglesiarrubia.svg"
+},
+"09180": {
+"coa": "Escudo de Iglesias.svg",
+"flag": "Bandera de Iglesias.svg"
+},
+"09181": {
+"coa": "Escudo de Isar.svg",
+"flag": "Isar-bandera.svg"
+},
+"09182": {
+"coa": "Escudo de Itero del Castillo.svg",
+"flag": "Bandera de Itero del Castillo.svg"
+},
+"09183": {
+"coa": "Jaramillo-de-la-Fuente-escudo.gif",
+"flag": "Jaramillo-de-la-Fuente-bandera.gif"
+},
+"09189": {
+"coa": "Escudo de Junta de Traslaloma.svg",
+"flag": "Bandera de Junta de Traslaloma.svg"
+},
+"09191": {
+"coa": "Escudo de Jurisdicción de Lara.svg",
+"flag": "Bandera de Jurisdicción de Lara.svg"
+},
+"09194": {
+"coa": "Escudo de Lerma.svg",
+"flag": "Lerma.svg"
+},
+"09195": {
+"coa": "Escudo de Llano de Bureba.svg"
+},
+"09196": {
+"coa": "Escudo de Madrigal del Monte (Burgos).svg",
+"flag": "Bandera de Madrigal del Monte (Burgos).svg"
+},
+"09197": {
+"coa": "Escudo de Madrigalejo del Monte (Burgos) 2.svg"
+},
+"09198": {
+"coa": "Escudo de Mahamud.svg",
+"flag": "Bandera de Mahamud.svg"
+},
+"09199": {
+"coa": "Escudo de Mambrilla de Castrejón.svg",
+"flag": "Bandera de Mambrilla de Castrejón.svg"
+},
+"09201": {
+"coa": "Escudo de Mamolar.svg"
+},
+"09206": {
+"coa": "Escudo de Mazuela.svg"
+},
+"09208": {
+"coa": "EscMece.jpg"
+},
+"09209": {
+"coa": "Coat of Arms of Medina de Pomar.svg",
+"flag": "Bandera de Medina de Pomar.svg"
+},
+"09211": {
+"coa": "Escudo de Melgar de Fernamental (Burgos).svg",
+"flag": "Bandera de Melgar de Fernamental (Burgos).svg"
+},
+"09214": {
+"coa": "Escudo de Merindad de Montija.svg"
+},
+"09215": {
+"coa": "Escudo de Merindad de Sotoscueva (Burgos).svg",
+"flag": "Bandera de Merindad de Sotoscueva (Burgos).svg"
+},
+"09216": {
+"coa": "Escudo de Merindad de Valdeporres (Burgos).svg"
+},
+"09218": {
+"coa": "Escudo de Milagros (Burgos).svg",
+"flag": "Bandera de Milagros (Burgos).svg"
+},
+"09219": {
+"coa": "Escudo de Miranda de Ebro.svg",
+"flag": "Bandera de Miranda de Ebro.svg"
+},
+"09220": {
+"coa": "Escudo de Miraveche.svg",
+"flag": "Bandera de Miraveche.svg"
+},
+"09221": {
+"coa": "Escudo de Modúbar de la Emparedada.svg",
+"flag": "Bandera de Modúbar de la Emparedada.svg"
+},
+"09224": {
+"coa": "Escudo de Monasterio de Rodilla.svg",
+"flag": "Bandera de Monasterio de Rodilla.svg"
+},
+"09226": {
+"coa": "Escudo de Monterrubio de la Demanda (Burgos).svg",
+"flag": "Bandera de Monterrubio de la Demanda (Burgos).svg"
+},
+"09228": {
+"coa": "Escudo de Moradillo de Roa.svg"
+},
+"09230": {
+"coa": "Escudo de Navas de Bureba.svg"
+},
+"09231": {
+"coa": "Escudo de Nebreda (Burgos).svg",
+"flag": "Bandera de Nebreda (Burgos).svg"
+},
+"09236": {
+"coa": "Escudo de Olmillos de Muñó.svg"
+},
+"09238": {
+"coa": "Escudo de Oña.svg",
+"flag": "Bandera de Oña.svg"
+},
+"09239": {
+"coa": "Escudo de Oquillas.svg",
+"flag": "Bandera de Oquillas.svg"
+},
+"09241": {
+"coa": "Escudo de Orbaneja Riopico.svg",
+"flag": "Bandera de Orbaneja Riopico.svg"
+},
+"09242": {
+"coa": "Escudo de Padilla de Abajo.svg",
+"flag": "Bandera de Padilla de Abajo.svg"
+},
+"09243": {
+"coa": "Escudo de Padilla de Arriba.svg"
+},
+"09244": {
+"coa": "Escudo de Padrones de Bureba.svg",
+"flag": "Bandera de Padrones de Bureba.svg"
+},
+"09246": {
+"coa": "Escudo de Palacios de la Sierra.svg",
+"flag": "Bandera de Palacios de la Sierra.svg"
+},
+"09248": {
+"coa": "Escudo de Palazuelos de la Sierra (Burgos).svg"
+},
+"09250": {
+"coa": "Escudo de Pampliega (Burgos).svg",
+"flag": "Bandera de Pampliega (Burgos).svg"
+},
+"09251": {
+"coa": "Escudo de Pancorbo.svg",
+"flag": "Bandera de Pancorbo.svg"
+},
+"09253": {
+"coa": "Escudo de Pardilla (Burgos).svg"
+},
+"09255": {
+"coa": "Escudo de Partido de la Sierra en Tobalina.svg",
+"flag": "Bandera de Partido de la Sierra en Tobalina (Burgos, España).svg"
+},
+"09257": {
+"coa": "Escudo de Pedrosa del Páramo (Burgos).svg",
+"flag": "Bandera de Pedrosa del Páramo (Burgos).svg"
+},
+"09258": {
+"coa": "Escudo de Pedrosa del Príncipe.svg",
+"flag": "Bandera de Pedrosa del Príncipe.svg"
+},
+"09261": {
+"coa": "Escudo de Peñaranda de Duero opt.svg",
+"flag": "Bandera de Peñaranda de Duero.svg"
+},
+"09262": {
+"coa": "Escudo de Peral de Arlanza.svg"
+},
+"09265": {
+"coa": "Escudo-piernigas.png",
+"flag": "Bandera de Piérnigas (Burgos).svg"
+},
+"09267": {
+"coa": "Escudo de Pineda Trasmonte (Burgos).svg"
+},
+"09268": {
+"coa": "Escudo de Pinilla de los Barruecos.svg"
+},
+"09274": {
+"coa": "Escudo de Pradoluengo.svg"
+},
+"09275": {
+"coa": "Escudo de Presencio.svg",
+"flag": "Bandera de Presencio.svg"
+},
+"09276": {
+"coa": "Escudo de La Puebla de Arganzón.svg",
+"flag": "Bandera de La Puebla de Arganzón.svg"
+},
+"09277": {
+"coa": "Escudo de Puentedura.svg",
+"flag": "Bandera de Puentedura.svg"
+},
+"09279": {
+"coa": "Escudo de Quemada (Burgos).svg"
+},
+"09280": {
+"coa": "Escudo de Quintanabureba.svg",
+"flag": "Bandera de Quintanabureba.svg"
+},
+"09281": {
+"coa": "Escudo de Quintana del Pidio.svg"
+},
+"09283": {
+"coa": "Escudo de Quintanaélez (Burgos).svg",
+"flag": "Bandera de Quintanaélez (Burgos).svg"
+},
+"09287": {
+"coa": "Escudo de Quintanaortuño (Burgos).svg",
+"flag": "Bandera de Quintanaortuño.svg"
+},
+"09288": {
+"coa": "Escudo de Quintanapalla.svg"
+},
+"09289": {
+"coa": "Escudo de Quintanar de la Sierra.svg"
+},
+"09292": {
+"coa": "Escudo de Quintanavides (Burgos).svg",
+"flag": "Bandera de Quintanavides (Burgos).svg"
+},
+"09297": {
+"coa": "Escudo de Las Quintanillas (Burgos).svg"
+},
+"09301": {
+"coa": "Escudo Quintanilla Vivar.svg",
+"flag": "Bandera Quintanilla Vivar.svg"
+},
+"09302": {
+"coa": "Escudo de Rabanera del Pinar.svg"
+},
+"09304": {
+"coa": "Escudo de Rabé de las Calzadas (Burgos).svg",
+"flag": "Bandera de Rabé de las Calzadas (Burgos).svg"
+},
+"09307": {
+"coa": "Escudo de Redecilla del Camino.svg",
+"flag": "Bandera de Redecilla del Camino.svg"
+},
+"09309": {
+"coa": "Escudo de Regumiel de la Sierra.svg"
+},
+"09312": {
+"coa": "Escudo de La Revilla y Ahedo.svg"
+},
+"09314": {
+"coa": "Escudo de Revilla del Campo (Burgos).svg",
+"flag": "Bandera de Revilla del Campo (Burgos).svg"
+},
+"09316": {
+"coa": "Escudo de Revilla de Vallejera.svg",
+"flag": "Bandera de Revilla Vallejera.svg"
+},
+"09317": {
+"coa": "Escudo de Rezmondo (Burgos).svg",
+"flag": "Bandera de Rezmondo (Burgos).svg"
+},
+"09318": {
+"coa": "Escudo de Riocavado de la Sierra.svg"
+},
+"09321": {
+"coa": "Escudo de Roa.svg"
+},
+"09323": {
+"coa": "Escudo de Rojas.svg",
+"flag": "Rojas-bandera.gif"
+},
+"09325": {
+"coa": "Escudo de Royuela de Río Franco (Burgos).svg"
+},
+"09326": {
+"coa": "Escudo de Rubena.svg"
+},
+"09328": {
+"coa": "Escudo de Rucandio.svg",
+"flag": "Bandera de Rucandio.svg"
+},
+"09329": {
+"coa": "Escudo de Salas de Bureba (Burgos).svg",
+"flag": "Bandera de Salas de Bureba (Burgos).svg"
+},
+"09330": {
+"coa": "Escudo de Salas de los Infantes (Burgos).svg",
+"flag": "Bandera de Salas de los Infantes.jpg"
+},
+"09332": {
+"coa": "Escudo de Saldaña de Burgos.svg",
+"flag": "Bandera de Saldaña de Burgos.svg"
+},
+"09334": {
+"coa": "Escudo de Salinillas de Bureba.svg",
+"flag": "Bandera de Salinillas de Bureba.svg"
+},
+"09335": {
+"coa": "Escudo de San Adrián de Juarros.svg",
+"flag": "Bandera de San Adrián de Juarros.svg"
+},
+"09337": {
+"coa": "Escudo de San Juan del Monte.svg"
+},
+"09338": {
+"coa": "Escudo de San Mamés de Burgos.svg",
+"flag": "Bandera de San Mamés de Burgos.svg"
+},
+"09343": {
+"coa": "Escudo de Santa Cecilia (Burgos).svg",
+"flag": "Bandera de Santa Cecilia (Burgos).svg"
+},
+"09345": {
+"coa": "Escudo de Santa Cruz de la Salceda.svg",
+"flag": "Bandera de Santa Cruz de la Salceda.svg"
+},
+"09346": {
+"coa": "Escudo de Santa Cruz del Valle Urbión (Burgos).svg"
+},
+"09347": {
+"coa": "Escudo de Santa Gadea del Cid.svg",
+"flag": "Bandera de Santa Gadea del Cid.svg"
+},
+"09348": {
+"coa": "Escudo de Santa Inés (Burgos).svg"
+},
+"09350": {
+"coa": "Escudo de Santa María del Campo (Burgos).svg",
+"flag": "Bandera de Santa María del Campo (Burgos).svg"
+},
+"09352": {
+"coa": "Escudo de Santa María del Mercadillo.svg",
+"flag": "Bandera de Santa María del Mercadillo.svg"
+},
+"09353": {
+"coa": "Escudo de Santa María Ribarredonda (Burgos).svg",
+"flag": "Bandera de Santa María Ribarredonda (Burgos).svg"
+},
+"09355": {
+"coa": "Escudo de Santibáñez de Esgueva.svg"
+},
+"09356": {
+"coa": "Escudo de Santibáñez del Val (Burgos).svg",
+"flag": "Bandera de Santibáñez del Val (Burgos).svg"
+},
+"09358": {
+"coa": "Escudo de Santo Domingo de Silos (Burgos).svg"
+},
+"09361": {
+"coa": "Escudo de Sargentes de la Lora.svg"
+},
+"09362": {
+"coa": "Escudo de Sarracín (Burgos).svg",
+"flag": "Bandera de Sarracín (Burgos).svg"
+},
+"09363": {
+"coa": "Escudo de Sasamón.svg"
+},
+"09365": {
+"coa": "Escudo de La Sequera de Haza.svg"
+},
+"09366": {
+"coa": "Escudo de Solarana (Burgos).svg",
+"flag": "Bandera de Solarana (Burgos).svg"
+},
+"09368": {
+"coa": "Escudo de Sordillos.svg"
+},
+"09369": {
+"coa": "Escudo de Sotillo de la Ribera (Burgos).svg"
+},
+"09372": {
+"coa": "Escudo de Sotragero.svg"
+},
+"09374": {
+"coa": "Escudo de Susinos del Páramo.svg",
+"flag": "Bandera de Susinos del Páramo.svg"
+},
+"09375": {
+"coa": "Escudo de Tamarón.svg",
+"flag": "Tamarón-bandera.gif"
+},
+"09377": {
+"coa": "Escudo de Tardajos.svg",
+"flag": "Tardajos-bandera.gif"
+},
+"09378": {
+"coa": "Escudo de Tejada.svg",
+"flag": "Bandera de Tejada.svg"
+},
+"09380": {
+"coa": "Escudo de Terradillos de Esgueva (Burgos).svg"
+},
+"09381": {
+"coa": "Escudo de Tinieblas de la Sierra.svg",
+"flag": "Tinieblas de la Sierra flag.png"
+},
+"09384": {
+"coa": "Escudo de Tordómar.svg"
+},
+"09386": {
+"coa": "Escudo de Torrecilla del Monte.svg"
+},
+"09387": {
+"coa": "Escudo de Torregalindo.svg",
+"flag": "Bandera de Torregalindo.svg"
+},
+"09389": {
+"coa": "Escudo de Torrepadre.svg"
+},
+"09390": {
+"coa": "Escudo de Torresandino.svg",
+"flag": "Bandera de Torresandino.svg"
+},
+"09392": {
+"coa": "Escudo de Tosantos.svg",
+"flag": "Bandera de Tosantos.svg"
+},
+"09394": {
+"coa": "Escudo de Trespaderne.svg"
+},
+"09395": {
+"coa": "Escudo de Tubilla del Agua (Burgos).svg"
+},
+"09396": {
+"coa": "Escudo de Tubilla del Lago.svg"
+},
+"09400": {
+"coa": "Escudo de Vadocondes.svg",
+"flag": "Bandera de Vadocondes.svg"
+},
+"09403": {
+"coa": "Escudo de Valdeande.svg"
+},
+"09405": {
+"coa": "Escudopueblocoloreado.jpg"
+},
+"09406": {
+"coa": "Escudo de Valdorros.svg"
+},
+"09409": {
+"coa": "Escudo de Valle de Manzanedo.svg",
+"flag": "Bandera de Valle de Manzanedo.svg"
+},
+"09410": {
+"coa": "Escudovalledemena.gif"
+},
+"09411": {
+"coa": "Escudo de Valle de Oca.svg",
+"flag": "Bandera de Valle de Oca.svg"
+},
+"09412": {
+"coa": "Escudo de Valle de Tobalina (Burgos).svg",
+"flag": "Bandera de Valle de Tobalina (Burgos).svg"
+},
+"09413": {
+"coa": "Escudo de Valle de Valdebezana.svg"
+},
+"09415": {
+"coa": "Escudo de Valle de Valdelucio.svg",
+"flag": "Bandera de Valle de Valdelucio.svg"
+},
+"09417": {
+"coa": "Escudo de Vallejera (Burgos).svg",
+"flag": "Bandera de Vallejera (Burgos).svg"
+},
+"09418": {
+"coa": "Escudo de Valles de Palenzuela (Burgos).svg"
+},
+"09419": {
+"coa": "Escudo de Valluércanes (Burgos).svg",
+"flag": "Bandera de Valluércanes (Burgos).svg"
+},
+"09421": {
+"coa": "Escudo de La Vid y Barrios.svg",
+"flag": "Bandera de La Vid y Barrios.svg"
+},
+"09422": {
+"coa": "Escudo La Vid de Bureba.jpg"
+},
+"09423": {
+"coa": "Escudo de Vileña.svg"
+},
+"09425": {
+"coa": "Escudo de Vilviestre del Pinar (Burgos).svg"
+},
+"09427": {
+"coa": "Escudo de Villadiego (Burgos).svg",
+"flag": "Bandera de Villadiego (Burgos).svg"
+},
+"09428": {
+"coa": "Escudo de Villaescusa de Roa.svg"
+},
+"09431": {
+"coa": "Escudo de Villafranca Montes de Oca.svg",
+"flag": "Bandera de Villafranca Montes de Oca.svg"
+},
+"09432": {
+"coa": "Escudo de Villafruela(Burgos).svg"
+},
+"09433": {
+"coa": "Escudo de Villagalijo.svg"
+},
+"09434": {
+"coa": "Escudo de Villagonzalo Pedernales.svg"
+},
+"09437": {
+"coa": "Escudo de Villahoz (Burgos).svg",
+"flag": "Bandera de Villahoz (Burgos).svg"
+},
+"09438": {
+"coa": "Escudo de Villalba de Duero.svg"
+},
+"09439": {
+"coa": "Escudo de Villalbilla de Burgos.svg",
+"flag": "Bandera de Villalbilla de Burgos.svg"
+},
+"09440": {
+"coa": "Escudo de Villalbilla de Gumiel (Burgos).svg"
+},
+"09442": {
+"coa": "Escudo municipal de Villalmanzo.svg"
+},
+"09443": {
+"coa": "Escudo de Villamayor de los Montes.svg"
+},
+"09445": {
+"coa": "Escudo de Villambistia (Burgos).svg",
+"flag": "Bandera de Villambistia (Burgos).svg"
+},
+"09446": {
+"coa": "Escudo de Villamedianilla.svg"
+},
+"09447": {
+"coa": "Escudo de Villamiel de la Sierra.svg",
+"flag": "Bandera de Villamiel de la Sierra (Burgos).svg"
+},
+"09448": {
+"coa": "Escudo de Villangómez (Burgos).svg",
+"flag": "Bandera de Villangómez (Burgos).svg"
+},
+"09449": {
+"coa": "Escudo de Villanueva de Argaño.svg",
+"flag": "Bandera de Villanueva de Argaño.svg"
+},
+"09450": {
+"coa": "Escudo de Villanueva de Carazo.svg",
+"flag": "Bandera de Villanueva de Carazo.svg"
+},
+"09451": {
+"coa": "Escudo de Villanueva de Gumiel.svg",
+"flag": "Bandera de Villanueva de Gumiel.svg"
+},
+"09454": {
+"coa": "Escudo de Villanueva de Teba (Burgos).svg",
+"flag": "Bandera de Villanueva de Teba (Burgos).svg"
+},
+"09456": {
+"coa": "Escudo de Villaquirán de los Infantes.svg",
+"flag": "Bandera de Villaquirán de los Infantes (Burgos).svg"
+},
+"09458": {
+"coa": "Escudo de Villariezo.svg"
+},
+"09463": {
+"coa": "Escudo de Villasur de Herreros.svg"
+},
+"09466": {
+"coa": "Escudo de Villaverde del Monte (Burgos).svg",
+"flag": "Bandera de Villaverde del Monte.svg"
+},
+"09467": {
+"coa": "Escudo de Villaverde Mogina (Burgos).svg"
+},
+"09471": {
+"coa": "Escudo de Villayerno Morquillas.svg",
+"flag": "Bandera de Villayerno Morquillas.svg"
+},
+"09473": {
+"coa": "Escudo de Villegas (Burgos).svg",
+"flag": "Bandera de Villegas (Burgos).svg"
+},
+"09480": {
+"coa": "Escudo de Zael (Burgos).svg"
+},
+"09483": {
+"coa": "Escudo de Zazuar (Burgos).svg",
+"flag": "Bandera de Zazuar (Burgos).svg"
+},
+"09901": {
+"coa": "Escudo de Quintanilla del Agua y Tordueles (Burgos).svg"
+},
+"09902": {
+"coa": "Escudo de Valle de Santibáñez (Burgos).svg",
+"flag": "Bandera de Valle de Santibáñez (Burgos).svg"
+},
+"09903": {
+"coa": "Escudo de Villarcayo de Merindad de Castilla la Vieja.svg",
+"flag": "Bandera de Villarcayo de Merindad de Castilla la Vieja.svg"
+},
+"09905": {
+"coa": "Escudo de Valle de Sedano.svg",
+"flag": "Bandera de Valle de Sedano.svg"
+},
+"09906": {
+"coa": "Escudo de Merindad de Río Ubierna.svg"
+},
+"09907": {
+"coa": "Escudo de Alfoz de Quintanadueñas.svg",
+"flag": "Bandera de Alfoz de Quintanadueñas.svg"
+},
+"09908": {
+"coa": "Escudo de Valle de Losa (Burgos).svg",
+"flag": "Bandera de Valle de Losa (Burgos).svg"
+},
+"24001": {
+"coa": "Escudo de Acebedo.svg",
+"flag": "Bandera de Acebedo.svg"
+},
+"24003": {
+"coa": "Escudo de Alija del Infantado.svg",
+"flag": "Flag of Alija del Infantado Spain.svg"
+},
+"24004": {
+"coa": "Escudo de Almanza.svg",
+"flag": "Flag of Almanza Spain.svg"
+},
+"24005": {
+"coa": "Escudo de La Antigua (León).svg"
+},
+"24006": {
+"coa": "Escudo de Ardón.svg",
+"flag": "Bandera de Ardón.svg"
+},
+"24007": {
+"coa": "Escudo de Arganza.svg"
+},
+"24008": {
+"coa": "Escudo de Astorga.svg",
+"flag": "Flag of Astorga Spain.svg"
+},
+"24009": {
+"coa": "Escudo de Balboa.svg"
+},
+"24010": {
+"coa": "Escudo de La Bañeza.svg",
+"flag": "Flag of La Bañeza Spain.svg"
+},
+"24011": {
+"coa": "Escudo de Barjas.svg",
+"flag": "Flag of Barjas Spain.svg"
+},
+"24012": {
+"coa": "Escudo de Los Barrios de Luna.svg"
+},
+"24014": {
+"coa": "Escudo de Bembibre.svg"
+},
+"24015": {
+"coa": "Escudo de Benavides.svg"
+},
+"24016": {
+"coa": "Escudo de Benuza.svg"
+},
+"24017": {
+"coa": "Escudo de Bercianos del Páramo.svg"
+},
+"24018": {
+"coa": "Escudo de Bercianos del Real Camino.svg",
+"flag": "Flag of Bercianos del Real Camino Spain.svg"
+},
+"24019": {
+"coa": "Escudo de Berlanga del Bierzo.svg"
+},
+"24020": {
+"coa": "Escudo de Boca de Huérgano.svg"
+},
+"24021": {
+"coa": "Escudo de Boñar (León).svg"
+},
+"24022": {
+"coa": "Escudo de Borrenes.svg"
+},
+"24023": {
+"coa": "Escudo de Brazuelo.svg"
+},
+"24024": {
+"coa": "Escudo de El Burgo Ranero.svg",
+"flag": "Flag of El Burgo Ranero Spain.svg"
+},
+"24025": {
+"coa": "Escudo de Burón.svg",
+"flag": "Bandera de Burón (León).svg"
+},
+"24026": {
+"coa": "Escudo de Bustillo del Páramo.svg",
+"flag": "Bandera de Bustillo del Páramo.svg"
+},
+"24027": {
+"coa": "Escudo de Cabañas Raras.svg",
+"flag": "Flag of Cabañas Raras Spain.svg"
+},
+"24029": {
+"coa": "Escudo de Cabrillanes.svg"
+},
+"24030": {
+"coa": "Escudo de Cacabelos.svg",
+"flag": "Bandera de Cacabelos.svg"
+},
+"24032": {
+"coa": "Escudo de Campazas.svg",
+"flag": "Flag of Campazas Spain.svg"
+},
+"24034": {
+"coa": "Escudo de Camponaraya (León).svg",
+"flag": "Flag of Camponaraya Spain.svg"
+},
+"24037": {
+"coa": "Escudo de Cármenes.svg",
+"flag": "Bandera de Cármenes.svg"
+},
+"24038": {
+"coa": "Escudo de Carracedelo.svg"
+},
+"24039": {
+"coa": "Escudo de Carrizo de la Ribera (León).svg"
+},
+"24040": {
+"coa": "Escudo de Carrocera (León).svg",
+"flag": "Bandera de Carrocera.svg"
+},
+"24041": {
+"coa": "Escudo Carucedo.svg"
+},
+"24042": {
+"coa": "Escudo de Castilfalé (León).svg",
+"flag": "Bandera de Castilfalé (León).svg"
+},
+"24043": {
+"coa": "Escudo de Castrillo de Cabrera (León).svg",
+"flag": "Flag of Castrillo de Cabrera.svg"
+},
+"24044": {
+"coa": "Escudo de Castrillo de la Valduerna.svg",
+"flag": "Flag of Castrillo de la Valduerna Spain.svg"
+},
+"24046": {
+"coa": "Escudo de Castrocalbón (León).svg"
+},
+"24047": {
+"coa": "Escudo de Castrocontrigo.svg"
+},
+"24049": {
+"coa": "Escudo de Castropodame.svg"
+},
+"24050": {
+"coa": "Escudo de Castrotierra de Valmadrigal.svg",
+"flag": "Bandera de Castrotierra de Valmadrigal.svg"
+},
+"24051": {
+"coa": "Escudo de Cea.svg",
+"flag": "Bandera de Cea.svg"
+},
+"24052": {
+"coa": "Escudo de Cebanico.svg"
+},
+"24053": {
+"coa": "Escudo de Cebrones del Río.svg"
+},
+"24054": {
+"coa": "Escudo de Cimanes de la Vega (León).svg",
+"flag": "Flag of Cimanes de la Vega Spain.svg"
+},
+"24055": {
+"coa": "Escudo de Cimanes del Tejar (León).svg"
+},
+"24056": {
+"coa": "Escudo Cistierna.svg",
+"flag": "Bandera de Cistierna.svg"
+},
+"24057": {
+"coa": "Escudo de Congosto (León).svg"
+},
+"24059": {
+"coa": "Escudo de Corullón (León).svg"
+},
+"24061": {
+"coa": "Escudo de Cuadros.svg",
+"flag": "Bandera de Cuadros.svg"
+},
+"24063": {
+"coa": "Escudo de Cubillas de Rueda (León).svg",
+"flag": "Flag of Cubillas de Rueda Spain.svg"
+},
+"24064": {
+"coa": "Escudo de Cubillos del Sil.svg"
+},
+"24065": {
+"coa": "Escudo de Chozas de Abajo (León).svg"
+},
+"24066": {
+"coa": "Escudo de Destriana.svg",
+"flag": "Bandera de Destriana.svg"
+},
+"24067": {
+"coa": "Escudo de Encinedo.svg",
+"flag": "Flag of Encinedo Spain.svg"
+},
+"24068": {
+"coa": "Escudo de La Ercina.svg",
+"flag": "Flag of La Ercina Spain.svg"
+},
+"24070": {
+"coa": "Escudo de Fabero.svg"
+},
+"24071": {
+"coa": "Escudo de Folgoso de la Ribera (León).svg",
+"flag": "Bandera de Folgoso de la Ribera (León).svg"
+},
+"24073": {
+"coa": "Escudo de Fresno de la Vega.svg"
+},
+"24074": {
+"coa": "Escudo de Fuentes de Carbajal (León).svg",
+"flag": "Bandera de Fuentes de Carbajal (León).svg"
+},
+"24076": {
+"coa": "Escudo de Garrafe de Torio.svg"
+},
+"24077": {
+"coa": "Escudo de Gordaliza del Pino.svg",
+"flag": "Bandera de Gordaliza del Pino.svg"
+},
+"24078": {
+"coa": "Escudo de Gordoncillo (León).svg",
+"flag": "Bandera de Gordoncillo (León).svg"
+},
+"24079": {
+"coa": "Escudo de Gradefes (León).svg",
+"flag": "Bandera de Gradefes.svg"
+},
+"24080": {
+"coa": "Escudo de Grajal de Campos (León).svg"
+},
+"24081": {
+"coa": "Escudo de Gusendos de los Oteros.svg"
+},
+"24082": {
+"coa": "Escudo de Hospital de Orbigo.svg"
+},
+"24083": {
+"coa": "Escudo de Igüeña.svg"
+},
+"24084": {
+"coa": "Escudo de Izagre (León).svg",
+"flag": "Bandera de Izagre (León).svg"
+},
+"24086": {
+"coa": "Escudo de Joarilla de las Matas (León).svg",
+"flag": "Flag of Joarilla de las Matas.svg"
+},
+"24087": {
+"coa": "Escudo de Laguna Dalga.svg",
+"flag": "Bandera de Laguna Dalga.svg"
+},
+"24088": {
+"coa": "Escudo de Laguna de Negrillos.svg"
+},
+"24089": {
+"coa": "Escudo de León (ciudad).svg",
+"flag": "Bandera de León (ciudad).svg"
+},
+"24090": {
+"coa": "Escudo de Lucillo (León).svg"
+},
+"24091": {
+"coa": "Escudo de Luyego (León).svg",
+"flag": "Flag of Luyego Spain.svg"
+},
+"24092": {
+"coa": "Escudo de Llamas de la Ribera.svg"
+},
+"24093": {
+"coa": "Escudo de Magaz de Cepeda.svg"
+},
+"24094": {
+"coa": "Escudo de Mansilla de las Mulas.svg"
+},
+"24095": {
+"coa": "Escudo de Mansilla Mayor (León).svg",
+"flag": "Flag of Mansilla Mayor Spain.svg"
+},
+"24096": {
+"coa": "Escudo de Maraña.svg",
+"flag": "Flag of Maraña Spain.svg"
+},
+"24097": {
+"coa": "Escudo de Matadeon de los Oteros.svg",
+"flag": "Bandera de Matadeon de los Oteros.svg"
+},
+"24098": {
+"coa": "Escudo de Matallana de Torío.svg",
+"flag": "Flag of Matallana de Torío Spain.svg"
+},
+"24099": {
+"coa": "Escudo de Matanza.svg",
+"flag": "Flag of Matanza Spain.svg"
+},
+"24100": {
+"coa": "Escudo de Molinaseca.svg"
+},
+"24101": {
+"coa": "Escudo de Murias de Paredes (León).svg",
+"flag": "Bandera de Murias de Paredes.svg"
+},
+"24102": {
+"coa": "Escudo de Noceda del Bierzo (León).svg",
+"flag": "Bandera de Noceda del Bierzo (León).svg"
+},
+"24104": {
+"coa": "Escudo de Las Omañas (León).svg"
+},
+"24105": {
+"coa": "Escudo de Onzonilla.svg",
+"flag": "Bandera de Onzonilla.svg"
+},
+"24106": {
+"coa": "Escudo de Oseja de Sajambre.svg",
+"flag": "Bandera de Oseja de Sajambre (León).svg"
+},
+"24107": {
+"coa": "Escudo de Pajares de los Oteros (León).svg"
+},
+"24108": {
+"coa": "Escudo de Palacios de la Valduerna (León).svg",
+"flag": "Bandera de Palacios de la Valduerna (León).svg"
+},
+"24109": {
+"coa": "Escudo de Palacios del Sil.svg",
+"flag": "Flag of Palacios del Sil Spain.svg"
+},
+"24110": {
+"coa": "Escudo de Páramo del Sil.svg"
+},
+"24112": {
+"coa": "Escudo de Peranzanes (León).svg",
+"flag": "Flag of Peranzanes Spain.svg"
+},
+"24113": {
+"coa": "Escudo de Pobladura de Pelayo García.svg",
+"flag": "Bandera de Pobladura de Pelayo García.svg"
+},
+"24114": {
+"coa": "Escudo de La Pola de Gordón.svg",
+"flag": "Flag of La Pola de Gordón Spain.svg"
+},
+"24115": {
+"coa": "Escudo Ponferrada.svg"
+},
+"24116": {
+"coa": "Escudo de Posada de Valdeón (León).svg",
+"flag": "Flag of Posada de Valdeón Spain.svg"
+},
+"24117": {
+"coa": "Escudo de Pozuelo del Páramo (León).svg",
+"flag": "Flag of Pozuelo del Páramo Spain.svg"
+},
+"24119": {
+"coa": "Escudo de Priaranza del Bierzo.svg"
+},
+"24120": {
+"coa": "Escudo de Prioro (León).svg"
+},
+"24121": {
+"coa": "Escudo de Puebla de Lillo.svg",
+"flag": "Flag of Puebla de Lillo Spain.svg"
+},
+"24122": {
+"coa": "Escudo de Puente de Domingo Flórez.svg"
+},
+"24123": {
+"coa": "Escudo de Quintana del Castillo.svg"
+},
+"24124": {
+"coa": "Escudo de Quintana del Marco.svg",
+"flag": "Flag of Quintana del Marco Spain.svg"
+},
+"24127": {
+"coa": "Escudo de Regueras de Arriba (León).svg",
+"flag": "Bandera de Regueras de Arriba (León).svg"
+},
+"24130": {
+"coa": "Escudo de Riaño.svg",
+"flag": "Bandera de Riaño.svg"
+},
+"24131": {
+"coa": "Escudo de Riego de la Vega (León).svg",
+"flag": "Flag of Riego de la Vega Spain.svg"
+},
+"24132": {
+"coa": "Escudo de Riello.svg"
+},
+"24133": {
+"coa": "Escudo de Rioseco de Tapia.svg"
+},
+"24134": {
+"coa": "Escudo de La Robla.svg",
+"flag": "Bandera de La Robla.svg"
+},
+"24137": {
+"coa": "Escudo de Sabero (León).svg"
+},
+"24139": {
+"coa": "Escudo de Sahagún2.svg",
+"flag": "Bandera de Sahagún.svg"
+},
+"24141": {
+"coa": "Escudo de San Adrián del Valle (León).svg",
+"flag": "Bandera de San Adrián del Valle (León).svg"
+},
+"24142": {
+"coa": "Escudo San Andrés del Rabanedo.svg"
+},
+"24143": {
+"coa": "Escudo de Sancedo.svg",
+"flag": "Flag of Sancedo Spain.svg"
+},
+"24144": {
+"coa": "Escudo de San Cristóbal de la Polantera.svg",
+"flag": "Flag of San Cristóbal de la Polantera Spain.svg"
+},
+"24145": {
+"coa": "Escudo de San Emiliano (León).svg"
+},
+"24146": {
+"coa": "Escudo de San Esteban de Nogales (León).svg",
+"flag": "Bandera de San Esteban de Nogales (León).svg"
+},
+"24148": {
+"coa": "Escudo de San Justo de la Vega.svg",
+"flag": "Flag of San Justo de la Vega Spain.svg"
+},
+"24151": {
+"coa": "Escudo de Santa Colomba de Curueño (León).svg"
+},
+"24152": {
+"coa": "Escudo de Santa Colomba de Somoza (León).svg",
+"flag": "Flag of Santa Colomba de Somoza Spain.svg"
+},
+"24153": {
+"coa": "Escudo de Santa Cristina de Valmadrigal (León).svg",
+"flag": "Flag of Santa Cristina de Valmadrigal Spain.svg"
+},
+"24154": {
+"coa": "Escudo de Santa Elena de Jamuz (León).svg"
+},
+"24155": {
+"coa": "Escudo de Santa María de la Isla.svg",
+"flag": "Flag of Santa Maria de la Isla Spain.svg"
+},
+"24157": {
+"coa": "Escudo de Santa María del Páramo (León).svg",
+"flag": "Bandera de Santa María del Páramo (León).svg"
+},
+"24159": {
+"coa": "Escudo de Santa Marina del Rey (León).svg"
+},
+"24160": {
+"coa": "Escudo de Santas Martas.svg",
+"flag": "Flag of Santas Martas Spain.svg"
+},
+"24161": {
+"coa": "Escudo de Santiago Millas.svg"
+},
+"24162": {
+"coa": "Escudo de Santovenia de la Valdoncina.svg",
+"flag": "Flag of Santovenia de la Valdoncina Spain.svg"
+},
+"24163": {
+"coa": "Escudo de Sariegos.svg",
+"flag": "Flag of Sariegos Spain.svg"
+},
+"24164": {
+"coa": "Escudo de Sena de Luna (León).svg"
+},
+"24165": {
+"coa": "Escudo de Sobrado (León).svg"
+},
+"24166": {
+"coa": "Escudo de Soto de la Vega.svg",
+"flag": "Flag of Soto de la Vega Spain.svg"
+},
+"24167": {
+"coa": "Escudo de Soto y Amío.svg"
+},
+"24168": {
+"coa": "Escudo de Toral de los Guzmanes (León).svg",
+"flag": "Bandera de Toral de los Guzmanes.svg"
+},
+"24169": {
+"coa": "Escudo de Toreno (León).svg"
+},
+"24170": {
+"coa": "Escudo de Torre del Bierzo (León).svg"
+},
+"24171": {
+"coa": "Escudo de Trabadelo (León).svg"
+},
+"24172": {
+"coa": "Escudo de Truchas.svg",
+"flag": "Bandera de Truchas.svg"
+},
+"24173": {
+"coa": "Escudo de Turcia.svg"
+},
+"24174": {
+"coa": "Escudo de Urdiales del Páramo.svg",
+"flag": "Flag of Urdiales del Páramo Spain.svg"
+},
+"24175": {
+"coa": "Escudo de Valdefresno (León) 2.svg"
+},
+"24176": {
+"coa": "Escudo de Valdefuentes del Páramo.svg"
+},
+"24177": {
+"coa": "Escudo de Valdelugueros (León).svg",
+"flag": "Bandera de Valdelugueros (León).svg"
+},
+"24179": {
+"coa": "Escudo de Valdepiélago (León).svg",
+"flag": "Bandera de Valdepiélago (León).svg"
+},
+"24180": {
+"coa": "Escudo de Valdepolo (León).svg",
+"flag": "Bandera de Valdepolo (León).svg"
+},
+"24182": {
+"coa": "Escudo de Valderrey.svg",
+"flag": "Valderrey.svg"
+},
+"24183": {
+"coa": "Escudo de Valderrueda.svg",
+"flag": "Flag of Valderrueda Spain.svg"
+},
+"24184": {
+"coa": "Escudo de Valdesamario.svg"
+},
+"24185": {
+"coa": "Escudo de Val de San Lorenzo (León).svg",
+"flag": "Flag of Val de San Lorenzo Spain.svg"
+},
+"24187": {
+"coa": "Escudo de Valdevimbre.svg",
+"flag": "Bandera de Valdevimbre.svg"
+},
+"24188": {
+"coa": "Escudo de Valencia de Don Juan.svg",
+"flag": "Flag Valencia de Don Juan.svg"
+},
+"24189": {
+"coa": "Escudo de Valverde de la Virgen.svg"
+},
+"24190": {
+"coa": "Escudo de Valverde-Enrique (León).svg",
+"flag": "Valvenrb.gif"
+},
+"24193": {
+"coa": "Escudo de La Vecilla (León).svg",
+"flag": "Bandera de La Vecilla (León).svg"
+},
+"24194": {
+"coa": "Escudo de Vegacervera.svg"
+},
+"24196": {
+"coa": "Escudo de Vega de Espinareda.svg",
+"flag": "Bandera de Vega de Espinareda.svg"
+},
+"24197": {
+"flag": "Bandera de Vega de Infanzones.svg"
+},
+"24198": {
+"coa": "Escudo de Vega de Valcarce (León).svg"
+},
+"24199": {
+"coa": "Escudo de Vegaquemada.svg",
+"flag": "Bandera de Vegaquemada.svg"
+},
+"24201": {
+"coa": "Escudo de Vegas del Condado (León).svg",
+"flag": "Bandera de Vegas del Condado.svg"
+},
+"24202": {
+"coa": "Escudo de Villablino.svg",
+"flag": "Bandera de Villablino.svg"
+},
+"24203": {
+"coa": "Escudo de Villabraz.svg",
+"flag": "Flag of villabraz.svg"
+},
+"24205": {
+"coa": "Escudo de Villadangos del Páramo.svg",
+"flag": "Bandera de Villadangos del Páramo.svg"
+},
+"24206": {
+"coa": "Escudo de Toral de los Vados (León).svg"
+},
+"24207": {
+"coa": "Escudo de Villademor de la Vega.svg",
+"flag": "Flag of Villademor de la Vega Spain.svg"
+},
+"24209": {
+"coa": "Coat of Arms of Villafranca del Bierzo.svg"
+},
+"24210": {
+"coa": "Escudo de Villagatón (León).svg",
+"flag": "Bandera de Villagatón (León).svg"
+},
+"24211": {
+"coa": "Escudo de Villamandos (León).svg",
+"flag": "Bandera de Villamandos (León).svg"
+},
+"24212": {
+"coa": "Escudo de Villamañán.svg"
+},
+"24213": {
+"coa": "Escudo de Villamartín de Don Sancho (León).svg"
+},
+"24214": {
+"coa": "Escudo de Villamejil (León).svg"
+},
+"24216": {
+"coa": "Escudo de Villamontán de la Valduerna.svg",
+"flag": "Bandera de Villamontán de la Valduerna.svg"
+},
+"24217": {
+"coa": "Escudo de Villamoratiel de las Matas (León).svg",
+"flag": "Bandera de Villamoratiel de las Matas (León).svg"
+},
+"24219": {
+"coa": "Escudo de Villaobispo de Otero (León).svg",
+"flag": "Bandera de Villaobispo de Otero (León).svg"
+},
+"24221": {
+"coa": "Escudo de Villaquejida.svg",
+"flag": "Flag of Villaquejida.svg"
+},
+"24222": {
+"coa": "Escudo de Villaquilambre.svg",
+"flag": "Bandera de Villaquilambre.svg"
+},
+"24223": {
+"coa": "Escudo de Villarejo de Orbigo.svg",
+"flag": "Bandera de Villarejo de Orbigo.svg"
+},
+"24224": {
+"coa": "Escudo de Villares de Órbigo.svg"
+},
+"24225": {
+"coa": "Escudo de Villasabariego (León).svg",
+"flag": "Bandera de Villasabariego (León).svg"
+},
+"24227": {
+"coa": "Escudo de Villaturiel.svg",
+"flag": "Bandera de Villaturiel.svg"
+},
+"24228": {
+"coa": "Escudo de Villazala (León).svg",
+"flag": "Bandera de Villazala (León).svg"
+},
+"24229": {
+"coa": "Escudo de Villazanzo de Valderaduey (León).svg"
+},
+"24901": {
+"coa": "Escudo de Villamanín (León).svg",
+"flag": "Bandera de Villamanín (León).svg"
+},
+"24902": {
+"coa": "Escudo de Villaornate y Castro (León).svg",
+"flag": "Flag of Villaornate Spain.svg"
+},
+"34001": {
+"coa": "Escudo de Abarca de Campos.svg"
+},
+"34003": {
+"coa": "Escudo de Abia de las Torres.svg",
+"flag": "Bandera de Abia de las Torres.svg"
+},
+"34004": {
+"coa": "Escudo de Aguilar de Campoo.svg"
+},
+"34005": {
+"coa": "Escudo de Alar del Rey (Palencia).svg"
+},
+"34006": {
+"coa": "Escudo de Alba de Cerrato.svg",
+"flag": "Bandera de Alba de Cerrato.svg"
+},
+"34011": {
+"coa": "Escudo de Amusco.svg"
+},
+"34012": {
+"coa": "Escudo de Antigüedad.svg",
+"flag": "Bandera de Antigüedad.svg"
+},
+"34015": {
+"coa": "Escudo de Arconada (Palencia).svg"
+},
+"34017": {
+"coa": "Escudo de Astudillo.svg"
+},
+"34018": {
+"coa": "Escudo de Autilla del Pino.svg",
+"flag": "Flag of Autilla del Pino.svg"
+},
+"34019": {
+"coa": "Escudo de Autillo de Campos.svg"
+},
+"34022": {
+"coa": "Escudo Baltanás.svg",
+"flag": "Bandera Baltanás.svg"
+},
+"34023": {
+"coa": "Coat of Arms of Venta de Baños.svg"
+},
+"34027": {
+"coa": "Escudo de Barruelo de Santullán.svg",
+"flag": "Bandera de Barruelo de Santullán.svg"
+},
+"34029": {
+"coa": "Escudo de Becerril de Campos.svg",
+"flag": "Bandera de Becerril de Campos.svg"
+},
+"34034": {
+"coa": "Escudo de Boadilla del Camino.svg",
+"flag": "Bandera de Boadilla del Camino (Palencia).svg"
+},
+"34035": {
+"coa": "Escudo de Boadilla de Rioseco.svg",
+"flag": "Bandera de Boadilla de Rioseco.svg"
+},
+"34036": {
+"coa": "Escudo de Brañosera.svg"
+},
+"34037": {
+"coa": "Escudo de Buenavista de Valdavia.svg",
+"flag": "Bandera de Buenavista de Valdavia.svg"
+},
+"34038": {
+"coa": "Escudo de Bustillo de la Vega.svg",
+"flag": "Bandera de Bustillo de la Vega.svg"
+},
+"34041": {
+"coa": "Escudo de Calahorra de Boedo.svg",
+"flag": "Bandera de Calahorra de Boedo.svg"
+},
+"34042": {
+"coa": "Escudo de Calzada de los Molinos.svg",
+"flag": "Bandera de Calzada de los Molinos.svg"
+},
+"34046": {
+"coa": "Escudo de Cardeñosa de Volpejera.svg",
+"flag": "Bandera de Cardeñosa de Volpejera.svg"
+},
+"34047": {
+"coa": "Escudo de Carrión de los Condes Nuevo.svg",
+"flag": "Bandera Carrión Condes.svg"
+},
+"34049": {
+"coa": "Escudo de Castrejón de la Peña.svg"
+},
+"34050": {
+"coa": "Escudo de Castrillo de Don Juan.svg",
+"flag": "Bandera de Castrillo de Don Juan.svg"
+},
+"34052": {
+"coa": "Escudo de Castrillo de Villavega.svg",
+"flag": "Bandera de Castrillo de Villavega.svg"
+},
+"34053": {
+"coa": "Escudo de Castromocho (Palencia).svg",
+"flag": "Bandera de Castromocho (Palencia).svg"
+},
+"34055": {
+"coa": "Escudo de Cervatos de la Cueza.svg",
+"flag": "Flag of Cervatos de la Cueza.svg"
+},
+"34056": {
+"coa": "Escudo de Cervera de Pisuerga.svg"
+},
+"34059": {
+"coa": "Escudo de Cisneros.svg",
+"flag": "Bandera de Cisneros.svg"
+},
+"34060": {
+"coa": "Escudo de Cobos de Cerrato.svg",
+"flag": "Bandera de Cobos de Cerrato.svg"
+},
+"34063": {
+"coa": "Escudo de Cordovilla la Real (Palencia).svg"
+},
+"34067": {
+"coa": "Escudo de Dehesa de Montejo.svg"
+},
+"34069": {
+"coa": "Coat of Arms of Dueñas (Spain).svg"
+},
+"34070": {
+"coa": "Escudo de Espinosa de Cerrato.svg",
+"flag": "Espinosa de Cerrato Spain.svg"
+},
+"34071": {
+"coa": "Escudo de Espinosa de Villagonzalo.svg",
+"flag": "Bandera de Espinosa de Villagonzalo.svg"
+},
+"34072": {
+"coa": "Escudo de Frechilla (Palencia).svg"
+},
+"34073": {
+"coa": "Escudo de Fresno del Río.svg",
+"flag": "Bandera de Fresno del Río.svg"
+},
+"34074": {
+"coa": "Escudo de Fromista.svg"
+},
+"34076": {
+"coa": "Escudo de Fuentes de Nava.svg",
+"flag": "Bandera Fuentes de Nava.svg"
+},
+"34077": {
+"coa": "Escudo de Fuentes de Valdepero.svg",
+"flag": "Bandera de Fuentes de Valdepero.svg"
+},
+"34079": {
+"coa": "Escudo de Grijota.svg",
+"flag": "Bandera de Grijota.svg"
+},
+"34080": {
+"coa": "Escudo de Guardo (Palencia).svg"
+},
+"34081": {
+"coa": "Escudo de Guaza de Campos.svg",
+"flag": "Bandera de Guaza de Campos.svg"
+},
+"34083": {
+"coa": "Escudo de Herrera de Pisuerga2.svg",
+"flag": "Bandera de Herrera de Pisuerga2.svg"
+},
+"34084": {
+"coa": "Escudo de Herrera de Valdecañas.svg",
+"flag": "Bandera de Herrera de Valdecañas.svg"
+},
+"34086": {
+"coa": "Escudo de Hontoria de Cerrato.svg",
+"flag": "Bandera de Hontoria de Cerrato.svg"
+},
+"34087": {
+"coa": "Escudo de Hornillos de Cerrato.svg",
+"flag": "Bandera de Hornillos de Cerrato.svg"
+},
+"34088": {
+"coa": "Escudo de Husillos.svg"
+},
+"34089": {
+"coa": "Escudo de Itero de la Vega.svg"
+},
+"34092": {
+"coa": "Escudo de Lantadilla.svg",
+"flag": "Bandera de Lantadilla.svg"
+},
+"34098": {
+"coa": "Escudo de Magaz de Pisuerga.svg",
+"flag": "Bandera de Magaz de Pisuerga.svg"
+},
+"34100": {
+"coa": "Escudo de Mantinos.svg",
+"flag": "Bandera de Mantinos.svg"
+},
+"34101": {
+"coa": "Escudo de Marcilla de Campos.svg",
+"flag": "Bandera de Marcilla de Campos.svg"
+},
+"34102": {
+"coa": "Escudo de Mazariegos.svg",
+"flag": "Bandera de Mazariegos.svg"
+},
+"34104": {
+"coa": "Escudo de Melgar de Yuso.svg",
+"flag": "Bandera de Melgar de Yuso.svg"
+},
+"34108": {
+"coa": "Escudo de Monzón de Campos.svg"
+},
+"34116": {
+"coa": "Escudo de Osornillo.svg"
+},
+"34120": {
+"coa": "Escudo heraldico de Palencia.svg",
+"flag": "Bandera de Palencia.svg"
+},
+"34122": {
+"coa": "Escudo de Páramo de Boedo.svg",
+"flag": "Bandera de Páramo Boedo.svg"
+},
+"34123": {
+"coa": "Escudo de Paredes de Nava.svg",
+"flag": "Bandera de Paredes de Nava.svg"
+},
+"34127": {
+"coa": "Escudo de Perales.svg",
+"flag": "Bandera de Perales.svg"
+},
+"34129": {
+"coa": "Escudo de Pino del Río.svg",
+"flag": "Bandera de Pino del Río.svg"
+},
+"34130": {
+"coa": "Escudo de Piña de Campos (Palencia).svg"
+},
+"34132": {
+"coa": "Escudo de Población de Campos.svg"
+},
+"34135": {
+"coa": "Escudo de Pomar de Valdivia.svg",
+"flag": "Bandera de Pomar de Valdivia.svg"
+},
+"34137": {
+"coa": "Escudo de Pozo de Urama.svg",
+"flag": "Bandera de Pozo de Urama.svg"
+},
+"34141": {
+"coa": "Escudo de Quintana del Puente (Palencia).svg",
+"flag": "Bandera de Quintana del Puente (Palencia).svg"
+},
+"34146": {
+"coa": "Escudo de Reinoso de Cerrato.svg",
+"flag": "Bandera de Reinoso de Cerrato.svg"
+},
+"34147": {
+"coa": "Escudo de Renedo de la Vega.svg",
+"flag": "Bandera de Renedo de la Vega.svg"
+},
+"34149": {
+"coa": "Escudo de Requena de Campos (Palencia).svg"
+},
+"34152": {
+"coa": "Escudo de Revenga de Campos.svg",
+"flag": "Bandera Revenga de Campos.svg"
+},
+"34155": {
+"coa": "Escudo de Ribas de Campos.svg",
+"flag": "Bandera de Ribas de Campos.svg"
+},
+"34157": {
+"coa": "Escudo de Saldaña (Palencia).svg",
+"flag": "Bandera de Saldaña (Palencia).svg"
+},
+"34158": {
+"coa": "Escudo de Salinas de Pisuerga.svg",
+"flag": "Bandera de Salinas de Pisuerga.svg"
+},
+"34159": {
+"coa": "Escudo de San Cebrián de Campos.svg",
+"flag": "Bandera de San Cebrián de Campos.svg"
+},
+"34165": {
+"coa": "Escudo San Roman de la Cuba.svg",
+"flag": "Bandera San Roman de la Cuba.svg"
+},
+"34169": {
+"coa": "Escudo de Santervás de la Vega.svg",
+"flag": "Bandera de Santervás de la Vega.svg"
+},
+"34171": {
+"coa": "Escudo de Santibáñez de la Peña (Palencia).svg",
+"flag": "Bandera de Santibáñez de la Peña (Palencia).svg"
+},
+"34174": {
+"coa": "Escudo de Santoyo.svg",
+"flag": "Bandera de Santoyo.svg"
+},
+"34176": {
+"coa": "Escudo de Sotobañado y Priorato (Palencia).svg"
+},
+"34177": {
+"coa": "Escudo de Soto de Cerrato.svg",
+"flag": "Bandera de Soto de Cerrato.svg"
+},
+"34178": {
+"coa": "Escudo de Tabanera de Cerrato.svg",
+"flag": "Bandera de Tabanera de Cerrato.svg"
+},
+"34181": {
+"coa": "Escudo de Tariego de Cerrato (Palencia).svg"
+},
+"34182": {
+"coa": "Escudo de Torquemada.svg"
+},
+"34184": {
+"coa": "Escudo de Torremormojón.svg"
+},
+"34199": {
+"coa": "Escudo de Velilla del Río Carrión.svg",
+"flag": "Flag of Velilla del Río Carrión.svg"
+},
+"34201": {
+"coa": "Escudo de Vertavillo.svg",
+"flag": "Bandera de Vertavillo.svg"
+},
+"34202": {
+"coa": "Escudo de Villabasta de Valdavia (Palencia).svg",
+"flag": "Bandera Villabasta de Valdavia.svg"
+},
+"34206": {
+"coa": "Escudo de Villada (Palencia).svg"
+},
+"34208": {
+"coa": "Escudo de Villaeles de Valdavia.svg",
+"flag": "Bandera Villaeles de Valdavia.svg"
+},
+"34211": {
+"coa": "Escudo de Villaherreros.svg",
+"flag": "Bandera de Villaherreros.svg"
+},
+"34214": {
+"coa": "Escudo de Villalba de Guardo (Palencia).svg"
+},
+"34215": {
+"coa": "Escudo de Villalcázar de Sirga.svg",
+"flag": "Bandera Villalcázar de Sirga.svg"
+},
+"34217": {
+"coa": "Escudo de Villalobón.svg",
+"flag": "Bandera de Villalobón.svg"
+},
+"34220": {
+"coa": "Escudo de Villamartín de Campos (Palencia).svg"
+},
+"34221": {
+"coa": "Escudo de Villamediana.svg"
+},
+"34223": {
+"coa": "Escudo de Villamoronta.svg",
+"flag": "Bandera de Villamoronta.svg"
+},
+"34225": {
+"coa": "Escudo de Villamuriel de Cerrato (Palencia).svg"
+},
+"34228": {
+"coa": "Escudo de Villanuño de Valdavia.svg",
+"flag": "Bandera de Villanuño de Valdavia.svg"
+},
+"34232": {
+"coa": "Escudo de Villarramiel (Palencia).svg"
+},
+"34234": {
+"coa": "Escudo Villasila de Valdavia oficial.svg",
+"flag": "Bandera de Villasila de Valdavia.svg"
+},
+"34236": {
+"coa": "Escudo de Villaturde.svg",
+"flag": "Bandera de Villaturde.svg"
+},
+"34237": {
+"coa": "Villaumbrales.png"
+},
+"34238": {
+"coa": "Escudo de Villaviudas.svg",
+"flag": "Flag of Villaviudas, Spain.svg"
+},
+"34242": {
+"coa": "Escudo de Villodrigo (Palencia).svg"
+},
+"34243": {
+"coa": "Escudo de Villoldo (Palencia).svg"
+},
+"34245": {
+"coa": "Escudo villota.jpg",
+"flag": "Bandera villota.jpg"
+},
+"34901": {
+"coa": "Escudo de Osorno la Mayor.svg"
+},
+"34902": {
+"coa": "Escudo de Valle del Retortillo.svg",
+"flag": "Bandera de Valle del Retortillo.svg"
+},
+"37001": {
+"coa": "Escudo de Abusejo.svg"
+},
+"37002": {
+"coa": "Escudo de Agallas.svg",
+"flag": "Bandera de Agallas.svg"
+},
+"37005": {
+"coa": "Escudo de La Alameda de Gardón.svg"
+},
+"37006": {
+"coa": "Escudo de La Alamedilla.svg"
+},
+"37007": {
+"coa": "Escudo de Alaraz.svg",
+"flag": "Alaraz (Salamanca) - Bandera.svg"
+},
+"37008": {
+"coa": "Escudo de Alba de Tormes.svg"
+},
+"37009": {
+"coa": "Escudo de Alba de Yeltes.svg"
+},
+"37010": {
+"coa": "Escudo de La Alberca.svg",
+"flag": "Bandera de La Alberca.svg"
+},
+"37011": {
+"coa": "Escudo de La Alberguería de Argañán.svg"
+},
+"37013": {
+"coa": "Escudo de Aldeacipreste.svg",
+"flag": "Bandera de Aldeacipreste.svg"
+},
+"37014": {
+"coa": "Escudo de Aldeadávila de la Ribera.svg"
+},
+"37015": {
+"coa": "Escudo de Aldea del Obispo.svg"
+},
+"37016": {
+"coa": "Escudo de Aldealengua.svg"
+},
+"37017": {
+"coa": "Escudo de Aldeanueva de Figueroa.svg",
+"flag": "Bandera de Aldeanueva de Figueroa.svg"
+},
+"37018": {
+"flag": "Bandera de Aldeanueva de la Sierra.svg"
+},
+"37019": {
+"coa": "Escudo de Aldearrodrigo.svg"
+},
+"37020": {
+"coa": "Escudo de Aldearrubia (Salamanca).svg"
+},
+"37022": {
+"coa": "Escudo de Aldeaseca de la Frontera.svg",
+"flag": "Bandera de Aldeaseca de la frontera.svg"
+},
+"37023": {
+"coa": "Escudo de Aldeatejada.svg"
+},
+"37025": {
+"coa": "Escudo de Aldehuela de la Bóveda.svg"
+},
+"37026": {
+"coa": "Escudo de Aldehuela de Yeltes.svg",
+"flag": "Aldehuela de Yeltes Spain.svg"
+},
+"37028": {
+"coa": "Escudo de Almendra.svg"
+},
+"37031": {
+"coa": "Escudo de Arabayona.svg",
+"flag": "Bandera de Arabayona.svg"
+},
+"37032": {
+"coa": "Escudo de Arapiles.svg",
+"flag": "Bandera de Arapiles.svg"
+},
+"37035": {
+"coa": "Escudo de Armenteros.svg"
+},
+"37037": {
+"coa": "Escudo de La Atalaya.svg",
+"flag": "Bandera de La Atalaya.svg"
+},
+"37039": {
+"coa": "Escudo de Bañobárez.svg",
+"flag": "Bandera de Bañobárez.svg"
+},
+"37040": {
+"coa": "Escudo de Barbadillo (Salamanca).svg"
+},
+"37044": {
+"coa": "Escudo de Barruecopardo.svg"
+},
+"37046": {
+"coa": "Escudo de Béjar-Salamanca.svg"
+},
+"37049": {
+"coa": "Escudo en tramitación de Bermellar.svg"
+},
+"37050": {
+"coa": "Escudo de Berrocal de Huebra.svg",
+"flag": "Bandera Berrocal de Huebra.svg"
+},
+"37051": {
+"coa": "Escudo de Berrocal de Salvatierra.svg",
+"flag": "Bandera de Berrocal de Salvatierra.svg"
+},
+"37052": {
+"coa": "Escudo de Boada.svg",
+"flag": "BanderaBoadaFIN.jpg"
+},
+"37054": {
+"coa": "Escudo de El Bodón (Salamanca).svg"
+},
+"37055": {
+"coa": "Escudo de Bogajo.svg"
+},
+"37057": {
+"coa": "Escudo de Bóveda de rio Almar.svg",
+"flag": "Bandera de Boveda de rio Almar.svg"
+},
+"37059": {
+"coa": "Escudo de Buenamadre.svg"
+},
+"37060": {
+"coa": "Escudo municipal de Buenavista.svg"
+},
+"37061": {
+"coa": "Escudo de El Cabaco.svg",
+"flag": "Bandera de El Cabaco (Salamanca).svg"
+},
+"37062": {
+"coa": "Escudo de Cabezabellosa de la Calzada.svg"
+},
+"37065": {
+"coa": "Escudo de Cabeza de Caballo.svg",
+"flag": "Bandera Cabeza de Caballo.svg"
+},
+"37067": {
+"coa": "Escudo de Cabrerizos.svg"
+},
+"37068": {
+"coa": "Escudo de Cabrillas.svg"
+},
+"37069": {
+"coa": "Escudo de Calvarrasa de Abajo.svg",
+"flag": "Bandera de Calvarrasa de Abajo.svg"
+},
+"37070": {
+"coa": "Escudo de Calvarrasa de Arriba.svg"
+},
+"37072": {
+"coa": "Escudo de Calzada de Don Diego.svg"
+},
+"37073": {
+"coa": "Escudo de Calzada de Valdunciel.svg"
+},
+"37074": {
+"coa": "Escudo de Campillo de Azaba.svg",
+"flag": "Bandera de Campillo de Azaba.svg"
+},
+"37078": {
+"coa": "Escudo de Candelario.svg"
+},
+"37080": {
+"coa": "Escudo de Cantagallo.svg"
+},
+"37081": {
+"coa": "Escudo de Cantalapiedra.svg"
+},
+"37082": {
+"coa": "Escudo de Cantalpino.svg",
+"flag": "Bandera de Cantalpino.svg"
+},
+"37085": {
+"coa": "Escudo de Carbajosa de la Sagrada.svg"
+},
+"37086": {
+"coa": "Escudo de Carpio de Azaba.svg",
+"flag": "Bandera de Carpio de Azaba.svg"
+},
+"37087": {
+"coa": "Escudo de Carrascal de Barregas.svg"
+},
+"37088": {
+"coa": "Escudo de Carrascal del Obispo.svg"
+},
+"37090": {
+"coa": "Escudo de Las Casas del Conde.svg",
+"flag": "Bandera las Casas del Conde.svg"
+},
+"37091": {
+"coa": "Escudo de Casillas de Flores.svg"
+},
+"37092": {
+"coa": "Escudo de Castellanos de Moriscos.svg"
+},
+"37096": {
+"coa": "Escudo de Castillejo de Martín Viejo (Salamanca).svg"
+},
+"37098": {
+"coa": "Escudo de Cepeda.svg"
+},
+"37099": {
+"coa": "Escudo de Cereceda de la Sierra.svg",
+"flag": "Bandera de Cereceda de la Sierra.svg"
+},
+"37102": {
+"coa": "Escudo de El Cerro (Salamanca).svg"
+},
+"37103": {
+"coa": "Escudo de Cespedosa de Tormes.svg"
+},
+"37106": {
+"coa": "Escudo de Cipérez.svg",
+"flag": "Bandera de Ciperez.svg"
+},
+"37107": {
+"coa": "Escudo de Ciudad Rodrigo.svg",
+"flag": "Flag of Ciudad Rodrigo.svg"
+},
+"37108": {
+"coa": "Escudo de Coca de Alba.svg",
+"flag": "Bandera de Coca de Alba.svg"
+},
+"37110": {
+"coa": "Escudo de Cordovilla.svg",
+"flag": "Bandera de Cordovilla.svg"
+},
+"37112": {
+"coa": "Escudo Cristóbal.svg",
+"flag": "Bandera Cristóbal.svg"
+},
+"37113": {
+"coa": "Escudo de El Cubo de Don Sancho.svg"
+},
+"37119": {
+"coa": "Escudo de La Encina.svg"
+},
+"37120": {
+"coa": "Escudo de La Encina de San Silvestre.svg",
+"flag": "Bandera de Encina de San Silvestre.svg"
+},
+"37122": {
+"coa": "Escudo de Encinas de Arriba.svg"
+},
+"37127": {
+"coa": "Escudo de Espeja.svg"
+},
+"37128": {
+"coa": "Escudo de Espino de la Orbada.svg",
+"flag": "Bandera de Espino de la Orbada.svg"
+},
+"37130": {
+"coa": "Escudo de Forfoleda.svg"
+},
+"37132": {
+"coa": "Escudo de La Fregeneda.svg",
+"flag": "Bandera de la localidad de La Fregeneda.svg"
+},
+"37133": {
+"coa": "Escudo de Fresnedoso.svg"
+},
+"37135": {
+"coa": "Escudo de La Fuente de San Esteban.svg",
+"flag": "Bandera de La Fuente de San Esteban.svg"
+},
+"37136": {
+"coa": "Escudo de Fuenteguinaldo.svg"
+},
+"37138": {
+"coa": "Escudo de Fuenterroble de Salvatierra.svg"
+},
+"37140": {
+"coa": "Escudo de Fuentes de Oñoro.svg",
+"flag": "Bandera de Bandera de Fuentes de Oñoro.svg"
+},
+"37141": {
+"coa": "Escudo de Gajates.svg"
+},
+"37143": {
+"coa": "Escudo de Galinduste.svg",
+"flag": "Bandera de Galinduste.svg"
+},
+"37145": {
+"coa": "Escudo de Gallegos de Argañan.svg"
+},
+"37146": {
+"coa": "Escudo de Gallegos de Solmirón.svg",
+"flag": "Bandera de Gallegos de Solmirón.svg"
+},
+"37149": {
+"coa": "Escudo de Garcirrey.svg"
+},
+"37151": {
+"coa": "Escudo de Golpejas.svg"
+},
+"37154": {
+"coa": "Escudo de Guadramiro.svg",
+"flag": "Bandera de Guadramiro.svg"
+},
+"37155": {
+"coa": "Escudo de Guijo de Ávila.svg"
+},
+"37156": {
+"coa": "Escudo de Guijuelo.svg",
+"flag": "Bandera de Guijuelo.svg"
+},
+"37158": {
+"coa": "Escudo de Herguijuela de la Sierra.svg"
+},
+"37160": {
+"coa": "Escudo de Hinojosa del Duero.svg"
+},
+"37164": {
+"coa": "Escudo de Huerta.svg"
+},
+"37166": {
+"coa": "Escudo de Ituero de Azaba.svg"
+},
+"37167": {
+"coa": "Escudo de Juzbado.svg"
+},
+"37168": {
+"coa": "Escudo de Lagunilla.svg"
+},
+"37169": {
+"coa": "Escudo de Larrodrigo.svg"
+},
+"37170": {
+"coa": "Escudo de Ledesma.svg",
+"flag": "Bandera de Ledesma.svg"
+},
+"37171": {
+"coa": "Escudo de Ledrada.svg",
+"flag": "Bandera de Ledrada.svg"
+},
+"37172": {
+"coa": "Escudo de Linares de Riofrío.svg"
+},
+"37173": {
+"coa": "Escudo de Lumbrales.svg",
+"flag": "Bandera de Lumbrales (Salamanca).svg"
+},
+"37174": {
+"coa": "Escudo de Macotera.svg",
+"flag": "Bandera de Macotera.svg"
+},
+"37179": {
+"coa": "Escudo de Mancera de Abajo.svg",
+"flag": "Bandera de Mancera de Abajo.svg"
+},
+"37183": {
+"coa": "Escudo de Martín de Yeltes.svg"
+},
+"37184": {
+"coa": "Escudo de Masueco.svg"
+},
+"37185": {
+"coa": "Escudo de Castellanos de Villiquera.svg"
+},
+"37187": {
+"coa": "Escudo de Matilla de los caños del rio.svg"
+},
+"37190": {
+"coa": "Escudo de Mieza.svg",
+"flag": "Bandera de Mieza.svg"
+},
+"37191": {
+"coa": "Escudo de El Milano.svg",
+"flag": "Bandera de El Milano.svg"
+},
+"37192": {
+"coa": "Escudo de Miranda de Azan.svg",
+"flag": "Bandera de Miranda de Azán.svg"
+},
+"37193": {
+"coa": "Escudo de Miranda del Castañar.svg",
+"flag": "Bandera de Miranda del Castañar.svg"
+},
+"37194": {
+"coa": "Escudo de Mogarraz.svg"
+},
+"37196": {
+"coa": "Escudo de Monforte de la Sierra.svg"
+},
+"37197": {
+"coa": "Escudo de Monleón.svg"
+},
+"37199": {
+"coa": "Escudo de Monsagro (Salamanca).svg"
+},
+"37200": {
+"coa": "Escudo de Montejo1.svg",
+"flag": "Bandera de Montejo.svg"
+},
+"37201": {
+"coa": "Escudo de Montemayor del Río.svg"
+},
+"37204": {
+"coa": "Escudo de Morasverdes.svg"
+},
+"37205": {
+"coa": "Escudo de Morille.svg",
+"flag": "Bandera de Morille.svg"
+},
+"37206": {
+"coa": "Escudo de Moríñigo.svg"
+},
+"37209": {
+"coa": "Escudo de Mozárbez.svg"
+},
+"37214": {
+"coa": "Escudo de Nava de Francia.svg"
+},
+"37215": {
+"coa": "Escudo de Nava de Sotrobal.svg"
+},
+"37216": {
+"flag": "Bandera de Navales.svg"
+},
+"37221": {
+"coa": "Escudo de Navasfrías.svg",
+"flag": "Bandera de Navasfrías.svg"
+},
+"37222": {
+"coa": "Escudo de Negrilla de Palencia.svg"
+},
+"37223": {
+"coa": "Escudo de Olmedo de Camaces (Salamanca).svg"
+},
+"37226": {
+"coa": "Escudo de Palacios del Arzobispo (Salamanca).svg"
+},
+"37228": {
+"coa": "Escudo de Palaciosrubios.svg"
+},
+"37229": {
+"coa": "Escudo de Palencia de Negrilla (Salamanca).svg"
+},
+"37230": {
+"coa": "Escudo de Parada de Arriba.svg",
+"flag": "Bandera de Parada de Arriba.svg"
+},
+"37231": {
+"coa": "Escudo de Parada de Rubiales.svg"
+},
+"37232": {
+"coa": "Escudo de Paradinas de San Juan.svg",
+"flag": "Bandera de Paradinas de San Juan.svg"
+},
+"37234": {
+"coa": "Escudo de El Payo.svg"
+},
+"37235": {
+"coa": "Escudo de Pedraza de Alba.svg"
+},
+"37236": {
+"coa": "Escudo de Pedrosillo de Alba.svg"
+},
+"37237": {
+"flag": "Bandera de Pedrosillo de los Aires.svg"
+},
+"37238": {
+"flag": "Bandera de Pedrosillo el Ralo.svg"
+},
+"37239": {
+"coa": "Escudo de El Pedroso de la Armuña.svg"
+},
+"37240": {
+"coa": "Escudo de Pelabravo.svg"
+},
+"37243": {
+"coa": "Escudo de La Peña (Salamanca).svg",
+"flag": "Bandera de La Peña.svg"
+},
+"37244": {
+"coa": "Escudo de Peñacaballera.svg",
+"flag": "Bandera de Peñacaballera.svg"
+},
+"37245": {
+"coa": "Escudo de Peñaparda.svg"
+},
+"37246": {
+"coa": "Coat of Arms of Peñaranda de Bracamonte.svg",
+"flag": "Bandera Peñaranda de Bracamonte (vector).svg"
+},
+"37247": {
+"coa": "Escudo de Peñarandilla.svg",
+"flag": "Bandera de Peñarandilla.svg"
+},
+"37248": {
+"coa": "Escudo de Peralejos de Abajo.svg",
+"flag": "Bandera de Peralejos de Abajo.svg"
+},
+"37250": {
+"coa": "Escudo de Pereña de la Ribera (Salamanca).svg"
+},
+"37253": {
+"coa": "Escudo de El Pino de Tormes.svg"
+},
+"37254": {
+"coa": "Escudo de Pitiegua.svg"
+},
+"37255": {
+"coa": "Escudo de Pizarral.svg",
+"flag": "Bandera de Pizarral.svg"
+},
+"37257": {
+"coa": "Escudo de Pozos de Hinojo.svg"
+},
+"37261": {
+"coa": "Escudo de Puente del Congosto (Salamanca).svg",
+"flag": "Bandera de Puente del Congosto (Salamanca).svg"
+},
+"37263": {
+"coa": "Escudo de Puerto de Béjar.svg",
+"flag": "Bandera de Puerto de Bejar.svg"
+},
+"37264": {
+"coa": "Escudo de Puerto Seguro (Salamanca).svg",
+"flag": "Bandera de Puerto Seguro.svg"
+},
+"37265": {
+"coa": "Escudo de Rágama.svg"
+},
+"37267": {
+"coa": "Escudo de Retortillo.svg"
+},
+"37269": {
+"coa": "Escudo de Robleda.svg"
+},
+"37270": {
+"coa": "Escudo de Robliza de Cojos.svg"
+},
+"37272": {
+"coa": "Escudo de Saelices el Chico.svg",
+"flag": "Bandera de Saelices el Chico.svg"
+},
+"37273": {
+"coa": "Escudo de La Sagrada.svg"
+},
+"37274": {
+"coa": "Escudo heráldico de Salamanca.svg",
+"flag": "Bandera de Salamanca1.svg"
+},
+"37275": {
+"coa": "Escudo de Saldeana.svg"
+},
+"37277": {
+"coa": "Escudo de Salvatierra de Tormes.svg"
+},
+"37278": {
+"coa": "Escudo de San Cristóbal de la Cuesta.svg",
+"flag": "Bandera de San Cristobal de la Cuesta.svg"
+},
+"37279": {
+"coa": "Escudo de Sancti-Spíritus (Salamanca).svg"
+},
+"37281": {
+"coa": "Escudo de Sanchón de la Sagrada.svg"
+},
+"37282": {
+"coa": "Escudo de Sanchotello.svg",
+"flag": "Bandera de Sanchotello.svg"
+},
+"37285": {
+"coa": "Escudo de San Felices de los Gallegos.svg",
+"flag": "Bandera de San Felices de los Gallegos.svg"
+},
+"37288": {
+"coa": "Escudo de San Morales (Salamanca).svg",
+"flag": "Bandera de San Morales.svg"
+},
+"37289": {
+"coa": "Escudo de San Muñoz.svg",
+"flag": "Bandera de San Muñoz.svg"
+},
+"37290": {
+"coa": "Escudo de San Pedro del Valle.svg",
+"flag": "Bandera de San Pedro del Valle.svg"
+},
+"37294": {
+"coa": "Escudo de Santa Marta de Tormes.svg",
+"flag": "Bandera de Santa Marta de Tormes.svg"
+},
+"37297": {
+"coa": "Escudo de Santibáñez de Béjar.svg"
+},
+"37298": {
+"coa": "Escudo de Santibáñez de la Sierra.svg",
+"flag": "Bandera Santibáñez de la Sierra.svg"
+},
+"37299": {
+"coa": "Escudo de Santiz(Salamanca).svg",
+"flag": "Bandera de Santiz.svg"
+},
+"37300": {
+"coa": "Escudo de Los Santos.svg"
+},
+"37301": {
+"coa": "Escudo de Sardón de los Frailes.svg"
+},
+"37302": {
+"coa": "Escudo de Saucelle.svg",
+"flag": "Bandera de Saucelle.svg"
+},
+"37303": {
+"coa": "Escudo de El Sahugo (Salamanca).svg"
+},
+"37304": {
+"coa": "Escudo de Sepulcro-Hilario.svg",
+"flag": "Bandera de Sepulcro Hilario.svg"
+},
+"37306": {
+"coa": "Escudo de Serradilla del Arroyo.svg"
+},
+"37310": {
+"coa": "Escudo de Sieteiglesias de Tormes.svg"
+},
+"37311": {
+"coa": "Escudo de Sobradillo.svg"
+},
+"37312": {
+"coa": "Escudo de Sorihuela.png"
+},
+"37316": {
+"coa": "Escudo de Tamames.svg",
+"flag": "Bandera de Tamames.svg"
+},
+"37317": {
+"coa": "Escudo de Tarazona de Guareña.svg"
+},
+"37318": {
+"coa": "Escudo de Tardáguila.svg"
+},
+"37319": {
+"coa": "Escudo de El Tejado.svg"
+},
+"37322": {
+"coa": "Escudo de Terradillos.svg"
+},
+"37323": {
+"coa": "Escudo de Topas.svg"
+},
+"37324": {
+"coa": "Escudo de Tordillos.svg",
+"flag": "Bandera de Tordillos.svg"
+},
+"37325": {
+"coa": "Escudo de El Tornadizo.svg",
+"flag": "Bandera de El Tornadizo.svg"
+},
+"37327": {
+"coa": "Escudo de Torresmenudas.svg"
+},
+"37328": {
+"coa": "Escudo de Trabanca.svg"
+},
+"37329": {
+"coa": "Coat of Arms of Tremedal de Tormes 2026.svg",
+"flag": "Flag of Tremedal de Tormes 2026.svg"
+},
+"37330": {
+"coa": "Escudo de Valdecarros.svg",
+"flag": "Bandera de Valdecarros.svg"
+},
+"37331": {
+"coa": "Escudo de Valdefuentes de Sangusín (Salamanca).svg"
+},
+"37333": {
+"coa": "Escudo de Valdelacasa.svg"
+},
+"37335": {
+"coa": "Escudo de Valdelosa.svg",
+"flag": "Bandera de Valdelosa.svg"
+},
+"37342": {
+"coa": "Escudo de Valverdón.svg"
+},
+"37344": {
+"coa": "Escudo de Vecinos.svg"
+},
+"37345": {
+"flag": "Bandera de Vega de Tirados.svg"
+},
+"37346": {
+"coa": "Escudo de Las Veguillas.svg"
+},
+"37347": {
+"coa": "Escudo de La Vellés.svg"
+},
+"37348": {
+"coa": "Escudo de Ventosa del Río Almar.svg"
+},
+"37349": {
+"coa": "Escudo de La Vídola.svg",
+"flag": "Bandera de La Vídola.svg"
+},
+"37350": {
+"coa": "Escudo de Vilvestre.svg",
+"flag": "Bandera de Vilvestre.svg"
+},
+"37352": {
+"coa": "Escudo de Villagonzalo de Tormes.svg"
+},
+"37353": {
+"coa": "Escudo de Villalba de los Llanos.svg"
+},
+"37354": {
+"coa": "Escudo de Villamayor de Armuña.svg",
+"flag": "Bandera de Villamayor (Salamanca).svg"
+},
+"37357": {
+"coa": "Escudo de Villar de Ciervo.svg"
+},
+"37359": {
+"coa": "Escudo de Villar de la Yegua.svg"
+},
+"37360": {
+"coa": "Escudo de Villar de Peralonso.svg",
+"flag": "Bandera de Villar de Peralonso.svg"
+},
+"37362": {
+"coa": "Escudo de Villares de la Reina.svg",
+"flag": "Bandera de Villares de la Reina (Salamanca).svg"
+},
+"37363": {
+"coa": "Escudo de Villares de Yeltes.svg"
+},
+"37364": {
+"coa": "Escudo de Villarino de los Aires.svg"
+},
+"37365": {
+"coa": "Escudo de Villarmayor.svg",
+"flag": "Bandera de Villarmayor.svg"
+},
+"37367": {
+"coa": "Escudo de Villasbuenas.svg"
+},
+"37370": {
+"coa": "Escudo de Villaseco de los Reyes (Salamanca).svg"
+},
+"37371": {
+"coa": "Escudo de Villasrubias.svg"
+},
+"37375": {
+"coa": "Escudo de Villoruela.svg",
+"flag": "Bandera de Villoruela.svg"
+},
+"37376": {
+"coa": "Escudo Heraldico de Vitigudino.svg",
+"flag": "Bandera de Vitigudino.svg"
+},
+"37378": {
+"coa": "Escudo de Zamarra.svg",
+"flag": "Bandera de Zamarra.svg"
+},
+"37379": {
+"coa": "Escudo de Zamayón.svg"
+},
+"37380": {
+"flag": "Bandera de Zarapicos.svg"
+},
+"37381": {
+"coa": "Escudo de La Zarza de Pumareda.svg"
+},
+"37382": {
+"coa": "Escudo de Zorita de la Frontera.svg",
+"flag": "Bandera de Zorita de la Frontera.svg"
+},
+"40001": {
+"coa": "Escudo de Abades.svg",
+"flag": "Bandera de Abades.svg"
+},
+"40003": {
+"coa": "Escudo de Adrados.svg",
+"flag": "Flag of Adrados.svg"
+},
+"40004": {
+"coa": "Escudo de Aguilafuente (Segovia).svg"
+},
+"40006": {
+"coa": "Escudo de Aldealcorvo.jpg"
+},
+"40009": {
+"coa": "Escudo de Aldeanueva de la Serrezuela.svg",
+"flag": "Bandera de Aldeanueva de la Serrezuela.png"
+},
+"40010": {
+"coa": "Escudo de Aldeanueva del Codonal.svg",
+"flag": "Bandera de Aldeanueva del Codonal.svg"
+},
+"40012": {
+"coa": "Escudo de Aldea Real (Segovia).svg",
+"flag": "Bandera Aldea Real.svg"
+},
+"40013": {
+"coa": "Escudo de Aldeasoña (Segovia).svg",
+"flag": "Bandera de Aldeasoña (Segovia).svg"
+},
+"40017": {
+"coa": "Escudo de Anaya.svg",
+"flag": "Bandera de Anaya.svg"
+},
+"40020": {
+"coa": "Escudo de Arcones.svg",
+"flag": "Bandera de Arcones.svg"
+},
+"40022": {
+"coa": "Escudo de Armuña Segovia.svg",
+"flag": "Bandera de Armuña Segovia 2.svg"
+},
+"40024": {
+"coa": "Escudo de Ayllón.svg",
+"flag": "Bandera de Ayllón.svg"
+},
+"40025": {
+"coa": "Escudo de Barbolla.svg",
+"flag": "Bandera de Barbolla.svg"
+},
+"40026": {
+"coa": "Escudo de Basardilla.svg",
+"flag": "Bandera de Basardilla.svg"
+},
+"40029": {
+"coa": "Escudo de Bercimuel Segovia.svg",
+"flag": "Bandera de Bercimuel.svg"
+},
+"40031": {
+"coa": "Escudo de Bernuy de Porreros.svg",
+"flag": "Bandera de Bernuy de Porreros.svg"
+},
+"40032": {
+"coa": "Escudo de Boceguillas.svg",
+"flag": "Bandera de Boceguillas.svg"
+},
+"40033": {
+"coa": "Escudo de Brieva.svg",
+"flag": "Bandera de Brieva.svg"
+},
+"40036": {
+"coa": "Coat of Arms of Cabezuela 2026.svg",
+"flag": "Flag of Cabezuela 2026.svg"
+},
+"40041": {
+"coa": "Escudo de Cantimpalos.svg",
+"flag": "Bandera de Cantimpalos.svg"
+},
+"40043": {
+"coa": "Escudo de Carbonero el Mayor.svg",
+"flag": "Bandera de Carbonero el Mayor.svg"
+},
+"40044": {
+"coa": "Carrascal del rio.svg",
+"flag": "Bandera de Carrascal del Río.png"
+},
+"40045": {
+"coa": "Escudo de Casla (Segovia).svg"
+},
+"40051": {
+"coa": "Escudo de Castroserracín (Segovia).svg"
+},
+"40053": {
+"coa": "Escudo de Cerezo de Abajo (Segovia).svg"
+},
+"40057": {
+"coa": "Escudo de Coca.svg",
+"flag": "Bandera de Coca.svg"
+},
+"40058": {
+"coa": "Escudo de Codorniz.svg",
+"flag": "Bandera de Codorniz.svg"
+},
+"40059": {
+"coa": "Escudo de Collado Hermoso.svg"
+},
+"40063": {
+"coa": "Escudo de Cuéllar.svg",
+"flag": "Bandera de Cuéllar.svg"
+},
+"40065": {
+"coa": "Escudo de Chañe.svg"
+},
+"40070": {
+"coa": "Escudo de Duruelo.svg",
+"flag": "Bandera de Duruelo.svg"
+},
+"40073": {
+"coa": "Escudo de Escalona del Prado.svg"
+},
+"40076": {
+"coa": "Escudo de El Espinar (Segovia).svg",
+"flag": "Bandera de El Espinar.svg"
+},
+"40077": {
+"coa": "Escudo de Espirdo.svg",
+"flag": "Bandera de Espirdo.svg"
+},
+"40082": {
+"coa": "Escudo de Fuente de Santa Cruz (Segovia).svg"
+},
+"40086": {
+"coa": "Escudo de Fuentepelayo.svg",
+"flag": "Bandera de Fuentepelayo.svg"
+},
+"40087": {
+"coa": "Escudo de Fuentepiñel.svg",
+"flag": "Bandera de Fuentepiñel.svg"
+},
+"40088": {
+"coa": "Escudo de Fuenterrebollo.svg",
+"flag": "Fuenterrebollo bn.jpg"
+},
+"40089": {
+"coa": "Escudo de Fuentesaúco de Fuentidueña.svg",
+"flag": "Bandera de Fuentesaúco de Fuentidueña.svg"
+},
+"40091": {
+"coa": "Escudo de Fuentesoto.svg",
+"flag": "Bandera de Fuentesoto.svg"
+},
+"40092": {
+"coa": "Escudo de Fuentidueña.svg",
+"flag": "Bandera de Fuentidueña.svg"
+},
+"40094": {
+"coa": "Escudo de Garcillán.svg"
+},
+"40095": {
+"coa": "Escudo de Gomezserracín.svg"
+},
+"40097": {
+"coa": "Escudo de Grajera.svg",
+"flag": "Bandera de Grajera.svg"
+},
+"40101": {
+"coa": "Escudo de Hontanares de Eresma.svg",
+"flag": "Bandera de Hontanares de Eresma.svg"
+},
+"40103": {
+"coa": "Escudo de Los Huertos.svg",
+"flag": "Bandera de Los Huertos.svg"
+},
+"40104": {
+"coa": "Escudo de Ituero y Lama.svg",
+"flag": "Bandera de Ituero y Lama.svg"
+},
+"40106": {
+"coa": "Escudo de Juarros de Voltoya.svg",
+"flag": "Bandera de Juarros de Voltoya.svg"
+},
+"40107": {
+"coa": "Escudo de Labajos (Segovia).svg",
+"flag": "ETM Labajos.PNG"
+},
+"40110": {
+"coa": "Escudo de Lastras de Cuéllar.svg"
+},
+"40111": {
+"coa": "Escudo de Lastras del Pozo.svg",
+"flag": "Bandera de Lastras del Pozo.svg"
+},
+"40112": {
+"coa": "Escudo de La Lastrilla.svg",
+"flag": "Bandera de La Lastrilla.svg"
+},
+"40115": {
+"coa": "Escudo de Maderuelo.svg",
+"flag": "Bandera de Maderuelo.svg"
+},
+"40120": {
+"coa": "Escudo martin muñoz de la dehesa.svg",
+"flag": "Bandera martin muñoz de la dehesa.svg"
+},
+"40121": {
+"coa": "Escudo martin muñoz de las posadas.svg",
+"flag": "Bandera martin muñoz de las posadas.png"
+},
+"40122": {
+"coa": "Escudo de Marugán.svg",
+"flag": "Bandera de Marugán.svg"
+},
+"40125": {
+"coa": "Escudo de La Matilla (Segovia).svg",
+"flag": "Bandera de La Matilla (Segovia).svg"
+},
+"40128": {
+"coa": "Escudo de Migueláñez.svg",
+"flag": "Bandera de Migueláñez.svg"
+},
+"40131": {
+"coa": "Escudo de Monterrubio.svg",
+"flag": "Bandera de Monterrubio.svg"
+},
+"40134": {
+"coa": "Escudo de Mozoncillo.svg",
+"flag": "Bandera de Mozoncillo.svg"
+},
+"40135": {
+"coa": "Escudo de Muñopedro.svg",
+"flag": "Bandera de Muñopedro.svg"
+},
+"40136": {
+"coa": "Escudo de Muñoveros.svg",
+"flag": "Bandera de Muñoveros.svg"
+},
+"40138": {
+"coa": "Escudo de Nava de la Asunción.svg",
+"flag": "Bandera de Nava de la Asunción.svg"
+},
+"40139": {
+"coa": "Escudo de Navafría.svg",
+"flag": "Bandera de Navafría.svg"
+},
+"40140": {
+"coa": "Escudo de Navalilla.svg",
+"flag": "Bandera de Navalilla.svg"
+},
+"40141": {
+"coa": "Escudo de Navalmanzano.svg",
+"flag": "Bandera de Navalmanzano.svg"
+},
+"40145": {
+"coa": "Escudo Navas de Oro.svg",
+"flag": "Bandera de Navas de Oro.svg"
+},
+"40146": {
+"coa": "Escudo de Navas de San Antonio.svg",
+"flag": "Bandera de Navas de San Antonio.svg"
+},
+"40149": {
+"coa": "Escudo de Olombrada.svg",
+"flag": "Bandera de Olombrada.svg"
+},
+"40155": {
+"coa": "Escudo de Palazuelos de Eresma (Segovia).svg",
+"flag": "Bandera de Palazuelos de Eresma.svg"
+},
+"40156": {
+"coa": "Escudo de Pedraza.svg",
+"flag": "Bandera de Pedraza.svg"
+},
+"40162": {
+"coa": "Escudo de Prádena.svg",
+"flag": "Bandera de Prádena.svg"
+},
+"40164": {
+"coa": "Escudo de Rapariegos.svg",
+"flag": "Bandera de Rapariegos.svg"
+},
+"40170": {
+"coa": "Escudo de Riaza.svg",
+"flag": "Bandera de Riaza.svg"
+},
+"40176": {
+"coa": "Escudo de Samboal.svg",
+"flag": "Bandera de Samboal.svg"
+},
+"40179": {
+"coa": "Escudo de Sanchonuño.svg",
+"flag": "Bandera de Sanchonuño.svg"
+},
+"40180": {
+"coa": "Escudo de Sangarcía.svg",
+"flag": "Bandera de Sangarcía.svg"
+},
+"40181": {
+"coa": "Escudo del Real Sitio de San Ildefonso.svg",
+"flag": "Bandera del Real Sitio de San Ildefonso.svg"
+},
+"40182": {
+"coa": "Escudo de San Martín y Mudrián.svg",
+"flag": "Bandera de San Martín y Mudrián.svg"
+},
+"40183": {
+"coa": "Escudo de San Miguel de Bernuy.svg",
+"flag": "Bandera de San Miguel de Bernuy.svg"
+},
+"40184": {
+"coa": "Escudo de San Pedro de Gaíllos.svg",
+"flag": "Bandera de San Pedro de Gaillos.svg"
+},
+"40185": {
+"coa": "EscudoStaMª.png",
+"flag": "BanderaStaMª.png"
+},
+"40189": {
+"coa": "Escudo de Santiuste de San Juan Bautista.svg",
+"flag": "Bandera de Santiuste de San Juan Bautista.svg"
+},
+"40191": {
+"coa": "Escudo de Santo Tomé del Puerto.svg",
+"flag": "Bandera de Santo Tomé del Puerto.svg"
+},
+"40193": {
+"coa": "Escudo de Sebúlcor.svg",
+"flag": "Bandera de Sebúlcor.svg"
+},
+"40194": {
+"coa": "Escudo de Segovia (Segovia) 2.svg",
+"flag": "Bandera de Segovia.svg"
+},
+"40195": {
+"coa": "Escudo de Sepúlveda.svg",
+"flag": "Bandera de Sepúlveda.svg"
+},
+"40199": {
+"coa": "Escudo de Sotosalbos.svg"
+},
+"40203": {
+"coa": "Escudo de Torrecaballeros.svg",
+"flag": "Bandera de Torrecaballeros.png"
+},
+"40205": {
+"coa": "Escudo de Torreiglesias (Segovia).svg"
+},
+"40206": {
+"coa": "Escudo de torre val de san pedro.svg",
+"flag": "Bandera de torre val san pedro.svg"
+},
+"40207": {
+"coa": "Escudo de Trescasas.svg",
+"flag": "Bandera de Trescasas.svg"
+},
+"40208": {
+"coa": "Escudo de Turégano (Segovia).svg"
+},
+"40210": {
+"coa": "Escudo de Urueñas.svg",
+"flag": "Bandera de Urueñas.svg"
+},
+"40211": {
+"coa": "Escudo de Valdeprados.svg"
+},
+"40214": {
+"coa": "Escudo de Valseca.svg",
+"flag": "Bandera de Valseca.svg"
+},
+"40216": {
+"coa": "Escudo de Valverde del Majano.svg",
+"flag": "Bandera de Valverde del Majano.svg"
+},
+"40219": {
+"coa": "Escudo de Vallelado.svg",
+"flag": "Bandera de Vallelado.svg"
+},
+"40222": {
+"coa": "Escudo de Veganzones.svg",
+"flag": "Bandera de Veganzones.svg"
+},
+"40223": {
+"coa": "Escudo de Vegas de Matute (Segovia).svg",
+"flag": "Bandera de Vegas de Matute.svg"
+},
+"40224": {
+"coa": "Escudo de Ventosilla y Tejadilla.svg",
+"flag": "Bandera de Ventosilla y Tejadilla.svg"
+},
+"40225": {
+"coa": "Escudo de Villacastín (Segovia).svg",
+"flag": "Bandera de Villacastín.png"
+},
+"40228": {
+"coa": "Escudo de Villaverde de Íscar.svg",
+"flag": "Bandera de Villaverde de Íscar.png"
+},
+"40230": {
+"coa": "Escudo de Villeguillo.svg",
+"flag": "Bandera de Villeguillo.svg"
+},
+"40233": {
+"coa": "Escudo de Zarzuela del Monte.svg",
+"flag": "Bandera de Zarzuela del Monte.svg"
+},
+"40901": {
+"coa": "Escudo de Ortigosa del Monte.svg",
+"flag": "Bandera de Ortigosa del Monte.svg"
+},
+"40902": {
+"coa": "Escudo de Cozuelos de Fuentidueña.svg"
+},
+"40903": {
+"coa": "Escudo de Marazoleja.svg",
+"flag": "Bandera de Marazoleja.svg"
+},
+"40904": {
+"coa": "Escudo de Navas de Riofrío (Segovia).svg"
+},
+"40906": {
+"coa": "Escudo de San Cristóbal de Segovia.svg",
+"flag": "Bandera de San Cristóbal de Segovia.svg"
+},
+"42001": {
+"coa": "Escudo de Abejar.svg"
+},
+"42004": {
+"coa": "Escudo de Ágreda.svg",
+"flag": "Bandera del Ágreda.svg"
+},
+"42008": {
+"coa": "Escudo de Alcubilla de las Peñas.svg",
+"flag": "Bandera de Alcubilla de las Peñas.svg"
+},
+"42017": {
+"coa": "Escudo de Almajano.svg",
+"flag": "Bandera Almajano (Soria).jpg"
+},
+"42019": {
+"coa": "Escudo de Almarza.svg"
+},
+"42020": {
+"coa": "Escudo de Almazán.svg",
+"flag": "Flag Almazán.svg"
+},
+"42022": {
+"coa": "Escudo de Almenar de Soria (Soria).svg",
+"flag": "Bandera de Almenar de Soria.svg"
+},
+"42025": {
+"coa": "Escudo de ArcosdeJalon.svg",
+"flag": "Bandera de Arcos de Jalón.svg"
+},
+"42029": {
+"coa": "Escudo de Baraona.svg",
+"flag": "Baraona.svg"
+},
+"42030": {
+"coa": "Escudo de Barca.svg"
+},
+"42032": {
+"coa": "Escudo de Bayubas de Abajo.svg",
+"flag": "Bandera de Bayubas de Abajo.svg"
+},
+"42033": {
+"coa": "Escudo de Bayubas de Arriba.svg",
+"flag": "Bandera de Bayubas de Arriba.svg"
+},
+"42035": {
+"coa": "Escudo de Berlanga de Duero.svg",
+"flag": "Bandera de Berlanga de Duero.svg"
+},
+"42043": {
+"coa": "Coat of Arms of El Burgo de Osma.svg",
+"flag": "Bandera de ElBurgodeOsma.svg"
+},
+"42045": {
+"coa": "Escudo de CabrejasdelPinar.svg"
+},
+"42049": {
+"coa": "Escudo de Candilichera.svg"
+},
+"42058": {
+"coa": "Escudo de CastillejodeRobledo.svg",
+"flag": "Bandera de Castillejo de Robledo.svg"
+},
+"42062": {
+"coa": "Escudo de Cigudosa.svg"
+},
+"42063": {
+"coa": "Escudo de Cihuela.svg",
+"flag": "Bandera de Cihuela.svg"
+},
+"42069": {
+"coa": "Escudo de Covaleda.svg"
+},
+"42071": {
+"coa": "Escudo de CubodelaSolana.svg"
+},
+"42075": {
+"coa": "Escudo de Dévanos (Soria).svg"
+},
+"42076": {
+"coa": "Escudo de Deza.svg"
+},
+"42078": {
+"coa": "COA duruelo.svg",
+"flag": "Bandera de DuruelodelaSierra.svg"
+},
+"42080": {
+"coa": "Escudo de EspejadeSanMarcelino.svg",
+"flag": "Bandera de EspejadeSanMarcelino.svg"
+},
+"42081": {
+"coa": "Escudo de Espejón.svg"
+},
+"42085": {
+"coa": "Escudo de Fuenteamergil.svg"
+},
+"42094": {
+"coa": "Escudo de Garray.svg",
+"flag": "Flag Garray.svg"
+},
+"42096": {
+"coa": "Escudo de Gomara.svg"
+},
+"42097": {
+"coa": "Escudo ConCorona CMYK.jpg"
+},
+"42100": {
+"coa": "Escudo de Hinojosa del Campo.svg",
+"flag": "Bandera de Hinojosa del Campo.svg"
+},
+"42103": {
+"coa": "Escudo de LangadeDuero.svg",
+"flag": "Bandera de LangadeDuero.svg"
+},
+"42105": {
+"coa": "Escudo de Liceras (Soria).svg",
+"flag": "Bandera de Liceras (Soria).svg"
+},
+"42107": {
+"coa": "Escudo de Magaña.svg"
+},
+"42113": {
+"coa": "Coat of Arms of Medinaceli.svg",
+"flag": "Bandera de Medinaceli.svg"
+},
+"42117": {
+"coa": "Escudo de MolinosdeDuero.svg"
+},
+"42121": {
+"coa": "Escudo de MontenegrodeCameros.svg"
+},
+"42123": {
+"coa": "Escudo de Morón de Almazán.svg"
+},
+"42125": {
+"coa": "Escudo de Muriel Viejo.svg",
+"flag": "Bandera de Muriel Viejo.svg"
+},
+"42129": {
+"coa": "Escudo de Navaleno.svg",
+"flag": "Flag Navalenoz.svg"
+},
+"42132": {
+"coa": "Escudo de Noviercas.svg"
+},
+"42134": {
+"coa": "Escudo de Ólvega (Soria).svg",
+"flag": "Bandera de Ólvega.svg"
+},
+"42135": {
+"coa": "Escudo de Oncala.svg"
+},
+"42144": {
+"coa": "Escudo de QuintanaRedonda.svg",
+"flag": "Bandera de QuintanaRedonda.svg"
+},
+"42149": {
+"coa": "Escudo de Los Rabanos.svg"
+},
+"42155": {
+"coa": "Escudo de Retortillo-Soria.svg"
+},
+"42158": {
+"coa": "Escudo de RiosecodeSoria.svg",
+"flag": "Bandera de Rioseco de Soria.svg"
+},
+"42161": {
+"coa": "Escudo de Salduero.svg"
+},
+"42162": {
+"coa": "Escudo de SanEstebandeGormaz.svg",
+"flag": "Flag San Esteban de Gormaz.svg"
+},
+"42164": {
+"coa": "Escudo de SanLeonardodeYagüe.svg",
+"flag": "Bandera de SanLeonardodeYagüe.svg"
+},
+"42165": {
+"coa": "Escudo de SanPedroManrique.svg"
+},
+"42167": {
+"coa": "Escudo de SantaMariadeHuerta.svg"
+},
+"42171": {
+"coa": "Escudo de SerondeNagima.svg"
+},
+"42173": {
+"coa": "Escudo de Soria.svg",
+"flag": "Bandera de Soria.svg"
+},
+"42182": {
+"coa": "Escudo de Taroda.png"
+},
+"42184": {
+"coa": "Escudo de Torlengua.svg"
+},
+"42191": {
+"coa": "Escudo de Valdeavellano de Tera.svg"
+},
+"42193": {
+"coa": "Escudo de Valdelagua del Cerro.svg",
+"flag": "Bandera de Valdelagua del Cerro.svg"
+},
+"42195": {
+"coa": "Escudo de Valdenebro.svg",
+"flag": "Bandera de Valdenebro.svg"
+},
+"42215": {
+"coa": "Escudo de Vinuesa.svg",
+"flag": "Bandera y escudo de vinuesa.svg"
+},
+"42218": {
+"coa": "Escudo de Yanguas.svg"
+},
+"47001": {
+"coa": "Escudo de Adalia (Valladolid).svg"
+},
+"47003": {
+"coa": "Escudo de Aguilar de Campos.svg",
+"flag": "Flag of Aguilar de Campos Spain.svg"
+},
+"47004": {
+"coa": "Escudo de Alaejos.svg",
+"flag": "Bandera de Alaejos.svg"
+},
+"47005": {
+"coa": "Escudo de Alcazarén.svg",
+"flag": "Bandera de Alcazarén.svg"
+},
+"47007": {
+"coa": "Escudo de Aldeamayor de San Martín (Valladolid).svg"
+},
+"47010": {
+"coa": "Escudo Arroyo de la Encomienda.svg",
+"flag": "Bandera de Arroyo de la Encomienda.svg"
+},
+"47011": {
+"coa": "Escudo de Ataquines.svg",
+"flag": "Bandera de Ataquines.svg"
+},
+"47012": {
+"coa": "Escudo de Bahabón.svg"
+},
+"47013": {
+"coa": "Escudo de Barcial de la Loma (Valladolid).svg"
+},
+"47015": {
+"coa": "Escudo de Becilla de Valderaduey (Valladolid).svg"
+},
+"47016": {
+"coa": "Escudo de Benafarces.svg",
+"flag": "Bandera de Benafarces.svg"
+},
+"47017": {
+"coa": "Escudo de Bercero (Valladolid).svg"
+},
+"47018": {
+"coa": "Escudo de Berceruelo.svg"
+},
+"47020": {
+"coa": "Escudo de Bobadilla del Campo.svg",
+"flag": "Bobadilla del Campo.svg"
+},
+"47021": {
+"coa": "Escudo de Bocigas.svg",
+"flag": "Bandera de Bocigas.svg"
+},
+"47023": {
+"coa": "Escudo de Boecillo.svg",
+"flag": "Bandera de Boecillo.svg"
+},
+"47024": {
+"coa": "Escudo de Bolaños de Campos (Valladolid).svg"
+},
+"47027": {
+"coa": "Escudo de Cabezón de Pisuerga.svg"
+},
+"47028": {
+"coa": "Escudo de Cabezón de Valderaduey.svg"
+},
+"47029": {
+"coa": "Escudo de Cabreros del Monte (Valladolid).svg"
+},
+"47030": {
+"coa": "Escudo de Campaspero.svg",
+"flag": "Bandera de Campaspero.svg"
+},
+"47031": {
+"coa": "Escudo de El Campillo (Valladolid).svg"
+},
+"47032": {
+"coa": "Escudo de Camporredondo.svg",
+"flag": "Camporredondo.svg"
+},
+"47033": {
+"coa": "Escudo de Canalejas de Peñafiel.svg",
+"flag": "Bandera de Canalejas de Peñafiel.svg"
+},
+"47035": {
+"coa": "Escudo de Carpio.svg",
+"flag": "Bandera de Carpio.svg"
+},
+"47037": {
+"coa": "Escudo de Castrejón de Trabancos.svg"
+},
+"47039": {
+"coa": "Escudo de Castrillo-Tejeriego.svg"
+},
+"47040": {
+"coa": "Escudo de Castrobol (Valladolid).svg"
+},
+"47042": {
+"coa": "Escudo de Castromembibre.svg"
+},
+"47043": {
+"coa": "Escudo de Castromonte (Valladolid).svg"
+},
+"47044": {
+"coa": "Escudo de Castronuevo de Esgueva.svg"
+},
+"47045": {
+"coa": "Escudo de Castronuño.svg"
+},
+"47046": {
+"coa": "Escudo de Castroponce de Valderaduey.svg"
+},
+"47047": {
+"coa": "Escudo de Castroverde de Cerrato (Valladolid).svg"
+},
+"47048": {
+"coa": "Escudo de Ceinos de Campos.svg",
+"flag": "Bandera de Ceinos de Campos.svg"
+},
+"47050": {
+"coa": "Escudo de Cigales.svg",
+"flag": "Bandera de Cigales.svg"
+},
+"47051": {
+"coa": "Escudo de Ciguñuela (Valladolid).svg"
+},
+"47052": {
+"coa": "Escudo de La Cistérniga.svg"
+},
+"47054": {
+"coa": "Escudo de Cogeces del Monte.svg"
+},
+"47055": {
+"coa": "Escudo de Corcos.svg",
+"flag": "Bandera de Corcos.svg"
+},
+"47057": {
+"coa": "Escudo de Cubillas de Santa Marta.svg"
+},
+"47058": {
+"coa": "Escudo de Cuenca de Campos.svg"
+},
+"47060": {
+"coa": "Escudo de Encinas de Esgueva.svg"
+},
+"47061": {
+"coa": "Escudo de Esguivillas de Esgueva.svg"
+},
+"47063": {
+"coa": "Escudo de Fompedraza (Valladolid).svg",
+"flag": "Bandera de Fompedraza (Valladolid).svg"
+},
+"47065": {
+"coa": "Escudo de Fresno el Viejo (Valladolid).svg"
+},
+"47066": {
+"coa": "Escudo de Fuensaldaña (Valladolid).svg"
+},
+"47067": {
+"coa": "Escudo de Fuente el Sol (Valladolid).svg"
+},
+"47070": {
+"coa": "Escudo de Gatón de Campos (Valladolid).svg"
+},
+"47071": {
+"coa": "Escudo de Geria (Valladolid).svg",
+"flag": "Bandera de Geria (Valladolid).svg"
+},
+"47073": {
+"coa": "Escudo de Herrín de Campos (Valladolid).svg"
+},
+"47074": {
+"coa": "Escudo de Hornillos de Eresma.svg",
+"flag": "Bandera de Hornillos de Eresma.svg"
+},
+"47075": {
+"coa": "Escudo de Íscar (Valladolid).svg"
+},
+"47076": {
+"coa": "Escudo de Laguna de Duero.svg",
+"flag": "Bandera de Laguna de Duero.svg"
+},
+"47077": {
+"coa": "Escudo de Langayo.svg"
+},
+"47078": {
+"coa": "Escudo de Lomoviejo.svg",
+"flag": "Bandera de Lomoviejo.svg"
+},
+"47080": {
+"coa": "Escudo de Manzanillo.svg"
+},
+"47081": {
+"coa": "Escudo de Marzales (Valladolid).svg"
+},
+"47082": {
+"coa": "Escudo de Matapozuelos (Valladolid).svg"
+},
+"47084": {
+"coa": "Escudo de Mayorga.svg"
+},
+"47085": {
+"coa": "Escudo de Medina del Campo (Valladolid).svg",
+"flag": "Bandera de Medina del Campo (Valladolid).svg"
+},
+"47086": {
+"coa": "Escudo de Medina de Rioseco.svg",
+"flag": "Bandera de Medina de Rioseco.svg"
+},
+"47087": {
+"coa": "Escudo de Megeces.svg",
+"flag": "Bandera de Megeces.svg"
+},
+"47088": {
+"coa": "Escudo de Melgar de Abajo (Valladolid).svg"
+},
+"47089": {
+"coa": "Escudo de Melgar de Arriba (Valladolid).svg"
+},
+"47090": {
+"coa": "Escudo de Mojados (Valladolid).svg"
+},
+"47091": {
+"coa": "Escudo de Monasterio de Vega.svg"
+},
+"47092": {
+"coa": "Escudo de Montealegre de Campos.svg"
+},
+"47093": {
+"coa": "Escudo de Montemayor de Pililla.svg",
+"flag": "Bandera de Montemayor de Pililla.svg"
+},
+"47094": {
+"coa": "Escudo de Moral de la Reina.svg"
+},
+"47097": {
+"coa": "Escudo de Mota del Marqués (Valladolid).svg"
+},
+"47099": {
+"coa": "Escudo de La Mudarra.svg"
+},
+"47102": {
+"coa": "Escudo de Nueva Villa de las Torres.svg"
+},
+"47103": {
+"coa": "Escudo de Olivares de Duero.svg",
+"flag": "Bandera de Olivares de Duero.svg"
+},
+"47104": {
+"coa": "Escudo de Olmedo (Valladolid).svg"
+},
+"47105": {
+"coa": "Escudo de Olmos de Esgueva.svg"
+},
+"47109": {
+"coa": "Escudo de Palazuelo de Vedija.svg"
+},
+"47110": {
+"coa": "Escudo de La Parrilla.svg"
+},
+"47111": {
+"coa": "Escudo de La Pedraja de Portillo.svg",
+"flag": "Bandera de La Pedraja de Portillo.svg"
+},
+"47112": {
+"coa": "Escudo de Pedrajas de San Esteban (Valladolid).svg",
+"flag": "Bandera de Pedrajas de San Esteban (Valladolid).svg"
+},
+"47114": {
+"coa": "Coat of Arms of Peñafiel.svg",
+"flag": "Bandera de Peñafiel.jpg"
+},
+"47115": {
+"coa": "Escudo de Peñaflor de Hornija.svg",
+"flag": "Flag of Peñaflor de Hornija.svg"
+},
+"47116": {
+"coa": "Escudo de Pesquera de Duero.svg",
+"flag": "Bandera Pesquera de Duero.svg"
+},
+"47117": {
+"coa": "Escudo de Piña de Esgueva.svg",
+"flag": "Bandera de Piña de Esgueva.svg"
+},
+"47118": {
+"coa": "Escudo de Piñel de Abajo.svg"
+},
+"47119": {
+"coa": "Escudo de Piñel de Arriba (Valladolid).svg"
+},
+"47121": {
+"coa": "Escudo de Pollos (Valladolid).svg"
+},
+"47123": {
+"coa": "Escudo de Pozal de Gallinas.svg",
+"flag": "Bandera de Pozal de Gallinas.svg"
+},
+"47125": {
+"coa": "Escudo de Pozuelo de la Orden (Valladolid).svg"
+},
+"47127": {
+"coa": "Escudo de Quintanilla de Arriba (Valladolid).svg",
+"flag": "Bandera de Quintanilla de Arriba (Valladolid).svg"
+},
+"47128": {
+"coa": "Escudo de Quintanilla del Molar.svg"
+},
+"47129": {
+"coa": "Escudo de Quintanilla de Abajo.svg"
+},
+"47130": {
+"coa": "Escudo de Quintanilla de Trigueros.svg",
+"flag": "Bandera de Quintanilla de Trigueros.svg"
+},
+"47131": {
+"coa": "Escudo de Rábano (Valladolid).svg"
+},
+"47133": {
+"coa": "Escudo de Renedo de Esgueva (Valladolid).svg"
+},
+"47138": {
+"coa": "Escudo de Rubi de Bracamonte.svg",
+"flag": "Bandera de Rubi de Bracamonte.svg"
+},
+"47139": {
+"coa": "Escudo de Rueda.svg",
+"flag": "Bandera de Rueda.svg"
+},
+"47140": {
+"coa": "Escudo de Saelices de Mayorga.svg",
+"flag": "Bandera de Saelices de Mayorga.svg"
+},
+"47142": {
+"coa": "Escudo de San Cebrián de Mazote (Valladolid).svg"
+},
+"47144": {
+"coa": "Escudo de San Martín de Valvení (Valladolid).svg"
+},
+"47145": {
+"coa": "Escudo de San Miguel del Arroyo.svg",
+"flag": "Bandera de San Miguel del Arroyo.svg"
+},
+"47148": {
+"coa": "Escudo de San Pedro de Latarce.svg"
+},
+"47149": {
+"coa": "Escudo de San Pelayo.svg",
+"flag": "Bandera de San Pelayo.svg"
+},
+"47150": {
+"coa": "Escudo de San Román de Hornija.svg"
+},
+"47153": {
+"coa": "Escudo de Santervás de Campos.svg",
+"flag": "Bandera de Santervás de Campos.svg"
+},
+"47154": {
+"coa": "Escudo de Santibanez de Valcorba muebles rectos.svg"
+},
+"47155": {
+"coa": "Escudo de Santovenia de Pisuerga.svg",
+"flag": "Bandera de Santovenia de Pisuerga.svg"
+},
+"47157": {
+"coa": "Escudo de Sardón de Duero (Valladolid).svg"
+},
+"47159": {
+"coa": "Escudo de Serrada.svg",
+"flag": "Bandera de Serrada.svg"
+},
+"47160": {
+"coa": "Escudo de Siete Iglesias de Trabancos (Valladolid).svg"
+},
+"47161": {
+"coa": "Escudo de Simancas.svg"
+},
+"47163": {
+"coa": "Escudo de Tiedra (Valladolid).svg"
+},
+"47164": {
+"coa": "Escudo de Tordehumos.svg"
+},
+"47165": {
+"coa": "Escudo de Tordesillas.svg",
+"flag": "Bandera tordesillas.png"
+},
+"47166": {
+"coa": "Escudo de Torrecilla de la Abadesa.svg"
+},
+"47167": {
+"coa": "Escudo de Torrecilla de la Orden.svg",
+"flag": "Bandera de Torrecilla de la Orden.svg"
+},
+"47171": {
+"coa": "Escudo de Torrelobatón.svg"
+},
+"47172": {
+"coa": "Escudo de Torrescárcela (Valladolid).svg"
+},
+"47173": {
+"coa": "Escudo de Traspinedo (Valladolid).svg"
+},
+"47174": {
+"coa": "Escudo de Trigueros del Valle.svg",
+"flag": "Bandera de Trigueros del Valle.svg"
+},
+"47175": {
+"coa": "Escudo de Tudela de Duero (Valladolid).svg"
+},
+"47176": {
+"coa": "Escudo de La Unión de Campos (Valladolid).svg"
+},
+"47178": {
+"coa": "Escudo de Urueña.svg"
+},
+"47182": {
+"flag": "Bandera de Valdestillas (Valladolid).svg"
+},
+"47183": {
+"coa": "Escudo de Valdunquillo (Valladolid).svg"
+},
+"47184": {
+"coa": "Escudo de Valoria la Buena (Valladolid).svg"
+},
+"47185": {
+"coa": "Escudo de Valverde de Campos.svg"
+},
+"47186": {
+"coa": "Escudo de Valladolid.svg",
+"flag": "Bandera valladolid.svg"
+},
+"47187": {
+"coa": "Escudo de Vega de Ruiponce.svg"
+},
+"47188": {
+"coa": "Escudo de Vega de Valdetronco (Valladolid).svg"
+},
+"47189": {
+"coa": "Escudo de Velascálvaro (Valladolid).svg",
+"flag": "Bandera de Velascálvaro (Valladolid).svg"
+},
+"47191": {
+"coa": "Escudo de Velliza (Valladolid).svg"
+},
+"47193": {
+"coa": "Escudo de Viana de Cega.svg"
+},
+"47195": {
+"coa": "Escudo de Villabáñez.svg"
+},
+"47197": {
+"coa": "VILLABRAGIMA escudo.jpg"
+},
+"47200": {
+"coa": "Escudo de Villaco.svg"
+},
+"47205": {
+"coa": "Escudo de Villafrechós (Valladolid).svg"
+},
+"47207": {
+"coa": "Escudo de Villagarcía de Campos.svg"
+},
+"47210": {
+"coa": "Escudo de Villalar de los Comuneros.svg",
+"flag": "Bandera de Villalar de los Comuneros.svg"
+},
+"47212": {
+"coa": "Escudo de Villalba de los Alcores.svg"
+},
+"47213": {
+"coa": "Escudo de Villalbarba (Valladolid).svg",
+"flag": "Bandera de Villalbarba (Valladolid).svg"
+},
+"47214": {
+"coa": "Escudo de Villalón de Campos (Valladolid).svg"
+},
+"47215": {
+"coa": "Escudo de Villamuriel de Campos (Valladolid).svg"
+},
+"47217": {
+"coa": "Escudo de Villanubla.svg"
+},
+"47218": {
+"coa": "Escudo de Villanueva de Duero.svg",
+"flag": "Villanueva de Duero.svg"
+},
+"47220": {
+"coa": "Escudo de Villanueva de los Caballeros.svg"
+},
+"47226": {
+"coa": "Escudo de Villavaquerín.svg",
+"flag": "Bandera de Villavaquerín.svg"
+},
+"47227": {
+"coa": "Escudo de Villavellid (Valladolid).svg"
+},
+"47228": {
+"coa": "Escudo de Villaverde de Medina.svg",
+"flag": "Bandera de Villaverde de Medina.svg"
+},
+"47231": {
+"coa": "Escudo de Zaratán.svg",
+"flag": "Bandera de Zaratán.svg"
+},
+"49002": {
+"coa": "Escudo de Abezames.svg",
+"flag": "Bandera de Abezames.svg"
+},
+"49003": {
+"coa": "Escudo de Alcañices.svg",
+"flag": "Bandera de Alcañices.svg"
+},
+"49007": {
+"coa": "Escudo de Almaraz de Duero.svg",
+"flag": "AlmarazBandera.svg"
+},
+"49008": {
+"coa": "Escudo de Almeida (Zamora).svg",
+"flag": "Flag of Almeida de Sayago Spain.svg"
+},
+"49010": {
+"coa": "Escudo de Arcenillas.svg",
+"flag": "Arcenillas Spain.svg"
+},
+"49011": {
+"coa": "Escudo de Arcos de la Polvorosa.svg",
+"flag": "Flag of Arcos de la Polvorosa Spain.svg"
+},
+"49013": {
+"coa": "Escudo de Argujillo.svg"
+},
+"49014": {
+"coa": "Escudo de Arquillinos.svg",
+"flag": "Flag of Arquillinos Spain.svg"
+},
+"49016": {
+"coa": "Escudo de Aspariegos.svg",
+"flag": "Aspariegos Spain.svg"
+},
+"49017": {
+"coa": "Escudo de Asturianos (Zamora, versión oficial).svg",
+"flag": "Bandera de Asturianos.svg"
+},
+"49018": {
+"coa": "Escudo de Ayoó de Vidriales.svg"
+},
+"49019": {
+"coa": "Escudo de Barcial del Barco.svg",
+"flag": "Flag Barcial de Barco.svg"
+},
+"49020": {
+"coa": "Escudo de Belver de los Montes.svg",
+"flag": "Flag of Belver de los Montes Spain.svg"
+},
+"49021": {
+"coa": "Escudo de Benavente.svg",
+"flag": "Bandera de Benavente.svg"
+},
+"49022": {
+"coa": "Escudo de Benegiles.svg",
+"flag": "Bandera de Benegiles.svg"
+},
+"49024": {
+"coa": "Escudo de La Bóveda de Toro.svg"
+},
+"49025": {
+"coa": "Escudo de Bretó.svg",
+"flag": "Bandera de Bretó.svg"
+},
+"49027": {
+"coa": "Escudo de Brime de Sog.svg",
+"flag": "Flag of Brime de Sog Spain.svg"
+},
+"49031": {
+"coa": "Escudo de Cabañas de Sayago.svg"
+},
+"49032": {
+"coa": "Escudo de Calzadilla de Tera (Zamora).svg",
+"flag": "Bandera de Calzadilla de Tera (Zamora).svg"
+},
+"49033": {
+"coa": "Escudo de Camarzana de Tera.svg",
+"flag": "Flag of Camarzana de Tera Spain.svg"
+},
+"49034": {
+"coa": "Escudo de Cañizal.svg"
+},
+"49035": {
+"coa": "Escudo de Cañizo.svg",
+"flag": "Flag of Cañizo Spain.svg"
+},
+"49036": {
+"coa": "Escudo de Carbajales de Alba.svg",
+"flag": "Carbajales de Alba Spain.svg"
+},
+"49037": {
+"coa": "Escudo de Carbellino.svg"
+},
+"49039": {
+"coa": "Escudo de Casaseca de las Chanas.svg",
+"flag": "Flag of Casaseca de las Chanas.svg"
+},
+"49040": {
+"coa": "Escudo de Castrillo de la Guareña.svg"
+},
+"49041": {
+"coa": "Escudo de Castrogonzalo.svg"
+},
+"49042": {
+"coa": "Escudo de Castronuevo de los Arcos.svg",
+"flag": "Flag of Castronuevo Spain.svg"
+},
+"49043": {
+"coa": "Escudo de Castroverde de Campos (Zamora).svg"
+},
+"49044": {
+"coa": "Escudo de Cazurra.svg",
+"flag": "Bandera de Cazurra.svg"
+},
+"49046": {
+"coa": "Escudo de Cerecinos de Campos.svg",
+"flag": "Bandera de Cerecinos de Campos.svg"
+},
+"49047": {
+"coa": "Escudo de Cerecinos del Carrizal.svg",
+"flag": "Flag of Cerecinos del Carrizal Spain.svg"
+},
+"49052": {
+"coa": "Escudo de Coomonte.svg"
+},
+"49053": {
+"coa": "Escudo de Coreses.svg"
+},
+"49055": {
+"coa": "Escudo de Cotanes del Monte.svg",
+"flag": "Flag of Cotanes del Monte Spain.svg"
+},
+"49056": {
+"coa": "Escudo Cubillos.svg",
+"flag": "Bandera de Cubillos.svg"
+},
+"49058": {
+"coa": "Escudo de El Cubo del Vino.svg",
+"flag": "Flag of El Cubo del Vino Spain.svg"
+},
+"49061": {
+"coa": "Escudo de Entrala (Zamora).svg",
+"flag": "Entrala.svg"
+},
+"49064": {
+"coa": "Escudo de Fariza (Zamora).svg",
+"flag": "Flag of Fariza Spain.svg"
+},
+"49065": {
+"coa": "Escudo de Fermoselle.svg",
+"flag": "Bandera de Fermoselle.svg"
+},
+"49066": {
+"coa": "Escudo de Ferreras de Abajo.svg"
+},
+"49071": {
+"coa": "Escudo de Fonfría (Zamora).svg"
+},
+"49075": {
+"coa": "Escudo de Fresno de la Polvorosa.svg",
+"flag": "Bandera de Fresno de la Polvorosa.svg"
+},
+"49076": {
+"coa": "Escudo de Fresno de la Ribera.svg",
+"flag": "Bandera de Fresno de la Ribera.svg"
+},
+"49077": {
+"coa": "Escudo de Fresno de Sayago.svg",
+"flag": "Flag of Fresno de Sayago Spain.svg"
+},
+"49079": {
+"coa": "Escudo de Fuente Encalada.svg",
+"flag": "Bandera de Fuente Encalada.svg"
+},
+"49080": {
+"coa": "Escudo de Fuentelapeña.svg"
+},
+"49081": {
+"coa": "Escudo de Fuentesaúco.svg",
+"flag": "Bandera de Fuentesaúco.svg"
+},
+"49082": {
+"coa": "Escudo de Fuentes de Ropel.svg",
+"flag": "Bandera de Fuentes de Ropel.svg"
+},
+"49085": {
+"coa": "Escudo de Galende (Zamora).svg",
+"flag": "Flag of Galende Spain.svg"
+},
+"49090": {
+"coa": "Escudo de Gema.svg",
+"flag": "Bandera de Gema.svg"
+},
+"49091": {
+"coa": "Escudo de Granja de Moreruela (Zamora).svg"
+},
+"49093": {
+"coa": "Escudo de Guarrate (Zamora).svg",
+"flag": "Bandera de Guarrate.svg"
+},
+"49094": {
+"coa": "Escudo de Hermisende (Zamora).svg",
+"flag": "Bandera de Hermisende (Zamora).svg"
+},
+"49096": {
+"coa": "Escudo de Jambrina.svg"
+},
+"49097": {
+"coa": "Escudo de Justel.svg",
+"flag": "Bandera de Justel.svg"
+},
+"49101": {
+"coa": "Escudo de Luelmo.svg",
+"flag": "Bandera de Luelmo.svg"
+},
+"49107": {
+"coa": "Escudo de Malva.svg",
+"flag": "Bandera de Malva.svg"
+},
+"49108": {
+"coa": "Escudo de Manganeses de la Lampreana.svg"
+},
+"49109": {
+"coa": "Escudo de Manganeses de la Polvorosa.svg"
+},
+"49110": {
+"coa": "Escudo de Manzanal de Arriba.svg",
+"flag": "Bandera de Manzanal de Arriba.svg"
+},
+"49111": {
+"coa": "Escudo de Manzanal del Barco.svg",
+"flag": "Manzanal del Barco Spain.svg"
+},
+"49115": {
+"coa": "Escudo de Mayalde.svg",
+"flag": "Mayalde Spain.svg"
+},
+"49116": {
+"coa": "Escudo de Melgar de Tera.svg"
+},
+"49117": {
+"coa": "Escudo de Micereces de Tera.svg"
+},
+"49119": {
+"coa": "Escudo de Molacillos 2.svg"
+},
+"49122": {
+"coa": "Escudo de Monfarracinos.svg",
+"flag": "Flag of Monfarracinos.svg"
+},
+"49123": {
+"coa": "Escudo de Montamarta (Zamora).svg",
+"flag": "Bandera de Montamarta (Zamora).svg"
+},
+"49124": {
+"coa": "Escudo de Moral de Sayago.svg",
+"flag": "Bandera de Moral de Sayago.svg"
+},
+"49125": {
+"coa": "Escudo de Moraleja del Vino.svg"
+},
+"49127": {
+"coa": "Escudo de Morales del Vino.svg"
+},
+"49128": {
+"coa": "Escudo de Morales del Rey.svg"
+},
+"49129": {
+"coa": "Escudo de Morales de Toro (Zamora).svg"
+},
+"49131": {
+"coa": "Escudo de Moralina.svg"
+},
+"49132": {
+"coa": "Escudo de Moreruela de los Infanzones.svg",
+"flag": "Bandera de Moreruela de los Infanzones.svg"
+},
+"49134": {
+"coa": "Escudo de Muelas de los Caballeros.svg",
+"flag": "Bandera de Muelas de los Caballeros.svg"
+},
+"49135": {
+"coa": "Escudo de Muelas del Pan.svg"
+},
+"49136": {
+"coa": "Escudo de Muga de Sayago.svg",
+"flag": "Flag of Muga de Sayago Spain.svg"
+},
+"49137": {
+"coa": "Escudo de Navianos de Valverde.svg",
+"flag": "Bandera navianos.svg"
+},
+"49141": {
+"coa": "Escudo de Pajares de la Lampreana.svg",
+"flag": "Bandera de Pajares de la Lampreana.svg"
+},
+"49145": {
+"coa": "Escudo de Pedralba de la Pradería.svg",
+"flag": "Bandera de Pedralba de la Pradería.svg"
+},
+"49146": {
+"coa": "ESCUDO EL PEGO.jpg"
+},
+"49148": {
+"coa": "Escudo de Peleas de Abajo.svg",
+"flag": "Flag of Peleas de Abajo.svg"
+},
+"49149": {
+"coa": "Escudo de Peñausende.svg",
+"flag": "Bandera de Peñausende.svg"
+},
+"49150": {
+"coa": "Escudo de Peque.svg",
+"flag": "Bandera de Peque.svg"
+},
+"49151": {
+"coa": "Escudo de El Perdigón.svg",
+"flag": "Bandera de El Perdigón.svg"
+},
+"49155": {
+"coa": "Escudo de Piedrahíta de Castro (Zamora).svg",
+"flag": "Bandera de Piedrahíta de Castro (Zamora).svg"
+},
+"49157": {
+"coa": "Escudo de Pino del Oro (Zamora).svg"
+},
+"49158": {
+"coa": "Escudo de El Piñero (Zamora).svg"
+},
+"49159": {
+"coa": "Escudo de Pobladura del Valle.svg"
+},
+"49162": {
+"coa": "Escudo de Porto (Zamora).svg"
+},
+"49163": {
+"coa": "Escudo de Pozoantiguo.svg",
+"flag": "Bandera de Pozoantiguo.svg"
+},
+"49166": {
+"coa": "Escudo de Puebla de Sanabria.svg",
+"flag": "Flag of Puebla de Sanabria.svg"
+},
+"49168": {
+"coa": "Escudo de Quintanilla del Monte (Zamora).svg",
+"flag": "Flag of Quintanilla del Monte, Spain.svg"
+},
+"49171": {
+"coa": "Escudo de Quiruelas de Vidriales.svg",
+"flag": "Flag of Quiruelas de Vidriales.svg"
+},
+"49172": {
+"coa": "Escudo de Rabanales.svg"
+},
+"49174": {
+"coa": "Escudo de Requejo de Sanabria (Zamora).svg"
+},
+"49175": {
+"coa": "Escudo de Revellinos (Zamora).svg"
+},
+"49177": {
+"coa": "Escudo de Rionegro del Puente.svg"
+},
+"49179": {
+"coa": "Escudo de Robleda Cervantes.svg",
+"flag": "Bandera de Robleda-Cervantes.svg"
+},
+"49180": {
+"coa": "Escudo de Roelos de Sayago.svg"
+},
+"49181": {
+"coa": "Escudo de Rosinos de la Requejada.svg"
+},
+"49183": {
+"coa": "Escudo de Salce.svg"
+},
+"49184": {
+"coa": "Escudo de Samir de los Caños.svg"
+},
+"49186": {
+"coa": "Escudo de San Cebrián de Castro (Zamora).svg"
+},
+"49187": {
+"coa": "Escudo de San Cristóbal de Entreviñas (Zamora).svg",
+"flag": "Bandera de San Cristóbal de Entreviñas (Zamora).svg"
+},
+"49188": {
+"coa": "Escudo de San Esteban del Molar (Zamora).svg"
+},
+"49192": {
+"coa": "Escudo de San Miguel del Valle.svg"
+},
+"49193": {
+"coa": "Escudo de San Pedro de Ceque (Zamora).svg"
+},
+"49200": {
+"coa": "Escudo de Santa Cristina de la Polvorosa.svg",
+"flag": "Bandera Santa Cristina de la Polvorosa.svg"
+},
+"49201": {
+"coa": "Escudo de Santa Croya de Tera.svg"
+},
+"49203": {
+"coa": "Escudo de Santa María de la Vega.svg",
+"flag": "Bandera de Santa María de la Vega.svg"
+},
+"49204": {
+"coa": "Escudo de Santa María de Valverde (Zamora).svg",
+"flag": "Bandera de Santa María de Valverde (Zamora).svg"
+},
+"49205": {
+"coa": "Escudo de Santibáñez de Tera.svg",
+"flag": "Bandera de Santibáñez de Tera.svg"
+},
+"49206": {
+"coa": "Escudo de Santibáñez de Vidriales.svg",
+"flag": "Bandera de Santibáñez de Vidriales.svg"
+},
+"49207": {
+"coa": "Escudo de Santovenia del Esla.svg"
+},
+"49209": {
+"coa": "Escudo de San Vitero (Zamora).svg"
+},
+"49210": {
+"coa": "Escudo de Sanzoles.svg",
+"flag": "Bandera de Sanzoles.svg"
+},
+"49214": {
+"coa": "Escudo de Tábara.svg"
+},
+"49219": {
+"coa": "Escudo de Toro.svg"
+},
+"49221": {
+"coa": "Escudo de Torregamones.svg"
+},
+"49222": {
+"coa": "Escudo de Torres del Carrizal (Zamora).svg"
+},
+"49223": {
+"coa": "Escudo de Trabazos (Zamora).svg",
+"flag": "Flag of Trabazos Spain.svg"
+},
+"49224": {
+"coa": "Escudo de Trefacio.svg",
+"flag": "Bandera de Trefacio.svg"
+},
+"49226": {
+"coa": "Escudo de Vadillo de la Guareña (Zamora).svg"
+},
+"49229": {
+"coa": "Escudo de Valdescorriel.svg"
+},
+"49234": {
+"coa": "Escudo de Venialbo (Zamora).svg",
+"flag": "Bandera de Venialbo (Zamora).svg"
+},
+"49238": {
+"coa": "Escudo de Villabrázaro (Zamora).svg"
+},
+"49239": {
+"coa": "Escudo de Villabuena del Puente.svg"
+},
+"49241": {
+"coa": "Escudo de Villaescusa.svg",
+"flag": "Bandera de Villaescusa.svg"
+},
+"49242": {
+"coa": "Escudo de Villafáfila.svg",
+"flag": "Bandera de Villafafila.svg"
+},
+"49245": {
+"coa": "Escudo de Villalazán.svg"
+},
+"49246": {
+"coa": "Escudo de Villalba de la Lampreana.svg",
+"flag": "Bandera de Villalba de la Lampreana.svg"
+},
+"49247": {
+"coa": "Escudo de Villalcampo.svg"
+},
+"49248": {
+"coa": "Escudo de Villalobos.svg"
+},
+"49250": {
+"coa": "Escudo de Villalpando (Zamora).svg",
+"flag": "Bandera de Villalpando.svg"
+},
+"49251": {
+"coa": "Escudo de Villalube.svg"
+},
+"49261": {
+"coa": "Escudo de Villaralbo.svg"
+},
+"49262": {
+"coa": "Escudo de Villardeciervos.svg",
+"flag": "Bandera de Villardeciervos.svg"
+},
+"49264": {
+"coa": "Escudo de Villar del Buey.svg"
+},
+"49265": {
+"coa": "Escudo de Villardiegua de la Ribera.svg"
+},
+"49267": {
+"coa": "Escudo de Villardondiego.svg",
+"flag": "Flag of Villardondiego.svg"
+},
+"49268": {
+"coa": "Escudo de Villarrín de Campos.svg"
+},
+"49270": {
+"coa": "Escudo de Villavendimio (Zamora).svg"
+},
+"49275": {
+"coa": "Escudo de Zamora.svg",
+"flag": "Bandera de Zamora.svg"
+}
+},
+"provinces": {
+"Burgos": {
+"coa": "Escudo de la Provincia de Burgos.svg",
+"flag": "Flag Burgos Province.svg"
+},
+"León": {
+"coa": "Escudo de León.svg",
+"flag": "Bandera de León.svg"
+},
+"Palencia": {
+"coa": "Escudo de la Provincia de Palencia.svg",
+"flag": "Bandera de la provincia de Palencia1.svg"
+},
+"Salamanca": {
+"coa": "Escudo de la Provincia de Salamanca.svg",
+"flag": "Bandera de la provincia de Salamanca.svg"
+},
+"Segovia": {
+"coa": "Escudo de la provincia de Segovia.svg",
+"flag": "Flag Segovia province.svg"
+},
+"Soria": {
+"coa": "Escudo de la provincia de Soria2.svg",
+"flag": "Flag Soria province.svg"
+},
+"Valladolid": {
+"coa": "Va-dip.svg",
+"flag": "Bandera de la provincia de Valladolid.svg"
+},
+"Zamora": {
+"coa": "Escudo de la provincia de Zamora.svg"
+},
+"Ávila": {
+"coa": "Escudo de la provincia de Ávila.svg",
+"flag": "Bandera de la provincia de Ávila.svg"
+}
+}
+}

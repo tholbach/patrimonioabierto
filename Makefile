@@ -1,6 +1,6 @@
 .DEFAULT_GOAL := help
 
-.PHONY: help fetch build photo-stats wiki-extracts wikidata-labels monument-pages potw test serve deploy up down logs
+.PHONY: help fetch build photo-stats wiki-extracts wikidata-labels emblems monument-pages potw test serve deploy up down logs
 
 help:
 	@echo "Available targets:"
@@ -13,6 +13,8 @@ help:
 	@echo "                   data/raw/ (~1 request/article, resumable) - feeds monument-pages"
 	@echo "  wikidata-labels  Fetch each linked monument's Spanish Wikidata label and aliases"
 	@echo "                   into data/raw/ (~45 requests) - feeds monument-pages"
+	@echo "  emblems          Fetch each municipality's and province's coat of arms and flag"
+	@echo "                   from Wikidata into web/data/emblems.json (2 queries, weekly)"
 	@echo "  monument-pages   (Re)generate web/monumento/<id>-<slug>/index.html for every"
 	@echo "                   monument + web/sitemap.xml + web/robots.txt - run after"
 	@echo "                   build/wiki-extracts so both are picked up"
@@ -43,6 +45,9 @@ wiki-extracts:
 
 wikidata-labels:
 	@python3 scripts/fetch_wikidata_labels.py
+
+emblems:
+	@python3 scripts/fetch_emblems.py
 
 monument-pages:
 	@python3 scripts/build_monument_pages.py

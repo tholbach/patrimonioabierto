@@ -78,6 +78,7 @@ function bboxToLeafletBounds(bbox) {
 let recordsById = new Map(); // filled once data loads; used by deep-link handling
 let allRecords = [];
 let allMunicipalities = [];
+let emblems = { municipalities: {}, provinces: {} }; // Commons filenames of coat of arms / flag, from data/emblems.json (optional)
 let allProvinces = [];
 let datasetMeta = null;
 
@@ -1326,6 +1327,29 @@ function clearLoadingState() {
   panelContentEl.querySelector('.skeleton-block')?.remove();
 }
 
+// Header for a municipality/province that has a coat of arms and/or a flag
+// on Wikidata (data/emblems.json, scripts/fetch_emblems.py): the emblems
+// beside the name instead of a hero, since neither has a photo. Returns ''
+// when there is nothing to show, and the caller falls back to heroBlock()'s
+// placeholder. Each image links to its Commons file page (author/licence).
+function emblemHeader({ kicker, title, emblem }) {
+  if (!emblem || (!emblem.coa && !emblem.flag)) return '';
+  const img = (file, kind, width) => {
+    if (!file) return '';
+    const alt = t(`emblem.${kind}_alt`, title);
+    return `<a class="emblem-${kind}" href="https://commons.wikimedia.org/wiki/File:${encodeURIComponent(file)}" target="_blank" rel="noopener"><img src="${commonsThumbUrl(file, width)}" alt="${alt}" loading="lazy"></a>`;
+  };
+  return `
+    <div class="emblem-head">
+      <div class="emblem-images">${img(emblem.coa, 'coa', 160)}${img(emblem.flag, 'flag', 100)}</div>
+      <div class="emblem-text">
+        ${kicker ? `<div class="hero-kicker">${kicker}</div>` : ''}
+        <h1 class="hero-title">${title}</h1>
+      </div>
+    </div>
+  `;
+}
+
 function heroBlock({ imageUrl, linkUrl, kicker, title, placeholderIcon, loading = false }) {
   const scrim = `
     <div class="hero-scrim">
@@ -2553,7 +2577,8 @@ function showMunicipalityPanel(muni, { flyTo = false, updateUrl = true } = {}) {
     .sort((a, b) => Number(a.already_linked) - Number(b.already_linked) || a.name.localeCompare(b.name));
 
   panelContentEl.innerHTML = `
-    ${heroBlock({ kicker: t('municipality.kicker'), title: muni.name, placeholderIcon: '📍' })}
+    ${emblemHeader({ kicker: t('municipality.kicker'), title: muni.name, emblem: emblems.municipalities[muni.ine_code_p772] }) ||
+      heroBlock({ kicker: t('municipality.kicker'), title: muni.name, placeholderIcon: '📍' })}
     <div class="panel-body">
       <nav class="crumbs" aria-label="${t('breadcrumb.label')}">
         <a href="/provincia/${slugify(muni.province)}/" data-province="${muni.province}">${muni.province}</a> › <span aria-current="page">${muni.name}</span>
@@ -2680,7 +2705,8 @@ function showProvincePanel(prov, { flyTo = false, updateUrl = true } = {}) {
     .join('');
 
   panelContentEl.innerHTML = `
-    ${heroBlock({ kicker: t('province.kicker'), title: prov.name, placeholderIcon: '🗺️' })}
+    ${emblemHeader({ kicker: t('province.kicker'), title: prov.name, emblem: emblems.provinces[prov.name] }) ||
+      heroBlock({ kicker: t('province.kicker'), title: prov.name, placeholderIcon: '🗺️' })}
     <div class="panel-body">
       <div class="meta">${t('province.municipality_count', prov.municipality_count)} · ${t('stats.monument_count', prov.monument_count)}</div>
       <h3>${t('province.municipalities_title')}</h3>
@@ -3366,8 +3392,11 @@ Promise.all([
   fetch('data/municipalities.json').then((r) => r.json()),
   fetch('data/provinces.json').then((r) => r.json()),
   fetch('data/meta.json').then((r) => (r.ok ? r.json() : null)).catch(() => null),
+  // Only decoration: without it panels keep their placeholder hero.
+  fetch('data/emblems.json').then((r) => (r.ok ? r.json() : null)).catch(() => null),
 ])
-  .then(([records, municipalities, provinces, meta]) => {
+  .then(([records, municipalities, provinces, meta, emblemData]) => {
+    if (emblemData) emblems = emblemData;
     allRecords = records;
     allMunicipalities = municipalities;
     allProvinces = provinces;

@@ -827,6 +827,21 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
   background: linear-gradient(to top, rgba(0,0,0,0.78) 0%, rgba(0,0,0,0.35) 55%, transparent 100%);
   color: white;
 }
+.emblem-head {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 22px 56px 22px 22px; /* right room for the close button */
+  background: linear-gradient(135deg, var(--cyl-purple) 0%, var(--cyl-purple-dark) 100%);
+  color: white;
+}
+.emblem-images { display: flex; flex-direction: column; align-items: center; gap: 8px; flex: none; width: 72px; }
+.emblem-images a { display: block; line-height: 0; }
+.emblem-coa img { display: block; max-width: 72px; max-height: 84px; width: auto; height: auto; filter: drop-shadow(0 2px 5px rgba(0,0,0,0.35)); }
+.emblem-flag img { display: block; max-width: 44px; max-height: 30px; width: auto; height: auto; border-radius: 2px; box-shadow: 0 1px 4px rgba(0,0,0,0.35); }
+.emblem-text { min-width: 0; }
+.emblem-head .hero-kicker { margin-bottom: 2px; }
+.emblem-head .hero-title { overflow-wrap: anywhere; }
 .hero-kicker {
   font-size: 12px;
   font-weight: 600;
