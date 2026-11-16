@@ -92,6 +92,7 @@ let allMarkerLayers = [];
 const markerByJcylId = new Map();
 let selectedCategories = new Set(); // filled with every category once data loads = no filter applied
 let selectedStatuses = new Set(); // 'unlinked' | 'no_photo' - empty = no status filter applied
+let selectedProvince = null; // province name, or null = no province filter applied
 
 // Tracks what's currently shown in the panel so the language toggle can
 // re-render it in place, instead of just relabeling the chrome around it.
@@ -274,6 +275,8 @@ const filterBadgeEl = document.getElementById('filter-badge');
 const filterPanelEl = document.getElementById('filter-panel');
 const filterListEl = document.getElementById('filter-list');
 const filterStatusListEl = document.getElementById('filter-status-list');
+const filterProvinceSectionEl = document.getElementById('filter-province-section');
+const filterProvinceListEl = document.getElementById('filter-province-list');
 let categoriesWithCounts = []; // [{ category, count }], sorted most common first, filled by initCategoryFilter()
 
 // 'no_photo' and 'no_wikipedia' both deliberately exclude unlinked records
@@ -510,6 +513,7 @@ function wireFilterLink(el, status) {
 // the monument's own panel just fine, but nothing to actually see back on
 // the map once you closed it (issue #8).
 function recordPassesFilters(record) {
+  if (selectedProvince && record.province !== selectedProvince) return false;
   if (!selectedCategories.has(record.category)) return false;
   if (!selectedStatuses.size) return true;
   return [...selectedStatuses].some((status) => STATUS_MATCHERS[status](record));
@@ -523,16 +527,52 @@ function applyFilters() {
   const totalCategoryCount = categoriesWithCounts.length;
   const categoryFiltering = activeCategoryCount < totalCategoryCount;
   const statusFiltering = selectedStatuses.size > 0;
-  filterBtnEl.classList.toggle('active', categoryFiltering || statusFiltering);
-  filterBadgeEl.hidden = !(categoryFiltering || statusFiltering);
+  const provinceFiltering = !!selectedProvince;
+  filterBtnEl.classList.toggle('active', categoryFiltering || statusFiltering || provinceFiltering);
+  filterBadgeEl.hidden = !(categoryFiltering || statusFiltering || provinceFiltering);
   // Badge shows whichever dimension is actually narrowing things - category
   // count takes priority since it's usually the bigger number, falling back
   // to the status-box count so an "all categories, one status box" filter
   // still shows *something* rather than an empty-looking active button.
   if (categoryFiltering) filterBadgeEl.textContent = activeCategoryCount.toLocaleString(currentLang);
   else if (statusFiltering) filterBadgeEl.textContent = selectedStatuses.size.toLocaleString(currentLang);
+  else filterBadgeEl.textContent = '1';
 
   syncFiltersToUrl(categoryFiltering, statusFiltering);
+}
+
+// Narrows the map (and the list view) to one province - set when arriving on
+// /provincia/<province>/, where the map should show that province and not
+// the whole region around it. Shown in the filter panel as a checked row so
+// it is visible and can be cleared; null removes it.
+function setProvinceFilter(province) {
+  // The pre-built /provincia/ pages carry their own copy of index.html until
+  // the next make monument-pages run, so on a stale page the filter's UI is
+  // missing - narrow the map anyway rather than throwing and taking the
+  // whole load down with it.
+  if (!filterProvinceSectionEl) {
+    selectedProvince = province;
+    applyFilters();
+    return;
+  }
+  selectedProvince = province;
+  filterProvinceSectionEl.hidden = !province;
+  filterProvinceListEl.innerHTML = '';
+  if (province) {
+    const count = allRecords.filter((r) => r.province === province).length;
+    const row = document.createElement('label');
+    row.className = 'filter-row';
+    row.innerHTML = `
+      <input type="checkbox" checked>
+      <span class="filter-row-icon">🗺️</span>
+      <span class="filter-row-name"></span>
+      <span class="filter-row-count">${count.toLocaleString(currentLang)}</span>
+    `;
+    row.querySelector('.filter-row-name').textContent = province;
+    row.querySelector('input').addEventListener('change', () => setProvinceFilter(null));
+    filterProvinceListEl.appendChild(row);
+  }
+  applyFilters();
 }
 
 // Filters are merged into whatever's already in the URL (an open ?id=
@@ -2515,7 +2555,10 @@ function showMunicipalityPanel(muni, { flyTo = false, updateUrl = true } = {}) {
   panelContentEl.innerHTML = `
     ${heroBlock({ kicker: t('municipality.kicker'), title: muni.name, placeholderIcon: '📍' })}
     <div class="panel-body">
-      <div class="meta">${muni.province} · ${t('stats.monument_count', muni.monument_count)}</div>
+      <nav class="crumbs" aria-label="${t('breadcrumb.label')}">
+        <a href="/provincia/${slugify(muni.province)}/" data-province="${muni.province}">${muni.province}</a> › <span aria-current="page">${muni.name}</span>
+      </nav>
+      <div class="meta">${t('stats.monument_count', muni.monument_count)}</div>
       <h3>${t('municipality.monuments_title')}</h3>
       ${
         monuments.length
@@ -2546,8 +2589,7 @@ function showMunicipalityPanel(muni, { flyTo = false, updateUrl = true } = {}) {
 function showListPanel() {
   currentPanelState = { type: 'list' };
   const filtered = allRecords
-    .filter((r) => selectedCategories.has(r.category))
-    .filter((r) => !selectedStatuses.size || [...selectedStatuses].some((s) => STATUS_MATCHERS[s](r)))
+    .filter(recordPassesFilters)
     .sort((a, b) => a.name.localeCompare(b.name, 'es'));
 
   const rowsHtml = filtered.length
@@ -2583,11 +2625,12 @@ function provinceShareUrl(prov) {
 // crawler that runs this script should still find its links, so it is kept
 // rather than replaced by showProvincePanel()'s own, link-less rows. All that
 // is left to do is bring the map in line (the province in view, only that
-// category's markers) and make the listed monuments open in-app, like every
+// category's markers, only that province's) and make the listed monuments open in-app, like every
 // other list does.
 function openStaticListing(provinceName, categoryName) {
   const prov = allProvinces.find((p) => p.name === provinceName);
   if (prov) currentPanelState = { type: 'province', prov };
+  if (prov) setProvinceFilter(prov.name);
   if (categoryName && categoriesWithCounts.some((c) => c.category === categoryName)) selectOnlyCategory(categoryName);
   wireMonumentListRows(panelContentEl);
   openPanel(() => {
