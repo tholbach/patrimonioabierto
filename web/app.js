@@ -321,6 +321,22 @@ const STATUS_MATCHERS = {
   has_photo: hasPhoto,
   no_wikipedia: isLinkedNoWikipedia,
 };
+// The three-way split of the dataset the picture-of-the-week card and the
+// contribute bar draw as a bar: a free photo on Wikidata, linked to Wikidata
+// but without one (the number the collab block already headlines), and not
+// linked at all yet. hasPhoto implies linked, so the three add up to total.
+function photoCoverage() {
+  const total = allRecords.length;
+  const photo = allRecords.filter(hasPhoto).length;
+  const noPhoto = allRecords.filter(isLinkedNoPhoto).length;
+  return { total, photo, noPhoto, unlinked: total - photo - noPhoto };
+}
+
+function setCoverageBar(barEl, cov) {
+  barEl.querySelector('.s1').style.width = `${(cov.photo / cov.total) * 100}%`;
+  barEl.querySelector('.s2').style.width = `${(cov.noPhoto / cov.total) * 100}%`;
+}
+
 const STATUS_ICONS = { no_photo: '🖼️', has_photo: '🖼️', no_wikipedia: '📖' };
 
 function initStatusFilter() {
@@ -2884,6 +2900,18 @@ function restorePotwAfterPanel() {
   document.getElementById('map-wrap').classList.add('potw-visible');
 }
 
+// "Municipality · Province", both real links like the ones in a monument's
+// own meta line (see bodyMetaLine()): the hrefs are the pages they stand for,
+// a plain click opens the panel in place (wired in initPictureOfTheWeek()).
+function potwPlaceHtml(record) {
+  const ine = record.municipality_ine_code_p772;
+  const muni = ine
+    ? `<a href="/?muni=${encodeURIComponent(ine)}" data-muni="${ine}">${record.municipality}</a>`
+    : record.municipality;
+  const prov = `<a href="/provincia/${slugify(record.province)}/" data-province="${record.province}">${record.province}</a>`;
+  return `${muni} · ${prov}`;
+}
+
 function initPictureOfTheWeek() {
   const potwEl = document.getElementById('potw');
   if (sessionStorage.getItem('potw-dismissed')) return;
@@ -2906,7 +2934,8 @@ function initPictureOfTheWeek() {
       // to also ask for help closing it for the rest. Only shown on wide
       // enough screens (see CSS) - there isn't room next to the photo
       // otherwise, and the strip already does its main job without it.
-      const missingPhotoCount = allRecords.filter(isLinkedNoPhoto).length;
+      const cov = photoCoverage();
+      const missingPhotoCount = cov.noPhoto;
       // Two real links (map/Contribute), not one block - #potw's own
       // click-through handler below already ignores clicks on any <a>, so
       // neither needs its own stopPropagation() the way #potw-close does.
@@ -2917,6 +2946,14 @@ function initPictureOfTheWeek() {
           <div id="potw-collab-count">${missingPhotoCount.toLocaleString(currentLang)}</div>
           <div id="potw-collab-text">
             <div id="potw-collab-label" data-i18n="potw.collab_label">${t('potw.collab_label')}</div>
+            <div id="potw-progress" role="img" aria-label="${t('potw.progress_aria', cov.photo.toLocaleString(currentLang), cov.total.toLocaleString(currentLang))}">
+              <div class="potw-bar"><i class="s1"></i><i class="s2"></i></div>
+              <div class="potw-legend">
+                <span class="c1">${cov.photo.toLocaleString(currentLang)} <span data-i18n="potw.progress_photo">${t('potw.progress_photo')}</span></span>
+                <span class="c2">${cov.noPhoto.toLocaleString(currentLang)} <span data-i18n="potw.progress_nophoto">${t('potw.progress_nophoto')}</span></span>
+                <span class="c3">${cov.unlinked.toLocaleString(currentLang)} <span data-i18n="potw.progress_unlinked">${t('potw.progress_unlinked')}</span></span>
+              </div>
+            </div>
             <div id="potw-collab-links">
               <a id="potw-collab-map-link" href="?status=no_photo" data-i18n="potw.collab_map_link">${t('potw.collab_map_link')}</a>
               <span class="sep">·</span>
@@ -2931,16 +2968,22 @@ function initPictureOfTheWeek() {
 
       potwEl.innerHTML = `
         <button type="button" id="potw-close" data-i18n-title="potw.close_title" aria-label="Close">✕</button>
-        <img src="${thumbUrl}" alt="${record.name}" loading="lazy">
+        <div id="potw-photo">
+          <img src="${thumbUrl}" alt="${record.name}" loading="lazy">
+          <button type="button" id="potw-chip" class="potw-chip" title="${t('potw.chip_title', titlecaseEs(record.category))}">${CATEGORY_ICONS[record.category] || DEFAULT_ICON} ${titlecaseEs(record.category)}</button>
+        </div>
         <div id="potw-info">
           <div id="potw-label" data-i18n="potw.label">${t('potw.label')}</div>
           <div id="potw-name">${record.name}</div>
+          <div id="potw-where">${potwPlaceHtml(record)}</div>
           <div id="potw-credit">${licenseLineHtml(meta)}</div>
           <div id="potw-cta" data-i18n="potw.cta">${t('potw.cta')}</div>
         </div>
         ${collabHtml}
       `;
       applyStaticI18n();
+      const progressBar = potwEl.querySelector('.potw-bar');
+      if (progressBar) setCoverageBar(progressBar, cov);
       potwEl.hidden = false;
       document.getElementById('map-wrap').classList.add('potw-visible');
 
@@ -2960,8 +3003,11 @@ function initPictureOfTheWeek() {
       // featured monument, which is the one monument it definitively
       // isn't about. Nothing but its own links is clickable there (see
       // its cursor in style.css).
+      // The chip and the two place links are for the map, not for this
+      // monument: they get their own handlers below, and (like the links
+      // above) must not fall through to opening it.
       potwEl.addEventListener('click', (e) => {
-        if (e.target.closest('a, #potw-collab')) return;
+        if (e.target.closest('a, #potw-collab, .potw-chip')) return;
         dismissPotw();
         // entry.file: the exact photo the card showed - without this,
         // selectMonument() would open on whatever P18/gallery order
@@ -2970,6 +3016,22 @@ function initPictureOfTheWeek() {
         // "good picture" tier photo rather than trusting P18 already
         // points at the best shot).
         selectMonument(record, { flyTo: true, featuredFile: entry.file });
+      });
+      // Chip: show only this monument's category on the map (the filter
+      // button's badge shows it is on, and clears it). Card stays up, like
+      // the collab block's own "see on the map" link.
+      document.getElementById('potw-chip').addEventListener('click', () => selectOnlyCategory(record.category));
+      potwEl.addEventListener('click', (e) => {
+        const link = e.target.closest('#potw-where a');
+        if (!link || e.button !== 0 || e.metaKey || e.ctrlKey || e.shiftKey || e.altKey) return;
+        e.preventDefault();
+        if (link.dataset.muni) {
+          const muni = allMunicipalities.find((m) => m.ine_code_p772 === link.dataset.muni);
+          if (muni) showMunicipalityPanel(muni, { flyTo: true });
+        } else {
+          const prov = allProvinces.find((p) => p.name === link.dataset.province);
+          if (prov) showProvincePanel(prov, { flyTo: true });
+        }
       });
       document.getElementById('potw-close').addEventListener('click', (e) => {
         e.stopPropagation();
@@ -3439,6 +3501,10 @@ Promise.all([
       markerByJcylId.set(String(record.jcyl_id), marker);
     }
     initCategoryFilter();
+    // Pre-built static pages carry their own copy of index.html until the next
+    // make monument-pages, so on one of those this element may not exist yet.
+    const coverageLine = document.getElementById('contribute-bar-progress');
+    if (coverageLine) setCoverageBar(coverageLine, photoCoverage());
 
     // Deep links: ?id=<jcyl_id> / ?muni=<ine_code> / ?prov=<name> open
     // straight to that monument/municipality/province; /about/,
