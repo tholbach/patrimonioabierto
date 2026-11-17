@@ -716,12 +716,16 @@ def listing_panel(kicker, title, body_html):
 
 
 def link_items(items):
-    """[(label, path or None, count)] -> <li>s; no path means no page exists,
-    so the label stays plain text."""
+    """[(label, path or None, count[, icon[, attrs]])] -> <li>s; no path means
+    no page exists, so the label stays plain text. icon is an emoji shown in
+    front of the label, attrs extra attributes for the <a>."""
     out = []
-    for label, path, count in items:
-        name = f'<a href="{path}">{html.escape(label)}</a>' if path else html.escape(label)
-        out.append(f'<li>{name} <span class="meta">{count}</span></li>')
+    for label, path, count, *extra in items:
+        icon = extra[0] if extra else ""
+        attrs = extra[1] if len(extra) > 1 else ""
+        name = f'<a href="{path}"{attrs}>{html.escape(label)}</a>' if path else html.escape(label)
+        icon_html = f'<span class="page-link-icon" aria-hidden="true">{icon}</span>' if icon else ""
+        out.append(f'<li>{icon_html}<span class="page-link-name">{name}</span> <span class="meta">{count}</span></li>')
     return "".join(out)
 
 
@@ -747,9 +751,11 @@ def build_province_page(shell, province, recs, category_pages, provinces):
     url = SITE_URL + path
     by_cat = defaultdict(list)
     by_muni = defaultdict(int)
+    muni_ine = {}
     for r in recs:
         by_cat[r["category"]].append(r)
         by_muni[r["municipality"]] += 1
+        muni_ine[r["municipality"]] = r.get("municipality_ine_code_p772")
     cats = sorted(by_cat, key=lambda c: (-len(by_cat[c]), c))
     trail = [("Inicio", "/"), (province, None)]
 
@@ -767,13 +773,19 @@ def build_province_page(shell, province, recs, category_pages, provinces):
                     category_plural(c),
                     category_path(province, c) if (province, c) in category_pages else None,
                     len(by_cat[c]),
+                    CATEGORY_ICONS.get(c, DEFAULT_ICON),
                 )
                 for c in cats
             ]
         )
         + "</ul>",
         "<h2>Municipios con más bienes</h2>",
-        '<ul class="page-links">' + link_items([(m, None, n) for m, n in top_munis]) + "</ul>",
+        '<ul class="page-links">' + link_items(
+            [
+                (m, f"/?muni={muni_ine[m]}", n, "", f' data-muni="{muni_ine[m]}"') if muni_ine.get(m) else (m, None, n)
+                for m, n in top_munis
+            ]
+        ) + "</ul>",
     ]
     picks = featured(recs)
     if picks:
