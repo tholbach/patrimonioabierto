@@ -229,6 +229,10 @@
            wireSpaLink()'s own comment: hover/right-click/ctrl-click should
            all behave like the real link to /contribute/ that this is. -->
       <a href="/contribute/" id="contribute-bar" hidden>
+        <!-- Phones only (see style.css): the same photo / no photo / not
+             linked split as the picture-of-the-week card's bar, as a thin
+             line along the bar's top edge. Widths are set from app.js. -->
+        <span id="contribute-bar-progress" aria-hidden="true"><i class="s1"></i><i class="s2"></i></span>
         <span class="contribute-bar-text-full" data-i18n="contribute_bar.text"></span>
         <span class="contribute-bar-text-short" data-i18n="contribute_bar.text_short"></span>
       </a>
