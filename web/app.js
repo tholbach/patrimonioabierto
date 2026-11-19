@@ -3174,48 +3174,92 @@ const locateBtn = document.getElementById('locate-btn');
 let userLocationMarker = null;
 let userAccuracyCircle = null;
 
+// Live tracking: one tap starts it (the dot moves with the visitor and the
+// map follows), dragging the map lets go of the follow without stopping the
+// dot, a tap after that re-centers, and a tap while following stops it.
+let locateTracking = false;
+let locateFollowing = false;
+
+function stopLocating() {
+  map.stopLocate();
+  locateTracking = false;
+  locateFollowing = false;
+  locateBtn.classList.remove('locating', 'tracking');
+}
+
 locateBtn.addEventListener('click', () => {
-  locateBtn.classList.add('locating');
+  if (locateTracking) {
+    if (locateFollowing) {
+      stopLocating();
+    } else {
+      locateFollowing = true;
+      locateBtn.classList.add('tracking');
+      if (userLocationMarker) map.setView(userLocationMarker.getLatLng(), Math.max(map.getZoom(), 15));
+    }
+    return;
+  }
+  locateTracking = true;
+  locateFollowing = true;
+  locateBtn.classList.add('locating', 'tracking');
   // map.locate() is Leaflet's own wrapper around the browser Geolocation
-  // API - no separate plugin needed. Works on both mobile and desktop
-  // (desktop falls back to network/IP-based positioning, less precise but
-  // still useful), and requires HTTPS in production (fine here - it's
-  // already true on localhost for this dev server too).
-  map.locate({ setView: true, maxZoom: 15, enableHighAccuracy: true });
+  // API - no separate plugin needed. watch: true keeps it running
+  // (watchPosition) so locationfound fires on every movement. Works on both
+  // mobile and desktop (desktop falls back to network/IP-based positioning),
+  // and requires HTTPS in production. The map is moved by the handler below,
+  // not by setView, so a visitor who pans away is left alone.
+  map.locate({ watch: true, setView: false, enableHighAccuracy: true });
+});
+
+// A drag is the visitor looking elsewhere - stop following, keep tracking.
+map.on('dragstart', () => {
+  if (!locateFollowing) return;
+  locateFollowing = false;
+  locateBtn.classList.remove('tracking');
+});
+
+// GPS in a pocket drains the battery - stop when the page goes to the background.
+document.addEventListener('visibilitychange', () => {
+  if (document.hidden && locateTracking) stopLocating();
 });
 
 map.on('locationfound', (e) => {
   locateBtn.classList.remove('locating');
-  if (userLocationMarker) map.removeLayer(userLocationMarker);
-  if (userAccuracyCircle) map.removeLayer(userAccuracyCircle);
 
-  // Accuracy circle first (so the dot sits visually on top of it), sized
-  // to the real GPS accuracy Leaflet reports - a plain small dot alone is
-  // easy to miss/lose track of on a map full of other colored markers.
-  userAccuracyCircle = L.circle(e.latlng, {
-    radius: e.accuracy,
-    color: '#2a6fbb',
-    weight: 1,
-    fillColor: '#2a6fbb',
-    fillOpacity: 0.12,
-    interactive: false,
-  }).addTo(map);
+  if (userLocationMarker) {
+    // Move the existing dot instead of re-creating it, so an open popup stays open.
+    userLocationMarker.setLatLng(e.latlng);
+    userAccuracyCircle.setLatLng(e.latlng).setRadius(e.accuracy);
+  } else {
+    // Accuracy circle first (so the dot sits visually on top of it), sized
+    // to the real GPS accuracy Leaflet reports - a plain small dot alone is
+    // easy to miss/lose track of on a map full of other colored markers.
+    userAccuracyCircle = L.circle(e.latlng, {
+      radius: e.accuracy,
+      color: '#2a6fbb',
+      weight: 1,
+      fillColor: '#2a6fbb',
+      fillOpacity: 0.12,
+      interactive: false,
+    }).addTo(map);
 
-  userLocationMarker = L.marker(e.latlng, {
-    icon: L.divIcon({
-      html: '<div class="you-are-here-dot"></div>',
-      className: '',
-      iconSize: [18, 18],
-      iconAnchor: [9, 9],
-    }),
-    zIndexOffset: 1000, // stay above monument markers/clusters at the same spot
-  })
-    .addTo(map)
-    .bindPopup(t('geolocation.you_are_here'));
+    userLocationMarker = L.marker(e.latlng, {
+      icon: L.divIcon({
+        html: '<div class="you-are-here-dot"></div>',
+        className: '',
+        iconSize: [18, 18],
+        iconAnchor: [9, 9],
+      }),
+      zIndexOffset: 1000, // stay above monument markers/clusters at the same spot
+    })
+      .addTo(map)
+      .bindPopup(t('geolocation.you_are_here'));
+  }
+
+  if (locateFollowing) map.setView(e.latlng, Math.max(map.getZoom(), 15));
 });
 
 map.on('locationerror', () => {
-  locateBtn.classList.remove('locating');
+  stopLocating();
   showToast(t('geolocation.error'));
 });
 

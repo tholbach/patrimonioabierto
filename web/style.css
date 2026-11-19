@@ -1883,6 +1883,7 @@ body { display: flex; flex-direction: column; font-family: var(--font-body); bac
 
 #locate-btn:hover { transform: scale(1.08); background: white; }
 #locate-btn.locating { animation: pulse 1s ease-in-out infinite; }
+#locate-btn.tracking { background: white; box-shadow: 0 0 0 3px #2a6fbb, 0 4px 16px rgba(0,0,0,0.2); }
 @keyframes pulse {
   0%, 100% { opacity: 1; }
   50% { opacity: 0.5; }
