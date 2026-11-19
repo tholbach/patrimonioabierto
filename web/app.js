@@ -2661,10 +2661,10 @@ wireSpaLink(document.getElementById('skip-to-list-link'), () => {
 });
 
 function provinceShareUrl(prov) {
-  // pathname forced to '/' - same reasoning as municipalityShareUrl() above.
-  const url = new URL('/', location.origin);
-  url.search = new URLSearchParams({ prov: prov.name }).toString();
-  return url.toString();
+  // The static page's own address (scripts/build_monument_pages.py), so a
+  // shared or reloaded link lands on the crawlable page. ?prov=<name> is
+  // only still read, for old links (see the deep-link handling below).
+  return new URL(`/provincia/${slugify(prov.name)}/`, location.origin).toString();
 }
 
 // /provincia/<province>/ and /provincia/<province>/<category>/ are static
@@ -3594,7 +3594,11 @@ Promise.all([
       if (muni) showMunicipalityPanel(muni, { flyTo: true, updateUrl: false });
     } else if (requestedProv) {
       const prov = allProvinces.find((p) => p.name === requestedProv);
-      if (prov) showProvincePanel(prov, { flyTo: true, updateUrl: false });
+      if (prov) {
+        showProvincePanel(prov, { flyTo: true, updateUrl: false });
+        // An old ?prov= link: show the address everyone should use now.
+        history.replaceState(null, '', provinceShareUrl(prov));
+      }
     } else if (requestedPage === 'stats') {
       showStatsPanel({ updateUrl: false });
     } else if (requestedPage === 'about') {
